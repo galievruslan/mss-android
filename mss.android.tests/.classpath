@@ -10,5 +10,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/com.mss.android.web"/>
 	<classpathentry kind="lib" path="C:/Projects/mss-android/libs/Httpcomponents-client-4.2.5/httpclient-4.2.5.jar"/>
 	<classpathentry kind="lib" path="C:/Projects/mss-android/libs/Httpcomponents-client-4.2.5/httpcore-4.2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Projects/mss-android/libs/JSON/java-json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
