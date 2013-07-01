@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;GenericWebRepository.java&apos; to &apos;com.mss.android.web.repositories.AuthenticationFailedException.java&apos;&#x0D;&#x0A;- Original project: &apos;com.mss.android.web&apos;&#x0D;&#x0A;- Destination element: &apos;com.mss.android.web.repositories.AuthenticationFailedException.java&apos;&#x0D;&#x0A;- Original element: &apos;com.mss.android.web.repositories.GenericWebRepository.java&apos;" description="Copy compilation unit" destination="/src&lt;com.mss.android.web.repositories{AuthenticationFailedException.java" element1="/src&lt;com.mss.android.web.repositories{GenericWebRepository.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1372712607280" units="1" version="1.0"/>
+</session>

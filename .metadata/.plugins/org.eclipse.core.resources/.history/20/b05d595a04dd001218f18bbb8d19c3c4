@@ -1,0 +1,39 @@
+package com.mss.android.web.repositories;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class WebHelpers {
+	public static HttpURLConnection getHttpURLConnection(WebConnection connection, String address) throws WebConnectionException {
+		try {
+			URL url = new URL(address);
+			if (HttpURLConnection.getFollowRedirects())
+				HttpURLConnection.setFollowRedirects(false);
+			
+			HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
+			httpUrlConnection.setRequestMethod("GET");
+			httpUrlConnection.addRequestProperty("User-Agent", "MSS.Android mobile client");
+		 
+			String cookie = connection.getCookie();
+			if (cookie.length() > 0) {
+				httpUrlConnection.setRequestProperty("Cookie", cookie);	
+			}				
+			
+			if (httpUrlConnection.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+					+ httpUrlConnection.getResponseCode());
+			}
+			
+			return httpUrlConnection;
+			
+		} catch (MalformedURLException e) {		 
+			e.printStackTrace(); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+		
+		throw new WebConnectionException();
+	}
+}

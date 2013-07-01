@@ -1,0 +1,30 @@
+package com.mss.android.web.repositories;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class WebHelpers {
+	public static HttpURLConnection getHttpURLConnection(WebConnection connection, String address) throws WebConnectionException {
+		try {
+			URL url = new URL(address);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+		 
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+			}
+			
+			return conn;
+			
+		} catch (MalformedURLException e) {		 
+			e.printStackTrace(); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+		
+		throw new WebConnectionException();
+	}
+}

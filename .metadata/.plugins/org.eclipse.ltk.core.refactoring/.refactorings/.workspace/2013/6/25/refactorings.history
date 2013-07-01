@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;mss.android.infrastructure.ormlite.tests&apos; to &apos;mss.android.tests&apos;&#x0D;&#x0A;- Original element: &apos;mss.android.infrastructure.ormlite.tests&apos;&#x0D;&#x0A;- Renamed element: &apos;mss.android.infrastructure.ormlite.tests&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;mss.android.infrastructure.ormlite.tests&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=mss.android.infrastructure.ormlite.tests" name="mss.android.tests" references="true" stamp="1372012722773" version="1.0"/>
+</session>

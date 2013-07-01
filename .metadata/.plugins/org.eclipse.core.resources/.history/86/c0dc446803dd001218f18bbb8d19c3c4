@@ -1,0 +1,68 @@
+package com.mss.android.web.repositories;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class WebServer {
+	
+	String address;
+	
+	public WebServer(String address) {		
+		this.address = address;
+	}
+	
+	String login;
+	String password;
+	
+	public WebConnection connect(String login, String password) throws WebConnectionException{		
+		this.login = login;
+		this.password = password;
+		
+		webConnection = new WebConnection(this);			
+		try {
+			URL url = new URL(address + "/users/sign_in");
+			if (HttpURLConnection.getFollowRedirects())
+				HttpURLConnection.setFollowRedirects(false);
+			
+			HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
+			httpUrlConnection.setRequestMethod("GET");
+			httpUrlConnection.addRequestProperty("User-Agent", "MSS.Android mobile client");
+		 
+			String cookie = webConnection.getCookie();
+			if (cookie.length() > 0) {
+				httpUrlConnection.setRequestProperty("Cookie", cookie);	
+			}				
+			
+			if (httpUrlConnection.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+					+ httpUrlConnection.getResponseCode());
+			}
+			
+			String output = "";
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+				(httpUrlConnection.getInputStream())));
+		 		
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);
+			}
+			
+			httpUrlConnection.disconnect();
+			
+		} catch (MalformedURLException e) {		 
+			e.printStackTrace(); 
+		} catch (IOException e) { 
+			e.printStackTrace(); 
+		}
+		
+		return webConnection;
+	}
+	
+	private WebConnection webConnection;
+	public WebConnection getCurrent(){
+		return webConnection;
+	}
+}

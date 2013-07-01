@@ -1,0 +1,5 @@
+package com.mss.android.web.repositories;
+
+public class WebQuery {
+
+}

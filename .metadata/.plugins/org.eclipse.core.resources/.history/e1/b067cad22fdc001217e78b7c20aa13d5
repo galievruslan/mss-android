@@ -1,0 +1,11 @@
+package com.mss.android.web.dtos;
+
+@IDtoSourceUrl("synchronization//customers.json");
+public class Customer extends Dto {
+	
+	private String name;
+	
+	public String getName(){
+		return name;
+	}
+}

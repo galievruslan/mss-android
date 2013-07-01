@@ -6,23 +6,35 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,22 +49,36 @@ public class WebServer {
 	String login;
 	String password;
 	
+	CookieStore cookieStore;
+	HttpContext httpContext;
+	
 	public WebConnection connect(String login, String password) throws WebConnectionException, AuthenticationFailedException{		
 		this.login = login;
 		this.password = password;
+		
+		cookieStore = new BasicCookieStore();
+		httpContext = new BasicHttpContext();
+		httpContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
 		
 		webConnection = new WebConnection(this);			
 		try {
 			
 			Get("/users/sign_in", new HashMap<String, String>());
 			
-			JSONObject jsonCredentials = new JSONObject();
-			jsonCredentials.put("username", login);
-			jsonCredentials.put("password", password);
-			JSONObject jsonUser = new JSONObject();
-			jsonUser.put("user", jsonCredentials);
+			//JSONObject jsonCredentials = new JSONObject();
+			//jsonCredentials.put("username", login);
+			//jsonCredentials.put("password", password);
+			//JSONObject jsonUser = new JSONObject();
+			//jsonUser.put("user", jsonCredentials);
 			
-			int status = Post("/users/sign_in", jsonUser);
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
+			nameValuePairs.add(new BasicNameValuePair("user[username]", login));
+			nameValuePairs.add(new BasicNameValuePair("user[password]", password));
+			nameValuePairs.add(new BasicNameValuePair("user[remember_me]", "0"));
+			nameValuePairs.add(new BasicNameValuePair("commit", "Sign in"));
+			
+			int status = Post("/users/sign_in", nameValuePairs);
 			System.out.print("Logon status: " + status + '\n');
 			if (status != 302)
 				throw new AuthenticationFailedException();
@@ -82,11 +108,11 @@ public class WebServer {
 		HttpGet httpGet = new HttpGet(uri);
 		httpGet.addHeader("User-Agent", "MSS.Android mobile client");
 				
-		String cookie = getCurrentConnection().getCookie();		
-		if (cookie.length() > 0) {
-			System.out.print("Set cookies: " + cookie + '\n');
-			httpGet.setHeader("Cookie", cookie);	
-		}	
+		//String cookie = getCurrentConnection().getCookie();		
+		//if (cookie.length() > 0) {
+		//	System.out.print("Set cookies: " + cookie + '\n');
+		//	httpGet.setHeader("Cookie", cookie);	
+		//}	
 		
 		HttpResponse response = Dispatch(httpGet);
 		String content = Parse(response);
@@ -100,24 +126,32 @@ public class WebServer {
 		return content;
 	}
 	
-	public int Post(String url, JSONObject data) throws JSONException, Exception {
-		if (getCurrentConnection().getCsrf() != "") {
-			data.put("csrf-token", getCurrentConnection().getCsrf());
-			System.out.print("Set csrf token: " + getCurrentConnection().getCsrf() + '\n');
-		}
+	public int Post(String url, List<NameValuePair> params) throws JSONException, Exception {
+		//if (getCurrentConnection().getCsrf() != "") {
+		//	params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
+			//data.put("authenticity_token", getCurrentConnection().getCsrf());
+			//System.out.print("Set csrf token: " + getCurrentConnection().getCsrf() + '\n');
+		//}
 		
-		StringEntity entity = new StringEntity(data.toString());
-		entity.setContentType("application/json");
+		//StringEntity entity = new StringEntity(data.toString());
+		//entity.setContentType("application/json");
+		//entity.setContentEncoding("utf-8");
 		
-		HttpPost httpPost = new HttpPost(address + url);		
-		httpPost.setEntity(entity);
-		httpPost.addHeader("User-Agent", "MSS.Android mobile client");		
+		//params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
+		HttpPost httpPost = new HttpPost(address + url);
+		//httpPost.addHeader("Content-Type","application/json");
+		httpPost.setEntity(new UrlEncodedFormEntity(params));
+		//httpPost.setEntity(entity);
+		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
+		//httpPost.addHeader("Accept", "application/json");
+		//httpPost.addHeader("Accept-Encoding", "gzip, deflate, compress");
+		//httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
 		
-		String cookie = webConnection.getCookie();		
-		if (cookie.length() > 0) {
-			System.out.print("Set cookies: " + cookie + '\n');
-			httpPost.setHeader("Cookie", cookie);	
-		}	
+		//String cookie = webConnection.getCookie();		
+		//if (cookie.length() > 0) {
+		//	System.out.print("Set cookies: " + cookie + '\n');
+		//	httpPost.setHeader("Cookie", cookie);	
+		//}	
 		
 		HttpResponse response = Dispatch(httpPost);
 		String content = Parse(response);
@@ -133,16 +167,20 @@ public class WebServer {
 	}
 	
 	private HttpResponse Dispatch(HttpUriRequest request) throws IOException {
-		HttpClient httpClient = new DefaultHttpClient();		
-		httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,
-	            CookiePolicy.BROWSER_COMPATIBILITY);
+		//String nameAndPassword = login+":"+password;
+		//String authorizationString = "Basic " + Base64.encodeBase64String(StringUtils.getBytesUtf8(nameAndPassword));
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		//request.addHeader("Authorization", authorizationString);
+		//httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,
+	    //        CookiePolicy.BROWSER_COMPATIBILITY);
 				
-		HttpResponse response = httpClient.execute(request);
+		HttpResponse response = httpClient.execute(request, httpContext);
 		// set cookies
-		if (response.getFirstHeader("Set-Cookie") != null) {
-			webConnection.setCookie(response.getFirstHeader("Set-Cookie").toString());
-			System.out.print("Get cookies: " + webConnection.getCookie() + '\n');
-		}
+		//if (response.getFirstHeader("Set-Cookie") != null) {
+		//	webConnection.setCookie(response.getFirstHeader("Set-Cookie").toString());
+		//	System.out.print("Get cookies: " + webConnection.getCookie() + '\n');
+		//}
 		
 		return response;
 	}
