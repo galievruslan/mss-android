@@ -1,8 +1,0 @@
-package com.mss.android.web.dtos;
-
-import java.lang.annotation.*;  
-
-@Retention(RetentionPolicy.RUNTIME)  
-@interface IDtoSourceUrl {
-	String value();
-}
