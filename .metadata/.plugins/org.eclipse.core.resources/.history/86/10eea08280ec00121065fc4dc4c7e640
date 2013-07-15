@@ -1,0 +1,18 @@
+package com.mss.android.infrastructure.ormlite;
+
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.support.ConnectionSource;
+import com.mss.android.domain.models.RoutePointTemplate;
+
+public class OrmliteRoutePointTemplateRepository extends OrmliteGenericRepository<RoutePointTemplate> {
+
+	public OrmliteRoutePointTemplateRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getRoutePointDao());
+	}
+
+	@Override
+	protected Dao<RoutePointTemplate, Integer> initializeDao(ConnectionSource connectionSource) throws Throwable {
+		return DaoManager.createDao(connectionSource, RoutePointTemplate.class);
+	}
+}

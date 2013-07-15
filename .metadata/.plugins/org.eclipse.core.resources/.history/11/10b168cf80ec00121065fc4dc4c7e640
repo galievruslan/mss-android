@@ -1,0 +1,18 @@
+package com.mss.android.infrastructure.ormlite;
+
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.support.ConnectionSource;
+import com.mss.android.domain.models.Warehouse;
+
+public class OrmliteWarehouseRepository extends OrmliteGenericRepository<Warehouse> {
+
+	public OrmliteWarehouseRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getWarehouseDao());
+	}
+
+	@Override
+	protected Dao<Warehouse, Integer> initializeDao(ConnectionSource connectionSource) throws Throwable {
+		return DaoManager.createDao(connectionSource, Warehouse.class);
+	}
+}

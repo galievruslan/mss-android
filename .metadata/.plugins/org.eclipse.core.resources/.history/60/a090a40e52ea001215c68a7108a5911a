@@ -1,0 +1,26 @@
+package com.mss.android.infrastructure.web.repositories;
+
+import java.lang.reflect.Type;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mss.android.infrastructure.web.dtos.Customer;
+import com.mss.infrastructure.web.WebConnection;
+import com.mss.infrastructure.web.WebRepository;
+
+public class CustomerWebRepository extends WebRepository<Customer> {
+	final String PATH = "synchronization/customers.json";
+	public CustomerWebRepository(WebConnection connection){
+		super(connection);
+	}
+	
+	public List<Customer> find(Map<String,String> params) throws URISyntaxException, Exception {
+		String json = connection.getWebServer().Get(PATH, params);
+		
+		Type listType = new TypeToken<List<Customer>>() {}.getType();
+		return new Gson().fromJson(json, listType);
+	}
+}
