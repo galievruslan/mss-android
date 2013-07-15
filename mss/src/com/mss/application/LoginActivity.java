@@ -4,8 +4,6 @@ import com.mss.infrastructure.web.AuthenticationFailedException;
 import com.mss.infrastructure.web.WebConnectionException;
 import com.mss.infrastructure.web.WebServer;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;

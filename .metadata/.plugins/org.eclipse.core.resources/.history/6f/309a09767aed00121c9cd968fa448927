@@ -1,0 +1,52 @@
+package com.mss.application;
+
+import java.util.Calendar;
+
+import com.mss.android.domain.models.RoutePoint;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.ListView;
+import android.widget.TextView;
+
+public class RouteActivity extends Activity  {
+
+	private TextView mDateView;
+	private DatePicker mDatePicker;
+	private ListView mListView;
+		
+	public void onCreate(Bundle icicle) {
+	    super.onCreate(icicle);
+	    setContentView(R.layout.activity_route);
+	    setCurrentDateOnView();
+	    
+	    RoutePoint[] values = new RoutePoint[] { new RoutePoint(), new RoutePoint() };
+	    RoutePointsAdapter adapter = new RoutePointsAdapter(this, values);
+	    
+	    mListView = (ListView) findViewById(R.id.list);
+	    mListView.setAdapter(adapter);
+	}
+	
+	// display current date
+		private void setCurrentDateOnView() {
+	 
+			mDateView = (TextView) findViewById(R.id.label_date);
+			mDatePicker = (DatePicker) findViewById(R.id.route_date_picker);
+	 
+			final Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+	 
+			// set current date into textview
+			mDateView.setText(new StringBuilder()
+			.append(day).append(".")
+			.append(month + 1).append(".")
+			.append(year).append(" "));
+	 
+			// set current date into datepicker
+			mDatePicker.init(year, month, day, null);
+	 
+		}
+}

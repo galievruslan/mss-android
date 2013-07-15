@@ -1,0 +1,18 @@
+package com.mss.application;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+
+public class RouteActivity extends ListActivity  {
+
+	public void onCreate(Bundle icicle) {
+	    super.onCreate(icicle);
+	  }
+
+	  @Override
+	  protected void onListItemClick(ListView l, View v, int position, long id) {
+	  }
+
+}

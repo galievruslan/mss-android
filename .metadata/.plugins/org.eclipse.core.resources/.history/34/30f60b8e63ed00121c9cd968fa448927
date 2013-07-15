@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    tools:context=".RouteActivity" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button_change_date"
+        android:entries="@layout/route_point_item_layout" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/button_change_date"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_change_date"
+        android:layout_alignBottom="@+id/button_change_date"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/button_change_date"
+        android:text="1/1/2013"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

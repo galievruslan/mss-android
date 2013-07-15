@@ -2,7 +2,9 @@ package com.mss.application;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -10,6 +12,18 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		findViewById(R.id.routeButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	showRoute();
+            }
+        });
+		
+		findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	showSettings();
+            }
+        });
 	}
 
 	@Override
@@ -17,5 +31,14 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	private void showRoute(){
+		Intent mainActivity = new Intent(getApplicationContext(), RouteActivity.class);
+    	startActivity(mainActivity);
+	}
+	
+	private void showSettings(){
+		
 	}
 }

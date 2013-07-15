@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- Strings related to login -->    
+    <string name="label_name">route point name</string>
+    <string name="label_address">route point address</string>
+</resources>

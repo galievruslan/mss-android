@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Strings related to route -->
+    <string name="prompt_route_date">Route date</string>
+    <string name="lable_route_date_default">01.01.2013</string>
+    <string name="title_activity_route">RouteActivity</string>
+
+</resources>

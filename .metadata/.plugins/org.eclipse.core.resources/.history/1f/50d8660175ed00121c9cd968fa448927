@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Strings related to route -->
+    <string name="prompt_route_date">Route date</string>
+    <string name="title_activity_route">RouteActivity</string>
+
+</resources>
