@@ -12288,3 +12288,15 @@ Caused by: org.eclipse.core.runtime.CoreException: Cannot create or restore 'ic_
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1438)
 !SUBENTRY 1 org.eclipse.ltk.core.refactoring 4 0 2013-07-15 23:54:39.836
 !MESSAGE Cannot create or restore 'ic_menu_route.png' because it already exists.
+!SESSION 2013-07-16 23:29:06.708 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-07-16 23:29:09.336
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 2 2013-07-16 23:40:10.809
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
