@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper"/>
-<fullyQualifiedTypeName name="com.j256.ormlite.dao.Dao"/>
-<fullyQualifiedTypeName name="android.database.sqlite.SQLiteDatabase"/>
 <fullyQualifiedTypeName name="com.j256.ormlite.support.ConnectionSource"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.database.SQLException"/>
 <fullyQualifiedTypeName name="com.j256.ormlite.table.TableUtils"/>
@@ -22,8 +18,6 @@
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Order"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.OrderItem"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Category"/>
-<fullyQualifiedTypeName name="android.accounts.AccountManager"/>
-<fullyQualifiedTypeName name="android.accounts.Account"/>
 <fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
@@ -60,4 +54,10 @@
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="com.mss.application.tasks.SyncCustomers"/>
 <fullyQualifiedTypeName name="com.mss.android.infrastructure.ormlite.OrmliteCustomerRepository"/>
+<fullyQualifiedTypeName name="android.accounts.AccountManager"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.accounts.Account"/>
+<fullyQualifiedTypeName name="java.lang.StrictMath"/>
+<fullyQualifiedTypeName name="com.mss.application.services.AuthenticationService"/>
+<fullyQualifiedTypeName name="com.mss.application.services.Credentials"/>
 </qualifiedTypeNameHistroy>

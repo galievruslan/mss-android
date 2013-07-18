@@ -1,0 +1,36 @@
+package com.mss.application.services;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
+
+public class AuthenticationService {
+	private final String ACCOUNT_TYPE = "MSS_ACCOUNT";
+	
+	private Context context;
+	public AuthenticationService(Context context) {
+		this.context = context;
+	}
+	
+	public boolean IsAuthenticated(){
+		boolean result = false;
+		
+		AccountManager accountManager = AccountManager.get(context);
+        Account[] accounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
+        if (accounts.length > 1) {
+        	for (Account account : accounts) {
+        		accountManager.removeAccount(account, null, null);
+			}
+        } else if (accounts.length == 1) {
+        	result = true;
+        }
+        
+        return result;        		
+	}
+	
+	public void Authenticate(String login, String password){
+		Account account = new Account(login, ACCOUNT_TYPE);
+    	AccountManager accountManager = AccountManager.get(context);            	
+    	accountManager.addAccountExplicitly(account, password, null);	
+	}
+}
