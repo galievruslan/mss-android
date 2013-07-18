@@ -3,7 +3,7 @@ package com.mss.android.domain.models;
 import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
 
-@DatabaseTable(tableName = Constants.Tables.Route.TABLE_NAME)
+@DatabaseTable(tableName = Constants.Tables.RouteTemplate.TABLE_NAME)
 public class RouteTemplate extends Entity {
 	
 	public RouteTemplate(){}

@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.apache.http.protocol.BasicHttpContext"/>
-<fullyQualifiedTypeName name="org.apache.http.client.protocol.ClientContext"/>
-<fullyQualifiedTypeName name="org.apache.http.message.BasicNameValuePair"/>
-<fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
-<fullyQualifiedTypeName name="org.apache.http.HttpResponse"/>
-<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpGet"/>
-<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpPost"/>
-<fullyQualifiedTypeName name="org.apache.http.client.entity.UrlEncodedFormEntity"/>
-<fullyQualifiedTypeName name="org.apache.http.client.methods.HttpUriRequest"/>
-<fullyQualifiedTypeName name="org.apache.http.client.HttpClient"/>
-<fullyQualifiedTypeName name="org.apache.http.impl.client.DefaultHttpClient"/>
-<fullyQualifiedTypeName name="org.apache.http.params.HttpParams"/>
-<fullyQualifiedTypeName name="org.apache.http.params.BasicHttpParams"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="org.apache.http.client.params.ClientPNames"/>
-<fullyQualifiedTypeName name="android.app.ListActivity"/>
 <fullyQualifiedTypeName name="com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper"/>
 <fullyQualifiedTypeName name="com.j256.ormlite.dao.Dao"/>
 <fullyQualifiedTypeName name="android.database.sqlite.SQLiteDatabase"/>
@@ -37,13 +21,10 @@
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Route"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Order"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.OrderItem"/>
-<fullyQualifiedTypeName name="com.mss.android.domain.models.Customer"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Category"/>
-<fullyQualifiedTypeName name="com.mss.android.infrastructure.ormlite.DatabaseHelper"/>
 <fullyQualifiedTypeName name="android.accounts.AccountManager"/>
 <fullyQualifiedTypeName name="android.accounts.Account"/>
 <fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
-<fullyQualifiedTypeName name="com.mss.application.R.id"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
@@ -59,5 +40,24 @@
 <fullyQualifiedTypeName name="android.app.DatePickerDialog"/>
 <fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="com.mss.application.RouteActivity"/>
+<fullyQualifiedTypeName name="android.widget.CheckBox"/>
+<fullyQualifiedTypeName name="com.mss.application.R.id"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.web.repositories.CustomerWebRepository"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.j256.ormlite.android.apptools.OrmLiteBaseActivity"/>
+<fullyQualifiedTypeName name="com.mss.android.infrastructure.ormlite.DatabaseHelper"/>
+<fullyQualifiedTypeName name="com.mss.application.SynchronizationActivity"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.web.WebRepository"/>
+<fullyQualifiedTypeName name="com.mss.android.infrastructure.data.IRepository"/>
+<fullyQualifiedTypeName name="com.mss.android.infrastructure.data.IEntity"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.Customer"/>
+<fullyQualifiedTypeName name="com.mss.android.domain.models.Customer"/>
+<fullyQualifiedTypeName name="com.mss.android.domain.models.Entity"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
+<fullyQualifiedTypeName name="org.apache.http.message.BasicNameValuePair"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="com.mss.application.tasks.SyncCustomers"/>
+<fullyQualifiedTypeName name="com.mss.android.infrastructure.ormlite.OrmliteCustomerRepository"/>
 </qualifiedTypeNameHistroy>

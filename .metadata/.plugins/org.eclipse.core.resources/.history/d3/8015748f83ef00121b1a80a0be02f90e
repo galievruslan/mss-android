@@ -1,0 +1,29 @@
+package com.mss.application.tasks;
+
+import java.util.Date;
+
+import com.mss.android.domain.models.Customer;
+import com.mss.android.infrastructure.data.IRepository;
+import com.mss.infrastructure.web.WebRepository;
+
+public class SyncCustomers extends SyncTask<com.mss.infrastructure.web.dtos.Customer, com.mss.android.domain.models.Customer> {
+
+	public SyncCustomers(
+			WebRepository<com.mss.infrastructure.web.dtos.Customer> webRepo,
+			IRepository<Customer> modelRepo) {
+		super(webRepo, modelRepo);
+	}
+	
+	public SyncCustomers(
+			WebRepository<com.mss.infrastructure.web.dtos.Customer> webRepo,
+			IRepository<Customer> modelRepo, Date lastSync) {
+		super(webRepo, modelRepo, lastSync);
+	}
+
+	@Override
+	protected Boolean doAttemptInBackground(Void... arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

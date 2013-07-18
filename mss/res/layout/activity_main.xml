@@ -8,6 +8,7 @@
     tools:context=".MainActivity" >
 
     <android.support.v7.widget.GridLayout
+        android:id="@+id/gridLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -16,7 +17,7 @@
         app:rowCount="1" >
 
         <ImageButton
-            android:id="@+id/routeButton"
+            android:id="@+id/route_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_column="0"
@@ -27,7 +28,7 @@
             android:src="@drawable/ic_menu_route" />
 
         <ImageButton
-            android:id="@+id/settingsButton"
+            android:id="@+id/settings_button"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_column="2"
@@ -36,7 +37,16 @@
             android:contentDescription="@string/menu_settings"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_menu_settings" />
-
     </android.support.v7.widget.GridLayout>
+
+    <ImageButton
+        android:id="@+id/sync_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/gridLayout1"
+        android:layout_below="@+id/gridLayout1"
+        android:contentDescription="@string/menu_sync"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_menu_sync" />
 
 </RelativeLayout>

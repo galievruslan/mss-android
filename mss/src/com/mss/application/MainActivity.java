@@ -13,15 +13,21 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		findViewById(R.id.routeButton).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.route_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	showRoute();
             }
         });
 		
-		findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	showSettings();
+            }
+        });
+		
+		findViewById(R.id.sync_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+            	showSynchronization();
             }
         });
 	}
@@ -40,5 +46,10 @@ public class MainActivity extends Activity {
 	
 	private void showSettings(){
 		
+	}
+	
+	private void showSynchronization(){
+		Intent mainActivity = new Intent(getApplicationContext(), SynchronizationActivity.class);
+    	startActivity(mainActivity);
 	}
 }
