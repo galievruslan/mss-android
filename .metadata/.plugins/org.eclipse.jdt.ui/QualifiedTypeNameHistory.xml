@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.j256.ormlite.support.ConnectionSource"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.database.SQLException"/>
-<fullyQualifiedTypeName name="com.j256.ormlite.table.TableUtils"/>
-<fullyQualifiedTypeName name="com.mss.android.domain.models.ShippingAddress"/>
-<fullyQualifiedTypeName name="com.mss.android.domain.models.UnitOfMeasure"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Status"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Warehouse"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Product"/>
@@ -60,4 +54,10 @@
 <fullyQualifiedTypeName name="java.lang.StrictMath"/>
 <fullyQualifiedTypeName name="com.mss.application.services.AuthenticationService"/>
 <fullyQualifiedTypeName name="com.mss.application.services.Credentials"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.Category"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Category"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.PriceList"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Week"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Week.Days"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.DatabaseHelper"/>
 </qualifiedTypeNameHistroy>

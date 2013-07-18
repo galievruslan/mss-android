@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- Strings related to login --> 
+    <string name="action_synchronize">Synchronize</string>
+    <string name="label_full_synchronization">Full synchronization</string>
+	<string name="sync_progress_signing_in">Synchronizing in&#8230;</string>
+	<string name="title_activity_sync">Synchronization</string>
+</resources>

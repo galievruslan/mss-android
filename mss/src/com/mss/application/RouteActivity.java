@@ -1,7 +1,8 @@
 package com.mss.application;
 
 import java.util.Calendar;
-import com.mss.android.domain.models.RoutePoint;
+
+import com.mss.domain.models.RoutePoint;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

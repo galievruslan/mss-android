@@ -1,6 +1,6 @@
 package com.mss.application;
 
-import com.mss.android.domain.models.RoutePoint;
+import com.mss.domain.models.RoutePoint;
 
 import android.view.View;
 import android.view.ViewGroup;

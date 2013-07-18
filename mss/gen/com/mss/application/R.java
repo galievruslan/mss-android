@@ -308,7 +308,7 @@ containing a value of this type.
         /**  Strings related to login 
          */
         public static final int prompt_server=0x7f060006;
-        public static final int sync_progress_signing_in=0x7f060016;
+        public static final int sync_progress=0x7f060016;
         public static final int title_activity_main=0x7f060005;
         public static final int title_activity_route=0x7f060013;
         public static final int title_activity_sync=0x7f060017;

@@ -7,16 +7,16 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-import com.mss.android.infrastructure.data.IRepository;
-import com.mss.android.infrastructure.ormlite.DatabaseHelper;
-import com.mss.android.infrastructure.ormlite.OrmliteCustomerRepository;
-import com.mss.application.tasks.SyncCustomers;
+import com.mss.application.tasks.*;
+import com.mss.infrastructure.data.IRepository;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.*;
 import com.mss.infrastructure.web.AuthenticationFailedException;
 import com.mss.infrastructure.web.WebConnectionException;
 import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.WebServer;
 import com.mss.infrastructure.web.dtos.Customer;
-import com.mss.infrastructure.web.repositories.CustomerWebRepository;
+import com.mss.infrastructure.web.repositories.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -62,9 +62,8 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
         findViewById(R.id.synchronize_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	try {
-					OrmliteCustomerRepository customerRepo = new OrmliteCustomerRepository(getHelper());
-					attemptSync(customerRepo);
+            	try {					
+					attemptSync();
 				} catch (Throwable e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -86,14 +85,14 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptSync(OrmliteCustomerRepository customerRepo) {
+    public void attemptSync() {
         if (mSyncTask != null) {
             return;
         }
 
-        mSyncStatusMessageView.setText(R.string.sync_progress_signing_in);
+        mSyncStatusMessageView.setText(R.string.sync_progress);
         showProgress(true);
-        mSyncTask = new SynchronizationTask(customerRepo);
+        mSyncTask = new SynchronizationTask(getHelper());
         mSyncTask.execute((Void) null);
     }
 
@@ -143,9 +142,9 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
      */
     public class SynchronizationTask extends AsyncTask<Void, Void, Boolean> {
     	    	
-    	OrmliteCustomerRepository customerRepo;
-    	public SynchronizationTask(OrmliteCustomerRepository customerRepo) {
-    		this.customerRepo = customerRepo;
+    	DatabaseHelper databaseHelper;
+    	public SynchronizationTask(DatabaseHelper databaseHelper) {
+    		this.databaseHelper = databaseHelper;
     	}
     	
         @Override
@@ -153,10 +152,16 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
         	WebServer webServer = new WebServer("http://mss.alkotorg.com:3000/");
 
            	try {
-				webServer.connect("manager", "423200");
-				CustomerWebRepository customerWebRepo = new CustomerWebRepository(webServer.getCurrentConnection());
+				webServer.connect("manager", "423200");				
 
-				SyncCustomers syncCustomers = new SyncCustomers(customerWebRepo, new OrmliteCustomerRepository(getHelper()));
+				OrmliteCategoryRepository categoryRepo = new OrmliteCategoryRepository(databaseHelper);
+				CategoryWebRepository categoryWebRepo = new CategoryWebRepository(webServer.getCurrentConnection());
+				SyncCategories syncCategories = new SyncCategories(categoryWebRepo, categoryRepo);
+				syncCategories.execute((Void)null).get();
+				
+				OrmliteCustomerRepository customerRepo = new OrmliteCustomerRepository(databaseHelper);
+				CustomerWebRepository customerWebRepo = new CustomerWebRepository(webServer.getCurrentConnection());
+				SyncCustomers syncCustomers = new SyncCustomers(customerWebRepo, customerRepo);
 				syncCustomers.execute((Void)null).get();
 				
 			} catch (WebConnectionException e) {

@@ -2,8 +2,8 @@ package com.mss.application.tasks;
 
 import java.util.Date;
 
-import com.mss.android.infrastructure.data.IEntity;
-import com.mss.android.infrastructure.data.IRepository;
+import com.mss.infrastructure.data.IEntity;
+import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.Dto;
 

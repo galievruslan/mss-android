@@ -26,3 +26,18 @@
 1374090269805	Rename field 'settingsButton'
 1374133015030	Copy package
 1374133018574	Delete element
+1374179107595	Rename package 'com.mss.android.infrastructure.ormlite'
+1374179117014	Rename package 'com.mss.android.infrastructure.data'
+1374179125222	Rename package 'com.mss.android.domain.services'
+1374179134827	Rename package 'com.mss.android.domain.models'
+1374179253892	Copy compilation unit
+1374179630452	Copy compilation unit
+1374179755676	Copy compilation unit
+1374179862870	Copy compilation unit
+1374179936534	Copy compilation unit
+1374180056258	Copy compilation unit
+1374180428268	Copy compilation unit
+1374180503456	Copy compilation unit
+1374180571034	Copy compilation unit
+1374180612268	Copy compilation unit
+1374180685743	Copy compilation unit

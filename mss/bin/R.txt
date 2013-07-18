@@ -87,7 +87,7 @@ int string prompt_login 0x7f060007
 int string prompt_password 0x7f060008
 int string prompt_route_date 0x7f060011
 int string prompt_server 0x7f060006
-int string sync_progress_signing_in 0x7f060016
+int string sync_progress 0x7f060016
 int string title_activity_main 0x7f060005
 int string title_activity_route 0x7f060013
 int string title_activity_sync 0x7f060017
