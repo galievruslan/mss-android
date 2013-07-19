@@ -1,0 +1,25 @@
+package com.mss.application.tasks;
+
+import java.util.Date;
+
+import com.mss.infrastructure.data.IRepository;
+import com.mss.infrastructure.web.WebRepository;
+import com.mss.infrastucture.web.dtos.translators.PriceListTranslator;
+
+public class SyncPriceLists extends SyncTask<com.mss.infrastructure.web.dtos.PriceList, com.mss.domain.models.PriceList> {
+
+	public SyncPriceLists(
+			WebRepository<com.mss.infrastructure.web.dtos.PriceList> webRepo,
+			IRepository<com.mss.domain.models.PriceList> modelRepo,
+			PriceListTranslator priceListTranslator) {
+		super(webRepo, modelRepo, priceListTranslator);
+	}
+	
+	public SyncPriceLists(
+			WebRepository<com.mss.infrastructure.web.dtos.PriceList> webRepo,
+			IRepository<com.mss.domain.models.PriceList> modelRepo,
+			PriceListTranslator priceListTranslator, 
+			Date lastSync) {
+		super(webRepo, modelRepo, priceListTranslator, lastSync);
+	}
+}

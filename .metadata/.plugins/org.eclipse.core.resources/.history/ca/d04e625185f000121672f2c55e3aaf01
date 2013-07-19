@@ -1,0 +1,87 @@
+package com.mss.application.tasks;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.mss.infrastructure.data.IEntity;
+import com.mss.infrastructure.data.IRepository;
+import com.mss.infrastructure.web.WebRepository;
+import com.mss.infrastructure.web.dtos.Dto;
+import com.mss.infrastucture.web.dtos.translators.Translator;
+
+import android.os.AsyncTask;
+
+public abstract class SyncTask<TDto extends Dto, TModel extends IEntity> extends AsyncTask<Void, Void, Boolean> {
+
+	protected WebRepository<TDto> webRepo;
+	protected IRepository<TModel> modelRepo;
+	protected Translator<TDto, TModel> translator;
+	protected Date lastSync;
+	
+	int attemptCount = 0;
+	
+	public SyncTask(WebRepository<TDto> webRepo, IRepository<TModel> modelRepo, Translator<TDto, TModel> translator, int pageSize){
+		this.webRepo = webRepo;
+		this.modelRepo = modelRepo;
+		this.translator = translator;
+	}
+	
+	public SyncTask(WebRepository<TDto> webRepo, IRepository<TModel> modelRepo, Translator<TDto, TModel> translator, int pageSize, Date lastSync){
+		this(webRepo, modelRepo, translator);
+		this.lastSync = lastSync;  
+	}	
+	
+	@Override
+	protected Boolean doInBackground(Void... arg0) {
+		Boolean result = false;
+		while (attemptCount < 3) {
+			result = doAttemptInBackground();
+			attemptCount ++;
+		}
+		
+		return result;
+	}
+		
+	protected Boolean doAttemptInBackground(Void... arg0) {
+		Boolean result = true;
+		
+		try {
+			List<TDto> dtos;
+			
+			do {
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				if (lastSync != null) {
+					params.add(new BasicNameValuePair("updated_at", lastSync.toString()));
+				}
+				
+				dtos = webRepo.find(params);
+				for (TDto dto : dtos) {
+					if (!dto.getIsValid()) {
+						TModel invalidModel = modelRepo.getById(dto.getId());
+						if (invalidModel != null)
+							modelRepo.delete(invalidModel);
+					}					
+				
+					modelRepo.save(translator.Translate(dto));			
+				}
+			}
+			while (dtos.size() > 0);
+		} catch (Throwable e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+    protected void onPostExecute(final Boolean success) {
+        if (!success && attemptCount < 3) {
+        	this.execute((Void)null);        	
+        }
+    }
+}

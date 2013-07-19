@@ -289,11 +289,11 @@ containing a value of this type.
         public static final int error_invalid_login=0x7f06000d;
         public static final int error_invalid_password=0x7f06000e;
         public static final int hello_world=0x7f060001;
-        public static final int label_address=0x7f060019;
+        public static final int label_address=0x7f060025;
         public static final int label_full_synchronization=0x7f060015;
         /**  Strings related to login 
          */
-        public static final int label_name=0x7f060018;
+        public static final int label_name=0x7f060024;
         public static final int lable_route_date_default=0x7f060012;
         public static final int login_progress_signing_in=0x7f06000c;
         public static final int menu_forgot_password=0x7f06000b;
@@ -308,10 +308,22 @@ containing a value of this type.
         /**  Strings related to login 
          */
         public static final int prompt_server=0x7f060006;
+        public static final int sync_categories=0x7f060018;
+        public static final int sync_customers=0x7f060017;
+        public static final int sync_price_lists=0x7f060019;
+        public static final int sync_price_lists_lines=0x7f06001e;
+        public static final int sync_products=0x7f06001a;
+        public static final int sync_products_units_of_measures=0x7f06001c;
         public static final int sync_progress=0x7f060016;
+        public static final int sync_route_points_templates=0x7f060022;
+        public static final int sync_route_templates=0x7f060021;
+        public static final int sync_shipping_addresses=0x7f06001b;
+        public static final int sync_statuses=0x7f06001f;
+        public static final int sync_units_of_measures=0x7f06001d;
+        public static final int sync_warehouses=0x7f060020;
         public static final int title_activity_main=0x7f060005;
         public static final int title_activity_route=0x7f060013;
-        public static final int title_activity_sync=0x7f060017;
+        public static final int title_activity_sync=0x7f060023;
     }
     public static final class style {
         /** 

@@ -13,10 +13,4 @@ public class Warehouse extends Dto {
 	public String getAddress(){
 		return address;
 	}
-	
-	private Boolean isDefault;
-	
-	public Boolean getIsDefault(){
-		return isDefault;
-	}
 }

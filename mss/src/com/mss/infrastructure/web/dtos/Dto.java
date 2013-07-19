@@ -11,13 +11,13 @@ public abstract class Dto {
 		this.id = id;
 	}
 	
-	private Boolean isValid;
+	private Boolean validity;
 	
 	public Boolean getIsValid(){
-		return isValid;
+		return validity;
 	}
 	
 	public void setIsValid(Boolean isValid) {
-		this.isValid = isValid;
+		this.validity = isValid;
 	}
 }

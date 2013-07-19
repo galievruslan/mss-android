@@ -1,0 +1,5 @@
+package com.mss.infrastucture.web.dtos.translators;
+
+public abstract class Translator {
+
+}

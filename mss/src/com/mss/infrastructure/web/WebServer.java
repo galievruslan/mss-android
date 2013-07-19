@@ -21,6 +21,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -78,14 +79,15 @@ public class WebServer {
 	}
 	
 	public String Get(String url, List<NameValuePair> params) throws URISyntaxException, Exception {
-
-		HttpParams httpParams = new BasicHttpParams();
-		for (NameValuePair nameValuePair : params) {
-			httpParams.setParameter(nameValuePair.getName(), nameValuePair.getValue());
+		String getUrl = address + url;
+		if (params.size() > 0) {
+			getUrl += '?';
 		}
-					
-		HttpGet httpGet = new HttpGet(address + url);
-		httpGet.setParams(httpParams);
+		
+		String getParamsEncoded = URLEncodedUtils.format(params, "utf-8");
+		getUrl += getParamsEncoded;
+		
+		HttpGet httpGet = new HttpGet(getUrl);
 		httpGet.addHeader("User-Agent", "MSS.Android mobile client");
 						
 		HttpResponse response = Dispatch(httpGet);

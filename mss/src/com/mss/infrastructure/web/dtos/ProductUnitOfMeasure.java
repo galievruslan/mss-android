@@ -14,15 +14,15 @@ public class ProductUnitOfMeasure extends Dto {
 		return unitOfMeasureId;
 	}
 	
-	private Boolean isBase;
+	private Boolean base;
 	
 	public Boolean getIsBase(){
-		return isBase;
+		return base;
 	}
 	
-	private int countInBase;
+	private int countInBaseUnit;
 	
 	public int getCountInBase(){
-		return countInBase;
+		return countInBaseUnit;
 	}
 }
