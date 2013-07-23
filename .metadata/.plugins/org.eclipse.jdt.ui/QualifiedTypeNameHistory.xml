@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
-<fullyQualifiedTypeName name="android.app.Dialog"/>
-<fullyQualifiedTypeName name="android.app.DatePickerDialog"/>
-<fullyQualifiedTypeName name="android.text.format.DateFormat"/>
-<fullyQualifiedTypeName name="com.mss.application.RouteActivity"/>
-<fullyQualifiedTypeName name="android.widget.CheckBox"/>
 <fullyQualifiedTypeName name="com.mss.application.R.id"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.repositories.CustomerWebRepository"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.j256.ormlite.android.apptools.OrmLiteBaseActivity"/>
 <fullyQualifiedTypeName name="com.mss.android.infrastructure.ormlite.DatabaseHelper"/>
@@ -19,7 +12,6 @@
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.Customer"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Customer"/>
 <fullyQualifiedTypeName name="com.mss.android.domain.models.Entity"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
 <fullyQualifiedTypeName name="org.apache.http.message.BasicNameValuePair"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
@@ -60,4 +52,12 @@
 <fullyQualifiedTypeName name="android.content.SharedPreferences"/>
 <fullyQualifiedTypeName name="android.preference.PreferenceManager"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonDeserializer"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonElement"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonParseException"/>
+<fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.ISO8601Utils"/>
 </qualifiedTypeNameHistroy>

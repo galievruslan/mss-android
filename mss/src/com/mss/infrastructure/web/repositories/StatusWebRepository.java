@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.Status;
 
 public class StatusWebRepository extends WebRepository<Status> {
-	final String PATH = "synchronization/statuses.json";
+	final String PATH = "/synchronization/statuses.json";
 	public StatusWebRepository(WebConnection connection){
 		super(connection);
 	}

@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.RouteTemplate;
 
 public class RouteTemplateWebRepository extends WebRepository<RouteTemplate> {
-	final String PATH = "synchronization/template_routes.json";
+	final String PATH = "/synchronization/template_routes.json";
 	public RouteTemplateWebRepository(WebConnection connection){
 		super(connection);
 	}

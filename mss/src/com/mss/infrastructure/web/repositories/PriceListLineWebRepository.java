@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.PriceListLine;
 
 public class PriceListLineWebRepository extends WebRepository<PriceListLine> {
-	final String PATH = "synchronization/product_prices.json";
+	final String PATH = "/synchronization/product_prices.json";
 	public PriceListLineWebRepository(WebConnection connection){
 		super(connection);
 	}

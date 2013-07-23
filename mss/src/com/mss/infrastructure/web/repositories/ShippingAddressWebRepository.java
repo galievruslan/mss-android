@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.ShippingAddress;
 
 public class ShippingAddressWebRepository extends WebRepository<ShippingAddress> {
-	final String PATH = "synchronization/shipping_addresses.json";
+	final String PATH = "/synchronization/shipping_addresses.json";
 	public ShippingAddressWebRepository(WebConnection connection){
 		super(connection);
 	}

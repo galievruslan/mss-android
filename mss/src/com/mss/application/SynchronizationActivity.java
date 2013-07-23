@@ -1,6 +1,7 @@
 package com.mss.application;
 
 import java.net.URISyntaxException;
+import java.util.Date;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.application.tasks.*;
@@ -163,6 +164,8 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				webServer.connect("manager", "423200");				
 				int pageSize = 100;
 				
+				Date lastSyncDate = webServer.getTime();
+				
 				publishProgress(R.string.sync_categories);
 				SyncCategories syncCategories = new SyncCategories(
 						new CategoryWebRepository(webServer.getCurrentConnection()), 
@@ -258,6 +261,11 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 						new RoutePointTemplateTranslator(),
 						pageSize);
 				syncRoutePointsTemplates.execute((Void)null).get();
+				
+				SharedPreferences settings = getSharedPreferences("pref_data_sync", MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putString("last_sync", lastSyncDate.toString());
+				editor.commit();
 				
 			} catch (WebConnectionException e) {
 				e.printStackTrace();

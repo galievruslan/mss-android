@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.Category;
 
 public class CategoryWebRepository extends WebRepository<Category> {
-	final String PATH = "synchronization/categories.json";
+	final String PATH = "/synchronization/categories.json";
 	public CategoryWebRepository(WebConnection connection){
 		super(connection);
 	}

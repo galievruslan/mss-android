@@ -1,34 +1,37 @@
 package com.mss.application;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
+import java.util.Date;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.application.tasks.*;
-import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.ormlite.*;
 import com.mss.infrastructure.web.AuthenticationFailedException;
 import com.mss.infrastructure.web.WebConnectionException;
-import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.WebServer;
-import com.mss.infrastructure.web.dtos.Customer;
 import com.mss.infrastructure.web.repositories.*;
+import com.mss.infrastucture.web.dtos.translators.CategoryTranslator;
+import com.mss.infrastucture.web.dtos.translators.CustomerTranslator;
+import com.mss.infrastucture.web.dtos.translators.PriceListLineTranslator;
+import com.mss.infrastucture.web.dtos.translators.PriceListTranslator;
+import com.mss.infrastucture.web.dtos.translators.ProductTranslator;
+import com.mss.infrastucture.web.dtos.translators.ProductUnitOfMeasureTranslator;
+import com.mss.infrastucture.web.dtos.translators.RoutePointTemplateTranslator;
+import com.mss.infrastucture.web.dtos.translators.RouteTemplateTranslator;
+import com.mss.infrastucture.web.dtos.translators.ShippingAddressTranslator;
+import com.mss.infrastucture.web.dtos.translators.StatusTranslator;
+import com.mss.infrastucture.web.dtos.translators.UnitOfMeasureTranslator;
+import com.mss.infrastucture.web.dtos.translators.WarehouseTranslator;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -36,8 +39,7 @@ import android.widget.TextView;
 
 public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper> {  
 
-	Handler mHandler;
-	
+	private SharedPreferences sharedPreferences = null;		
     private SynchronizationTask mSyncTask = null;
 
     // Values for email and password at the time of the login attempt.
@@ -45,6 +47,7 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
     // UI references.
     private CheckBox mFullSyncView;
+    private TextView mLastSync;
     private View mSyncFormView;
     private View mSyncStatusView;
     private TextView mSyncStatusMessageView;
@@ -52,20 +55,16 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        mHandler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message inputMessage) {
-                String text = (String) inputMessage.obj;
-                mSyncStatusMessageView.setText(text);
-            }
-        };
-
-
         setContentView(R.layout.activity_synchronization);
+        
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         
         // Set up the login form.
         mFullSyncView = (CheckBox) findViewById(R.id.full_synchronization_checkbox);
+        mLastSync = (TextView) findViewById(R.id.last_sync_text_view);
+        
+        String lastSync = sharedPreferences.getString("last_sync", "");
+        mLastSync.setText(lastSync);
 
         mSyncFormView = findViewById(R.id.sync_form);
         mSyncStatusView = findViewById(R.id.sync_status);
@@ -76,7 +75,6 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
             	try {					
 					attemptSync();
 				} catch (Throwable e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -158,30 +156,115 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
     	}
     	
         @Override
-        protected Boolean doInBackground(Void... params) {
-        	WebServer webServer = new WebServer("http://mss.alkotorg.com:3000/");
+        protected Boolean doInBackground(Void... params) { 
+        	String serverAddress = sharedPreferences.getString("server_address", "");
+        	WebServer webServer = new WebServer(serverAddress);
 
            	try {
 				webServer.connect("manager", "423200");				
-
+				int pageSize = 100;
+				
+				Date lastSyncDate = webServer.getTime();
+				
 				publishProgress(R.string.sync_categories);
-				mSyncStatusMessageView.setText(R.string.sync_categories);
-				OrmliteCategoryRepository categoryRepo = new OrmliteCategoryRepository(databaseHelper);
-				CategoryWebRepository categoryWebRepo = new CategoryWebRepository(webServer.getCurrentConnection());
-				SyncCategories syncCategories = new SyncCategories(categoryWebRepo, categoryRepo);
+				SyncCategories syncCategories = new SyncCategories(
+						new CategoryWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteCategoryRepository(databaseHelper),
+						new CategoryTranslator(),
+						pageSize);
 				syncCategories.execute((Void)null).get();
 				
-				mSyncStatusMessageView.setText(R.string.sync_customers);
-				OrmliteCustomerRepository customerRepo = new OrmliteCustomerRepository(databaseHelper);
-				CustomerWebRepository customerWebRepo = new CustomerWebRepository(webServer.getCurrentConnection());
-				SyncCustomers syncCustomers = new SyncCustomers(customerWebRepo, customerRepo);
+				publishProgress(R.string.sync_customers);
+				SyncCustomers syncCustomers = new SyncCustomers(
+						new CustomerWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteCustomerRepository(databaseHelper),
+						new CustomerTranslator(),
+						pageSize);
 				syncCustomers.execute((Void)null).get();
 				
-				mSyncStatusMessageView.setText(R.string.sync_price_lists);
-				OrmlitePriceListRepository priceListRepo = new OrmlitePriceListRepository(databaseHelper);
-				PriceListWebRepository priceListWebRepo = new PriceListWebRepository(webServer.getCurrentConnection());
-				SyncPriceLists syncPriceLists = new SyncPriceLists(priceListWebRepo, priceListRepo);
+				publishProgress(R.string.sync_shipping_addresses);
+				SyncShippingAddresses syncShippingAddresses = new SyncShippingAddresses(
+						new ShippingAddressWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteShippingAddressRepository(databaseHelper),
+						new ShippingAddressTranslator(),
+						pageSize);
+				syncShippingAddresses.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_products);
+				SyncProducts syncProducts = new SyncProducts(
+						new ProductWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteProductRepository(databaseHelper),
+						new ProductTranslator(),
+						pageSize);
+				syncProducts.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_price_lists);
+				SyncPriceLists syncPriceLists = new SyncPriceLists(
+						new PriceListWebRepository(webServer.getCurrentConnection()), 
+						new OrmlitePriceListRepository(databaseHelper),
+						new PriceListTranslator(),
+						pageSize);
 				syncPriceLists.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_price_lists_lines);
+				SyncPriceListsLines syncPriceListsLines = new SyncPriceListsLines(
+						new PriceListLineWebRepository(webServer.getCurrentConnection()), 
+						new OrmlitePriceListLineRepository(databaseHelper),
+						new PriceListLineTranslator(),
+						pageSize);
+				syncPriceListsLines.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_units_of_measures);
+				SyncUnitsOfMeasures syncUnitsOfMeasures = new SyncUnitsOfMeasures(
+						new UnitOfMeasureWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteUnitOfMeasureRepository(databaseHelper),
+						new UnitOfMeasureTranslator(),
+						pageSize);
+				syncUnitsOfMeasures.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_products_units_of_measures);
+				SyncProductsUnitsOfMeasures syncProductsUnitsOfMeasures = new SyncProductsUnitsOfMeasures(
+						new ProductUoMWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteProductUnitOfMeasureRepository(databaseHelper),
+						new ProductUnitOfMeasureTranslator(),
+						pageSize);
+				syncProductsUnitsOfMeasures.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_statuses);
+				SyncStatuses syncStatuses = new SyncStatuses(
+						new StatusWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteStatusRepository(databaseHelper),
+						new StatusTranslator(),
+						pageSize);
+				syncStatuses.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_warehouses);
+				SyncWarehouses syncWarehouses = new SyncWarehouses(
+						new WarehouseWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteWarehouseRepository(databaseHelper),
+						new WarehouseTranslator(),
+						pageSize);
+				syncWarehouses.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_route_templates);
+				SyncRouteTemplates syncRouteTemplates = new SyncRouteTemplates(
+						new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRouteTemplateRepository(databaseHelper),
+						new RouteTemplateTranslator(),
+						pageSize);
+				syncRouteTemplates.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_route_points_templates);
+				SyncRoutePointsTemplates syncRoutePointsTemplates = new SyncRoutePointsTemplates(
+						new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRoutePointTemplateRepository(databaseHelper),
+						new RoutePointTemplateTranslator(),
+						pageSize);
+				syncRoutePointsTemplates.execute((Void)null).get();
+				
+				SharedPreferences settings = getSharedPreferences("last_sync", MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putString("last_sync", lastSyncDate.toString());
 				
 			} catch (WebConnectionException e) {
 				e.printStackTrace();
@@ -190,14 +273,14 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				e.printStackTrace();
 				return false;
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
 
             return true;
@@ -207,8 +290,10 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
         //called automatically after each call to publishProgress()
         //runs on the UI thread
         protected void onProgressUpdate(Integer... progress) {
+            //you need to cast the params to the type you want!
+        	Integer resId = (Integer)progress[0];
             //now update the progress dialog
-        	mSyncStatusMessageView.setText(progress);
+        	mSyncStatusMessageView.setText(resId);
         }
         
         @Override

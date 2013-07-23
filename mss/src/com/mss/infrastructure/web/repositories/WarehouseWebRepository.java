@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.Warehouse;
 
 public class WarehouseWebRepository extends WebRepository<Warehouse> {
-	final String PATH = "synchronization/warehouses.json";
+	final String PATH = "/synchronization/warehouses.json";
 	public WarehouseWebRepository(WebConnection connection){
 		super(connection);
 	}

@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.UnitOfMeasure;
 
 public class UnitOfMeasureWebRepository extends WebRepository<UnitOfMeasure> {
-	final String PATH = "synchronization/unit_of_measures.json";
+	final String PATH = "/synchronization/unit_of_measures.json";
 	public UnitOfMeasureWebRepository(WebConnection connection){
 		super(connection);
 	}

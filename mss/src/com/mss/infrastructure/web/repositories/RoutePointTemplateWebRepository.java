@@ -13,7 +13,7 @@ import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.RoutePointTemplate;
 
 public class RoutePointTemplateWebRepository extends WebRepository<RoutePointTemplate> {
-	final String PATH = "synchronization/template_route_points.json";
+	final String PATH = "/synchronization/template_route_points.json";
 	public RoutePointTemplateWebRepository(WebConnection connection){
 		super(connection);
 	}
