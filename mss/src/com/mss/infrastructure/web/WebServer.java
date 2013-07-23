@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -93,13 +94,12 @@ public class WebServer {
         JsonDeserializer<Date> jsonDateDeserializer = new JsonDeserializer<Date>() {
         	public Date deserialize(JsonElement json, Type typeOfT,
         		JsonDeserializationContext context) throws JsonParseException {
-        		
-				return json == null ? null : ISO8601Utils.parse(json.getAsString());
+        		return ISO8601Utils.parse(json.getAsString());
 			}
         };
         Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, jsonDateDeserializer).create();
         
-		return gson.fromJson(json, ServerTime.class).getDatetime();
+		return gson.fromJson(json, ServerTime.class).getTime();
 	} 
 	
 	public String Get(String url, List<NameValuePair> params) throws URISyntaxException, Exception {
@@ -187,7 +187,7 @@ public class WebServer {
 	class ServerTime {
 		private Date datetime;
 		
-		public Date getDatetime(){
+		public Date getTime(){
 			return datetime;
 		}
 	}

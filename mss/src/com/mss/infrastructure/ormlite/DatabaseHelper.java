@@ -232,4 +232,41 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		this.statusDao = null;
 		this.warehouseDao = null;
 	}
+	
+	public void clear() throws java.sql.SQLException {
+		Log.i(DatabaseHelper.class.getName(), "clear");		
+		TableUtils.dropTable(connectionSource, Category.class, true);
+		TableUtils.dropTable(connectionSource, Customer.class, true);
+		TableUtils.dropTable(connectionSource, ShippingAddress.class, true);
+		TableUtils.dropTable(connectionSource, UnitOfMeasure.class, true);
+		TableUtils.dropTable(connectionSource, Status.class, true);
+		TableUtils.dropTable(connectionSource, Warehouse.class, true);
+		TableUtils.dropTable(connectionSource, Product.class, true);
+		TableUtils.dropTable(connectionSource, ProductUnitOfMeasure.class, true);
+		TableUtils.dropTable(connectionSource, PriceList.class, true);
+		TableUtils.dropTable(connectionSource, PriceListLine.class, true);
+		TableUtils.dropTable(connectionSource, RouteTemplate.class, true);
+		TableUtils.dropTable(connectionSource, RoutePointTemplate.class, true);
+		TableUtils.dropTable(connectionSource, Route.class, true);
+		TableUtils.dropTable(connectionSource, RoutePoint.class, true);
+		TableUtils.dropTable(connectionSource, Order.class, true);
+		TableUtils.dropTable(connectionSource, OrderItem.class, true);
+		
+		TableUtils.createTable(connectionSource, Category.class);
+		TableUtils.createTable(connectionSource, Customer.class);
+		TableUtils.createTable(connectionSource, ShippingAddress.class);
+		TableUtils.createTable(connectionSource, UnitOfMeasure.class);
+		TableUtils.createTable(connectionSource, Status.class);
+		TableUtils.createTable(connectionSource, Warehouse.class);
+		TableUtils.createTable(connectionSource, Product.class);
+		TableUtils.createTable(connectionSource, ProductUnitOfMeasure.class);
+		TableUtils.createTable(connectionSource, PriceList.class);
+		TableUtils.createTable(connectionSource, PriceListLine.class);
+		TableUtils.createTable(connectionSource, RouteTemplate.class);
+		TableUtils.createTable(connectionSource, RoutePointTemplate.class);
+		TableUtils.createTable(connectionSource, Route.class);
+		TableUtils.createTable(connectionSource, RoutePoint.class);
+		TableUtils.createTable(connectionSource, Order.class);
+		TableUtils.createTable(connectionSource, OrderItem.class);
+	}
 }

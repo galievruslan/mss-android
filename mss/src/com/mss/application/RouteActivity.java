@@ -61,9 +61,9 @@ public class RouteActivity extends Activity  {
 			month = selectedMonth;
 			day = selectedDay;
 			
-			final Calendar c = Calendar.getInstance();
-			c.set(year, month, day);
-			mDateView.setText(DateFormat.getDateFormat(getApplicationContext()).format(c.getTime()));
+			final Calendar calendar = Calendar.getInstance();
+			calendar.set(year, month, day);
+			mDateView.setText(DateFormat.getDateFormat(getApplicationContext()).format(calendar.getTime()));
 		}
 	};
 

@@ -291,12 +291,12 @@ containing a value of this type.
         public static final int error_invalid_login=0x7f07000d;
         public static final int error_invalid_password=0x7f07000e;
         public static final int hello_world=0x7f070001;
-        public static final int label_address=0x7f07002e;
+        public static final int label_address=0x7f07002f;
         public static final int label_full_synchronization=0x7f07001c;
         public static final int label_last_synchronization=0x7f07001d;
         /**  Strings related to login 
          */
-        public static final int label_name=0x7f07002d;
+        public static final int label_name=0x7f07002e;
         public static final int lable_route_date_default=0x7f070012;
         public static final int last_synchronization=0x7f07001e;
         public static final int login_progress_signing_in=0x7f07000c;
@@ -325,23 +325,24 @@ containing a value of this type.
         /**  Strings related to login 
          */
         public static final int prompt_server=0x7f070006;
-        public static final int sync_categories=0x7f070021;
-        public static final int sync_customers=0x7f070020;
-        public static final int sync_price_lists=0x7f070022;
-        public static final int sync_price_lists_lines=0x7f070027;
-        public static final int sync_products=0x7f070023;
-        public static final int sync_products_units_of_measures=0x7f070025;
+        public static final int sync_categories=0x7f070022;
+        public static final int sync_clear_storage=0x7f070020;
+        public static final int sync_customers=0x7f070021;
+        public static final int sync_price_lists=0x7f070023;
+        public static final int sync_price_lists_lines=0x7f070028;
+        public static final int sync_products=0x7f070024;
+        public static final int sync_products_units_of_measures=0x7f070026;
         public static final int sync_progress=0x7f07001f;
-        public static final int sync_route_points_templates=0x7f07002b;
-        public static final int sync_route_templates=0x7f07002a;
-        public static final int sync_shipping_addresses=0x7f070024;
-        public static final int sync_statuses=0x7f070028;
-        public static final int sync_units_of_measures=0x7f070026;
-        public static final int sync_warehouses=0x7f070029;
+        public static final int sync_route_points_templates=0x7f07002c;
+        public static final int sync_route_templates=0x7f07002b;
+        public static final int sync_shipping_addresses=0x7f070025;
+        public static final int sync_statuses=0x7f070029;
+        public static final int sync_units_of_measures=0x7f070027;
+        public static final int sync_warehouses=0x7f07002a;
         public static final int title_activity_main=0x7f070005;
         public static final int title_activity_route=0x7f070013;
         public static final int title_activity_settings=0x7f070014;
-        public static final int title_activity_sync=0x7f07002c;
+        public static final int title_activity_sync=0x7f07002d;
     }
     public static final class style {
         /** 

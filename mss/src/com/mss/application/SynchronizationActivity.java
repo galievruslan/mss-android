@@ -1,6 +1,7 @@
 package com.mss.application;
 
 import java.net.URISyntaxException;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
@@ -32,6 +33,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -97,10 +99,13 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
         if (mSyncTask != null) {
             return;
         }
+        
+        mFullSyncView = (CheckBox)findViewById(R.id.full_synchronization_checkbox);
+        mFullSync = mFullSyncView.isChecked();
 
         mSyncStatusMessageView.setText(R.string.sync_progress);
         showProgress(true);
-        mSyncTask = new SynchronizationTask(getHelper());
+        mSyncTask = new SynchronizationTask(getHelper(), mFullSync);
         mSyncTask.execute((Void) null);
     }
 
@@ -150,9 +155,11 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
      */
     public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
     	    	
-    	DatabaseHelper databaseHelper;
-    	public SynchronizationTask(DatabaseHelper databaseHelper) {
+    	private DatabaseHelper databaseHelper;
+    	private boolean isFull;
+    	public SynchronizationTask(DatabaseHelper databaseHelper, boolean isFull) {
     		this.databaseHelper = databaseHelper;
+    		this.isFull = isFull;
     	}
     	
         @Override
@@ -162,9 +169,14 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
            	try {
 				webServer.connect("manager", "423200");				
-				int pageSize = 100;
+				int pageSize = 500;
 				
-				Date lastSyncDate = webServer.getTime();
+				Date serverTimestamp = webServer.getTime();
+				
+				if (isFull) {
+					publishProgress(R.string.sync_clear_storage);
+					databaseHelper.clear();
+				}
 				
 				publishProgress(R.string.sync_categories);
 				SyncCategories syncCategories = new SyncCategories(
@@ -262,10 +274,12 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 						pageSize);
 				syncRoutePointsTemplates.execute((Void)null).get();
 				
-				SharedPreferences settings = getSharedPreferences("pref_data_sync", MODE_PRIVATE);
-				SharedPreferences.Editor editor = settings.edit();
-				editor.putString("last_sync", lastSyncDate.toString());
-				editor.commit();
+				
+				SharedPreferences.Editor editor = sharedPreferences.edit();	
+				String stringTimeRepresentation = DateFormat.getDateFormat(getApplicationContext()).format(serverTimestamp) + " " + 
+						DateFormat.getTimeFormat(getApplicationContext()).format(serverTimestamp);				
+				editor.putString("last_sync", stringTimeRepresentation);
+				editor.apply();
 				
 			} catch (WebConnectionException e) {
 				e.printStackTrace();
