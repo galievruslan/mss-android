@@ -1,9 +1,0 @@
-package com.mss.application;
-
-import android.app.ListActivity;
-
-public class RouteActivity extends ListActivity  {
-
-	
-
-}

@@ -26,10 +26,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -37,8 +38,7 @@ import android.widget.TextView;
 
 public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper> {  
 
-	Handler mHandler;
-	
+	private SharedPreferences sharedPreferences = null;		
     private SynchronizationTask mSyncTask = null;
 
     // Values for email and password at the time of the login attempt.
@@ -46,6 +46,7 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 
     // UI references.
     private CheckBox mFullSyncView;
+    private TextView mLastSync;
     private View mSyncFormView;
     private View mSyncStatusView;
     private TextView mSyncStatusMessageView;
@@ -55,8 +56,14 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synchronization);
         
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        
         // Set up the login form.
         mFullSyncView = (CheckBox) findViewById(R.id.full_synchronization_checkbox);
+        mLastSync = (TextView) findViewById(R.id.last_sync_text_view);
+        
+        String lastSync = sharedPreferences.getString("last_sync", "");
+        mLastSync.setText(lastSync);
 
         mSyncFormView = findViewById(R.id.sync_form);
         mSyncStatusView = findViewById(R.id.sync_status);
@@ -67,7 +74,6 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
             	try {					
 					attemptSync();
 				} catch (Throwable e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -149,8 +155,9 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
     	}
     	
         @Override
-        protected Boolean doInBackground(Void... params) {
-        	WebServer webServer = new WebServer("http://mss.alkotorg.com:3000/");
+        protected Boolean doInBackground(Void... params) { 
+        	String serverAddress = sharedPreferences.getString("server_address", "");
+        	WebServer webServer = new WebServer(serverAddress);
 
            	try {
 				webServer.connect("manager", "423200");				
@@ -259,14 +266,14 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				e.printStackTrace();
 				return false;
 			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			} catch (Throwable e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 			}
 
             return true;

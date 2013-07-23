@@ -19,8 +19,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.mss.application.MainActivity"
-            android:label="@string/title_activity_main" 
-            android:launchMode="singleTask">
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
         <activity
             android:name="com.mss.application.LoginActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible" >            
+            android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
             android:name="com.mss.application.RouteActivity"
@@ -40,5 +40,10 @@
             android:name="com.mss.application.SynchronizationActivity"
             android:label="@string/title_activity_sync" >
         </activity>
+        <activity
+            android:name="com.mss.application.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
+
 </manifest>

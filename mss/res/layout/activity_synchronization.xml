@@ -46,6 +46,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/label_full_synchronization" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/last_sync_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/label_last_synchronization"
+                    android:paddingRight="5dp"
+                    android:text="@string/label_last_synchronization" />
+
+                <TextView
+                    android:id="@+id/last_sync_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/last_synchronization" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/synchronize_button"
                 android:layout_width="wrap_content"

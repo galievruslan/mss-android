@@ -45,11 +45,12 @@ public class MainActivity extends Activity {
 	}
 	
 	private void showSettings(){
-		
+		Intent settingsActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+    	startActivity(settingsActivity);
 	}
 	
 	private void showSynchronization(){
-		Intent mainActivity = new Intent(getApplicationContext(), SynchronizationActivity.class);
-    	startActivity(mainActivity);
+		Intent syncActivity = new Intent(getApplicationContext(), SynchronizationActivity.class);
+    	startActivity(syncActivity);
 	}
 }
