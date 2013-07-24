@@ -175,8 +175,9 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				Date lastSyncDate = null;
 				try {
 					String lastSync = sharedPreferences.getString("last_sync", "");
-					lastSyncDate = new Date(Date.parse(lastSync));
-				} catch (IllegalArgumentException e) {					
+					lastSyncDate = ISO8601Utils.parse(lastSync);
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
 					isFull = true;
 				}
 				
@@ -188,57 +189,27 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				Date serverTimestamp = webServer.getTime();
 				
 				publishProgress(R.string.sync_categories);
-				SyncCategories syncCategories = null;
-				if (isFull) {
-					syncCategories = new SyncCategories(
-							new CategoryWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteCategoryRepository(databaseHelper),
-							new CategoryTranslator(),
-							pageSize);
-				} else {
-					syncCategories = new SyncCategories(
-							new CategoryWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteCategoryRepository(databaseHelper),
-							new CategoryTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncCategories syncCategories = new SyncCategories(
+						new CategoryWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteCategoryRepository(databaseHelper),
+						new CategoryTranslator(),
+						pageSize);
 				syncCategories.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_customers);
-				SyncCustomers syncCustomers = null;
-				if (isFull) {
-					syncCustomers = new SyncCustomers(
-							new CustomerWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteCustomerRepository(databaseHelper),
-							new CustomerTranslator(),
-							pageSize);
-				} else {
-					syncCustomers = new SyncCustomers(
-							new CustomerWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteCustomerRepository(databaseHelper),
-							new CustomerTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncCustomers syncCustomers = new SyncCustomers(
+						new CustomerWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteCustomerRepository(databaseHelper),
+						new CustomerTranslator(),
+						pageSize);
 				syncCustomers.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_shipping_addresses);
-				SyncShippingAddresses syncShippingAddresses = null;
-				if (isFull) {
-					syncShippingAddresses = new SyncShippingAddresses(
-							new ShippingAddressWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteShippingAddressRepository(databaseHelper),
-							new ShippingAddressTranslator(),
-							pageSize);
-				} else {
-					syncShippingAddresses = new SyncShippingAddresses(
-							new ShippingAddressWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteShippingAddressRepository(databaseHelper),
-							new ShippingAddressTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncShippingAddresses syncShippingAddresses = new SyncShippingAddresses(
+						new ShippingAddressWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteShippingAddressRepository(databaseHelper),
+						new ShippingAddressTranslator(),
+						pageSize);
 				syncShippingAddresses.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_products);
@@ -250,152 +221,74 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				syncProducts.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_price_lists);
-				SyncPriceLists syncPriceLists = null;
-				if (isFull) {
-					syncPriceLists = new SyncPriceLists(
-							new PriceListWebRepository(webServer.getCurrentConnection()), 
-							new OrmlitePriceListRepository(databaseHelper),
-							new PriceListTranslator(),
-							pageSize);
-				} else {
-					syncPriceLists = new SyncPriceLists(
-							new PriceListWebRepository(webServer.getCurrentConnection()), 
-							new OrmlitePriceListRepository(databaseHelper),
-							new PriceListTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncPriceLists syncPriceLists = new SyncPriceLists(
+						new PriceListWebRepository(webServer.getCurrentConnection()), 
+						new OrmlitePriceListRepository(databaseHelper),
+						new PriceListTranslator(),
+						pageSize);
 				syncPriceLists.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_price_lists_lines);
-				SyncPriceListsLines syncPriceListsLines = null;
-				if (isFull) {
-					syncPriceListsLines = new SyncPriceListsLines(
-							new PriceListLineWebRepository(webServer.getCurrentConnection()), 
-							new OrmlitePriceListLineRepository(databaseHelper),
-							new PriceListLineTranslator(),
-							pageSize);
-				} else {
-					syncPriceListsLines = new SyncPriceListsLines(
-							new PriceListLineWebRepository(webServer.getCurrentConnection()), 
-							new OrmlitePriceListLineRepository(databaseHelper),
-							new PriceListLineTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncPriceListsLines syncPriceListsLines = new SyncPriceListsLines(
+						new PriceListLineWebRepository(webServer.getCurrentConnection()), 
+						new OrmlitePriceListLineRepository(databaseHelper),
+						new PriceListLineTranslator(),
+						pageSize);
 				syncPriceListsLines.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_units_of_measures);
-				SyncUnitsOfMeasures syncUnitsOfMeasures = null;
-				if (isFull) {
-					syncUnitsOfMeasures = new SyncUnitsOfMeasures(
-							new UnitOfMeasureWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteUnitOfMeasureRepository(databaseHelper),
-							new UnitOfMeasureTranslator(),
-							pageSize); 
-				} else {
-					syncUnitsOfMeasures = new SyncUnitsOfMeasures(
-							new UnitOfMeasureWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteUnitOfMeasureRepository(databaseHelper),
-							new UnitOfMeasureTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncUnitsOfMeasures syncUnitsOfMeasures = new SyncUnitsOfMeasures(
+						new UnitOfMeasureWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteUnitOfMeasureRepository(databaseHelper),
+						new UnitOfMeasureTranslator(),
+						pageSize);
 				syncUnitsOfMeasures.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_products_units_of_measures);
-				SyncProductsUnitsOfMeasures syncProductsUnitsOfMeasures = null;
-				if (isFull) {
-					syncProductsUnitsOfMeasures = new SyncProductsUnitsOfMeasures(
-							new ProductUoMWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteProductUnitOfMeasureRepository(databaseHelper),
-							new ProductUnitOfMeasureTranslator(),
-							pageSize);
-				} else {
-					syncProductsUnitsOfMeasures = new SyncProductsUnitsOfMeasures(
-							new ProductUoMWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteProductUnitOfMeasureRepository(databaseHelper),
-							new ProductUnitOfMeasureTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncProductsUnitsOfMeasures syncProductsUnitsOfMeasures = new SyncProductsUnitsOfMeasures(
+						new ProductUoMWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteProductUnitOfMeasureRepository(databaseHelper),
+						new ProductUnitOfMeasureTranslator(),
+						pageSize);
 				syncProductsUnitsOfMeasures.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_statuses);
-				SyncStatuses syncStatuses = null;
-				if (isFull) {
-					syncStatuses = new SyncStatuses(
-							new StatusWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteStatusRepository(databaseHelper),
-							new StatusTranslator(),
-							pageSize); 
-				} else {
-					syncStatuses = new SyncStatuses(
-							new StatusWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteStatusRepository(databaseHelper),
-							new StatusTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncStatuses syncStatuses = new SyncStatuses(
+						new StatusWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteStatusRepository(databaseHelper),
+						new StatusTranslator(),
+						pageSize);
 				syncStatuses.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_warehouses);
-				SyncWarehouses syncWarehouses = null;
-				if (isFull) {
-					syncWarehouses = new SyncWarehouses(
-							new WarehouseWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteWarehouseRepository(databaseHelper),
-							new WarehouseTranslator(),
-							pageSize);
-				} else {
-					syncWarehouses = new SyncWarehouses(
-							new WarehouseWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteWarehouseRepository(databaseHelper),
-							new WarehouseTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncWarehouses syncWarehouses = new SyncWarehouses(
+						new WarehouseWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteWarehouseRepository(databaseHelper),
+						new WarehouseTranslator(),
+						pageSize);
 				syncWarehouses.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_route_templates);
-				SyncRouteTemplates syncRouteTemplates = null;
-				if (isFull) {
-					syncRouteTemplates = new SyncRouteTemplates(
-							new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRouteTemplateRepository(databaseHelper),
-							new RouteTemplateTranslator(),
-							pageSize);
-				} else {
-					syncRouteTemplates = new SyncRouteTemplates(
-							new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRouteTemplateRepository(databaseHelper),
-							new RouteTemplateTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncRouteTemplates syncRouteTemplates = new SyncRouteTemplates(
+						new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRouteTemplateRepository(databaseHelper),
+						new RouteTemplateTranslator(),
+						pageSize);
 				syncRouteTemplates.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_route_points_templates);
-				SyncRoutePointsTemplates syncRoutePointsTemplates = null;
-				if (isFull) {
-					syncRoutePointsTemplates = new SyncRoutePointsTemplates(
-							new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRoutePointTemplateRepository(databaseHelper),
-							new RoutePointTemplateTranslator(),
-							pageSize);
-				} else {
-					syncRoutePointsTemplates = new SyncRoutePointsTemplates(
-							new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRoutePointTemplateRepository(databaseHelper),
-							new RoutePointTemplateTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncRoutePointsTemplates syncRoutePointsTemplates = new SyncRoutePointsTemplates(
+						new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRoutePointTemplateRepository(databaseHelper),
+						new RoutePointTemplateTranslator(),
+						pageSize);
 				syncRoutePointsTemplates.execute((Void)null).get();
 				
 				
 				SharedPreferences.Editor editor = sharedPreferences.edit();	
-				editor.putString("last_sync", serverTimestamp.toLocaleString());
+				String stringTimeRepresentation = DateFormat.getDateFormat(getApplicationContext()).format(serverTimestamp) + " " + 
+						DateFormat.getTimeFormat(getApplicationContext()).format(serverTimestamp);				
+				editor.putString("last_sync", stringTimeRepresentation);
 				editor.apply();
 				
 			} catch (WebConnectionException e) {

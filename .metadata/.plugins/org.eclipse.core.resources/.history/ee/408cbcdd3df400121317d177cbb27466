@@ -358,39 +358,19 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				syncWarehouses.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_route_templates);
-				SyncRouteTemplates syncRouteTemplates = null;
-				if (isFull) {
-					syncRouteTemplates = new SyncRouteTemplates(
-							new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRouteTemplateRepository(databaseHelper),
-							new RouteTemplateTranslator(),
-							pageSize);
-				} else {
-					syncRouteTemplates = new SyncRouteTemplates(
-							new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRouteTemplateRepository(databaseHelper),
-							new RouteTemplateTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncRouteTemplates syncRouteTemplates = new SyncRouteTemplates(
+						new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRouteTemplateRepository(databaseHelper),
+						new RouteTemplateTranslator(),
+						pageSize);
 				syncRouteTemplates.execute((Void)null).get();
 				
 				publishProgress(R.string.sync_route_points_templates);
-				SyncRoutePointsTemplates syncRoutePointsTemplates = null;
-				if (isFull) {
-					syncRoutePointsTemplates = new SyncRoutePointsTemplates(
-							new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRoutePointTemplateRepository(databaseHelper),
-							new RoutePointTemplateTranslator(),
-							pageSize);
-				} else {
-					syncRoutePointsTemplates = new SyncRoutePointsTemplates(
-							new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
-							new OrmliteRoutePointTemplateRepository(databaseHelper),
-							new RoutePointTemplateTranslator(),
-							pageSize,
-							lastSyncDate);
-				}
+				SyncRoutePointsTemplates syncRoutePointsTemplates = new SyncRoutePointsTemplates(
+						new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteRoutePointTemplateRepository(databaseHelper),
+						new RoutePointTemplateTranslator(),
+						pageSize);
 				syncRoutePointsTemplates.execute((Void)null).get();
 				
 				

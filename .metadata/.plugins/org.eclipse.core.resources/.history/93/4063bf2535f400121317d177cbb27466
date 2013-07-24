@@ -24,7 +24,7 @@ public abstract class SyncTask<TDto extends Dto, TModel extends IEntity> extends
 	protected Integer pageSize;
 	protected Date lastSync;
 	
-	private int attemptCount = 0;
+	int attemptCount = 0;
 	
 	public SyncTask(WebRepository<TDto> webRepo, IRepository<TModel> modelRepo, Translator<TDto, TModel> translator, Integer pageSize){
 		this.webRepo = webRepo;
