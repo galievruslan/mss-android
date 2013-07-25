@@ -1,9 +1,0 @@
-package com.mss.application.tasks;
-
-import com.mss.android.domain.models.Customer;
-import com.mss.android.infrastructure.data.IEntity;
-import com.mss.infrastructure.web.dtos.Dto;
-
-public class SyncCustomers extends SyncTask<com.mss.infrastructure.web.dtos.Customer, com.mss.android.domain.Customer> {
-
-}

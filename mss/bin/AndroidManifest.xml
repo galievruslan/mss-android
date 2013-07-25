@@ -44,6 +44,14 @@
             android:name="com.mss.application.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.mss.application.NewRoutePointActivity"
+            android:label="@string/title_activity_new_route_point" >
+        </activity>
+        <activity
+            android:name="com.mss.application.CustomersActivity"
+            android:label="@string/title_activity_customers" >
+        </activity>
     </application>
 
 </manifest>

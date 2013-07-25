@@ -8,4 +8,8 @@ public class CustomersService {
 	public CustomersService(IRepository<Customer> customersRepo) {
 		this.customersRepo = customersRepo;
 	}
+	
+	public Iterable<Customer> Customers() throws Throwable{
+		return customersRepo.find();
+	}
 }

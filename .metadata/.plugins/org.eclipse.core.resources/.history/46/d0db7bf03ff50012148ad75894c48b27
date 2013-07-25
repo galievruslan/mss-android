@@ -1,0 +1,20 @@
+package com.mss.infrastructure.ormlite;
+
+import java.util.Date;
+
+import com.j256.ormlite.stmt.StatementBuilder;
+import com.mss.domain.models.Route;
+
+public class OrmliteRouteRepository extends OrmliteGenericRepository<Route> {
+
+	public OrmliteRouteRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getRouteDao());
+	}
+	
+	public Iterable<Route> find(Date date) throws Throwable {
+		StatementBuilder statementBuilder = new StatementBuilder<T, ID>
+		
+		.where().like(Account.NAME_FIELD_NAME, name.substring(0, 3) + "%");
+		return dao.q;
+	}
+}

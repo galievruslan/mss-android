@@ -1,0 +1,11 @@
+package com.mss.application.services;
+
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+
+public class RouteService {
+	
+	private DatabaseHelper databaseHelper;
+	public RouteService(DatabaseHelper databaseHelper){
+		this.databaseHelper = databaseHelper;
+	}
+}

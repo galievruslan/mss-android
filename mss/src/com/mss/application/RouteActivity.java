@@ -2,9 +2,11 @@ package com.mss.application;
 
 import java.util.Calendar;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -16,7 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class RouteActivity extends Activity  {
+public class RouteActivity extends OrmLiteBaseActivity<DatabaseHelper>  {
 
 	private TextView mDateView;
 	private ImageButton mButtonPickUpRouteDate;
@@ -37,6 +39,7 @@ public class RouteActivity extends Activity  {
 	    	}
 	    });
 	    
+	    RouteService routeService = new RouteService(getHelper());
 	    RoutePoint[] values = new RoutePoint[] { new RoutePoint(), new RoutePoint() };
 	    RoutePointsAdapter adapter = new RoutePointsAdapter(this, values);
 	    
