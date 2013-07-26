@@ -7,4 +7,10 @@ public class Customer extends Dto {
 	public String getName(){
 		return name;
 	}
+	
+	private String address;
+	
+	public String getAddress(){
+		return address;
+	}
 }

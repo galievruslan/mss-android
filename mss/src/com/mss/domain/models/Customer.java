@@ -8,9 +8,10 @@ public class Customer extends Entity {
 	
 	public Customer() {}
 	
-	public Customer(int id, String name)  {
+	public Customer(int id, String name, String address)  {
 		super(id);
 		this.name = name;
+		this.address = address;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD)
@@ -18,5 +19,12 @@ public class Customer extends Entity {
 	
 	public String getName(){
 		return name;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.ADDRESS_FIELD)
+	private String address;
+	
+	public String getAddress(){
+		return address;
 	}
 }

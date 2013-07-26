@@ -15,6 +15,7 @@ public class Constants {
 		public static class Customer {
 			public static final String TABLE_NAME = "customer";
 			public static final String NAME_FIELD = "name";
+			public static final String ADDRESS_FIELD = "address";
 		}
 		
 		public static class ShippingAddress {

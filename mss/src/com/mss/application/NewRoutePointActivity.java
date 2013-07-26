@@ -2,10 +2,10 @@ package com.mss.application;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class NewRoutePointActivity extends Activity {
@@ -21,6 +21,8 @@ public class NewRoutePointActivity extends Activity {
 		mCustomer = (TextView) findViewById(R.id.customer_edit_text);
 		mCustomer.setOnClickListener(new OnClickListener() {
 	    	public void onClick(View v) {
+	    		Intent customersActivity = new Intent(getApplicationContext(), CustomersActivity.class);
+		      	startActivity(customersActivity);
 	    	}
 	    });
 	}

@@ -52,6 +52,14 @@
             android:name="com.mss.application.CustomersActivity"
             android:label="@string/title_activity_customers" >
         </activity>
+        <activity
+            android:name="com.mss.application.fragments.RouteFragment"
+            android:label="@string/title_activity_route_fragment" >
+        </activity>
+        <activity
+            android:name="com.mss.application.fragments.RoutePointFragment"
+            android:label="@string/title_activity_route_point_fragment" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,194 @@
+package com.mss.application.adapters;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
+public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
+
+	private final Context mContext;
+	private final LayoutInflater mLayoutInflater;
+	private List<RoutePoint> mRoutePointList;
+	private final Set<Integer> mRoutePointsChecked;
+	private final Set<OnRoutePointCheckedListener> mNoteCheckedListeners;
+	private final DatabaseHelper mHelper;
+	private final RouteService mRouteService;
+
+	public RoutePointAdapter(Context ctx, Date date) {
+		mContext = ctx;
+
+		mNoteCheckedListeners = new HashSet<RoutePointAdapter.OnRoutePointCheckedListener>();
+
+		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		mRoutePointsChecked = new HashSet<Integer>();
+
+		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
+		mRouteService = new RouteService(mHelper);
+		notifyDataSetChanged();	
+		
+	}
+
+	public void addOnNoteCheckedListener(OnRoutePointCheckedListener listener) {
+		mNoteCheckedListeners.add(listener);
+	}
+
+	public boolean removeOnNoteCheckedListener(OnRoutePointCheckedListener listener) {
+		return mNoteCheckedListeners.remove(listener);
+	}
+
+	public RoutePoint getItemById(int id) throws Throwable {
+		return mRouteService.getPointById(id);
+	}
+
+	@Override
+	public int getCount() {
+		if (mRoutePointList == null || mRoutePointList.isEmpty())
+			return 0;
+		return mRoutePointList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		if (mRoutePointList == null || mRoutePointList.isEmpty())
+			return null;
+		return mRoutePointList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		if (mRoutePointList == null || mRoutePointList.isEmpty())
+			return -1l;
+		return mRoutePointList.get(position).getId();
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		View v = convertView;
+		ViewHolder holder;
+
+		if (v == null) {
+			v = mLayoutInflater.inflate(R.layout.note_list_item, null, false);
+
+			holder = new ViewHolder();
+			holder.title = (TextView) v.findViewById(R.id.title);
+			holder.createDate = (TextView) v.findViewById(R.id.create_timestamp);
+			holder.checkBox = (CheckBox) v.findViewById(R.id.checkbox);
+			holder.checkBox.setOnClickListener(this);
+
+			v.setTag(holder);
+		} else {
+			holder = (ViewHolder) v.getTag();
+		}
+
+		holder.checkBox.setTag(position);
+
+		RoutePoint n = mRoutePointList.get(position);
+
+		holder.title.setText(n.getTitle());
+		holder.createDate.setText(n.getCreateDate().toString());
+		holder.checkBox.setChecked(mNotesChecked.contains(position));
+
+		return v;
+	}
+
+	@Override
+	public void onClick(View v) {
+		int position = (Integer) v.getTag();
+		boolean isChecked = ((CompoundButton) v).isChecked();
+
+		if (isChecked)
+			mRoutePointsChecked.add(position);
+		else
+			mRoutePointsChecked.remove(position);
+
+		for (OnRoutePointCheckedListener listener : mNoteCheckedListeners) {
+			listener.onNoteChecked((CompoundButton) v, isChecked, this, position);
+		}
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		mRoutePointsChecked.clear();
+
+		super.notifyDataSetChanged();
+	}
+
+	public void deleteSelected() throws Throwable {
+		for (int position : mRoutePointsChecked) {
+			mRouteService.deletePoint((RoutePoint)getItem(position));
+		}
+
+		uncheckAll();
+	}
+
+	public int delete(RoutePoint routePoint) {
+		int ret = mDao.delete(note);
+
+		if (ret > 0) {
+			notifyDataSetChanged();
+		}
+
+		return ret;
+	}
+
+	public void uncheckAll() {
+		mRoutePointsChecked.clear();
+
+		notifyDataSetChanged();
+	}
+
+	public void swapData(List<RoutePoint> data) {
+		mRoutePointList = data;
+
+		notifyDataSetChanged();
+	}
+
+	public int getCheckedCount() {
+		return mRoutePointsChecked.size();
+	}
+
+	private static class ViewHolder {
+		TextView title;
+		TextView createDate;
+		CheckBox checkBox;
+	}
+
+	/**
+	 * Implement this interface if you want to be able to handle events when the user selects the {@link CheckBox} in a
+	 * note entry.
+	 */
+	public interface OnRoutePointCheckedListener {
+		/**
+		 * Called when the user checks the {@link CheckBox}
+		 * 
+		 * @param checkBox
+		 *            actual {@link CheckBox} instance
+		 * @param isChecked
+		 *            whether the widget is selected or not
+		 * @param adapter
+		 *            the {@link NoteAdapter} instance
+		 * @param position
+		 *            list position
+		 */
+		void onNoteChecked(CompoundButton checkBox, boolean isChecked, RoutePointAdapter adapter, int position);
+	}
+}

@@ -1,0 +1,40 @@
+package com.mss.application;
+
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.mss.domain.models.Customer;
+import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.CustomerService;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import comm.mss.utils.IterableHelpers;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.ListView;
+
+public class CustomersActivity extends OrmLiteBaseActivity<DatabaseHelper> {
+
+	private ListView mListView;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_customers);
+		
+		CustomerService customerService = new CustomerService(getHelper());
+		Customer[] values = IterableHelpers.toArray(Customer.class, customerService.Customers());
+	    RoutePointsAdapter adapter = new RoutePointsAdapter(this, values);
+	    
+	    mListView = (ListView) findViewById(R.id.list);
+	    mListView.setAdapter(adapter);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.customers, menu);
+		return true;
+	}
+
+}

@@ -1,7 +1,6 @@
 package com.mss.application;
 
 import java.net.URISyntaxException;
-import java.util.Calendar;
 import java.util.Date;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
@@ -10,7 +9,6 @@ import com.mss.infrastructure.ormlite.*;
 import com.mss.infrastructure.web.AuthenticationFailedException;
 import com.mss.infrastructure.web.WebConnectionException;
 import com.mss.infrastructure.web.WebServer;
-import com.mss.infrastructure.web.dtos.ISO8601Utils;
 import com.mss.infrastructure.web.repositories.*;
 import com.mss.infrastucture.web.dtos.translators.CategoryTranslator;
 import com.mss.infrastucture.web.dtos.translators.CustomerTranslator;
@@ -34,7 +32,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -396,7 +393,7 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				
 				SharedPreferences.Editor editor = sharedPreferences.edit();	
 				editor.putString("last_sync", serverTimestamp.toLocaleString());
-				editor.apply();
+				editor.commit();
 				
 			} catch (WebConnectionException e) {
 				e.printStackTrace();
