@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- This menu is inflated by the NoteEditActivity and allows saving a note. -->
+
+    <item
+        android:id="@+id/menu_item_save"
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/menu_item_save"/>
+</menu>

@@ -1,11 +1,10 @@
 package com.mss.application;
 
-import java.util.Date;
 import java.util.List;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.domain.models.RoutePoint;
-import com.mss.domain.services.RouteService;
+import com.mss.domain.services.RoutePointService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
@@ -22,20 +21,19 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 	private final LayoutInflater mLayoutInflater;
 	private List<RoutePoint> mRoutePointList;
 	private final DatabaseHelper mHelper;
-	private final RouteService mRouteService;
+	private final RoutePointService mRoutePointService;
 
 	public RoutePointAdapter(Context ctx) {
 		mContext = ctx;
 		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
-		mRouteService = new RouteService(mHelper);
-		notifyDataSetChanged();	
-		
+		mRoutePointService = new RoutePointService(mHelper);
+		notifyDataSetChanged();		
 	}
 	
-	public RoutePoint getItemById(int id) throws Throwable {
-		return mRouteService.getPointById(id);
+	public RoutePoint getItemById(long id) throws Throwable {
+		return mRoutePointService.getPointById(id);
 	}
 
 	@Override
@@ -96,7 +94,7 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 	}
 
 	public void delete(RoutePoint routePoint) throws Throwable {
-		mRouteService.deletePoint(routePoint);
+		mRoutePointService.deletePoint(routePoint);
 		notifyDataSetChanged();
 	}
 

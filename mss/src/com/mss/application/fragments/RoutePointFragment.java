@@ -2,15 +2,10 @@ package com.mss.application.fragments;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.mss.application.R;
-import com.mss.application.R.layout;
-import com.mss.application.R.menu;
 import com.mss.domain.models.RoutePoint;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -57,9 +52,9 @@ public class RoutePointFragment extends SherlockFragment {
 		View v = inflater.inflate(R.layout.fragment_route_point, null);
 
 		if (mRoutePoint != null) {
-			mName = (TextView) v.findViewById(R.id.tv_title);
+			mName = (TextView) v.findViewById(R.id.route_point_name_text_view);
 			mName.setText(mRoutePoint.getId());
-			mAddress = (TextView) v.findViewById(R.id.tv_text);
+			mAddress = (TextView) v.findViewById(R.id.route_point_address_text_view);
 			mAddress.setText(mRoutePoint.getShippingAddressId());
 		}
 
@@ -71,8 +66,7 @@ public class RoutePointFragment extends SherlockFragment {
 	@Override
 	public void onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu,
 			com.actionbarsherlock.view.MenuInflater inflater) {
-		// TODO Auto-generated method stub
-		inflater.inflate(R.menu.menu_note, menu);
+		inflater.inflate(R.menu.menu_route_point, menu);
 	}
 
 	public RoutePoint getRoutePoint() {
@@ -87,8 +81,8 @@ public class RoutePointFragment extends SherlockFragment {
 
 	public void updateContent(RoutePoint routePoint) {
 		mRoutePoint = routePoint;
-		mName.setText(mRoutePoint.getTitle());
-		mAddress.setText(mRoutePoint.getText());
+		mName.setText(mRoutePoint.getId());
+		mAddress.setText(mRoutePoint.getShippingAddressId());
 	}
 
 }

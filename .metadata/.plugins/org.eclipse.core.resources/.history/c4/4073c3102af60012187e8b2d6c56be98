@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Edit and Delete items should only be visible while showing the NoteFragment -->
+    
+    <item
+        android:id="@+id/menu_item_edit"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/menu_item_edit"/>
+    
+    <item
+        android:id="@+id/menu_item_delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/menu_item_delete"/>
+
+</menu>

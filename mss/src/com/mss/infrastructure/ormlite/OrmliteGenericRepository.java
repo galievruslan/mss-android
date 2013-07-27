@@ -11,8 +11,8 @@ public class OrmliteGenericRepository<TEntity extends IEntity> implements IRepos
 		this.dao = dao;
 	}
 	
-	public TEntity getById(int id) throws Throwable {
-		return dao.queryForId(id);
+	public TEntity getById(long id) throws Throwable {
+		return dao.queryForId((int)id);
 	}
 
 	public Iterable<TEntity> find() throws Throwable {

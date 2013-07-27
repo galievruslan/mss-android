@@ -13,5 +13,13 @@
     <string name="menu_new_route_point">New</string>
     <string name="title_activity_route_fragment">RouteFragment</string>
     <string name="title_activity_route_point_fragment">RoutePointFragment</string>
+    <string name="menu_item_add">Add</string>
+    <string name="menu_item_edit">Edit</string>
+    <string name="menu_item_delete">Delete</string>
+    <string name="menu_item_save">Save</string>
+	<string name="key_id">id</string>
+    <bool name="dual_pane">false</bool>
+
+    <string name="title_activity_route_point">RoutePointActivity</string>
 
 </resources>

@@ -1,0 +1,36 @@
+package com.mss.infrastructure.ormlite;
+
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.dao.RawRowMapper;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.mss.domain.models.Route;
+import com.mss.domain.models.RoutePoint;
+
+public class OrmliteRoutePointRepository extends OrmliteGenericRepository<RoutePoint> {
+
+	public OrmliteRoutePointRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getRoutePointDao());
+	}
+	
+	@Override
+	public RoutePoint getById(long id) throws Throwable {
+		GenericRawResults<RoutePoint> rawResults =
+				  dao.queryRaw(
+				    "select account_id,sum(amount) from orders group by account_id",
+				    new RawRowMapper<RoutePoint>() {
+				            public RoutePoint mapRow(String[] columnNames,
+				              String[] resultColumns) {
+				                return new RoutePoint(Long.parseLong(resultColumns[0]),
+				                    Integer.parseInt(resultColumns[1]));
+				        }
+				    })[0];
+	}
+	
+	public Iterable<RoutePoint> findByRoute(Route route) throws Throwable {
+		
+		QueryBuilder<RoutePoint, Integer> queryBuilder = dao.queryBuilder();
+		
+		queryBuilder.where().like(com.mss.domain.models.Constants.Tables.RoutePoint.ROUTE_FIELD , route.getId());
+		return dao.query(queryBuilder.prepare());
+	}
+}

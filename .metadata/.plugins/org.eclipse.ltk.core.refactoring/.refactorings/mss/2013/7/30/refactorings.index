@@ -11,3 +11,18 @@
 1374846184906	Delete element
 1374846264942	Move compilation unit
 1374846429259	Rename resource 'activity_route_point_fragment.xml'
+1374859106078	Rename resource 'ic_action_edit.png'
+1374859255828	Rename resource 'route_point.xml'
+1374859389703	Rename resource 'menu_route.xml'
+1374862805906	Delete element
+1374862875453	Rename field 'textView1'
+1374862895140	Rename field 'textView2'
+1374862935046	Rename field 'textView3'
+1374862962359	Rename field 'textView4'
+1374863097109	Copy file
+1374863840750	Delete element
+1374865605093	Rename type 'NewRoutePointActivity'
+1374865762468	Rename resource 'activity_new_route_point.xml'
+1374866964062	Rename resource 'new_route_point.xml'
+1374866975828	Rename resource 'nenu_route_point_edit.xml'
+1374868536140	Copy compilation unit

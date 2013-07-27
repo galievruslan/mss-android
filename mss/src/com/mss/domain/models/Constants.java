@@ -100,6 +100,8 @@ public class Constants {
 			public static final String TABLE_NAME = "route_point";			
 			public static final String ROUTE_FIELD = "route_id";
 			public static final String SHIPPING_ADDRESS_FIELD = "shipping_address_id";
+			public static final String SHIPPING_ADDRESS_NAME_FIELD = "shipping_address_name";
+			public static final String SHIPPING_ADDRESS_VALUE_FIELD = "shipping_address_value";
 			public static final String STATUS_FIELD = "status_id";
 			public static final String SYNCHRONIZED_FIELD = "synchronized";
 		}

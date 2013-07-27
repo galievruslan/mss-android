@@ -1,0 +1,20 @@
+package com.mss.domain.services;
+
+import java.util.Date;
+
+import com.mss.domain.models.Route;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
+import com.mss.infrastructure.ormlite.OrmliteShippingAddressRepository;
+
+public class ShippingAddressService {
+	private DatabaseHelper databaseHelper;
+	public ShippingAddressService(DatabaseHelper databaseHelper){
+		this.databaseHelper = databaseHelper;
+	}
+	
+	public ShippingAddress getById(long id) throws Throwable{
+		OrmliteShippingAddressRepository shippingAddressRepo = new OrmliteShippingAddressRepository(databaseHelper);
+		return shippingAddressRepo.getById(id);
+	}
+}
