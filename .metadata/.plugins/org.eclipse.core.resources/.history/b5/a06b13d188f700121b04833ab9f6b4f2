@@ -1,0 +1,17 @@
+package com.mss.domain.services;
+
+import java.util.Date;
+
+import com.mss.domain.models.Route;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
+
+public class StatusService {
+	
+	private DatabaseHelper databaseHelper;
+	private OrmliteRouteRepository routeRepo;
+	public StatusService(DatabaseHelper databaseHelper) throws Throwable{
+		this.databaseHelper = databaseHelper;
+		routeRepo = new OrmliteRouteRepository(this.databaseHelper);
+	}
+}

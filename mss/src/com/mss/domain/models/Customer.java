@@ -8,7 +8,7 @@ public class Customer extends Entity {
 	
 	public Customer() {}
 	
-	public Customer(int id, String name, String address)  {
+	public Customer(long id, String name, String address)  {
 		super(id);
 		this.name = name;
 		this.address = address;

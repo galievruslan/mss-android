@@ -15,7 +15,7 @@ public class RoutePointLoader extends AsyncTaskLoader<RoutePoint> {
 	private final DatabaseHelper mHelper;
 	private final RoutePointService mRoutePointService;
 
-	public RoutePointLoader(Context ctx, long id) {
+	public RoutePointLoader(Context ctx, long id) throws Throwable {
 		super(ctx);
 
 		mId = id;

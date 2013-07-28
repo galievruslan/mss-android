@@ -8,7 +8,7 @@ public class Status extends Entity {
 	
 	public Status() {}
 	
-	public Status(int id, String name)  {
+	public Status(long id, String name)  {
 		super(id);
 		this.name = name;
 	}

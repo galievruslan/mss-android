@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(final SQLiteDatabase db, final ConnectionSource connectionSource) {
 		try {
 			Log.i(DatabaseHelper.class.getName(), "onCreate");
-			TableUtils.createTable(connectionSource, Category.class);
+			TableUtils.createTable(connectionSource, Category.class);			
 			TableUtils.createTable(connectionSource, Customer.class);
 			TableUtils.createTable(connectionSource, ShippingAddress.class);
 			TableUtils.createTable(connectionSource, UnitOfMeasure.class);
@@ -42,6 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, RoutePoint.class);
 			TableUtils.createTable(connectionSource, Order.class);
 			TableUtils.createTable(connectionSource, OrderItem.class);
+			TableUtils.createTable(connectionSource, Preferences.class);
 		} catch (java.sql.SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
@@ -72,6 +73,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, RoutePoint.class, true);
 			TableUtils.dropTable(connectionSource, Order.class, true);
 			TableUtils.dropTable(connectionSource, OrderItem.class, true);
+			TableUtils.dropTable(connectionSource, Preferences.class, true);
 			// after we drop the old databases, we create the new ones
 			onCreate(db, connectionSource);
 		} catch (java.sql.SQLException e) {
@@ -207,6 +209,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 		return this.warehouseDao;
 	}
+	
+	private Dao<Preferences, Integer> preferencesDao = null;	
+	public Dao<Preferences, Integer> getPreferencesDao() throws SQLException, java.sql.SQLException {
+		if (this.preferencesDao == null) {
+			this.preferencesDao = getDao(Preferences.class);
+		}
+		return this.preferencesDao;
+	}
 
 
 	/**
@@ -231,6 +241,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		this.shippingAddressDao = null;
 		this.statusDao = null;
 		this.warehouseDao = null;
+		this.preferencesDao = null;
 	}
 	
 	public void clear() throws java.sql.SQLException {
@@ -251,6 +262,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.dropTable(connectionSource, RoutePoint.class, true);
 		TableUtils.dropTable(connectionSource, Order.class, true);
 		TableUtils.dropTable(connectionSource, OrderItem.class, true);
+		TableUtils.dropTable(connectionSource, Preferences.class, true);
 		
 		TableUtils.createTable(connectionSource, Category.class);
 		TableUtils.createTable(connectionSource, Customer.class);
@@ -268,5 +280,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.createTable(connectionSource, RoutePoint.class);
 		TableUtils.createTable(connectionSource, Order.class);
 		TableUtils.createTable(connectionSource, OrderItem.class);
+		TableUtils.createTable(connectionSource, Preferences.class);
 	}
 }

@@ -116,5 +116,12 @@ public class Constants {
 			public static final String ROUTE_TEMPLATE_FIELD = "route_template_id";
 			public static final String SHIPPING_ADDRESS_FIELD = "shipping_address_id";
 		}
+		
+		public static class Preferences {
+			public static final String TABLE_NAME = "preferences";
+			public static final String DEFAULT_STATUS_FIELD = "default_status_id";
+			public static final String DEFAULT_ATTENDED_STATUS_FIELD = "default_attended_status_id";
+			public static final String DEFAULT_PRICE_LIST = "default_price_list_id";
+		}
 	}
 }

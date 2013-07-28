@@ -1,16 +1,20 @@
 package com.mss.infrastructure.web.dtos;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProductUnitOfMeasure extends Dto {
 	
-	private int productId;
+	@SerializedName("product_id")
+	private long productId;
 	
-	public int getProductId(){
+	public long getProductId(){
 		return productId;
 	}
 		
-	private int unitOfMeasureId;
+	@SerializedName("unit_of_measure_id")
+	private long unitOfMeasureId;
 	
-	public int getUnitOfMeasureId(){
+	public long getUnitOfMeasureId(){
 		return unitOfMeasureId;
 	}
 	
@@ -20,9 +24,10 @@ public class ProductUnitOfMeasure extends Dto {
 		return base;
 	}
 	
-	private int countInBaseUnit;
+	@SerializedName("count_in_base_unit")
+	private double countInBaseUnit;
 	
-	public int getCountInBase(){
+	public double getCountInBase(){
 		return countInBaseUnit;
 	}
 }

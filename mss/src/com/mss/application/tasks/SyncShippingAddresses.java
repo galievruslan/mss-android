@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.ShippingAddressTranslator;
+import com.mss.infrastructure.web.dtos.translators.ShippingAddressTranslator;
 
 public class SyncShippingAddresses extends SyncTask<com.mss.infrastructure.web.dtos.ShippingAddress, com.mss.domain.models.ShippingAddress> {
 

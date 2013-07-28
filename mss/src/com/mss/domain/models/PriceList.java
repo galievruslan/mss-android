@@ -8,7 +8,7 @@ public class PriceList extends Entity {
 	
 	public PriceList() {}
 	
-	public PriceList(int id, String name)  {
+	public PriceList(long id, String name)  {
 		super(id);
 		this.name = name;
 	}

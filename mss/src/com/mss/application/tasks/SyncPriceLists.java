@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.PriceListTranslator;
+import com.mss.infrastructure.web.dtos.translators.PriceListTranslator;
 
 public class SyncPriceLists extends SyncTask<com.mss.infrastructure.web.dtos.PriceList, com.mss.domain.models.PriceList> {
 

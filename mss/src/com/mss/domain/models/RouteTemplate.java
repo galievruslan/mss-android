@@ -8,7 +8,7 @@ public class RouteTemplate extends Entity {
 	
 	public RouteTemplate(){}
 	
-	public RouteTemplate(int id, Week.Days dayOfWeek) {
+	public RouteTemplate(long id, Week.Days dayOfWeek) {
 		super(id);
 		this.dayOfWeek = dayOfWeek;
 	}

@@ -1,9 +1,9 @@
 package com.mss.infrastructure.web.dtos;
 
-public abstract class Dto {
-	private int id;
+public abstract class Dto {	
+	private long id;
 	
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 	
@@ -17,7 +17,7 @@ public abstract class Dto {
 		return validity;
 	}
 	
-	public void setIsValid(Boolean isValid) {
-		this.validity = isValid;
+	protected void setIsValid(Boolean value){
+		validity = value;
 	}
 }

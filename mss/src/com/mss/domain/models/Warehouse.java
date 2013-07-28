@@ -8,13 +8,13 @@ public class Warehouse extends Entity {
 	
 	public Warehouse() {}
 	
-	public Warehouse(int id, String name, String address)  {
+	public Warehouse(long id, String name, String address)  {
 		super(id);
 		this.name = name;
 		this.address = address;
 	}
 	
-	public Warehouse(int id, String name, String address, Boolean isDefault)  {
+	public Warehouse(long id, String name, String address, Boolean isDefault)  {
 		this(id, name, address);
 		this.isDefault = isDefault;
 	}

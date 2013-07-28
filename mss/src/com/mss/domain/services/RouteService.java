@@ -9,12 +9,17 @@ import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
 public class RouteService {
 	
 	private DatabaseHelper databaseHelper;
-	public RouteService(DatabaseHelper databaseHelper){
+	private OrmliteRouteRepository routeRepo;
+	public RouteService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
+		routeRepo = new OrmliteRouteRepository(this.databaseHelper);
 	}
 	
 	public Route getOnDate(Date date) throws Throwable{
-		OrmliteRouteRepository routeRepo = new OrmliteRouteRepository(databaseHelper);
 		return routeRepo.findByDate(date).iterator().next();
+	}
+	
+	public Route createRoute(Date date) {
+		return new Route(date);
 	}
 }

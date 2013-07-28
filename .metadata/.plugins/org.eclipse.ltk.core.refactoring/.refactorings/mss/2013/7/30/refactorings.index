@@ -26,3 +26,19 @@
 1374866964062	Rename resource 'new_route_point.xml'
 1374866975828	Rename resource 'nenu_route_point_edit.xml'
 1374868536140	Copy compilation unit
+1374946596825	Delete element
+1374946608208	Delete element
+1375004566372	Rename package 'com.mss.infrastucture.web.dtos.translators'
+1375005700077	Move compilation unit
+1375007115211	Delete element
+1375007823819	Rename field 'mRouteDate'
+1375018260831	Move file
+1375018295339	Delete element
+1375018328956	Copy compilation unit
+1375019065424	Copy compilation unit
+1375019353603	Copy compilation unit
+1375020162225	Copy compilation unit
+1375020493866	Copy compilation unit
+1375020541750	Copy compilation unit
+1375020552565	Delete element
+1375020564591	Copy compilation unit

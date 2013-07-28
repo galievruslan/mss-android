@@ -8,23 +8,23 @@ public class RoutePointTemplate extends Entity {
 	
 	public RoutePointTemplate() {}
 	
-	public RoutePointTemplate(int id, int routeTemplateId, int shippingAddressId) {
+	public RoutePointTemplate(long id, long routeTemplateId, long shippingAddressId) {
 		super(id);
 		this.routeTemplateId = routeTemplateId;
 		this.shippingAddressId = shippingAddressId;
 	}
 		
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.RoutePointTemplate.ROUTE_TEMPLATE_FIELD)
-	private int routeTemplateId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePointTemplate.ROUTE_TEMPLATE_FIELD)
+	private long routeTemplateId;
 	
-	public int getRouteTemplateId(){
+	public long getRouteTemplateId(){
 		return routeTemplateId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.RoutePointTemplate.SHIPPING_ADDRESS_FIELD)
-	private int shippingAddressId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePointTemplate.SHIPPING_ADDRESS_FIELD)
+	private long shippingAddressId;
 	
-	public int getShippingAddressId(){
+	public long getShippingAddressId(){
 		return shippingAddressId;
 	}
 }

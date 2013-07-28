@@ -2,17 +2,21 @@ package com.mss.infrastructure.web.dtos;
 
 import java.math.BigDecimal;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PriceListLine extends Dto {
 	
-	private int priceListId;
+	@SerializedName("price_list_id")
+	private long priceListId;
 	
-	public int getPriceListId(){
+	public long getPriceListId(){
 		return priceListId;
 	}
 	
-	private int productId;
+	@SerializedName("product_id")
+	private long productId;
 	
-	public int getProductId(){
+	public long getProductId(){
 		return productId;
 	}
 	

@@ -12,7 +12,7 @@ import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.dtos.Dto;
 import com.mss.infrastructure.web.dtos.ISO8601Utils;
-import com.mss.infrastucture.web.dtos.translators.Translator;
+import com.mss.infrastructure.web.dtos.translators.Translator;
 
 import android.os.AsyncTask;
 

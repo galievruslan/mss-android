@@ -8,7 +8,7 @@ public class Product extends Entity {
 	
 	public Product() {}
 	
-	public Product(int id, String name, int categoryId)  {
+	public Product(long id, String name, long categoryId)  {
 		super(id);
 		this.name = name;
 		this.categoryId = categoryId;
@@ -21,10 +21,10 @@ public class Product extends Entity {
 		return name;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.Product.CATEGORY_FIELD)
-	private int categoryId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Product.CATEGORY_FIELD)
+	private long categoryId;
 	
-	public int getCategoryId(){
+	public long getCategoryId(){
 		return categoryId;
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.CustomerTranslator;
+import com.mss.infrastructure.web.dtos.translators.CustomerTranslator;
 
 public class SyncCustomers extends SyncTask<com.mss.infrastructure.web.dtos.Customer, com.mss.domain.models.Customer> {
 

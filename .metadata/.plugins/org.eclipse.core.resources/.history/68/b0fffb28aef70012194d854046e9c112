@@ -1,0 +1,19 @@
+package com.mss.infrastructure.web.dtos;
+
+public class Preferences extends Dto {
+		
+    private int defaultRoutePointStatusId;
+    public int getDefaultRoutePointStatusId() {
+    	return defaultRoutePointStatusId;
+    }
+    
+    private int defaultRoutePointAttendedStatusId;
+    public int getDefaultRoutePointAttendedStatusId() {
+    	return defaultRoutePointAttendedStatusId;
+    }
+    
+    private int defaultPriceListId;
+    public int getDefaultPriceListId() {
+    	return defaultPriceListId;
+    }
+}

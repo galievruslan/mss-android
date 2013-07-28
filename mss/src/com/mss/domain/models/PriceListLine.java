@@ -10,24 +10,24 @@ public class PriceListLine extends Entity {
 	
 	public PriceListLine() {}
 	
-	public PriceListLine(int id, int priceListId, int productId, BigDecimal price)  {
+	public PriceListLine(long id, long priceListId, long productId, BigDecimal price)  {
 		super(id);
 		this.priceListId = priceListId;
 		this.productId = productId;
 		this.price = price;		
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.PriceListLine.PRICE_LIST_FIELD)
-	private int priceListId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.PriceListLine.PRICE_LIST_FIELD)
+	private long priceListId;
 	
-	public int getPriceListId(){
+	public long getPriceListId(){
 		return priceListId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.PriceListLine.PRODUCT_FIELD)
-	private int productId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.PriceListLine.PRODUCT_FIELD)
+	private long productId;
 	
-	public int getProductId(){
+	public long getProductId(){
 		return productId;
 	}
 	

@@ -8,7 +8,7 @@ public class UnitOfMeasure extends Entity {
 	
 	public UnitOfMeasure() {}
 	
-	public UnitOfMeasure(int id, String name)  {
+	public UnitOfMeasure(long id, String name)  {
 		super(id);
 		this.name = name;
 	}

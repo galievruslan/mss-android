@@ -1,5 +1,7 @@
 package com.mss.application;
 
+import java.util.Date;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -10,16 +12,12 @@ import com.mss.domain.services.ShippingAddressService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,6 +27,7 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 
 	public static final int REQUEST_EDIT_ROUTE_POINT = 5;
 	public static final String KEY_ROUTE_POINT_ID = "id";
+	public static final String KEY_ROUTE_DATE = "route_date";
 	public static final int LOADER_ID_ROUTE_POINT = 0;
 
 	private RoutePoint mRoutePoint;
@@ -54,13 +53,21 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			args.putLong(KEY_ROUTE_POINT_ID, id);
 			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, args, this);
 		}
+		
+		String date = getIntent().getStringExtra(KEY_ROUTE_DATE);
+		TextView temp = (TextView) findViewById(R.id.textView1);
+		temp.setText(date);
+		
 
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-		mRoutePointService = new RoutePointService(mHelper);
+		try {
+			mRoutePointService = new RoutePointService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
 		mShippingAddressService = new ShippingAddressService(mHelper);
 
 		// Let's show the application icon as the Up button
-
 		if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -116,7 +123,11 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 		case LOADER_ID_ROUTE_POINT:
 			long routePointId = args.getLong(KEY_ROUTE_POINT_ID);
 
-			return new RoutePointLoader(this, routePointId);
+			try {
+				return new RoutePointLoader(this, routePointId);
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());
+			}
 		default:
 			return null;
 		}

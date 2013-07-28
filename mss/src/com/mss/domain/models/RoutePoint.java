@@ -6,6 +6,8 @@ import com.j256.ormlite.table.*;
 @DatabaseTable(tableName = Constants.Tables.RoutePoint.TABLE_NAME)
 public class RoutePoint extends Entity {
 	
+	public RoutePoint() {}
+	
 	public RoutePoint(Route route, ShippingAddress shippingAddress, Status status) {
 		routeId = route.getId();
 		shippingAddressId = shippingAddress.getId();
@@ -14,17 +16,17 @@ public class RoutePoint extends Entity {
 		statusId = status.id;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.RoutePoint.ROUTE_FIELD)
-	private int routeId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.ROUTE_FIELD)
+	private long routeId;
 	
-	public int getRouteId(){
+	public long getRouteId(){
 		return routeId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.RoutePoint.SHIPPING_ADDRESS_FIELD)
-	private int shippingAddressId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.SHIPPING_ADDRESS_FIELD)
+	private long shippingAddressId;
 	
-	public int getShippingAddressId(){
+	public long getShippingAddressId(){
 		return shippingAddressId;
 	}
 	
@@ -42,10 +44,10 @@ public class RoutePoint extends Entity {
 		return shippingAddressValue;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.RoutePoint.STATUS_FIELD)
-	private int statusId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.STATUS_FIELD)
+	private long statusId;
 	
-	public int getStatusId(){
+	public long getStatusId(){
 		return statusId;
 	}
 	

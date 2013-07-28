@@ -26,10 +26,7 @@ public class RouteLoader extends AsyncTaskLoader<List<RoutePoint>> {
 	private final RouteService mRouteService;
 	private final RoutePointService mRoutePointService;
 
-	private String mOrderBy;
-	private boolean mIsOrderAscending;
-
-	public RouteLoader(Context ctx, Date date) {
+	public RouteLoader(Context ctx, Date date) throws Throwable {
 		super(ctx);
 		
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);

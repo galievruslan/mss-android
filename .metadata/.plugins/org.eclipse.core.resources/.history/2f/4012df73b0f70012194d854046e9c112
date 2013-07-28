@@ -1,0 +1,24 @@
+package com.mss.infrastructure.web.dtos;
+
+import com.google.gson.annotations.SerializedName;
+
+public class Preferences extends Dto {
+		
+	@SerializedName("default_route_point_status_id")
+    private long defaultRoutePointStatusId;
+    public long getDefaultRoutePointStatusId() {
+    	return defaultRoutePointStatusId;
+    }
+    
+    @SerializedName("parent_id")
+    private long defaultRoutePointAttendedStatusId;
+    public long getDefaultRoutePointAttendedStatusId() {
+    	return defaultRoutePointAttendedStatusId;
+    }
+    
+    @SerializedName("parent_id")
+    private long defaultPriceListId;
+    public long getDefaultPriceListId() {
+    	return defaultPriceListId;
+    }
+}

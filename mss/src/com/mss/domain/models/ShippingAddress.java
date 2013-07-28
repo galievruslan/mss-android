@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class ShippingAddress extends Entity {
 	public ShippingAddress() {}
 	
-	public ShippingAddress(int id, String name, String address, int customerId)  {
+	public ShippingAddress(long id, String name, String address, long customerId)  {
 		super(id);
 		this.name = name;
 		this.address = address;
@@ -29,10 +29,10 @@ public class ShippingAddress extends Entity {
 		return address;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.ShippingAddress.CUSTOMER_FIELD)
-    private int customerId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.ShippingAddress.CUSTOMER_FIELD)
+    private long customerId;
 	
-	public int getCustomerId(){
+	public long getCustomerId(){
 		return customerId;
 	}
 }

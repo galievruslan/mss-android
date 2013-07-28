@@ -25,24 +25,24 @@ public class Order extends Entity {
 		return shippingDate;
 	}
 	
-	@DatabaseField(canBeNull = true, dataType = DataType.INTEGER, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_FIELD)
-	private int shippingAddressId;
+	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_FIELD)
+	private long shippingAddressId;
 	
-	public int getShippingAddressId() {
+	public long getShippingAddressId() {
 		return shippingAddressId;
 	}
 	
-	@DatabaseField(canBeNull = true, dataType = DataType.INTEGER, columnName = Constants.Tables.Order.PRICE_LIST_FIELD)
-	private int priceListId;
+	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.PRICE_LIST_FIELD)
+	private long priceListId;
 	
-	public int getPriceListId() {
+	public long getPriceListId() {
 		return priceListId;
 	}
 	
-	@DatabaseField(canBeNull = true, dataType = DataType.INTEGER, columnName = Constants.Tables.Order.WAREHOUSE_FIELD)
-	private int warehouseId;
+	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.WAREHOUSE_FIELD)
+	private long warehouseId;
 	
-	public int getWarehouseId() {
+	public long getWarehouseId() {
 		return warehouseId;
 	}
 	

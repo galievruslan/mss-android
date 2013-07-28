@@ -1,0 +1,10 @@
+package com.mss.infrastructure.ormlite;
+
+import com.mss.domain.models.Customer;
+
+public class OrmlitePreferencesRepository extends OrmliteGenericRepository<Customer> {
+
+	public OrmlitePreferencesRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getPreferencesDao());
+	}
+}

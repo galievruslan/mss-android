@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.ProductTranslator;
+import com.mss.infrastructure.web.dtos.translators.ProductTranslator;
 
 public class SyncProducts extends SyncTask<com.mss.infrastructure.web.dtos.Product, com.mss.domain.models.Product> {
 

@@ -16,14 +16,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
-
+	
 	private final Context mContext;
 	private final LayoutInflater mLayoutInflater;
 	private List<RoutePoint> mRoutePointList;
 	private final DatabaseHelper mHelper;
 	private final RoutePointService mRoutePointService;
 
-	public RoutePointAdapter(Context ctx) {
+	public RoutePointAdapter(Context ctx) throws Throwable {
 		mContext = ctx;
 		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -77,8 +77,8 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 
 		RoutePoint n = mRoutePointList.get(position);
 
-		holder.mName.setText(n.getId());
-		holder.mAddress.setText(n.getShippingAddressId());
+		//holder.mName.setText(n.getId().toString());
+		//holder.mAddress.setText(n.getShippingAddressId());
 
 		return v;
 	}

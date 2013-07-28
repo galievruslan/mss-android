@@ -1,16 +1,20 @@
 package com.mss.infrastructure.web.dtos;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RoutePointTemplate extends Dto {
 	
-	private int routeTemplateId;
+	@SerializedName("template_route_id")
+	private long routeTemplateId;
 	
-	public int getRouteTemplateId(){
+	public long getRouteTemplateId(){
 		return routeTemplateId;
 	}
 	
-	private int shippingAddressId;
+	@SerializedName("shipping_address_id")
+	private long shippingAddressId;
 	
-	public int getShippingAddressId(){
+	public long getShippingAddressId(){
 		return shippingAddressId;
 	}
 }

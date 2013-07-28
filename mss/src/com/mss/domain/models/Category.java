@@ -8,12 +8,12 @@ public class Category extends Entity {
 	
 	public Category() {}
 	
-	public Category(int id, String name)  {
+	public Category(long id, String name)  {
 		super(id);
 		this.name = name;
 	}
 	
-	public Category(int id, String name, int parentId)  {		
+	public Category(long id, String name, long parentId)  {		
 		this(id, name);
 		this.parentId = parentId;
 	}
@@ -25,10 +25,10 @@ public class Category extends Entity {
 		return name;
 	}
 	
-	@DatabaseField(canBeNull = true, dataType = DataType.INTEGER, columnName = Constants.Tables.Category.PARENT_CATEGORY_FIELD)
-	private int parentId;
+	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Category.PARENT_CATEGORY_FIELD)
+	private long parentId;
 	
-	public int getParentId(){
+	public long getParentId(){
 		return parentId;
 	}
 }

@@ -9,19 +9,20 @@ import com.mss.infrastructure.ormlite.*;
 import com.mss.infrastructure.web.AuthenticationFailedException;
 import com.mss.infrastructure.web.WebConnectionException;
 import com.mss.infrastructure.web.WebServer;
+import com.mss.infrastructure.web.dtos.translators.CategoryTranslator;
+import com.mss.infrastructure.web.dtos.translators.CustomerTranslator;
+import com.mss.infrastructure.web.dtos.translators.PreferencesTranslator;
+import com.mss.infrastructure.web.dtos.translators.PriceListLineTranslator;
+import com.mss.infrastructure.web.dtos.translators.PriceListTranslator;
+import com.mss.infrastructure.web.dtos.translators.ProductTranslator;
+import com.mss.infrastructure.web.dtos.translators.ProductUnitOfMeasureTranslator;
+import com.mss.infrastructure.web.dtos.translators.RoutePointTemplateTranslator;
+import com.mss.infrastructure.web.dtos.translators.RouteTemplateTranslator;
+import com.mss.infrastructure.web.dtos.translators.ShippingAddressTranslator;
+import com.mss.infrastructure.web.dtos.translators.StatusTranslator;
+import com.mss.infrastructure.web.dtos.translators.UnitOfMeasureTranslator;
+import com.mss.infrastructure.web.dtos.translators.WarehouseTranslator;
 import com.mss.infrastructure.web.repositories.*;
-import com.mss.infrastucture.web.dtos.translators.CategoryTranslator;
-import com.mss.infrastucture.web.dtos.translators.CustomerTranslator;
-import com.mss.infrastucture.web.dtos.translators.PriceListLineTranslator;
-import com.mss.infrastucture.web.dtos.translators.PriceListTranslator;
-import com.mss.infrastucture.web.dtos.translators.ProductTranslator;
-import com.mss.infrastucture.web.dtos.translators.ProductUnitOfMeasureTranslator;
-import com.mss.infrastucture.web.dtos.translators.RoutePointTemplateTranslator;
-import com.mss.infrastucture.web.dtos.translators.RouteTemplateTranslator;
-import com.mss.infrastucture.web.dtos.translators.ShippingAddressTranslator;
-import com.mss.infrastucture.web.dtos.translators.StatusTranslator;
-import com.mss.infrastucture.web.dtos.translators.UnitOfMeasureTranslator;
-import com.mss.infrastucture.web.dtos.translators.WarehouseTranslator;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -389,6 +390,24 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 							lastSyncDate);
 				}
 				syncRoutePointsTemplates.execute((Void)null).get();
+				
+				publishProgress(R.string.sync_preferences);
+				SyncPreferences syncPreferences = null;
+				if (isFull) {
+					syncPreferences = new SyncPreferences(
+							new PreferencesWebRepository(webServer.getCurrentConnection()), 
+							new OrmlitePreferencesRepository(databaseHelper),
+							new PreferencesTranslator(),
+							pageSize);
+				} else {
+					syncPreferences = new SyncPreferences(
+							new PreferencesWebRepository(webServer.getCurrentConnection()), 
+							new OrmlitePreferencesRepository(databaseHelper),
+							new PreferencesTranslator(),
+							pageSize,
+							lastSyncDate);
+				}
+				syncPreferences.execute((Void)null).get();
 				
 				
 				SharedPreferences.Editor editor = sharedPreferences.edit();	

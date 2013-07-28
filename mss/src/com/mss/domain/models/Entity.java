@@ -13,14 +13,14 @@ public abstract class Entity implements IEntity {
 	
 	protected Entity(){}
 	
-	public Entity(int id){
+	public Entity(long id){
 		this.id = id;
 	}
 	
 	@DatabaseField(generatedId=true, allowGeneratedIdInsert=true, columnName = Constants.Tables.Entity.ID_FIELD)
-	protected int id;
+	protected long id;
 	
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 }

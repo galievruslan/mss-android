@@ -1,0 +1,34 @@
+package com.mss.domain.models;
+
+import com.j256.ormlite.field.*;
+import com.j256.ormlite.table.*;
+
+@DatabaseTable(tableName = Constants.Tables.Customer.TABLE_NAME)
+public class Preferences extends Entity {
+	private final int ID = 1;
+		
+	public Preferences()  {
+		super(ID);
+	}
+
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD)
+	private int defaultRoutePointStatusId;
+	
+    public int getDefaultRoutePointStatusId() {
+    	return defaultRoutePointStatusId;
+    }
+    
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD)
+    private int defaultRoutePointAttendedStatusId;
+    
+    public int getDefaultRoutePointAttendedStatusId() {
+    	return defaultRoutePointAttendedStatusId;
+    }
+    
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD)
+    private int defaultPriceListId;
+    
+    public int getDefaultPriceListId() {
+    	return defaultPriceListId;
+    }
+}

@@ -1,5 +1,7 @@
 package com.mss.infrastructure.web.dtos;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Product extends Dto {
 	
 	private String name;
@@ -8,9 +10,10 @@ public class Product extends Dto {
 		return name;
 	}
 
-	private int categoryId;
+	@SerializedName("category_id")
+	private long categoryId;
 	
-	public int getCategoryId(){
+	public long getCategoryId(){
 		return categoryId;
 	}
 }

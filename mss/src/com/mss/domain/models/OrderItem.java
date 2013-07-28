@@ -9,24 +9,24 @@ public class OrderItem extends Entity {
 	
 	public OrderItem() {}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.OrderItem.ORDER_FIELD)
-	private int orderId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.OrderItem.ORDER_FIELD)
+	private long orderId;
 	
-	public int getOrderId() {
+	public long getOrderId() {
 		return orderId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.OrderItem.PRODUCT_FIELD)
-	private int productId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.OrderItem.PRODUCT_FIELD)
+	private long productId;
 	
-	public int getProductId() {
+	public long getProductId() {
 		return productId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.OrderItem.UNIT_OF_MEASURE_FIELD)
-	private int unitOfMeasureId;
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.OrderItem.UNIT_OF_MEASURE_FIELD)
+	private long unitOfMeasureId;
 	
-	public int getUnitOfMeasureId() {
+	public long getUnitOfMeasureId() {
 		return unitOfMeasureId;
 	}
 	

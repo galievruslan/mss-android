@@ -17,9 +17,11 @@
     <string name="menu_item_edit">Edit</string>
     <string name="menu_item_delete">Delete</string>
     <string name="menu_item_save">Save</string>
-	<string name="key_id">id</string>
+    <string name="key_id">id</string>
+
     <bool name="dual_pane">false</bool>
 
     <string name="title_activity_route_point">RoutePointActivity</string>
+    <string name="title_activity_date_picker_fragment">DatePickerFragment</string>
 
 </resources>

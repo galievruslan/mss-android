@@ -12,9 +12,12 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 
 public class RoutePointActivity extends SherlockFragmentActivity {
 
+	private static final String TAG = RoutePointActivity.class.getSimpleName();
+	
 	public static final int REQUEST_SHOW_ROUTE_POINT = 1;
 	public static final long ROUTE_POINT_ID_NEW = 0;
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
@@ -40,13 +43,17 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 		}
 
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-		mRoutePointService = new RoutePointService(mHelper);
+		try {
+			mRoutePointService = new RoutePointService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
 		if (id != ROUTE_POINT_ID_NEW) {			
 			RoutePoint routePoint = null;
 			try {
 				routePoint = mRoutePointService.getPointById(id);
 			} catch (Throwable e) {
-				e.printStackTrace();
+				Log.e(TAG, e.getMessage());
 			}
 
 			mRoutePointFragment = RoutePointFragment.newInstance(routePoint);

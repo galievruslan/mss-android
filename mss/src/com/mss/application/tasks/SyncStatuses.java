@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.StatusTranslator;
+import com.mss.infrastructure.web.dtos.translators.StatusTranslator;
 
 public class SyncStatuses extends SyncTask<com.mss.infrastructure.web.dtos.Status, com.mss.domain.models.Status> {
 

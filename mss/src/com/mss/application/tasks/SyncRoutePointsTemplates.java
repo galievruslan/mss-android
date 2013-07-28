@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.web.WebRepository;
-import com.mss.infrastucture.web.dtos.translators.RoutePointTemplateTranslator;
+import com.mss.infrastructure.web.dtos.translators.RoutePointTemplateTranslator;
 
 public class SyncRoutePointsTemplates extends SyncTask<com.mss.infrastructure.web.dtos.RoutePointTemplate, com.mss.domain.models.RoutePointTemplate> {
 
