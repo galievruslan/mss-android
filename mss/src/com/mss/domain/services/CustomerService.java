@@ -6,12 +6,17 @@ import com.mss.infrastructure.ormlite.OrmliteCustomerRepository;
 
 public class CustomerService {
 	private DatabaseHelper databaseHelper;
-	public CustomerService(DatabaseHelper databaseHelper){
+	private OrmliteCustomerRepository customerRepo;
+	public CustomerService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
+		customerRepo = new OrmliteCustomerRepository(this.databaseHelper);
 	}
 	
-	public Iterable<Customer> Customers() throws Throwable{
-		OrmliteCustomerRepository customerRepo = new OrmliteCustomerRepository(databaseHelper);
+	public Customer getById(long id) throws Throwable {
+		return customerRepo.getById(id);
+	}
+	
+	public Iterable<Customer> getCustomers() throws Throwable{		 
 		return customerRepo.find();
 	}
 }

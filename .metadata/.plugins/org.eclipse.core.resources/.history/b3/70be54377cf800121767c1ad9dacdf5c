@@ -1,0 +1,152 @@
+package com.mss.application;
+
+import java.util.List;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.RouteActivity.DualPaneMode;
+import com.mss.application.RouteActivity.OnePaneMode;
+import com.mss.application.fragments.RouteFragment;
+import com.mss.application.fragments.RoutePointFragment;
+import com.mss.domain.models.Customer;
+import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.CustomerService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.utils.IterableHelpers;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.Menu;
+import android.widget.ListView;
+
+public class CustomersActivity extends SherlockFragmentActivity implements Callback, LoaderCallbacks<List<Customer>> {
+
+	private static final String TAG = CustomersActivity.class.getSimpleName();
+	static final int PICK_CUSTOMER_REQUEST = 1;
+	
+	private ListView mListView;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_customers);
+		
+		if (getSupportActionBar() != null)
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_list, menu);
+
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		// Note that we handle Edit and Delete items here, even if they were
+		// added by the NoteFragment.
+
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				Intent upIntent = new Intent(this, RouteActivity.class);
+				if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+					TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+					finish();
+				} else {
+					NavUtils.navigateUpTo(this, upIntent);
+				}
+				return true;
+			default:
+				return false;
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    // Check which request we're responding to
+	    if (requestCode == PICK_CUSTOMER_REQUEST) {
+	        // Make sure the request was successful
+	        if (resultCode == RESULT_OK) {
+	            // The user picked a contact.
+	            // The Intent's data Uri identifies which contact was selected.
+
+	            // Do something with the contact here (bigger example below)
+	        }
+	    }
+	}
+
+	@Override
+	public Loader<List<Customer>> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<List<Customer>> arg0,
+			List<Customer> arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<List<Customer>> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean onCreateActionMode(ActionMode mode,
+			com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onPrepareActionMode(ActionMode mode,
+			com.actionbarsherlock.view.Menu menu) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onDestroyActionMode(ActionMode mode) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private DatabaseHelper databaseHelper = null;
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if (databaseHelper != null) {
+			OpenHelperManager.releaseHelper();
+			databaseHelper = null;
+		}
+	}
+
+	private DatabaseHelper getHelper() {
+		if (databaseHelper == null) {
+			databaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		}
+		return databaseHelper;
+	}
+}

@@ -1,6 +1,5 @@
 package com.mss.domain.services;
 
-import com.mss.domain.models.Status;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
 

@@ -1,9 +1,0 @@
-package com.mss.application.tasks;
-
-import java.util.Date;
-
-public class SyncTaskParams {
-	private Date lastSync;
-	
-	private 
-}

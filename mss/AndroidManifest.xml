@@ -53,20 +53,12 @@
             android:label="@string/title_activity_customers" >
         </activity>
         <activity
-            android:name="com.mss.application.fragments.RouteFragment"
-            android:label="@string/title_activity_route_fragment" >
-        </activity>
-        <activity
-            android:name="com.mss.application.fragments.RoutePointFragment"
-            android:label="@string/title_activity_route_point_fragment" >
+            android:name="com.mss.application.ShippingAddressesActivity"
+            android:label="@string/title_activity_shipping_addresses" >
         </activity>
         <activity
             android:name="com.mss.application.RoutePointActivity"
             android:label="@string/title_activity_route_point" >
-        </activity>
-        <activity
-            android:name="com.mss.application.fragments.DatePickerFragment"
-            android:label="@string/title_activity_date_picker_fragment" >
         </activity>
     </application>
 

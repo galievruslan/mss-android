@@ -2,6 +2,7 @@ package com.mss.utils;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @SuppressWarnings({"unchecked"})
@@ -23,5 +24,17 @@ public class IterableHelpers {
 	    }
 
 	    return arrayElements;
+	}
+	
+	public static <T> int size(Class<T> t, Iterable<T> elements) {
+		
+		int count = 0;
+		Iterator<T> iterator = elements.iterator();
+		while (iterator.hasNext()) {
+            iterator.next();
+            count++;
+		}
+		
+		return count;
 	}
 }
