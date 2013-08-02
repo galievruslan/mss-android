@@ -11,40 +11,20 @@
     tools:context=".RoutePointFragment" >
 
     <TextView
-        android:id="@+id/route_point_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="22dp"
-        android:text="@string/label_name" />
-
-    <TextView
-        android:id="@+id/route_point_address_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/route_point_name_label"
-        android:layout_below="@+id/route_point_name_label"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_address" />
-
-    <TextView
         android:id="@+id/route_point_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/route_point_name_label"
-        android:layout_alignBottom="@+id/route_point_name_label"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/description_name" />
+        android:contentDescription="@string/description_name"
+        android:text="some name" />
 
     <TextView
         android:id="@+id/route_point_address_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/route_point_address_label"
-        android:layout_alignBottom="@+id/route_point_address_label"
         android:layout_alignLeft="@+id/route_point_name_text_view"
-        android:contentDescription="@string/description_address" />
+        android:layout_below="@+id/route_point_name_text_view"
+        android:contentDescription="@string/description_address"
+        android:text="some address" />
 
 </RelativeLayout>

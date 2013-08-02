@@ -27,7 +27,7 @@ public class RoutePointLoader extends AsyncTaskLoader<RoutePoint> {
 	@Override
 	public RoutePoint loadInBackground() {
 		try {
-			mRoutePoint = mRoutePointService.getPointById(mId);
+			mRoutePoint = mRoutePointService.getById(mId);
 		} catch (Throwable e) {
 			return null;
 		}

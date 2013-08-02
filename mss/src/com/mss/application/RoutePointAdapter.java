@@ -33,7 +33,7 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 	}
 	
 	public RoutePoint getItemById(long id) throws Throwable {
-		return mRoutePointService.getPointById(id);
+		return mRoutePointService.getById(id);
 	}
 
 	@Override
@@ -77,8 +77,8 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 
 		RoutePoint n = mRoutePointList.get(position);
 
-		//holder.mName.setText(n.getId().toString());
-		//holder.mAddress.setText(n.getShippingAddressId());
+		holder.mName.setText(n.getShippingAddressName());
+		holder.mAddress.setText(n.getShippingAddressValue());
 
 		return v;
 	}

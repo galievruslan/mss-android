@@ -53,9 +53,9 @@ public class RoutePointFragment extends SherlockFragment {
 
 		if (mRoutePoint != null) {
 			mName = (TextView) v.findViewById(R.id.route_point_name_text_view);
-			//mName.setText(mRoutePoint.getId());
+			mName.setText(mRoutePoint.getShippingAddressName());
 			mAddress = (TextView) v.findViewById(R.id.route_point_address_text_view);
-			//mAddress.setText(mRoutePoint.getShippingAddressId());
+			mAddress.setText(mRoutePoint.getShippingAddressValue());
 		}
 
 		return v;
@@ -81,8 +81,8 @@ public class RoutePointFragment extends SherlockFragment {
 
 	public void updateContent(RoutePoint routePoint) {
 		mRoutePoint = routePoint;
-		//mName.setText(mRoutePoint.getId());
-		//mAddress.setText(mRoutePoint.getShippingAddressId());
+		mName.setText(mRoutePoint.getShippingAddressName());
+		mAddress.setText(mRoutePoint.getShippingAddressValue());
 	}
 
 }

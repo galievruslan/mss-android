@@ -4,8 +4,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.RoutePointFragment;
+import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.services.RoutePointService;
+import com.mss.domain.services.RouteService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
 
 	private DatabaseHelper mHelper;
+	private RouteService mRouteService;
 	private RoutePointService mRoutePointService;
 	private RoutePointFragment mRoutePointFragment;
 
@@ -44,6 +47,7 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
+			mRouteService = new RouteService(mHelper);
 			mRoutePointService = new RoutePointService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
@@ -51,7 +55,7 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 		if (id != ROUTE_POINT_ID_NEW) {			
 			RoutePoint routePoint = null;
 			try {
-				routePoint = mRoutePointService.getPointById(id);
+				routePoint = mRoutePointService.getById(id);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -76,7 +80,7 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 			// We are coming back from the NoteEditActivity
 			RoutePoint routePoint = null;
 			try {
-				routePoint = mRoutePointService.getPointById(mRoutePointFragment.getRoutePointId());
+				routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}
@@ -105,8 +109,19 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_item_edit:
 			if (mRoutePointFragment != null) {
+				Route route = null;
+				RoutePoint routePoint = null;				
+				try {
+					routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
+					route = mRouteService.getById(routePoint.getRouteId());
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+				
 				Intent i = new Intent(this, RoutePointEditActivity.class);
-				i.putExtra(getString(R.string.key_id), mRoutePointFragment.getRoutePointId());
+				i.putExtra(getString(R.string.key_id), routePoint.getId());
+				i.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, route.getDate().toString());
 				startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
 			}
 			return true;

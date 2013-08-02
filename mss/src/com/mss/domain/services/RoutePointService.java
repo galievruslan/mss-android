@@ -29,7 +29,7 @@ public class RoutePointService {
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
 	}
 	
-	public RoutePoint getPointById(long id) throws Throwable {
+	public RoutePoint getById(long id) throws Throwable {
 		return routePointRepo.getById(id);
 	}
 	
@@ -43,6 +43,7 @@ public class RoutePointService {
 		// if not created yet
 		if (route == null) {
 			route = routeService.createRoute(date);
+			routeService.saveRoute(route);
 		}
 		
 		Status status = statusRepo.getById(preferences.getDefaultRoutePointStatusId());

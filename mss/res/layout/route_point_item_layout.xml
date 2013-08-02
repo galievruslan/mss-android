@@ -8,13 +8,13 @@
         android:id="@+id/label_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/label_name"
+        android:text="some name"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/label_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/label_address"
+        android:text="some address"
         android:textSize="20sp" />
 </LinearLayout>
