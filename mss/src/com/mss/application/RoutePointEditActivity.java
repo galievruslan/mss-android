@@ -1,5 +1,8 @@
 package com.mss.application;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -60,7 +63,12 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, args, this);
 		}
 		
-		mRouteDate = new Date(getIntent().getStringExtra(KEY_ROUTE_DATE));				
+		DateFormat format = SimpleDateFormat.getDateInstance();
+		try {
+			mRouteDate = format.parse(getIntent().getStringExtra(KEY_ROUTE_DATE));
+		} catch (ParseException e) {
+			Log.e(TAG, e.getMessage());
+		}				
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
 			mRoutePointService = new RoutePointService(mHelper);
@@ -152,7 +160,7 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 		case android.R.id.home:
 			Intent upIntent = new Intent(this, RouteActivity.class);
 			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
 				finish();
 			} else {
 				NavUtils.navigateUpTo(this, upIntent);

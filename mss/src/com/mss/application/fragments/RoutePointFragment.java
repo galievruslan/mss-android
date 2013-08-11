@@ -84,5 +84,4 @@ public class RoutePointFragment extends SherlockFragment {
 		mName.setText(mRoutePoint.getShippingAddressName());
 		mAddress.setText(mRoutePoint.getShippingAddressValue());
 	}
-
 }

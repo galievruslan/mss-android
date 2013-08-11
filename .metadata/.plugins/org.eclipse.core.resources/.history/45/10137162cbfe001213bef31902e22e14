@@ -1,0 +1,88 @@
+package com.mss.application.fragments;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.mss.application.R;
+import com.mss.domain.models.Order;
+import com.mss.domain.models.RoutePoint;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class OrderFragment extends SherlockFragment {
+
+	private Order mOrder;
+	private TextView mShippingDate;
+	private TextView mAmount;
+
+	/**
+	 * We have to provide a public empty constructor because the framework needs it
+	 */
+	public OrderFragment() {
+
+	}
+
+	/**
+	 * We prefer to instantiate our {@link Fragment Fragments} using a factory method
+	 * 
+	 * @param note
+	 *            the {@link Note} instance
+	 * @return the actual {@link NoteFragment} instance
+	 */
+	public static OrderFragment newInstance(Order order) {
+		OrderFragment fragment = new OrderFragment();
+		fragment.mOrder = order;
+
+		return fragment;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		// Remember to call this method to enable onCreateOptionsMenu callback
+
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		View v = inflater.inflate(R.layout.fragment_order, null);
+
+		if (mOrder != null) {
+			mShippingDate = (TextView) v.findViewById(R.id.order_shipping_date_text_view);
+			mShippingDate.setText(mOrder.getShippingDate());
+			mAmount = (TextView) v.findViewById(R.id.order_amount_text_view);
+			mAmount.setText(mOrder.getAmount());
+		}
+
+		return v;
+	}
+	
+	
+
+	@Override
+	public void onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu,
+			com.actionbarsherlock.view.MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_route_point, menu);
+	}
+
+	public RoutePoint getRoutePoint() {
+		return mRoutePoint;
+	}
+
+	public long getRoutePointId() {
+		if (mRoutePoint != null)
+			return mRoutePoint.getId();
+		return 0l;
+	}
+
+	public void updateContent(RoutePoint routePoint) {
+		mRoutePoint = routePoint;
+		mName.setText(mRoutePoint.getShippingAddressName());
+		mAddress.setText(mRoutePoint.getShippingAddressValue());
+	}
+}

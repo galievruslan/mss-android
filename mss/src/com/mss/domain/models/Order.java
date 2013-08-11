@@ -11,6 +11,13 @@ public class Order extends Entity {
 	
 	public Order() {}
 	
+	public Order(RoutePoint routePoint) {
+		routePointId = routePoint.getId();
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Order.ROUTE_POINT_FIELD)
+	private long routePointId;
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_TIME, columnName = Constants.Tables.Order.ORDER_DATE_FIELD)
 	private Date orderDate;
 	
@@ -25,11 +32,32 @@ public class Order extends Entity {
 		return shippingDate;
 	}
 	
+	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.CUSTOMER_FIELD)
+	private long customerId;
+	
+	public long getCustomerId() {
+		return customerId;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Order.CUSTOMER_NAME_FIELD)
+	private String customerName;
+	
+	public String getCustomerName(){
+		return customerName;
+	}
+	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_FIELD)
 	private long shippingAddressId;
 	
 	public long getShippingAddressId() {
 		return shippingAddressId;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_NAME_FIELD)
+	private String shippingAddressName;
+	
+	public String getShippingAddressName(){
+		return shippingAddressName;
 	}
 	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.PRICE_LIST_FIELD)
@@ -39,11 +67,25 @@ public class Order extends Entity {
 		return priceListId;
 	}
 	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Order.PRICE_LIST_NAME_FIELD)
+	private String priceListName;
+	
+	public String getPriceListName(){
+		return priceListName;
+	}
+	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.WAREHOUSE_FIELD)
 	private long warehouseId;
 	
 	public long getWarehouseId() {
 		return warehouseId;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Order.WAREHOUSE_NAME_FIELD)
+	private String warehouseName;
+	
+	public String getWarehouseName(){
+		return warehouseName;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.Order.AMOUNT_FIELD)

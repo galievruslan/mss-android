@@ -1,0 +1,244 @@
+package com.mss.application;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
+import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.fragments.RoutePointFragment;
+import com.mss.domain.models.Route;
+import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.RoutePointService;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.TypedArray;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
+
+public class RoutePointActivity extends SherlockFragmentActivity {
+
+	private static final String TAG = RoutePointActivity.class.getSimpleName();
+	
+	public static final int REQUEST_SHOW_ROUTE_POINT = 1;
+	public static final long ROUTE_POINT_ID_NEW = 0;
+	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
+
+	private DatabaseHelper mHelper;
+	private RouteService mRouteService;
+	private RoutePointService mRoutePointService;
+	private RoutePointFragment mRoutePointFragment;
+
+	private int m_currentNavigationItem;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		long id = getIntent().getLongExtra(getString(R.string.key_id), ROUTE_POINT_ID_NEW);
+
+		if (getResources().getBoolean(R.bool.dual_pane)) {
+			// Let's get back to the NoteListActivity since it should show both
+			// fragments at the same time
+			
+			Intent data = new Intent();
+			data.putExtra(EXTRA_ROUTE_POINT_ID, id);
+			setResult(0, data);
+			finish();
+		}
+
+		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			mRouteService = new RouteService(mHelper);
+			mRoutePointService = new RoutePointService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		if (id != ROUTE_POINT_ID_NEW) {			
+			RoutePoint routePoint = null;
+			try {
+				routePoint = mRoutePointService.getById(id);
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());
+			}
+
+			mRoutePointFragment = RoutePointFragment.newInstance(routePoint);
+
+			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, mRoutePointFragment).commit();
+		}
+
+		// Let's show the application icon as the Up button
+		
+		//if (getSupportActionBar() != null)
+		//	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+
+		// Up Icon + Logo + Hide title...
+        getSupportActionBar().setDisplayHomeAsUpEnabled (true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayUseLogoEnabled  (true);
+        
+        // Custom navigation list adapter...
+        Context    context   = getSupportActionBar().getThemedContext();
+        TypedArray logos     = getResources().obtainTypedArray(R.array.activity_logos);
+        TypedArray titles    = getResources().obtainTypedArray(R.array.activity_titles);
+        TypedArray subtitles = getResources().obtainTypedArray(R.array.activity_subtitles);
+        NavigationListAdapter navigationListApdater = new NavigationListAdapter(context, logos, titles, subtitles);
+        
+        // Custom navigation list listener... 
+        NavigationListListener navigationListListener = new NavigationListListener(this);
+
+        // Set navigation mode...
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        getSupportActionBar().setListNavigationCallbacks(navigationListApdater, navigationListListener);
+        
+        // Remember current navigation item...
+        m_currentNavigationItem = getCurrentNavigationItem(this, titles);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+		case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:
+			// We are coming back from the NoteEditActivity
+			RoutePoint routePoint = null;
+			try {
+				routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+
+			mRoutePointFragment.updateContent(routePoint);
+
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// ActionBar's Home button clicked
+
+			Intent upIntent = new Intent(this, RouteActivity.class);
+			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+				TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+				finish();
+			} else {
+				NavUtils.navigateUpTo(this, upIntent);
+			}
+			return true;
+		case R.id.menu_item_edit:
+			if (mRoutePointFragment != null) {
+				Route route = null;
+				RoutePoint routePoint = null;				
+				try {
+					routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
+					route = mRouteService.getById(routePoint.getRouteId());
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+				
+				Intent i = new Intent(this, RoutePointEditActivity.class);
+				i.putExtra(getString(R.string.key_id), routePoint.getId());
+				i.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, route.getDate().toString());
+				startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
+			}
+			return true;
+		case R.id.menu_item_delete:
+			try {
+				mRoutePointService.deletePoint(mRoutePointFragment.getRoutePoint());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			finish();
+		default:
+			return false;
+		}
+	}
+	
+	/**
+     * Get navigation list index for current activity.
+     * 
+     * @param p_activity
+     * @param p_titles
+     * @return
+     */
+    private int getCurrentNavigationItem(Activity p_activity, TypedArray p_titles) {
+		String title    = p_activity.getTitle().toString();
+		int    position = 0;
+    	
+		for (int i = 0, n = p_titles.length(); i < n; i++) {
+	        if (p_titles.getString(i).equals(title)) {
+	        	position = i;
+	        	break;
+	        }
+		}
+		
+		return position;
+    }
+	
+	/**
+	 * Custom navigation list listener.
+	 */
+	private class NavigationListListener implements OnNavigationListener {
+		/**
+		 * Members
+		 */
+		private RoutePointActivity m_activity;
+		
+		/**
+		 * 
+		 * @param p_activity
+		 */
+		NavigationListListener(RoutePointActivity p_activity) {
+			m_activity = p_activity;
+		}
+		
+	    /*
+	     * (non-Javadoc)
+	     * @see com.actionbarsherlock.app.ActionBar.OnNavigationListener#onNavigationItemSelected(int, long)
+	     */
+		@Override
+		public boolean onNavigationItemSelected(int p_itemPosition, long p_itemId) {
+			/*
+			 * Ignore if selecting current...
+			 */
+			if (p_itemPosition == m_activity.m_currentNavigationItem) {
+				return true;
+			}
+			
+			/*
+			 * Start new activity...
+			 */
+			//Intent intent = null;
+			//if (p_itemId == R.string.title_activity_main) {
+			//	intent = new Intent(m_activity, MainActivity.class);
+			//}
+			//else if (p_itemId == R.string.title_activity_one) {
+			//	intent = new Intent(m_activity, FirstActivity.class);
+			//}
+			//else if (p_itemId == R.string.title_activity_two) {
+			//	intent = new Intent(m_activity, SecondActivity.class);
+			//}
+			
+			//if (intent != null) {
+			//	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			//	startActivity(intent);
+			//}
+			
+			return true;
+		}
+	}
+	
+}

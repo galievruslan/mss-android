@@ -10,6 +10,5 @@ public class StatusService {
 	public StatusService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
-	}
-	
+	}	
 }

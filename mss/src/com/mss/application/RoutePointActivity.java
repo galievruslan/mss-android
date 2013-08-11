@@ -29,6 +29,8 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 	private RoutePointService mRoutePointService;
 	private RoutePointFragment mRoutePointFragment;
 
+	private int m_currentNavigationItem;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,8 +69,10 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 
 		// Let's show the application icon as the Up button
 		
-		if (getSupportActionBar() != null)
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);;
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		}
 	}
 
 	@Override
@@ -132,6 +136,21 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 				e.printStackTrace();
 			}
 			finish();
+		case R.id.menu_order_list:
+			if (mRoutePointFragment != null) {
+				RoutePoint routePoint = null;				
+				try {
+					routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+				
+				Intent i = new Intent(this, OrdersActivity.class);				
+				i.putExtra(OrdersActivity.KEY_ROUTE_POINT_ID, routePoint.getId());
+				startActivity(i);
+			}
+			return true;
 		default:
 			return false;
 		}

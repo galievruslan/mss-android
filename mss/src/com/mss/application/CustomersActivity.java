@@ -7,14 +7,10 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
 import com.mss.application.fragments.CustomersFragment;
 import com.mss.application.fragments.CustomersFragment.OnCustomerSelectedListener;
-import com.mss.application.fragments.RouteFragment;
 import com.mss.domain.models.Customer;
-import com.mss.domain.models.RoutePoint;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;

@@ -1,11 +1,9 @@
 package com.mss.domain.services;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
 import com.mss.domain.models.Route;
-import com.mss.domain.models.RoutePoint;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
 

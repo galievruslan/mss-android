@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="activity_titles">
+        <item>@string/title_activity_orders</item>
+    </array>
+   
+    <array name="activity_logos">
+        <item>@drawable/ic_logo_activity_main</item>
+    </array>
+   
+    <array name="activity_subtitles">
+        <item>@string/sub_title_activity_orders</item>
+    </array>
+</resources>
+

@@ -60,6 +60,18 @@
             android:name="com.mss.application.RoutePointActivity"
             android:label="@string/title_activity_route_point" >
         </activity>
+        <activity
+            android:name="com.mss.application.AbstractActivity"
+            android:label="@string/title_activity_abstract" >
+        </activity>
+        <activity
+            android:name="com.mss.application.OrdersActivity"
+            android:label="@string/title_activity_orders" >
+        </activity>
+        <activity
+            android:name="com.mss.application.OrderEditActivity"
+            android:label="@string/title_activity_new_order" >
+        </activity>
     </application>
 
 </manifest>

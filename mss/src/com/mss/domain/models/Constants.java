@@ -55,11 +55,17 @@ public class Constants {
 		
 		public static class Order {
 			public static final String TABLE_NAME = "order";
-			public static final String ORDER_DATE_FIELD = "order_date";
+			public static final String ROUTE_POINT_FIELD = "route_point_id";
+			public static final String ORDER_DATE_FIELD = "order_date";			
 			public static final String SHIPPING_DATE_FIELD = "shipping_date";
+			public static final String CUSTOMER_FIELD = "customer_id";
+			public static final String CUSTOMER_NAME_FIELD = "customer_name";
 			public static final String SHIPPING_ADDRESS_FIELD = "shipping_address_id";
+			public static final String SHIPPING_ADDRESS_NAME_FIELD = "shipping_address_name";
 			public static final String PRICE_LIST_FIELD = "price_list_id";
+			public static final String PRICE_LIST_NAME_FIELD = "price_list_name";
 			public static final String WAREHOUSE_FIELD = "warehouse_id";
+			public static final String WAREHOUSE_NAME_FIELD = "warehouse_name";
 			public static final String AMOUNT_FIELD = "amount";
 			public static final String NOTE_FIELD = "note";
 			public static final String UID_FIELD = "uid";

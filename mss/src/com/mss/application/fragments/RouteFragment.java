@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.mss.application.R;
@@ -31,7 +31,7 @@ public class RouteFragment extends SherlockListFragment {
 			new HashSet<RouteFragment.OnRoutePointSelectedListener>(1);
 	
 	private Date mRouteDate = new Date(); 
-	private TextView mRouteDateTextView;
+	private EditText mRouteDateEditText;
 	private int mLastPosition;
 
 	public RouteFragment() {
@@ -49,9 +49,9 @@ public class RouteFragment extends SherlockListFragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_route, container, false);
 		
-		mRouteDateTextView = (TextView) v.findViewById(R.id.route_date_view_text);
-		mRouteDateTextView.setText(DateFormat.getDateFormat(v.getContext()).format(mRouteDate));	
-		mRouteDateTextView.setOnClickListener(new OnClickListener() {
+		mRouteDateEditText = (EditText) v.findViewById(R.id.route_date_edit_text);
+		mRouteDateEditText.setText(DateFormat.getDateFormat(v.getContext()).format(mRouteDate));	
+		mRouteDateEditText.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {	
 				showDatePicker();
 			}
@@ -156,12 +156,12 @@ public class RouteFragment extends SherlockListFragment {
 	OnDateSetListener ondate = new OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-			mRouteDateTextView = (TextView) getView().findViewById(R.id.route_date_view_text);
+			mRouteDateEditText = (EditText) getView().findViewById(R.id.route_date_edit_text);
 			final Calendar c = Calendar.getInstance();
 			c.set(year, monthOfYear, dayOfMonth);
 			mRouteDate = c.getTime();
 
-			mRouteDateTextView.setText(DateFormat.getDateFormat(getView().getContext()).format(mRouteDate));
+			mRouteDateEditText.setText(DateFormat.getDateFormat(getView().getContext()).format(mRouteDate));
 			for (OnRouteDateChangedListener listener : mOnRouteDateChangedListeners) {
 				listener.onRouteDateChanged(mRouteDate);
 			}
