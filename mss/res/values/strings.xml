@@ -29,15 +29,19 @@
     <string name="title_activity_date_picker_fragment">DatePickerFragment</string>
     <string name="title_activity_abstract">AbstractActivity</string>
     <string name="title_activity_orders">OrdersActivity</string>
-	<string name="label_tab_general">General</string>
-	<string name="label_tab_details">Details</string>
-	<string name="label_tab_notes">Notes</string>
-	<string name="label_order_date">Order date</string>
-	<string name="label_order_shipping_date">Shipping date</string>
-	<string name="label_order_shipping_time">Shipping time</string>
-	<string name="label_order_customer">Customer</string>
-	<string name="label_order_shipping_address">Shipping address</string>
-	<string name="label_order_price_list">Price list</string>
-	<string name="label_order_warehouse">Warehouse</string>
-	<string name="label_order_notes">Notes</string>
+    <string name="label_tab_general">General</string>
+    <string name="label_tab_details">Details</string>
+    <string name="label_tab_notes">Notes</string>
+    <string name="label_order_date">Order date</string>
+    <string name="label_order_shipping_date">Shipping date</string>
+    <string name="label_order_shipping_time">Shipping time</string>
+    <string name="label_order_customer">Customer</string>
+    <string name="label_order_shipping_address">Shipping address</string>
+    <string name="label_order_price_list">Price list</string>
+    <string name="label_order_warehouse">Warehouse</string>
+    <string name="label_order_notes">Notes</string>
+    <string name="title_activity_price_lists">PriceListsActivity</string>
+    <string name="title_activity_warehouses">WarehousesActivity</string>
+    <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
+
 </resources>

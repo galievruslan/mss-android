@@ -11,8 +11,9 @@ public class Order extends Entity {
 	
 	public Order() {}
 	
-	public Order(RoutePoint routePoint) {
-		routePointId = routePoint.getId();
+	public Order(Route route, RoutePoint routePoint) {
+		orderDate = route.getDate();
+		routePointId = routePoint.getId();		
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Order.ROUTE_POINT_FIELD)
@@ -32,6 +33,10 @@ public class Order extends Entity {
 		return shippingDate;
 	}
 	
+	public void setShippingDate(Date date) {
+		shippingDate = date;
+	}
+	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.CUSTOMER_FIELD)
 	private long customerId;
 	
@@ -44,6 +49,11 @@ public class Order extends Entity {
 	
 	public String getCustomerName(){
 		return customerName;
+	}
+	
+	public void setCustomer(Customer customer) {
+		customerId = customer.getId();
+		customerName = customer.getName();
 	}
 	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_FIELD)
@@ -60,6 +70,11 @@ public class Order extends Entity {
 		return shippingAddressName;
 	}
 	
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		shippingAddressId = shippingAddress.getId();
+		shippingAddressName = shippingAddress.getName();
+	}
+	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.PRICE_LIST_FIELD)
 	private long priceListId;
 	
@@ -74,6 +89,11 @@ public class Order extends Entity {
 		return priceListName;
 	}
 	
+	public void setPriceList(PriceList priceList) {
+		priceListId = priceList.getId();
+		priceListName = priceList.getName();
+	}
+	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.WAREHOUSE_FIELD)
 	private long warehouseId;
 	
@@ -86,6 +106,11 @@ public class Order extends Entity {
 	
 	public String getWarehouseName(){
 		return warehouseName;
+	}
+	
+	public void setWarehouse(Warehouse warehouse) {
+		warehouseId = warehouse.getId();
+		warehouseName = warehouse.getName();
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.Order.AMOUNT_FIELD)

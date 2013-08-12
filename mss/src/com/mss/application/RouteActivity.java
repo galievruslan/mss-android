@@ -1,12 +1,12 @@
 package com.mss.application;
 
 import java.lang.ref.WeakReference;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.MenuInflater;
@@ -16,10 +16,7 @@ import com.mss.application.fragments.RouteFragment.OnRoutePointSelectedListener;
 import com.mss.application.fragments.RoutePointFragment;
 import com.mss.domain.models.RoutePoint;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -132,7 +129,7 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 			case android.R.id.home:
 				Intent upIntent = new Intent(this, MainActivity.class);
 				if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-					TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+					TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
 					finish();
 				} else {
 					NavUtils.navigateUpTo(this, upIntent);
@@ -217,9 +214,9 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 	public void onDestroyActionMode(ActionMode mode) {
 		mActionMode = null;
 
-		FragmentManager manager = getSupportFragmentManager();
-		RouteFragment frag = (RouteFragment) manager.findFragmentById(R.id.fragment_route);
-		RoutePointAdapter adapter = (RoutePointAdapter) frag.getListAdapter();
+		//FragmentManager manager = getSupportFragmentManager();
+		//RouteFragment frag = (RouteFragment) manager.findFragmentById(R.id.fragment_route);
+		//RoutePointAdapter adapter = (RoutePointAdapter) frag.getListAdapter();
 	}
 
 	@Override
@@ -368,7 +365,8 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 			RouteActivity activity = mWeakActivity.get();
 
 			Intent intent = new Intent(activity, RoutePointEditActivity.class);
-			intent.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, activity.getRouteFragment().getRouteDate().toString());
+			DateFormat format = SimpleDateFormat.getDateInstance();
+			intent.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, format.format(activity.getRouteFragment().getRouteDate()));
 			activity.startActivityForResult(intent, 0);
 		}
 	}
@@ -411,7 +409,8 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 			RouteActivity activity = mWeakActivity.get();
 
 			Intent intent = new Intent(activity, RoutePointEditActivity.class);
-			intent.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, activity.getRouteFragment().getRouteDate().toString());
+			DateFormat format = SimpleDateFormat.getDateInstance();
+			intent.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, format.format(activity.getRouteFragment().getRouteDate()));
 			activity.startActivityForResult(intent, 0);
 		}
 

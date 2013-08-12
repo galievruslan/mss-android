@@ -29,7 +29,7 @@ public class WarehouseService {
 		return defaultWarehouse; 
 	}
 	
-	public Iterable<Warehouse> getCustomers() throws Throwable{		 
+	public Iterable<Warehouse> getWarehouses() throws Throwable{		 
 		return warehouseRepo.find();
 	}
 }

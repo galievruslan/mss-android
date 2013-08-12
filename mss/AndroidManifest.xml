@@ -72,6 +72,18 @@
             android:name="com.mss.application.OrderEditActivity"
             android:label="@string/title_activity_new_order" >
         </activity>
+        <activity
+            android:name="com.mss.application.PriceListsActivity"
+            android:label="@string/title_activity_price_lists" >
+        </activity>
+        <activity
+            android:name="com.mss.application.WarehousesActivity"
+            android:label="@string/title_activity_warehouses" >
+        </activity>
+        <activity
+            android:name="com.mss.application.fragments.TimePickerFragment"
+            android:label="@string/title_activity_time_picker_fragment" >
+        </activity>
     </application>
 
 </manifest>

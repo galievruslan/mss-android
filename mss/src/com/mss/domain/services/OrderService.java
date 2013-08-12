@@ -1,6 +1,7 @@
 package com.mss.domain.services;
 
 import com.mss.domain.models.Order;
+import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
@@ -22,8 +23,8 @@ public class OrderService {
 		return orderRepo.findByRoutePointId(routePoint.getId());
 	}
 	
-	public Order createOrder(RoutePoint routePoint) {
-		Order order = new Order(routePoint);
+	public Order createOrder(Route route, RoutePoint routePoint) {
+		Order order = new Order(route, routePoint);
 		
 		return order;
 	}

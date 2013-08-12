@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.actionbarsherlock.app.SherlockFragmentActivity"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="android.content.res.TypedArray"/>
-<fullyQualifiedTypeName name="com.actionbarsherlock.app.ActionBar"/>
-<fullyQualifiedTypeName name="com.actionbarsherlock.view.MenuItem"/>
-<fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
-<fullyQualifiedTypeName name="android.widget.SpinnerAdapter"/>
-<fullyQualifiedTypeName name="android.view.LayoutInflater"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="android.view.ViewGroup"/>
-<fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="com.actionbarsherlock.app.ActionBar.OnNavigationListener"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="android.view.ActionMode.Callback"/>
@@ -19,8 +8,6 @@
 <fullyQualifiedTypeName name="com.mss.application.OrderAdapter"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.OrderListFragment"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.OrderListFragment.OnOrderSelectedListener"/>
-<fullyQualifiedTypeName name="com.mss.domain.services.OrderService"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Order"/>
 <fullyQualifiedTypeName name="com.mss.application.R.id"/>
 <fullyQualifiedTypeName name="com.mss.application.OrdersActivity"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
@@ -36,14 +23,10 @@
 <fullyQualifiedTypeName name="android.app.FragmentManager"/>
 <fullyQualifiedTypeName name="android.support.v4.app.FragmentManager"/>
 <fullyQualifiedTypeName name="android.support.v4.app.TaskStackBuilder"/>
-<fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-<fullyQualifiedTypeName name="java.text.DateFormat"/>
-<fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.RouteService"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Route"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Customer"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.ShippingAddress"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmlitePriceListRepository"/>
@@ -53,11 +36,28 @@
 <fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteWarehouseRepository"/>
 <fullyQualifiedTypeName name="java.lang.Iterable"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.PriceList"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Warehouse"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.CustomerService"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.ShippingAddressService"/>
+<fullyQualifiedTypeName name="com.mss.application.RoutePointActivity"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.PriceListService"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.WarehouseService"/>
+<fullyQualifiedTypeName name="com.mss.application.PriceListsAdapter"/>
+<fullyQualifiedTypeName name="com.mss.application.WarehousesAdapter"/>
+<fullyQualifiedTypeName name="com.mss.application.fragments.PriceListsFragment.OnPriceListSelectedListener"/>
+<fullyQualifiedTypeName name="com.mss.application.fragments.PriceListsFragment"/>
+<fullyQualifiedTypeName name="com.mss.application.fragments.WarehousesFragment.OnWarehouseSelectedListener"/>
+<fullyQualifiedTypeName name="com.mss.application.fragments.WarehousesFragment"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.PriceList"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Order"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Route"/>
+<fullyQualifiedTypeName name="com.mss.domain.services.OrderService"/>
+<fullyQualifiedTypeName name="android.app.TimePickerDialog"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.text.DateFormat"/>
+<fullyQualifiedTypeName name="android.text.format.DateFormat"/>
+<fullyQualifiedTypeName name="com.mss.application.fragments.TimePickerFragment"/>
+<fullyQualifiedTypeName name="android.widget.TimePicker"/>
+<fullyQualifiedTypeName name="android.app.TimePickerDialog.OnTimeSetListener"/>
 </qualifiedTypeNameHistroy>

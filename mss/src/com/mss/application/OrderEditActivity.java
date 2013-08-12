@@ -1,9 +1,12 @@
 package com.mss.application;
 
+import java.util.Calendar;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.mss.application.fragments.OrderFragment;
+import com.mss.application.fragments.DatePickerFragment;
+import com.mss.application.fragments.TimePickerFragment;
 import com.mss.domain.models.Customer;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.PriceList;
@@ -12,6 +15,7 @@ import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.domain.models.Warehouse;
 import com.mss.domain.services.CustomerService;
+import com.mss.domain.services.OrderService;
 import com.mss.domain.services.PriceListService;
 import com.mss.domain.services.RoutePointService;
 import com.mss.domain.services.RouteService;
@@ -20,19 +24,24 @@ import com.mss.domain.services.WarehouseService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.TimePicker;
 
 public class OrderEditActivity extends SherlockFragmentActivity implements LoaderCallbacks<Order>, OnTabChangeListener {
 
@@ -71,6 +80,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	private ShippingAddressService mShippingAddressService;
 	private PriceListService mPriceListService;
 	private WarehouseService mWarehouseService;
+	private OrderService mOrderService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +112,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			mShippingAddressService = new ShippingAddressService(mHelper);
 			mPriceListService = new PriceListService(mHelper);
 			mWarehouseService = new WarehouseService(mHelper);
+			mOrderService = new OrderService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -122,29 +133,59 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 				PriceList priceList = mPriceListService.getDefault();
 				Warehouse warehouse = mWarehouseService.getDefault();
 				
+				mOrder = mOrderService.createOrder(route, routePoint);
+				mOrder.setShippingDate(mOrder.getOrderDate());
+				mOrder.setCustomer(customer);
+				mOrder.setShippingAddress(shippingAddress);
+				if (priceList != null) {
+					mOrder.setPriceList(priceList);
+				}
+				if (warehouse != null) {
+					mOrder.setWarehouse(warehouse);
+				}
+								
 				java.text.DateFormat dateFormat = DateFormat.getDateFormat(getApplicationContext());
 				java.text.DateFormat timeFormat = DateFormat.getTimeFormat(getApplicationContext());
-				mOrderDate.setText(dateFormat.format(route.getDate()));
-				mOrderShippingDate.setText(dateFormat.format(route.getDate()));
-				mOrderShippingTime.setText(timeFormat.format(route.getDate()));
-				mOrderCustomer.setTag(customer.getId());
-				mOrderCustomer.setText(customer.getName());
-				mOrderShippingAddress.setTag(shippingAddress.getId());
-				mOrderShippingAddress.setText(shippingAddress.getName());
-				if (priceList != null) {
-					mOrderPriceList.setTag(priceList.getId());
-					mOrderPriceList.setText(priceList.getName());
-				}
-				
-				if (warehouse != null) {
-					mOrderWarehouse.setTag(warehouse.getId());
-					mOrderWarehouse.setText(warehouse.getName());
-				}
-				
+				mOrderDate.setText(dateFormat.format(mOrder.getOrderDate()));
+				mOrderShippingDate.setText(dateFormat.format(mOrder.getShippingDate()));
+				mOrderShippingTime.setText(timeFormat.format(mOrder.getShippingDate()));
+				mOrderCustomer.setText(mOrder.getCustomerName());
+				mOrderShippingAddress.setText(mOrder.getShippingAddressName());
+				mOrderPriceList.setText(mOrder.getPriceListName());
+				mOrderWarehouse.setText(mOrder.getWarehouseName());
+								
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}			
 		}
+		
+		mOrderPriceList.setOnClickListener(new TextView.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent priceListsActivity = new Intent(getApplicationContext(), PriceListsActivity.class);
+		    	startActivityForResult(priceListsActivity, PICK_PRICE_LIST_REQUEST);
+			}
+        });
+		
+		mOrderWarehouse.setOnClickListener(new TextView.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent warehousesActivity = new Intent(getApplicationContext(), WarehousesActivity.class);
+				startActivityForResult(warehousesActivity, PICK_WAREHOUSE_REQUEST);
+			}
+        });
+		
+		mOrderShippingDate.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {	
+				showDatePicker();
+			}
+		});
+		
+		mOrderShippingTime.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {	
+				showTimePicker();
+			}
+		});
 
 		if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -209,40 +250,28 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	    if (requestCode == PICK_PRICE_LIST_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	//long customerId = data.getLongExtra("customer_id", 0l);
-	        	//mCustomer.setTag(customerId);
-	        	
-	        	//try {
-	        	//	Customer customer = mCustomerService.getById(customerId);
-	        	//	mCustomer.setText(customer.getName());
-	        	//	Iterable<ShippingAddress> shippingAddresses = mShippingAddressService.findByCustomer(customer);
-				//	if (IterableHelpers.size(ShippingAddress.class, shippingAddresses) == 1) {
-				//		ShippingAddress shippingAddress = shippingAddresses.iterator().next();
-				//		mShippinAddress.setTag(shippingAddress.getId());
-			    //    	mShippinAddress.setText(shippingAddress.getName());
-				//	} else {	        		
-				//		mShippinAddress.setTag(0);
-			    //    	mShippinAddress.setText("");
-				//	}
-				//} catch (Throwable e) {
-				//	Log.e(TAG, e.getMessage());
-				//}	        	
+	        	long priceListId = data.getLongExtra("price_list_id", 0l);
+	        		        	
+	        	try {
+	        		PriceList priceList = mPriceListService.getById(priceListId);
+	        		mOrder.setPriceList(priceList);
+	        		mOrderPriceList.setText(mOrder.getPriceListName());
+				} catch (Throwable e) {
+					Log.e(TAG, e.getMessage());
+				}	        	
 	        }
 	    } else if (requestCode == PICK_WAREHOUSE_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	//long shippingAddressId = data.getLongExtra("shipping_address_id", 0l);
-	        	//	        	
-	        	//mShippinAddress.setTag(shippingAddressId);	        		        	
-	        	//try {
-	        	//	ShippingAddress shippingAddress = mShippingAddressService.getById(shippingAddressId);
-	        	//	mShippinAddress.setText(shippingAddress.getName());
-				//	Customer customer = mCustomerService.getById(shippingAddress.getCustomerId());
-				//	mCustomer.setTag(customer.getId());
-		        //	mCustomer.setText(customer.getName());
-				//} catch (Throwable e) {
-				//	Log.e(TAG, e.getMessage());
-				//}
+	        	long warehouseId = data.getLongExtra("warehouse_id", 0l);
+	        		        		        		        	
+	        	try {
+	        		Warehouse warehouse = mWarehouseService.getById(warehouseId);
+	        		mOrder.setWarehouse(warehouse);
+	        		mOrderWarehouse.setText(mOrder.getWarehouseName());
+				} catch (Throwable e) {
+					Log.e(TAG, e.getMessage());
+				}
 	        }
 	    }
 	}
@@ -251,7 +280,9 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent upIntent = new Intent(this, RouteActivity.class);
+			Intent upIntent = new Intent(this, RoutePointActivity.class);
+			upIntent.putExtra(getString(R.string.key_id), mRoutePointId);
+			
 			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
 				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
 				finish();
@@ -260,7 +291,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			}
 			return true;
 		case R.id.menu_item_save:
-			//if (mOrder == null && mRoutePoint != null) {
+			if (mOrder == null && mRoutePointId != 0) {
 			//	ShippingAddress shippingAddress;
 			//	try {
 			//		shippingAddress = mShippingAddressService.getById((Long)mShippinAddress.getTag());
@@ -273,9 +304,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			//} else {
 				//mRoutePoint.setTitle(mTitle.getText().toString());
 				//mRoutePoint.setText(mText.getText().toString());
-			//}
-
-			//onRoutePointSaved(mRoutePoint);
+			}
 
 			return true;
 		default:
@@ -338,4 +367,68 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	public void onLoaderReset(Loader<Order> loader) {
 		mOrder = null;
 	}
+	
+	private void showDatePicker() {
+		DatePickerFragment date = new DatePickerFragment();
+		/**
+	     * Set Up Current Date Into dialog
+		 */
+		Calendar calender = Calendar.getInstance();
+		calender.setTime(mOrder.getShippingDate());
+		Bundle args = new Bundle();
+		args.putInt("year", calender.get(Calendar.YEAR));
+		args.putInt("month", calender.get(Calendar.MONTH));
+		args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+		date.setArguments(args);
+		/**
+		 * Set Call back to capture selected date
+		 */
+		date.setCallBack(ondate);
+		date.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	OnDateSetListener ondate = new OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {			
+			final Calendar c = Calendar.getInstance();
+			c.setTime(mOrder.getShippingDate());
+			c.set(year, monthOfYear, dayOfMonth);
+			mOrder.setShippingDate(c.getTime());
+
+			mOrderShippingDate.setText(DateFormat.getDateFormat(getApplicationContext()).format(mOrder.getShippingDate()));
+		}
+	};
+	
+	private void showTimePicker() {
+		TimePickerFragment timePickerFragment = new TimePickerFragment();
+		/**
+	     * Set Up Current Date Into dialog
+		 */
+		Calendar calender = Calendar.getInstance();
+		calender.setTime(mOrder.getShippingDate());
+		Bundle args = new Bundle();
+		args.putInt("hour", calender.get(Calendar.HOUR_OF_DAY));
+		args.putInt("minute", calender.get(Calendar.MINUTE));
+		timePickerFragment.setArguments(args);
+		/**
+		 * Set Call back to capture selected date
+		 */
+		timePickerFragment.setCallBack(onTime);
+		timePickerFragment.show(getSupportFragmentManager(), "Time Picker");
+	}
+
+	OnTimeSetListener onTime = new OnTimeSetListener() {
+		@Override
+		public void onTimeSet(TimePicker view, int hour, int minute) {
+			final Calendar c = Calendar.getInstance();
+			c.setTime(mOrder.getShippingDate());
+			c.set(Calendar.HOUR, hour);
+			c.set(Calendar.MINUTE, minute);
+			
+			mOrder.setShippingDate(c.getTime());
+
+			mOrderShippingTime.setText(DateFormat.getTimeFormat(getApplicationContext()).format(mOrder.getShippingDate()));
+			
+		}
+	};
 }
