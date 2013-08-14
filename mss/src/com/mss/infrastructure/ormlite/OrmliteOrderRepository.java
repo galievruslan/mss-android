@@ -13,7 +13,7 @@ public class OrmliteOrderRepository extends OrmliteGenericRepository<Order> {
 		
 		QueryBuilder<Order, Integer> queryBuilder = dao.queryBuilder();
 		
-		queryBuilder.where().like(com.mss.domain.models.Constants.Tables.Order.ROUTE_POINT_FIELD , id);
+		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.Order.ROUTE_POINT_FIELD , id);
 		return dao.query(queryBuilder.prepare());
 	}
 }

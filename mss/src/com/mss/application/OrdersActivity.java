@@ -1,7 +1,6 @@
 package com.mss.application;
 
 import java.lang.ref.WeakReference;
-import java.util.Date;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -10,17 +9,10 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.ActionMode.Callback;
 import com.mss.application.fragments.OrderFragment;
 import com.mss.application.fragments.OrderListFragment;
-import com.mss.application.fragments.ShippingAddressesFragment;
 import com.mss.application.fragments.OrderListFragment.OnOrderSelectedListener;
-import com.mss.application.fragments.RouteFragment;
-import com.mss.application.fragments.RoutePointFragment;
-import com.mss.application.fragments.RouteFragment.OnRouteDateChangedListener;
-import com.mss.application.fragments.RouteFragment.OnRoutePointSelectedListener;
 import com.mss.domain.models.Order;
-import com.mss.domain.models.RoutePoint;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
@@ -28,7 +20,6 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.view.Menu;
 
 public class OrdersActivity extends SherlockFragmentActivity implements OnOrderSelectedListener, Callback, LoaderCallbacks<List<Order>> {
 
@@ -141,7 +132,7 @@ public class OrdersActivity extends SherlockFragmentActivity implements OnOrderS
 			case android.R.id.home:
 				Intent upIntent = new Intent(this, MainActivity.class);
 				if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-					TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+					TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
 					finish();
 				} else {
 					NavUtils.navigateUpTo(this, upIntent);
@@ -219,11 +210,7 @@ public class OrdersActivity extends SherlockFragmentActivity implements OnOrderS
 
 	@Override
 	public void onDestroyActionMode(ActionMode mode) {
-		mActionMode = null;
-
-		FragmentManager manager = getSupportFragmentManager();
-		OrderListFragment frag = (OrderListFragment) manager.findFragmentById(R.id.fragment_order_list);
-		OrderAdapter adapter = (OrderAdapter) frag.getListAdapter();
+		mode = null;
 	}
 
 	@Override

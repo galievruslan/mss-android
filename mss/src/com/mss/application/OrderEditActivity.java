@@ -1,14 +1,23 @@
 package com.mss.application;
 
 import java.util.Calendar;
+import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.ActionMode.Callback;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.DatePickerFragment;
+import com.mss.application.fragments.OrderListFragment;
+import com.mss.application.fragments.OrderPickupItemsFragment;
+import com.mss.application.fragments.OrderPickupItemsFragment.OnOrderPickupItemSelectedListener;
 import com.mss.application.fragments.TimePickerFragment;
 import com.mss.domain.models.Customer;
 import com.mss.domain.models.Order;
+import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.PriceList;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
@@ -28,6 +37,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
@@ -43,20 +53,24 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TimePicker;
 
-public class OrderEditActivity extends SherlockFragmentActivity implements LoaderCallbacks<Order>, OnTabChangeListener {
+public class OrderEditActivity extends SherlockFragmentActivity implements OnTabChangeListener,  OnOrderPickupItemSelectedListener, Callback, LoaderCallbacks<List<OrderPickupItem>> {
 
 	private static final String TAG = OrderEditActivity.class.getSimpleName();
+    
 	public static final String TAB_GENERAL = "General";
     public static final String TAB_DETAILS = "Details";
     public static final String TAB_NOTES = "Notes";
-	
+    	
+	private static final int LOADER_ID_ORDER_PICKUP_ITEMS = 0;
+
+	private ActionMode mActionMode;
     private TabHost mTabHost;
     private int mCurrentTab;
 
 	public static final int REQUEST_EDIT_ORDER = 5;
 	public static final String KEY_ORDER_ID = "id";
 	public static final String KEY_ROUTE_POINT_ID = "route_point_id";
-	public static final int LOADER_ID_ORDER = 0;
+	public static final String KEY_PRICE_LIST_ID = "price_list_id";
 	
 	static final int PICK_PRICE_LIST_REQUEST = 1;
 	static final int PICK_WAREHOUSE_REQUEST = 2;
@@ -81,11 +95,19 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	private PriceListService mPriceListService;
 	private WarehouseService mWarehouseService;
 	private OrderService mOrderService;
+	
+	private OrderPickupItemAdapter mOrderPickupItemAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_edit);
+		
+		try {
+			mOrderPickupItemAdapter = new OrderPickupItemAdapter(this);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
 		
 		mOrderDate = (EditText)findViewById(R.id.order_date_edit_text);
 		mOrderShippingDate = (EditText)findViewById(R.id.order_shipping_date_edit_text);
@@ -119,9 +141,9 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
         
 		long id = getIntent().getLongExtra(getString(R.string.key_id), 0);
 		if (id != 0) {
-			Bundle args = new Bundle();
-			args.putLong(KEY_ORDER_ID, id);
-			getSupportLoaderManager().initLoader(LOADER_ID_ORDER, args, this);
+			//Bundle args = new Bundle();
+			//args.putLong(KEY_ORDER_ID, id);
+			//getSupportLoaderManager().initLoader(LOADER_ID_ORDER, args, this);
 		} else {
 			Long routePointId = getIntent().getLongExtra(KEY_ROUTE_POINT_ID, 0);
 			RoutePoint routePoint;
@@ -143,7 +165,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 				if (warehouse != null) {
 					mOrder.setWarehouse(warehouse);
 				}
-								
+												
 				java.text.DateFormat dateFormat = DateFormat.getDateFormat(getApplicationContext());
 				java.text.DateFormat timeFormat = DateFormat.getTimeFormat(getApplicationContext());
 				mOrderDate.setText(dateFormat.format(mOrder.getOrderDate()));
@@ -153,11 +175,15 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 				mOrderShippingAddress.setText(mOrder.getShippingAddressName());
 				mOrderPriceList.setText(mOrder.getPriceListName());
 				mOrderWarehouse.setText(mOrder.getWarehouseName());
-								
+				
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}			
 		}
+		
+		Bundle bundle = new Bundle();
+		bundle.putLong(KEY_PRICE_LIST_ID, mOrder.getPriceListId());		
+		getSupportLoaderManager().initLoader(LOADER_ID_ORDER_PICKUP_ITEMS, bundle, this);
 		
 		mOrderPriceList.setOnClickListener(new TextView.OnClickListener() {
 			@Override
@@ -190,6 +216,11 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 		if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}	
+	
+	protected OrderPickupItemsFragment getOrderPickupItemsFragment() {
+		return (OrderPickupItemsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_pickup_item_list);
+	}
+
 	
 	private void setupTabs() {
         mTabHost.setup(); // you must call this before adding your tabs!
@@ -256,6 +287,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 	        		PriceList priceList = mPriceListService.getById(priceListId);
 	        		mOrder.setPriceList(priceList);
 	        		mOrderPriceList.setText(mOrder.getPriceListName());
+	        		
+	        		Bundle bundle = new Bundle();
+	        		bundle.putLong(KEY_PRICE_LIST_ID, priceListId);		
+	        		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEMS, bundle, this);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}	        	
@@ -291,20 +326,13 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			}
 			return true;
 		case R.id.menu_item_save:
-			if (mOrder == null && mRoutePointId != 0) {
-			//	ShippingAddress shippingAddress;
-			//	try {
-			//		shippingAddress = mShippingAddressService.getById((Long)mShippinAddress.getTag());
-			//		mRoutePointService.cratePoint(mRouteDate, shippingAddress);
-			//	} catch (Throwable e) {
-			//		Log.e(TAG, e.getMessage());
-			//	}			
-				
-				//mRoutePoint = new RoutePoint(  mTitle.getText().toString(), mText.getText().toString());
-			//} else {
-				//mRoutePoint.setTitle(mTitle.getText().toString());
-				//mRoutePoint.setText(mText.getText().toString());
-			}
+			if (mOrder != null)
+				try {
+					mOrderService.saveOrder(mOrder);
+				} catch (Throwable e) {
+					Log.e(TAG, e.getMessage());
+				}
+				finish();
 
 			return true;
 		default:
@@ -319,53 +347,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			Log.e(TAG, "Unable to create or update route point: " + routePoint);
 		}
 		finish();
-	}
-
-	@Override
-	public Loader<Order> onCreateLoader(int id, Bundle args) {
-		switch (id) {
-		case LOADER_ID_ORDER:
-			long orderId = args.getLong(KEY_ORDER_ID);
-
-			try {
-				return new OrderLoader(this, orderId);
-			} catch (Throwable e) {
-				Log.e(TAG, e.getMessage());
-			}
-		default:
-			return null;
-		}
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Order> loader, Order data) {
-		mOrder = data;
-				
-		if (mOrder != null) {
-			try {
-				java.text.DateFormat dateFormat = DateFormat.getDateFormat(getApplicationContext());
-				java.text.DateFormat timeFormat = DateFormat.getTimeFormat(getApplicationContext());
-				mOrderDate.setText(dateFormat.format(mOrder.getOrderDate()));
-				mOrderShippingDate.setText(dateFormat.format(mOrder.getShippingDate()));
-				mOrderShippingTime.setText(timeFormat.format(mOrder.getShippingDate()));
-				mOrderCustomer.setTag(mOrder.getCustomerId());
-				mOrderCustomer.setText(mOrder.getCustomerName());
-				mOrderShippingAddress.setTag(mOrder.getShippingAddressId());
-				mOrderShippingAddress.setText(mOrder.getShippingAddressName());
-				mOrderPriceList.setTag(mOrder.getPriceListId());
-				mOrderPriceList.setText(mOrder.getPriceListName());
-				mOrderWarehouse.setTag(mOrder.getWarehouseId());
-				mOrderWarehouse.setText(mOrder.getWarehouseName());
-				mOrderNotes.setText(mOrder.getNote());
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}		
-		}
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Order> loader) {
-		mOrder = null;
 	}
 	
 	private void showDatePicker() {
@@ -431,4 +412,89 @@ public class OrderEditActivity extends SherlockFragmentActivity implements Loade
 			
 		}
 	};
-}
+
+
+	@Override
+	public void onLoadFinished(Loader<List<OrderPickupItem>> loader,
+			List<OrderPickupItem> data) {				
+		switch (loader.getId()) {
+		case LOADER_ID_ORDER_PICKUP_ITEMS:
+			OrderPickupItemAdapter orderPickupItemAdapter = mOrderPickupItemAdapter;
+			orderPickupItemAdapter.swapData(data);
+			getOrderPickupItemsFragment().setListAdapter(orderPickupItemAdapter);
+			break;
+		default:
+			break;
+		}
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<List<OrderPickupItem>> arg0) {
+		mOrderPickupItemAdapter.swapData(null);
+		
+	}
+
+	@Override
+	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.action_mode_list, menu);
+
+		mActionMode = mode;
+
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		return false;
+	}
+
+	@Override
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_item_delete:
+			FragmentManager manager = getSupportFragmentManager();
+			OrderPickupItemsFragment frag = (OrderPickupItemsFragment) manager.findFragmentById(R.id.fragment_order_pickup_item_list);
+			OrderPickupItemAdapter adapter = (OrderPickupItemAdapter) frag.getListAdapter();
+			try {
+				//adapter.delete(getOrderPickupItemsFragment().);
+			} catch (Throwable e) {
+				Log.e(TAG, e.toString());
+			}
+
+			getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEMS, null, this);
+
+			mode.finish();
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	@Override
+	public void onDestroyActionMode(ActionMode mode) {
+		mode = null;
+		
+	}
+
+	@Override
+	public Loader<List<OrderPickupItem>> onCreateLoader(int id, Bundle bundle) {
+		switch (id) {
+		case LOADER_ID_ORDER_PICKUP_ITEMS:
+			try {
+				return new OrderPickupItemsLoader(this, mOrder.getPriceListId());
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());
+			}
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public void onOrderPickupItemSelected(OrderPickupItem orderPickupItem,
+			int position, long id) {
+		// TODO Auto-generated method stub
+		
+	}}

@@ -26,13 +26,7 @@ public class OrderLoader extends AsyncTaskLoader<Order> {
 
 	@Override
 	public Order loadInBackground() {
-		try {
-			mOrder = mOrderService.getById(mId);
-		} catch (Throwable e) {
-			return null;
-		}
-
-		return mOrder;
+		return mOrderService.getById(mId);
 	}
 
 	@Override

@@ -43,5 +43,6 @@
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
+    <string name="title_activity_order_pickup_items_fragment">OrderPickupItemsFragment</string>
 
 </resources>

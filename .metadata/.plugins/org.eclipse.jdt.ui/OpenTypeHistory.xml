@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=mss/src&lt;com.mss.application.fragments{OrderListFragment.java[OrderListFragment" modifiers="1" timestamp="1376247291995"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{PriceListsFragment.java[PriceListsFragment" modifiers="1" timestamp="1376333220240"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{WarehousesFragment.java[WarehousesFragment" modifiers="1" timestamp="1376334365686"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{PriceListsFragment.java[PriceListsFragment" modifiers="1" timestamp="1376507388226"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{WarehousesFragment.java[WarehousesFragment" modifiers="1" timestamp="1376507367613"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{OrderPickupItemsFragment.java[OrderPickupItemsFragment" modifiers="1" timestamp="1376507314064"/>
 </typeInfoHistroy>

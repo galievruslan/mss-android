@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.mss.application.R;
-import com.mss.application.ShippingAddressesAdapter;
+import com.mss.application.ShippingAddressAdapter;
 import com.mss.domain.models.ShippingAddress;
 
 public class ShippingAddressesFragment extends SherlockListFragment {
@@ -39,7 +39,7 @@ public class ShippingAddressesFragment extends SherlockListFragment {
 		View v = inflater.inflate(R.layout.fragment_shipping_address_list, container, false);
 				
 	    try {
-			setListAdapter(new ShippingAddressesAdapter(v.getContext()));
+			setListAdapter(new ShippingAddressAdapter(v.getContext()));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

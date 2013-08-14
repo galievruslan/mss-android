@@ -14,19 +14,22 @@ public class Order extends Entity {
 	public Order(Route route, RoutePoint routePoint) {
 		orderDate = route.getDate();
 		routePointId = routePoint.getId();		
+		amount = new BigDecimal(0);
+		note = "";
+		uid = UUID.randomUUID();
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Order.ROUTE_POINT_FIELD)
 	private long routePointId;
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.DATE_TIME, columnName = Constants.Tables.Order.ORDER_DATE_FIELD)
+	@DatabaseField(canBeNull = false, dataType = DataType.DATE, columnName = Constants.Tables.Order.ORDER_DATE_FIELD)
 	private Date orderDate;
 	
 	public Date getOrderDate(){
 		return orderDate;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.DATE_TIME, columnName = Constants.Tables.Order.SHIPPING_DATE_FIELD)
+	@DatabaseField(canBeNull = false, dataType = DataType.DATE, columnName = Constants.Tables.Order.SHIPPING_DATE_FIELD)
 	private Date shippingDate;
 	
 	public Date getShippingDate(){

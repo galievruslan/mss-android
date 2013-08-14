@@ -84,6 +84,10 @@
             android:name="com.mss.application.fragments.TimePickerFragment"
             android:label="@string/title_activity_time_picker_fragment" >
         </activity>
+        <activity
+            android:name="com.mss.application.fragments.OrderPickupItemsFragment"
+            android:label="@string/title_activity_order_pickup_items_fragment" >
+        </activity>
     </application>
 
 </manifest>

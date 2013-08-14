@@ -14,3 +14,14 @@
 1376337250776	Rename resource 'activity_date_picker_fragment.xml'
 1376337322148	Rename resource 'activity_time_picker_fragment.xml'
 1376337357572	Move compilation unit
+1376502392009	Copy compilation unit
+1376504612440	Copy compilation unit
+1376505041273	Copy compilation unit
+1376507025970	Rename resource 'fragment_order_pickup_item.xml'
+1376507063878	Move compilation unit
+1376507092132	Copy file
+1376507345984	Rename type 'ShippingAddressesAdapter'
+1376507355874	Rename type 'WarehousesAdapter'
+1376507367656	Rename type 'WarehousAdapter'
+1376507388280	Rename type 'PriceListsAdapter'
+1376507406819	Copy compilation unit

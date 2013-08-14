@@ -23,14 +23,14 @@ public class ShippingAddressesActivity extends SherlockFragmentActivity implemen
 	private static final int LOADER_ID_SHIPPING_ADDRESSES = 0;
 	
 	private Long mCustomerId;
-	ShippingAddressesAdapter mShippingAddressesAdapter;
+	ShippingAddressAdapter mShippingAddressesAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shipping_addresses);
 		try {
-			mShippingAddressesAdapter = new ShippingAddressesAdapter(this);
+			mShippingAddressesAdapter = new ShippingAddressAdapter(this);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

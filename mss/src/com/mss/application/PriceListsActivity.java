@@ -20,14 +20,14 @@ public class PriceListsActivity extends SherlockFragmentActivity implements OnPr
 	private static final String TAG = PriceListsActivity.class.getSimpleName();
 	private static final int LOADER_ID_PRICE_LISTS = 0;
 	
-	PriceListsAdapter mPriceListsAdapter;
+	PriceListAdapter mPriceListsAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_price_lists);
 		try {
-			mPriceListsAdapter = new PriceListsAdapter(this);
+			mPriceListsAdapter = new PriceListAdapter(this);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

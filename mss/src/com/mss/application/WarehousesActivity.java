@@ -20,14 +20,14 @@ public class WarehousesActivity extends SherlockFragmentActivity implements OnWa
 	private static final String TAG = WarehousesActivity.class.getSimpleName();
 	private static final int LOADER_ID_WAREHOUSES = 0;
 	
-	WarehousesAdapter mWarehousesAdapter;
+	WarehouseAdapter mWarehousesAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_warehouses);
 		try {
-			mWarehousesAdapter = new WarehousesAdapter(this);
+			mWarehousesAdapter = new WarehouseAdapter(this);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

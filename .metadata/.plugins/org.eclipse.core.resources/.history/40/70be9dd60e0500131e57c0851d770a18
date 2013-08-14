@@ -1,0 +1,7 @@
+package com.mss.infrastructure.data;
+
+
+public interface IRepository<TEntity extends IEntity> extends IReadonlyRepository<IEntity> {
+	void save(TEntity entity) throws Throwable;
+	void delete(TEntity entity) throws Throwable;
+}

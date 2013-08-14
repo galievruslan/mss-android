@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.mss.application.R;
-import com.mss.application.WarehousesAdapter;
+import com.mss.application.WarehouseAdapter;
 import com.mss.domain.models.Warehouse;
 
 public class WarehousesFragment extends SherlockListFragment {
@@ -39,7 +39,7 @@ public class WarehousesFragment extends SherlockListFragment {
 		View v = inflater.inflate(R.layout.fragment_warehouse_list, container, false);
 				
 	    try {
-			setListAdapter(new WarehousesAdapter(v.getContext()));
+			setListAdapter(new WarehouseAdapter(v.getContext()));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.mss.application.PriceListsAdapter;
+import com.mss.application.PriceListAdapter;
 import com.mss.application.R;
 import com.mss.domain.models.PriceList;
 
@@ -39,7 +39,7 @@ public class PriceListsFragment extends SherlockListFragment {
 		View v = inflater.inflate(R.layout.fragment_price_lists, container, false);
 				
 	    try {
-			setListAdapter(new PriceListsAdapter(v.getContext()));
+			setListAdapter(new PriceListAdapter(v.getContext()));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
