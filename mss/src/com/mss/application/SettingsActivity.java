@@ -2,7 +2,6 @@ package com.mss.application;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -46,6 +45,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 * device configuration dictates that a simplified, single-pane UI should be
 	 * shown.
 	 */
+	@SuppressWarnings("deprecation")
 	private void setupSimplePreferencesScreen() {
 		if (!isSimplePreferences(this)) {
 			return;
@@ -67,20 +67,6 @@ public class SettingsActivity extends PreferenceActivity {
 		bindPreferenceSummaryToValue(findPreference("last_sync"));
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public boolean onIsMultiPane() {
-		return isXLargeTablet(this) && !isSimplePreferences(this);
-	}
-
-	/**
-	 * Helper method to determine if the device has an extra-large screen. For
-	 * example, 10" tablets are extra-large.
-	 */
-	private static boolean isXLargeTablet(Context context) {
-		return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-	}
-
 	/**
 	 * Determines whether the simplified settings UI should be shown. This is
 	 * true if this is forced via {@link #ALWAYS_SIMPLE_PREFS}, or the device
@@ -90,8 +76,7 @@ public class SettingsActivity extends PreferenceActivity {
 	 */
 	private static boolean isSimplePreferences(Context context) {
 		return ALWAYS_SIMPLE_PREFS
-				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
-				|| !isXLargeTablet(context);
+				|| Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
 	}
 
 	/** {@inheritDoc} */

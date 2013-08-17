@@ -81,12 +81,8 @@
             android:label="@string/title_activity_warehouses" >
         </activity>
         <activity
-            android:name="com.mss.application.fragments.TimePickerFragment"
-            android:label="@string/title_activity_time_picker_fragment" >
-        </activity>
-        <activity
-            android:name="com.mss.application.fragments.OrderPickupItemsFragment"
-            android:label="@string/title_activity_order_pickup_items_fragment" >
+            android:name="com.mss.application.OrderItemPickupActivity"
+            android:label="@string/title_activity_order_item_pickup" >
         </activity>
     </application>
 

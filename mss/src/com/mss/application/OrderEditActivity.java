@@ -10,10 +10,8 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.ActionMode.Callback;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.OrderPickupItemsActivity.OnOrderPickupItemSelectedListener;
 import com.mss.application.fragments.DatePickerFragment;
-import com.mss.application.fragments.OrderListFragment;
-import com.mss.application.fragments.OrderPickupItemsFragment;
-import com.mss.application.fragments.OrderPickupItemsFragment.OnOrderPickupItemSelectedListener;
 import com.mss.application.fragments.TimePickerFragment;
 import com.mss.domain.models.Customer;
 import com.mss.domain.models.Order;
@@ -37,7 +35,6 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
@@ -63,7 +60,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
     	
 	private static final int LOADER_ID_ORDER_PICKUP_ITEMS = 0;
 
-	private ActionMode mActionMode;
     private TabHost mTabHost;
     private int mCurrentTab;
 
@@ -217,8 +213,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}	
 	
-	protected OrderPickupItemsFragment getOrderPickupItemsFragment() {
-		return (OrderPickupItemsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_pickup_item_list);
+	protected OrderPickupItemsActivity getOrderPickupItemsFragment() {
+		return (OrderPickupItemsActivity) getSupportFragmentManager().findFragmentById(R.id.fragment_order_pickup_item_list);
 	}
 
 	
@@ -237,9 +233,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
         tabSpec.setContent(tabContentId);
         return tabSpec;
     }
- 
-    
-    
+     
     @Override
     public void onTabChanged(String tabId) {
         if (TAB_GENERAL.equals(tabId)) {
@@ -328,6 +322,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		case R.id.menu_item_save:
 			if (mOrder != null)
 				try {
+					String note = mOrderNotes.getText().toString();
+					mOrder.setNote(note);
 					mOrderService.saveOrder(mOrder);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
@@ -439,9 +435,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.action_mode_list, menu);
-
-		mActionMode = mode;
-
 		return true;
 	}
 
@@ -453,20 +446,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	@Override
 	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_item_delete:
-			FragmentManager manager = getSupportFragmentManager();
-			OrderPickupItemsFragment frag = (OrderPickupItemsFragment) manager.findFragmentById(R.id.fragment_order_pickup_item_list);
-			OrderPickupItemAdapter adapter = (OrderPickupItemAdapter) frag.getListAdapter();
-			try {
-				//adapter.delete(getOrderPickupItemsFragment().);
-			} catch (Throwable e) {
-				Log.e(TAG, e.toString());
-			}
-
-			getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEMS, null, this);
-
-			mode.finish();
-			return true;
 		default:
 			return false;
 		}

@@ -25,3 +25,13 @@
 1376507367656	Rename type 'WarehousAdapter'
 1376507388280	Rename type 'PriceListsAdapter'
 1376507406819	Copy compilation unit
+1376591706969	Copy file
+1376594775796	Rename resource 'activity_order_item_pickup.xml'
+1376594888014	Rename type 'OrderItemPickupActivity'
+1376594893585	Move compilation unit
+1376596605704	Rename type 'OrderPickupItemsFragment'
+1376596610802	Move compilation unit
+1376596632884	Rename resource 'fragment_order_item_pickup.xml'
+1376596693272	Rename type 'OrderItemPickupFragment'
+1376596708592	Move compilation unit
+1376597721404	Copy file

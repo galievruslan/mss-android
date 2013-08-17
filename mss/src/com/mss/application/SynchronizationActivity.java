@@ -1,6 +1,8 @@
 package com.mss.application;
 
 import java.net.URISyntaxException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
@@ -173,7 +175,8 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				Date lastSyncDate = null;
 				try {
 					String lastSync = sharedPreferences.getString("last_sync", "");
-					lastSyncDate = new Date(Date.parse(lastSync));
+					DateFormat format = SimpleDateFormat.getTimeInstance();
+					lastSyncDate = format.parse(lastSync);
 				} catch (IllegalArgumentException e) {					
 					isFull = true;
 				}
@@ -411,7 +414,8 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 				
 				
 				SharedPreferences.Editor editor = sharedPreferences.edit();	
-				editor.putString("last_sync", serverTimestamp.toLocaleString());
+				DateFormat format = SimpleDateFormat.getTimeInstance();
+				editor.putString("last_sync", format.format(serverTimestamp));
 				editor.commit();
 				
 			} catch (WebConnectionException e) {

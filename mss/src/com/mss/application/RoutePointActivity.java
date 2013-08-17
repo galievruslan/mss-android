@@ -28,8 +28,6 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 	private RouteService mRouteService;
 	private RoutePointService mRoutePointService;
 	private RoutePointFragment mRoutePointFragment;
-
-	private int m_currentNavigationItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +103,7 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 
 			Intent upIntent = new Intent(this, RouteActivity.class);
 			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.from(this).addNextIntent(upIntent).startActivities();
+				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
 				finish();
 			} else {
 				NavUtils.navigateUpTo(this, upIntent);

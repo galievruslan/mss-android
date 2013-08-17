@@ -130,6 +130,10 @@ public class Order extends Entity {
 		return note;
 	}
 	
+	public void setNote(String note){
+		this.note = note;
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.UUID, columnName = Constants.Tables.Order.UID_FIELD)
 	private UUID uid;
 	

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.R"/>
-<fullyQualifiedTypeName name="android.R.id"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Customer"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.ShippingAddress"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmlitePriceListRepository"/>
@@ -28,8 +26,6 @@
 <fullyQualifiedTypeName name="com.mss.domain.services.OrderService"/>
 <fullyQualifiedTypeName name="android.app.TimePickerDialog"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
-<fullyQualifiedTypeName name="java.text.DateFormat"/>
-<fullyQualifiedTypeName name="android.text.format.DateFormat"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.TimePickerFragment"/>
 <fullyQualifiedTypeName name="android.widget.TimePicker"/>
 <fullyQualifiedTypeName name="android.app.TimePickerDialog.OnTimeSetListener"/>
@@ -55,9 +51,13 @@
 <fullyQualifiedTypeName name="java.lang.Iterable"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.OrderPickupItemsFragment.OnOrderPickupItemSelectedListener"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.OrderPickupItemsFragment"/>
 <fullyQualifiedTypeName name="com.mss.application.OrderPickupItemAdapter"/>
 <fullyQualifiedTypeName name="com.mss.application.OrderPickupItemsLoader"/>
+<fullyQualifiedTypeName name="android.text.format.DateFormat"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.text.DateFormat"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
+<fullyQualifiedTypeName name="com.mss.application.R.id"/>
 </qualifiedTypeNameHistroy>
