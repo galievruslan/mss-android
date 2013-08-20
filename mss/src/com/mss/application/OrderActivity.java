@@ -127,5 +127,5 @@ public class OrderActivity extends SherlockFragmentActivity {
 		default:
 			return false;
 		}
-	}	
+	}
 }

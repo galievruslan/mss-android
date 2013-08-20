@@ -32,9 +32,49 @@ public class OrderPickupItem implements IEntity {
 		return productName;
 	}
 	
+	private long uomId;
+	
+	public long getUoMId(){
+		return uomId;
+	}
+	
+	public void setUoMId(long uomId){
+		this.uomId = uomId;
+	}
+	
+	private double countInBase;
+	
+	public double getCountInBase(){
+		return countInBase;
+	}
+	
+	public void setCountInBase(double countInBase){
+		this.countInBase = countInBase;
+	}
+	
+	private String uomName;
+	
+	public String getUoMName(){
+		return uomName;
+	}
+	
+	public void setUoMName(String uomName){
+		this.uomName = uomName;
+	}
+	
+	private int count;
+	
+	public int getCount(){
+		return count;
+	}
+	
 	private BigDecimal price;
 	
 	public BigDecimal getPrice(){
 		return price;
+	}
+	
+	public BigDecimal getAmount(){
+		return price.multiply(new BigDecimal(count)).multiply(new BigDecimal(countInBase));
 	}
 }

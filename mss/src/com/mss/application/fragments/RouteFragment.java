@@ -38,8 +38,7 @@ public class RouteFragment extends SherlockListFragment {
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-			
+	public void onViewCreated(View view, Bundle savedInstanceState) {			
 		ListView listView = getListView();
 		listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 	}

@@ -350,8 +350,8 @@ public class OrdersActivity extends SherlockFragmentActivity implements OnOrderS
 		public void onOrderSelected(Order n, int position, long id) {
 			OrdersActivity activity = mWeakActivity.get();
 
-			Intent intent = new Intent(activity, OrderActivity.class);
-			intent.putExtra(activity.getString(R.string.key_id), id);
+			Intent intent = new Intent(activity, OrderEditActivity.class);
+			intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
 			activity.startActivityForResult(intent, OrderActivity.REQUEST_SHOW_ORDER);
 		}
 

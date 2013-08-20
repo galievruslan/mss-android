@@ -16,6 +16,15 @@ public class ProductUnitOfMeasure extends Entity {
 		this.countInBase = countInBase;
 	}
 	
+	public ProductUnitOfMeasure(long id, long productId, long unitOfMeasureId, String unitOfMeasureName, Boolean isBase, double countInBase)  {
+		super(id);
+		this.productId = productId;
+		this.unitOfMeasureId = unitOfMeasureId;
+		this.unitOfMeasureName = unitOfMeasureName;
+		this.isBase = isBase;
+		this.countInBase = countInBase;
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.ProductUnitOfMeasure.PRODUCT_FIELD)
 	private long productId;
 	
@@ -28,6 +37,12 @@ public class ProductUnitOfMeasure extends Entity {
 	
 	public long getUnitOfMeasureId(){
 		return unitOfMeasureId;
+	}
+	
+	private String unitOfMeasureName;
+	
+	public String getUnitOfMeasureName(){
+		return unitOfMeasureName;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BOOLEAN, columnName = Constants.Tables.ProductUnitOfMeasure.BASE_FIELD)

@@ -1,0 +1,12 @@
+package com.mss.infrastructure.ormlite;
+
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.mss.domain.models.ProductUnitOfMeasure;
+import com.mss.domain.models.ShippingAddress;
+
+public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericRepository<ProductUnitOfMeasure> {
+
+	public OrmliteProductUnitOfMeasureRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getProductUnitOfMeasureDao());
+	}
+}

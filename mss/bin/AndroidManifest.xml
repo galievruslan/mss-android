@@ -69,6 +69,10 @@
             android:label="@string/title_activity_orders" >
         </activity>
         <activity
+            android:name="com.mss.application.OrderActivity"
+            android:label="@string/title_activity_order" >
+        </activity>
+        <activity
             android:name="com.mss.application.OrderEditActivity"
             android:label="@string/title_activity_new_order" >
         </activity>
@@ -83,6 +87,10 @@
         <activity
             android:name="com.mss.application.OrderItemPickupActivity"
             android:label="@string/title_activity_order_item_pickup" >
+        </activity>
+        <activity
+            android:name="com.mss.application.ProductUomsActivity"
+            android:label="@string/title_activity_product_uoms" >
         </activity>
     </application>
 

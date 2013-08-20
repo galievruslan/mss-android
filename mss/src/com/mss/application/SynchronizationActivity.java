@@ -177,7 +177,7 @@ public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper>
 					String lastSync = sharedPreferences.getString("last_sync", "");
 					DateFormat format = SimpleDateFormat.getTimeInstance();
 					lastSyncDate = format.parse(lastSync);
-				} catch (IllegalArgumentException e) {					
+				} catch (Throwable e) {					
 					isFull = true;
 				}
 				

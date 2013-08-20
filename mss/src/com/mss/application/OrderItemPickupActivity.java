@@ -1,33 +1,21 @@
 package com.mss.application;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.R;
-import com.mss.domain.models.Customer;
 import com.mss.domain.models.OrderPickupItem;
-import com.mss.domain.models.RoutePoint;
-import com.mss.domain.models.ShippingAddress;
-import com.mss.domain.services.CustomerService;
-import com.mss.domain.services.RoutePointService;
-import com.mss.domain.services.ShippingAddressService;
+import com.mss.domain.models.ProductUnitOfMeasure;
+import com.mss.domain.services.ProductService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
-import com.mss.utils.IterableHelpers;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,15 +26,13 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 
 	public static final int REQUEST_EDIT_ORDER_PICKUP_ITEM = 5;
 	public static final String KEY_ID = "id";
-	public static final String KEY_PRODUCT_ID = "product_id";
-	public static final String KEY_UNIT_OF_MEASURE_ID = "unit_of_measure_id";
-	public static final String KEY_PRICE = "price";
-	public static final String KEY_COUNT = "count";
+	public static final String KEY_ORDER_PICKUP_ITEM_ID = "order_pickup_item_id";
 		
 	public static final int LOADER_ID_ORDER_PICKUP_ITEM = 0;
 	
 	static final int PICK_UNIT_OF_MEASURE_REQUEST = 1;
 
+	private long mOrderPickupItemId;
 	private OrderPickupItem mOrderPickupItem;
 	private TextView mDescription;
 	private TextView mPrice;
@@ -54,17 +40,14 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	private TextView mAmount;
 	private EditText mUnitOfMeasure;
 
-	private DatabaseHelper mHelper;
-	private RoutePointService mRoutePointService;
-	private CustomerService mCustomerService;
-	private ShippingAddressService mShippingAddressService;
+	private ProductService mProductService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_item_pickup);
 
-		long id = getIntent().getLongExtra(getString(R.string.key_id), RoutePointActivity.ROUTE_POINT_ID_NEW);
+		mOrderPickupItemId = getIntent().getLongExtra(KEY_ORDER_PICKUP_ITEM_ID, RoutePointActivity.ROUTE_POINT_ID_NEW);
 		
 		mDescription = (TextView) findViewById(R.id.description_text_view);
 		mPrice = (TextView) findViewById(R.id.price_text_view);
@@ -74,11 +57,20 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		mUnitOfMeasure.setOnClickListener(new TextView.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent customersActivity = new Intent(getApplicationContext(), CustomersActivity.class);
-		    	startActivityForResult(customersActivity, PICK_UNIT_OF_MEASURE_REQUEST);
+				Intent activity = new Intent(getApplicationContext(), ProductUomsActivity.class);
+				activity.putExtra("product_id", mOrderPickupItem.getProductId());
+		    	startActivityForResult(activity, PICK_UNIT_OF_MEASURE_REQUEST);
 			}
         });
 
+		DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			mProductService = new ProductService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		getSupportLoaderManager().initLoader(LOADER_ID_ORDER_PICKUP_ITEM, null, this);
+		
 		// Let's show the application icon as the Up button
 		if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -96,20 +88,14 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	    if (requestCode == PICK_UNIT_OF_MEASURE_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	long uomId = data.getLongExtra("unit_of_measure_id", 0l);
+	        	long uomId = data.getLongExtra("product_uom_id", 0l);
 	        	
 	        	try {
-	        		Customer customer = mCustomerService.getById(customerId);
-	        		mCustomer.setText(customer.getName());
-	        		Iterable<ShippingAddress> shippingAddresses = mShippingAddressService.findByCustomer(customer);
-					if (IterableHelpers.size(ShippingAddress.class, shippingAddresses) == 1) {
-						ShippingAddress shippingAddress = shippingAddresses.iterator().next();
-						mShippinAddress.setTag(shippingAddress.getId());
-			        	mShippinAddress.setText(shippingAddress.getName());
-					} else {	        		
-						mShippinAddress.setTag(0);
-			        	mShippinAddress.setText("");
-					}
+	        		ProductUnitOfMeasure productUnitOfMeasure = mProductService.getProductsUnitOfMeasure(uomId);
+	        		
+	        		mOrderPickupItem.setUoMId(productUnitOfMeasure.getUnitOfMeasureId());
+	        		mOrderPickupItem.setUoMName(productUnitOfMeasure.getUnitOfMeasureName());
+	        		mOrderPickupItem.setCountInBase(productUnitOfMeasure.getCountInBase());
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}	        	
@@ -129,22 +115,22 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 				NavUtils.navigateUpTo(this, upIntent);
 			}
 			return true;
-		case R.id.menu_item_save:
-			if (mRoutePoint == null && mRouteDate != null) {
-				ShippingAddress shippingAddress;
-				try {
-					shippingAddress = mShippingAddressService.getById((Long)mShippinAddress.getTag());
-					mRoutePointService.cratePoint(mRouteDate, shippingAddress);
-				} catch (Throwable e) {
-					Log.e(TAG, e.getMessage());
-				}			
-				
+		//case R.id.menu_item_save:
+			//if (mRoutePoint == null && mRouteDate != null) {
+			//	ShippingAddress shippingAddress;
+			//	try {
+			//		shippingAddress = mShippingAddressService.getById((Long)mShippinAddress.getTag());
+			//		mRoutePointService.cratePoint(mRouteDate, shippingAddress);
+			//	} catch (Throwable e) {
+			//		Log.e(TAG, e.getMessage());
+			//	}			
+			//	
 				//mRoutePoint = new RoutePoint(  mTitle.getText().toString(), mText.getText().toString());
-			} else {
+			//} else {
 				//mRoutePoint.setTitle(mTitle.getText().toString());
 				//mRoutePoint.setText(mText.getText().toString());
-			}
-			return true;
+			//}
+			//return true;
 		default:
 			return false;
 		}
@@ -156,7 +142,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		case LOADER_ID_ORDER_PICKUP_ITEM:
 
 			try {
-				return new OrderPickupItemLoader(this, routePointId);
+				return new OrderPickupItemLoader(this, mOrderPickupItemId);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -171,12 +157,11 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 				
 		if (mOrderPickupItem != null) {
 			try {
-				ShippingAddress shippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
-				Customer customer = mCustomerService.getById(shippingAddress.getCustomerId());
-				mCustomer.setTag(customer.getId());
-				mCustomer.setText(customer.getName());
-				mShippinAddress.setTag(shippingAddress.getAddress());
-				mShippinAddress.setText(shippingAddress.getAddress());
+				mDescription.setText(mOrderPickupItem.getProductName());
+				mPrice.setText(mOrderPickupItem.getPrice().toString());
+				mCount.setText(mOrderPickupItem.getCount());
+				mAmount.setText(mOrderPickupItem.getAmount().toString());
+				mUnitOfMeasure.setText(mOrderPickupItem.getUoMName());				
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}		

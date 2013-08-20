@@ -12,7 +12,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_route_point">Route Point</string>
     <string name="sub_title_activity_route_point">Route Point subtitle</string>
-    <string name="title_activity_orders">Orders</string>
+    <string name="title_activity_order">Order</string>
+    <string name="title_activity_orders">Orders</string>    
     <string name="sub_title_activity_orders">Orders subtitle</string>
     <string name="title_activity_customers">CustomersActivity</string>
     <string name="title_activity_shipping_addresses">ShippingAddressesActivity</string>
@@ -40,10 +41,13 @@
     <string name="label_order_price_list">Price list</string>
     <string name="label_order_warehouse">Warehouse</string>
     <string name="label_order_notes">Notes</string>
+    <string name="label_uom_base">Base</string>
+    <string name="label_uom_count_in_base">Count in base</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
     <string name="title_activity_order_pickup_items_fragment">OrderPickupItemsFragment</string>
     <string name="title_activity_order_item_pickup">OrderItemPickupActivity</string>
+    <string name="title_activity_product_uoms">ProductUomsActivity</string>
 
 </resources>

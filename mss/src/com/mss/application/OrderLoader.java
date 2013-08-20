@@ -17,9 +17,7 @@ public class OrderLoader extends AsyncTaskLoader<Order> {
 
 	public OrderLoader(Context ctx, long id) throws Throwable {
 		super(ctx);
-
 		mId = id;
-
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mOrderService = new OrderService(mHelper);
 	}
