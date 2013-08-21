@@ -1,19 +1,38 @@
 package com.mss.application;
 
+import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.application.tasks.*;
+import com.mss.infrastructure.ormlite.*;
+import com.mss.infrastructure.web.AuthenticationFailedException;
+import com.mss.infrastructure.web.WebConnectionException;
+import com.mss.infrastructure.web.WebServer;
+import com.mss.infrastructure.web.dtos.translators.CategoryTranslator;
+import com.mss.infrastructure.web.dtos.translators.CustomerTranslator;
+import com.mss.infrastructure.web.dtos.translators.PreferencesTranslator;
+import com.mss.infrastructure.web.dtos.translators.PriceListLineTranslator;
+import com.mss.infrastructure.web.dtos.translators.PriceListTranslator;
+import com.mss.infrastructure.web.dtos.translators.ProductTranslator;
+import com.mss.infrastructure.web.dtos.translators.ProductUnitOfMeasureTranslator;
+import com.mss.infrastructure.web.dtos.translators.RoutePointTemplateTranslator;
+import com.mss.infrastructure.web.dtos.translators.RouteTemplateTranslator;
+import com.mss.infrastructure.web.dtos.translators.ShippingAddressTranslator;
+import com.mss.infrastructure.web.dtos.translators.StatusTranslator;
+import com.mss.infrastructure.web.dtos.translators.UnitOfMeasureTranslator;
+import com.mss.infrastructure.web.dtos.translators.WarehouseTranslator;
+import com.mss.infrastructure.web.repositories.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask.Status;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,7 +41,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class SynchronizationActivity extends Activity {  
+public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper> {  
 
     // Values for email and password at the time of the login attempt.
     private boolean mFullSync;
@@ -32,6 +51,7 @@ public class SynchronizationActivity extends Activity {
     private TextView mLastSync;
     private View mSyncFormView;
     private View mSyncStatusView;
+    private TextView mSyncStatusMessageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +71,6 @@ public class SynchronizationActivity extends Activity {
         mSyncStatusView = findViewById(R.id.sync_status);
         mSyncStatusMessageView = (TextView) findViewById(R.id.sync_status_message);
 
-        
-        mSyncTask=(SynchronizationTask)getLastNonConfigurationInstance();
-        
-        if (mSyncTask == null) {
-        	mSyncTask = new SynchronizationTask(this);
-        }
-        else {
-        	mSyncTask.attach(this);
-        	setStatusMessage(mSyncTask.getLastStatusMessageResId());
-        	showProgress(true);
-        
-        	if (mSyncTask.getStatus() == Status.FINISHED) {
-        		setLastSyncTime(mSyncTask.getServerTimestamp());
-  	
-            	Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-            	startActivity(mainActivity);        	
-            	finish();
-        	}
-        }
-        
-        
         findViewById(R.id.synchronize_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
             	try {					
@@ -81,14 +80,6 @@ public class SynchronizationActivity extends Activity {
 				}
             }
         });
-    }
-    
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-    	if (mSyncTask != null)
-    		mSyncTask.detach();
-    	
-    	return(mSyncTask);
     }
 
     @Override
@@ -104,17 +95,10 @@ public class SynchronizationActivity extends Activity {
     	return sharedPreferences.getString("server_address", "");
     }
     
-    public Date getLastSyncTime() throws ParseException{
+    public Date getLastSyncDate() throws ParseException{
     	String lastSync = sharedPreferences.getString("last_sync", "");
 		DateFormat format = SimpleDateFormat.getTimeInstance();
 		return format.parse(lastSync);
-    }
-    
-    public void setLastSyncTime(Date time) {
-    	SharedPreferences.Editor editor = sharedPreferences.edit();	
-		DateFormat format = SimpleDateFormat.getTimeInstance();
-		editor.putString("last_sync", format.format(time));
-		editor.commit();
     }
     
     private SynchronizationTask mSyncTask = null;
@@ -122,12 +106,6 @@ public class SynchronizationActivity extends Activity {
     public void setSynchronizationTask(SynchronizationTask synchronizationTask) {
     	mSyncTask = synchronizationTask;
     } 
-    
-    private TextView mSyncStatusMessageView;
-    
-    public void setStatusMessage(Integer resId) {
-    	mSyncStatusMessageView.setText(resId);
-    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -135,12 +113,16 @@ public class SynchronizationActivity extends Activity {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptSync() {
+        if (mSyncTask != null) {
+            return;
+        }
+        
         mFullSyncView = (CheckBox)findViewById(R.id.full_synchronization_checkbox);
         mFullSync = mFullSyncView.isChecked();
 
         mSyncStatusMessageView.setText(R.string.sync_progress);
         showProgress(true);
-        mSyncTask.setFull(mFullSync);
+        mSyncTask = new SynchronizationTask(getHelper(), mFullSync);
         mSyncTask.execute((Void) null);
     }
 

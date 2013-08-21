@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.application.tasks.*;
+import com.mss.infrastructure.ormlite.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -59,7 +61,6 @@ public class SynchronizationActivity extends Activity {
         }
         else {
         	mSyncTask.attach(this);
-        	setStatusMessage(mSyncTask.getLastStatusMessageResId());
         	showProgress(true);
         
         	if (mSyncTask.getStatus() == Status.FINISHED) {

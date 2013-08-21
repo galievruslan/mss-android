@@ -5,12 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.mss.application.tasks.*;
+import com.mss.infrastructure.ormlite.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask.Status;
@@ -22,7 +23,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class SynchronizationActivity extends Activity {  
+public class SynchronizationActivity extends OrmLiteBaseActivity<DatabaseHelper> {  
 
     // Values for email and password at the time of the login attempt.
     private boolean mFullSync;
@@ -55,11 +56,10 @@ public class SynchronizationActivity extends Activity {
         mSyncTask=(SynchronizationTask)getLastNonConfigurationInstance();
         
         if (mSyncTask == null) {
-        	mSyncTask = new SynchronizationTask(this);
+        	mSyncTask = new SynchronizationTask(this, getHelper());
         }
         else {
         	mSyncTask.attach(this);
-        	setStatusMessage(mSyncTask.getLastStatusMessageResId());
         	showProgress(true);
         
         	if (mSyncTask.getStatus() == Status.FINISHED) {
