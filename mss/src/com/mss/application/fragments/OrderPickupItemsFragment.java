@@ -15,7 +15,6 @@ import com.mss.application.OrderItemPickupAdapter;
 import com.mss.application.OrderPickupItemsLoader;
 import com.mss.application.R;
 import com.mss.domain.models.OrderPickupItem;
-import com.mss.domain.models.RoutePoint;
 
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -51,12 +50,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		View v = inflater.inflate(R.layout.fragment_order_pickup_item_list, container, false);
 				
 		try {
-			mOrderPickupItemAdapter = new OrderItemPickupAdapter(v.getContext());
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-	    try {
+			mOrderPickupItemAdapter = new OrderItemPickupAdapter(v.getContext());			
 			setListAdapter(new OrderAdapter(v.getContext()));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
@@ -131,9 +125,9 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 			List<OrderPickupItem> data) {				
 		switch (loader.getId()) {
 		case LOADER_ID_ORDER_PICKUP_ITEMS:
-			OrderItemPickupAdapter orderPickupItemAdapter = mOrderPickupItemAdapter;
-			orderPickupItemAdapter.swapData(data);
-			setListAdapter(orderPickupItemAdapter);
+			mOrderPickupItemAdapter.swapData(data);
+			setListAdapter(mOrderPickupItemAdapter);
+			setSelection(mLastPosition);
 			break;
 		default:
 			break;

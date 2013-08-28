@@ -25,9 +25,9 @@ public class ProductUnitOfMeasure extends Dto {
 	}
 	
 	@SerializedName("count_in_base_unit")
-	private double countInBaseUnit;
+	private int countInBaseUnit;
 	
-	public double getCountInBase(){
+	public int getCountInBase(){
 		return countInBaseUnit;
 	}
 }

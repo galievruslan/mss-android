@@ -8,13 +8,15 @@
         android:id="@+id/label_shipping_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="some shipping date"
+        android:text="@string/example_shipping_date"
+        android:maxLines="1"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/label_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="some amount"
+        android:text="@string/example_amount"
+        android:maxLines="1"
         android:textSize="20sp" />
 </LinearLayout>

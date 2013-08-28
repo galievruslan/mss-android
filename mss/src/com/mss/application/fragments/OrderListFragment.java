@@ -1,9 +1,12 @@
 package com.mss.application.fragments;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +14,29 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.OrderAdapter;
+import com.mss.application.OrdersLoader;
 import com.mss.application.R;
 import com.mss.domain.models.Order;
 
-public class OrderListFragment extends SherlockListFragment {
+public class OrderListFragment extends SherlockListFragment implements Callback, LoaderCallbacks<List<Order>> {
 	private static final String TAG = OrderListFragment.class.getSimpleName();
 	
 	private final Set<OnOrderSelectedListener> mOnOrderSelectedListeners = 
 			new HashSet<OrderListFragment.OnOrderSelectedListener>(1);
 	
+	public static final String KEY_ROUTE_POINT_ID = "route_point_id";
+	
+	/// RoutePoints-specific Loader id
+	private static final int LOADER_ID_ORDERS = 0;
+	
 	private int mLastPosition;
+	private long mRoutePointId;
+	private OrderAdapter mOrderAdapter;
 	
 	public OrderListFragment() {
 		
@@ -40,12 +55,18 @@ public class OrderListFragment extends SherlockListFragment {
 		View v = inflater.inflate(R.layout.fragment_order_list, container, false);
 				
 	    try {
-			setListAdapter(new OrderAdapter(v.getContext()));
+	    	mOrderAdapter = new OrderAdapter(v.getContext());
+			setListAdapter(mOrderAdapter);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
-		}
+		}		
 
 	    return v;
+	}
+	
+	public void refresh(long routePointId) {
+		mRoutePointId = routePointId;
+		getLoaderManager().restartLoader(LOADER_ID_ORDERS, null, this);
 	}
 	
 	@Override
@@ -88,5 +109,62 @@ public class OrderListFragment extends SherlockListFragment {
 		 *            its id
 		 */
 		void onOrderSelected(Order order, int position, long id);
+	}
+
+	@Override
+	public Loader<List<Order>> onCreateLoader(int id, Bundle bundle) {
+		switch (id) {
+		case LOADER_ID_ORDERS:
+			try {
+				return new OrdersLoader(getActivity(), mRoutePointId);
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());
+			}
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public void onLoadFinished(Loader<List<Order>> loader, List<Order> data) {
+		switch (loader.getId()) {
+		case LOADER_ID_ORDERS:
+			OrderAdapter orderAdapter = mOrderAdapter;
+			orderAdapter.swapData(data);
+			setListAdapter(orderAdapter);
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<List<Order>> arg0) {
+		mOrderAdapter.swapData(null);
+		
+	}
+
+	@Override
+	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+		return false;
+	}
+
+	@Override
+	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+		switch (item.getItemId()) {
+		default:
+			return false;
+		}
+	}
+
+	@Override
+	public void onDestroyActionMode(ActionMode mode) {
+		mode = null;
+		
 	}
 }

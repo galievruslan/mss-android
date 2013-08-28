@@ -77,6 +77,7 @@ public class Constants {
 			public static final String ORDER_FIELD = "order_id";
 			public static final String PRODUCT_FIELD = "product_id";
 			public static final String UNIT_OF_MEASURE_FIELD = "unit_of_measure_id";
+			public static final String UNIT_OF_MEASURE_COUNT_FIELD = "unit_of_measure_count";
 			public static final String COUNT_FIELD = "count";
 			public static final String PRICE_FIELD = "price";
 			public static final String AMOUNT_FIELD = "amount";

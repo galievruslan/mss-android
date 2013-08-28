@@ -4,6 +4,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.RoutePointFragment;
+import com.mss.application.fragments.RoutePointFragment.OnOrderSelectedListener;
+import com.mss.domain.models.Order;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.services.RoutePointService;
@@ -16,7 +18,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
-public class RoutePointActivity extends SherlockFragmentActivity {
+public class RoutePointActivity extends SherlockFragmentActivity implements OnOrderSelectedListener {
 
 	private static final String TAG = RoutePointActivity.class.getSimpleName();
 	
@@ -61,16 +63,21 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 			}
 
 			mRoutePointFragment = RoutePointFragment.newInstance(routePoint);
-
-			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, mRoutePointFragment).commit();
-		}
-
-		// Let's show the application icon as the Up button
+			mRoutePointFragment.addOnOrderSelectedListener(this);
+			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, mRoutePointFragment).commit();						
+		}		
 		
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);;
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
 		}
+	}
+	
+	@Override
+	public void onOrderSelected(Order order, int position, long id) {
+		Intent intent = new Intent(this, OrderEditActivity.class);
+		intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
+		startActivity(intent);
 	}
 
 	@Override
@@ -134,20 +141,10 @@ public class RoutePointActivity extends SherlockFragmentActivity {
 				e.printStackTrace();
 			}
 			finish();
-		case R.id.menu_order_list:
-			if (mRoutePointFragment != null) {
-				RoutePoint routePoint = null;				
-				try {
-					routePoint = mRoutePointService.getById(mRoutePointFragment.getRoutePointId());
-				} catch (Throwable e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
-				
-				Intent i = new Intent(this, OrdersActivity.class);				
-				i.putExtra(OrdersActivity.KEY_ROUTE_POINT_ID, routePoint.getId());
-				startActivity(i);
-			}
+		case R.id.menu_item_add:
+			Intent intent = new Intent(this, OrderEditActivity.class);
+			intent.putExtra(OrderEditActivity.KEY_ROUTE_POINT_ID, mRoutePointFragment.getRoutePointId());
+			startActivityForResult(intent, 0);
 			return true;
 		default:
 			return false;

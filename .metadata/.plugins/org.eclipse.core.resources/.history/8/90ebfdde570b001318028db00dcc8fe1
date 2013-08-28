@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="example_name">Some name</string>
+    <string name="example_address">Some address</string>
+
+</resources>

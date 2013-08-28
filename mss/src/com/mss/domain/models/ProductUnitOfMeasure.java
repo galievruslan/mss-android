@@ -8,7 +8,7 @@ public class ProductUnitOfMeasure extends Entity {
 	
 	public ProductUnitOfMeasure() {}
 	
-	public ProductUnitOfMeasure(long id, long productId, long unitOfMeasureId, Boolean isBase, double countInBase)  {
+	public ProductUnitOfMeasure(long id, long productId, long unitOfMeasureId, Boolean isBase, int countInBase)  {
 		super(id);
 		this.productId = productId;
 		this.unitOfMeasureId = unitOfMeasureId;
@@ -16,7 +16,7 @@ public class ProductUnitOfMeasure extends Entity {
 		this.countInBase = countInBase;
 	}
 	
-	public ProductUnitOfMeasure(long id, long productId, long unitOfMeasureId, String unitOfMeasureName, Boolean isBase, double countInBase)  {
+	public ProductUnitOfMeasure(long id, long productId, long unitOfMeasureId, String unitOfMeasureName, Boolean isBase, int countInBase)  {
 		super(id);
 		this.productId = productId;
 		this.unitOfMeasureId = unitOfMeasureId;
@@ -52,10 +52,10 @@ public class ProductUnitOfMeasure extends Entity {
 		return isBase;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.ProductUnitOfMeasure.COUNT_IN_BASE_FIELD)
-	private double countInBase;
+	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.ProductUnitOfMeasure.COUNT_IN_BASE_FIELD)
+	private int countInBase;
 	
-	public double getCountInBase(){
+	public int getCountInBase(){
 		return countInBase;
 	}
 }

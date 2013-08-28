@@ -1,0 +1,102 @@
+package com.mss.application.fragments;
+
+import com.actionbarsherlock.app.SherlockFragment;
+import com.mss.application.R;
+import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
+import com.mss.domain.models.Order;
+import com.mss.domain.models.RoutePoint;
+
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class RoutePointFragment extends SherlockFragment implements OnOrderSelectedListener, LoaderCallbacks<RoutePoint> {
+
+	private RoutePoint mRoutePoint;
+	private TextView mName;
+	private TextView mAddress;
+
+	public static final int LOADER_ID_ROUTE_POINT = 0;
+	
+	/**
+	 * We have to provide a public empty constructor because the framework needs it
+	 */
+	public RoutePointFragment() {
+
+	}
+
+	/**
+	 * We prefer to instantiate our {@link Fragment Fragments} using a factory method
+	 * 
+	 * @param note
+	 *            the {@link Note} instance
+	 * @return the actual {@link NoteFragment} instance
+	 */
+	public static RoutePointFragment newInstance(RoutePoint routePoint) {
+		RoutePointFragment fragment = new RoutePointFragment();
+		fragment.mRoutePoint = routePoint;
+
+		return fragment;
+	}
+	
+	protected RoutePointsOrdersFragment getRoutePointsOrdersFragment() {
+		return (RoutePointsOrdersFragment) getFragmentManager().findFragmentById(R.id.fragment_order_list);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		// Remember to call this method to enable onCreateOptionsMenu callback
+
+		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		View v = inflater.inflate(R.layout.fragment_route_point, null);
+
+		getLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);		
+		RoutePointsOrdersFragment fragment = getRoutePointsOrdersFragment();		
+		fragment.addOnOrderSelectedListener(this);
+
+		return v;
+	}
+	
+	
+
+	@Override
+	public void onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu,
+			com.actionbarsherlock.view.MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_route_point, menu);
+	}
+
+	@Override
+	public Loader<RoutePoint> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<RoutePoint> arg0, RoutePoint arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoaderReset(Loader<RoutePoint> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onOrderSelected(Order order, int position, long id) {
+		// TODO Auto-generated method stub
+		
+	}
+}

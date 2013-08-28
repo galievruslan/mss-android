@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:orientation="vertical">
+    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+		android:weightSum="4">
 
-    <TextView
-        android:id="@+id/label_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Some name"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="@string/example_description"
+            android:minLines="2"
+            android:maxLines="2"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/label_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0.00"
-        android:textSize="20sp" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/label_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:maxLines="1"
+                android:text="@string/example_price"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/label_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/example_count"
+                android:textSize="20sp"
+				android:maxLines = "1"/>
+
+        </LinearLayout>
+
+    </TableRow>

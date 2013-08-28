@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_route_point"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"        
+    tools:context=".RoutePointFragment"
+    android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/route_point_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_name"
+            android:text="some name" />
+
+        <TextView
+            android:id="@+id/route_point_address_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_address"
+            android:text="some address" />
+
+    </LinearLayout>

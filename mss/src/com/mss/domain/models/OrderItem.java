@@ -9,6 +9,11 @@ public class OrderItem extends Entity {
 	
 	public OrderItem() {}
 	
+	public OrderItem(long orderId, long productId) {
+		this.orderId = orderId;
+		this.productId = productId;
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.OrderItem.ORDER_FIELD)
 	private long orderId;
 	
@@ -30,11 +35,30 @@ public class OrderItem extends Entity {
 		return unitOfMeasureId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.FLOAT, columnName = Constants.Tables.OrderItem.COUNT_FIELD)
-	private float count;
+	public void setUnitOfMeasureId(long unitOfMeasureId) {
+		this.unitOfMeasureId = unitOfMeasureId;
+	}
 	
-	public float getCount(){
+	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.OrderItem.UNIT_OF_MEASURE_COUNT_FIELD)
+	private int countInUnitOfMeasure;
+	
+	public int getCountInUnitOfMeasure(){
+		return countInUnitOfMeasure;
+	}
+	
+	public void setCountInUnitOfMeasure(int countInUnitOfMeasure) {
+		this.countInUnitOfMeasure = countInUnitOfMeasure;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.OrderItem.COUNT_FIELD)
+	private int count;
+	
+	public int getCount(){
 		return count;
+	}
+	
+	public void setCount(int count){
+		this.count = count;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.OrderItem.PRICE_FIELD)
@@ -44,10 +68,11 @@ public class OrderItem extends Entity {
 		return price;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.OrderItem.AMOUNT_FIELD)
-	private BigDecimal amount;
+	public void setPrice(BigDecimal price){
+		this.price = price;
+	}
 	
 	public BigDecimal getAmount(){
-		return amount;
+		return new BigDecimal(count * countInUnitOfMeasure).multiply(price);
 	}
 }

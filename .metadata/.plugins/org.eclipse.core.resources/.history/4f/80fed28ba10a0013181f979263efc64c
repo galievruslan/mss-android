@@ -1,0 +1,162 @@
+package com.mss.application;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.fragments.RoutePointFragment;
+import com.mss.application.fragments.RoutePointsOrdersFragment;
+import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
+import com.mss.domain.models.Order;
+import com.mss.domain.models.Route;
+import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.RoutePointService;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+
+import android.os.Bundle;
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.util.Log;
+import android.widget.EditText;
+
+public class RoutePointActivity extends SherlockFragmentActivity implements OnOrderSelectedListener, LoaderCallbacks<RoutePoint> {
+
+	private static final String TAG = RoutePointActivity.class.getSimpleName();
+	
+	public static final int REQUEST_SHOW_ROUTE_POINT = 1;
+	public static final long ROUTE_POINT_ID_NEW = 0;
+	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
+	
+	private RouteService mRouteService;
+	private RoutePointService mRoutePointService;
+	
+	private Long mRoutePointId;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		mRoutePointId = getIntent().getLongExtra(getString(R.string.key_id), ROUTE_POINT_ID_NEW);
+		
+		DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			mRouteService = new RouteService(mHelper);
+			mRoutePointService = new RoutePointService(mHelper);
+		}
+		catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
+		// Let's show the application icon as the Up button		
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);;
+			getSupportActionBar().setDisplayShowTitleEnabled(false);
+		}
+	}
+	
+	protected RoutePointFragment getRoutePointFragment() {
+		return (RoutePointFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_route_point);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (requestCode) {
+		case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:
+			
+			if (resultCode == RESULT_OK) {
+				getRoutePointFragment().refresh();				
+			}
+
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// ActionBar's Home button clicked
+
+			Intent upIntent = new Intent(this, RouteActivity.class);
+			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
+				finish();
+			} else {
+				NavUtils.navigateUpTo(this, upIntent);
+			}
+			return true;
+		case R.id.menu_item_edit:
+				Route route = null;
+				RoutePoint routePoint = null;
+				
+				routePoint = mRoutePointService.getById(mRoutePointId);
+				route = mRouteService.getById(routePoint.getRouteId());
+				
+				Intent i = new Intent(this, RoutePointEditActivity.class);
+				i.putExtra(getString(R.string.key_id), mRoutePointId);
+				i.putExtra(RoutePointEditActivity.KEY_ROUTE_DATE, route.getDate().toString());
+				startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
+			return true;
+		case R.id.menu_item_delete:
+			try {
+				mRoutePointService.deletePoint(mRoutePointService.getById(mRoutePointId));
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			finish();
+		case R.id.menu_item_add:
+			RoutePoint routePoint = null;		
+			routePoint = mRoutePointService.getById(mRoutePointId);
+				
+			Intent intent = new Intent(this, OrderEditActivity.class);
+			intent.putExtra(OrderEditActivity.KEY_ROUTE_POINT_ID, routePoint.getId());
+			startActivityForResult(intent, 0);
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	@Override
+	public void onOrderSelected(Order order, int position, long id) {
+		Intent intent = new Intent(getApplicationContext(), OrderEditActivity.class);
+		intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
+		startActivity(intent);
+	}
+
+	@Override
+	public Loader<RoutePoint> onCreateLoader(int id, Bundle bundle) {
+		switch (id) {
+		case LOADER_ID_ROUTE_POINT:
+			try {
+				return new RoutePointLoader(this, mRoutePointId);
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());
+			}
+		default:
+			return null;
+		}
+	}
+
+	@Override
+	public void onLoadFinished(Loader<RoutePoint> loader, RoutePoint data) {
+		mRoutePoint = data;
+		mName.setText(mRoutePoint.getShippingAddressName());
+		mAddress.setText(mRoutePoint.getShippingAddressValue());
+		
+		if (mRoutePoint.getId() != 0) {
+			getRoutePointsOrdersFragment().refresh(mRoutePoint.getId());
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<RoutePoint> arg0) {
+		mRoutePoint = null;
+	}
+}

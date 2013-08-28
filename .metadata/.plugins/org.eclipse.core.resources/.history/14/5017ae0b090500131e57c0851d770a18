@@ -1,5 +1,0 @@
-package com.mss.domain.models;
-
-public class OrderPickupItem {
-
-}

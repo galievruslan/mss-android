@@ -39,7 +39,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 				            			Long.parseLong(resultColumns[2]),
 				            			resultColumns[3],
 				                		isBase,
-				                		Double.parseDouble(resultColumns[4]));
+				                		Integer.parseInt(resultColumns[4]));
 				        }
 				    });
 		
@@ -63,7 +63,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 				            			Long.parseLong(resultColumns[2]),
 				            			resultColumns[3],
 				                		isBase,
-				                		Double.parseDouble(resultColumns[4]));
+				                		Integer.parseInt(resultColumns[4]));
 				        }
 				    });
 		
@@ -86,7 +86,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 				            			Long.parseLong(resultColumns[2]),
 				            			resultColumns[3],
 				            			isBase,
-				                		Double.parseDouble(resultColumns[4]));
+				            			Integer.parseInt(resultColumns[4]));
 				        }
 				    });
 		

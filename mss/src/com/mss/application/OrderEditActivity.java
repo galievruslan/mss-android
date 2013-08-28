@@ -13,6 +13,7 @@ import com.mss.domain.models.Customer;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.PriceList;
+import com.mss.domain.models.ProductUnitOfMeasure;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
@@ -20,6 +21,7 @@ import com.mss.domain.models.Warehouse;
 import com.mss.domain.services.CustomerService;
 import com.mss.domain.services.OrderService;
 import com.mss.domain.services.PriceListService;
+import com.mss.domain.services.ProductService;
 import com.mss.domain.services.RoutePointService;
 import com.mss.domain.services.RouteService;
 import com.mss.domain.services.ShippingAddressService;
@@ -31,8 +33,6 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -66,10 +66,15 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	static final int PICK_PRICE_LIST_REQUEST = 1;
 	static final int PICK_WAREHOUSE_REQUEST = 2;
 	static final int PICK_PRODUCTS_REQUEST = 3;
+	static final int REQUEST_EDIT_ORDER_PICKUP_ITEM = 4;
 
 	private Long mOrderId;
 	private Long mRoutePointId;
 	private Order mOrder;
+	
+	private Warehouse mWarehouse;
+	private PriceList mPriceList;
+	
 	private EditText mOrderDate;
 	private EditText mOrderShippingDate;
 	private EditText mOrderShippingTime;
@@ -87,12 +92,16 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	private PriceListService mPriceListService;
 	private WarehouseService mWarehouseService;
 	private OrderService mOrderService;
-	
+	private ProductService mProductService;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order_edit);
 		
+		if (savedInstanceState == null || !savedInstanceState.getBoolean("restart", false))
+			OrderEditContext.Init();
+				
 		mOrderDate = (EditText)findViewById(R.id.order_date_edit_text);
 		mOrderShippingDate = (EditText)findViewById(R.id.order_shipping_date_edit_text);
 		mOrderShippingTime = (EditText)findViewById(R.id.order_shipping_time_edit_text);
@@ -117,6 +126,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			mPriceListService = new PriceListService(mHelper);
 			mWarehouseService = new WarehouseService(mHelper);
 			mOrderService = new OrderService(mHelper);
+			mProductService = new ProductService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -163,7 +173,15 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	protected OrderPickupItemsFragment getOrderPickupItemsFragment() {
 		return (OrderPickupItemsFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_pickup_item_list);
 	}
-
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		  // Save UI state changes to the savedInstanceState.
+		  // This bundle will be passed to onCreate if the process is
+		  // killed and restarted.
+		  savedInstanceState.putBoolean("restart", true);
+	}
 	
 	private void setupTabs() {
         mTabHost.setup(); // you must call this before adding your tabs!
@@ -212,13 +230,11 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        	long priceListId = data.getLongExtra("price_list_id", 0l);
 	        		        	
 	        	try {
-	        		PriceList priceList = mPriceListService.getById(priceListId);
-	        		mOrder.setPriceList(priceList);
-	        		mOrderPriceList.setText(mOrder.getPriceListName());
-	        		getOrderPickupItemsFragment().refresh(mOrder.getPriceListId());	        		
+	        		mPriceList = mPriceListService.getById(priceListId);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}	        	
+	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	        }
 	    } else if (requestCode == PICK_WAREHOUSE_REQUEST) {
 	        // Make sure the request was successful
@@ -226,12 +242,37 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        	long warehouseId = data.getLongExtra("warehouse_id", 0l);
 	        		        		        		        	
 	        	try {
-	        		Warehouse warehouse = mWarehouseService.getById(warehouseId);
-	        		mOrder.setWarehouse(warehouse);
-	        		mOrderWarehouse.setText(mOrder.getWarehouseName());
+	        		mWarehouse = mWarehouseService.getById(warehouseId);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
+	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
+	        }
+	    } else if (requestCode == REQUEST_EDIT_ORDER_PICKUP_ITEM) {
+	    	if (resultCode == RESULT_OK) {
+	        	long orderPickupItemId = data.getLongExtra("order_pickup_item_id", 0l);
+	        	long orderPickupItemUomId = data.getLongExtra("order_pickup_item_uom_id", 0l);
+	        	int orderPickupItemUomCount = data.getIntExtra("order_pickup_item_count", 0);
+	        		        	
+	        	OrderPickupItem item;
+	        	if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItemId)) {
+	        		item = OrderEditContext.getPickedUpItems().get(orderPickupItemId);
+	        		if (orderPickupItemUomCount == 0) {
+	        			OrderEditContext.getPickedUpItems().remove(orderPickupItemId);
+	        		}
+	        	} else {
+	        		item = mOrderService.getOrderPickupItemById(orderPickupItemId);
+	        		OrderEditContext.getPickedUpItems().put(orderPickupItemId, item);
+	        	}
+	        		
+	        	if (orderPickupItemUomCount != 0) { 
+	        		ProductUnitOfMeasure productUnitOfMeasure = 
+	        				mProductService.getProductsUnitOfMeasure(orderPickupItemUomId);
+	        		item.setProductUnitOfMeasure(productUnitOfMeasure);
+	        		item.setCount(orderPickupItemUomCount);
+	        	}
+	        	
+	        	getOrderPickupItemsFragment().refresh(mOrder.getPriceListId());
 	        }
 	    }
 	}
@@ -240,22 +281,14 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent upIntent = new Intent(this, RoutePointActivity.class);
-			upIntent.putExtra(getString(R.string.key_id), mRoutePointId);
-			
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
-				finish();
-			} else {
-				NavUtils.navigateUpTo(this, upIntent);
-			}
+			finish();
 			return true;
 		case R.id.menu_item_save:
 			if (mOrder != null)
 				try {
 					String note = mOrderNotes.getText().toString();
 					mOrder.setNote(note);
-					mOrderService.saveOrder(mOrder);
+					mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
@@ -265,15 +298,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		default:
 			return false;
 		}
-	}
-
-	public void onRoutePointSaved(RoutePoint routePoint) {
-		try {
-			mRoutePointService.savePoint(routePoint);
-		} catch (Throwable e) {
-			Log.e(TAG, "Unable to create or update route point: " + routePoint);
-		}
-		finish();
 	}
 	
 	private void showDatePicker() {
@@ -335,8 +359,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			
 			mOrder.setShippingDate(c.getTime());
 
-			mOrderShippingTime.setText(DateFormat.getTimeFormat(getApplicationContext()).format(mOrder.getShippingDate()));
-			
+			mOrderShippingTime.setText(DateFormat.getTimeFormat(getApplicationContext()).format(mOrder.getShippingDate()));			
 		}
 	};
 
@@ -345,7 +368,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			int position, long id) {
 		Intent intent = new Intent(getApplicationContext(), OrderItemPickupActivity.class);
 		intent.putExtra(OrderItemPickupActivity.KEY_ORDER_PICKUP_ITEM_ID, id);
-		startActivityForResult(intent, OrderItemPickupActivity.REQUEST_EDIT_ORDER_PICKUP_ITEM);
+		startActivityForResult(intent, REQUEST_EDIT_ORDER_PICKUP_ITEM);
 	}
 
 	@Override
@@ -364,7 +387,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 
 	@Override
 	public void onLoadFinished(Loader<Order> orders, Order order) {
-		mOrder = order;
+		if (order != null)
+			mOrder = order;
 		
 		java.text.DateFormat dateFormat = DateFormat.getDateFormat(getApplicationContext());
 		java.text.DateFormat timeFormat = DateFormat.getTimeFormat(getApplicationContext());
@@ -378,7 +402,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 				PriceList priceList = mPriceListService.getDefault();
 				Warehouse warehouse = mWarehouseService.getDefault();
 				
-				mOrder = mOrderService.createOrder(route, routePoint);
 				mOrder.setShippingDate(mOrder.getOrderDate());
 				mOrder.setCustomer(customer);
 				mOrder.setShippingAddress(shippingAddress);
@@ -391,7 +414,13 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}			
-		} 
+		}
+		
+		if (mPriceList != null)
+			mOrder.setPriceList(mPriceList);
+			
+		if(mWarehouse != null)
+			mOrder.setWarehouse(mWarehouse);
 
 		mOrderDate.setText(dateFormat.format(mOrder.getOrderDate()));
 		mOrderShippingDate.setText(dateFormat.format(mOrder.getShippingDate()));
@@ -400,7 +429,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		mOrderShippingAddress.setText(mOrder.getShippingAddressName());
 		mOrderPriceList.setText(mOrder.getPriceListName());
 		mOrderWarehouse.setText(mOrder.getWarehouseName());		
-		
+			
 		if (mOrder.getPriceListId() != 0) {
 			getOrderPickupItemsFragment().refresh(mOrder.getPriceListId());
 		}

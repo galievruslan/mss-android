@@ -43,6 +43,7 @@
     <string name="label_order_notes">Notes</string>
     <string name="label_uom_base">Base</string>
     <string name="label_uom_count_in_base">Count in base</string>
+    <string name="label_orders">Orders</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>

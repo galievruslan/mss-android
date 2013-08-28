@@ -6,11 +6,15 @@ import com.mss.infrastructure.data.IEntity;
 
 public class OrderPickupItem implements IEntity {
 	
-	public OrderPickupItem(long id, long productId, String productName, BigDecimal price) {
+	public OrderPickupItem(long id, long productId, String productName, BigDecimal price, long productUomId, long uomId, String uomName, int countInBase) {
 		this.id = id;
 		this.productId = productId;
 		this.productName = productName;
 		this.price = price;
+		this.productUomId = productUomId;
+		this.uomId = uomId;
+		this.uomName = uomName;
+		this.countInBase = countInBase;
 	}
 	
 	private long id;
@@ -32,24 +36,22 @@ public class OrderPickupItem implements IEntity {
 		return productName;
 	}
 	
+	private long productUomId;
+	
+	public long getProductUoMId(){
+		return productUomId;
+	}
+	
 	private long uomId;
 	
 	public long getUoMId(){
 		return uomId;
 	}
 	
-	public void setUoMId(long uomId){
-		this.uomId = uomId;
-	}
+	private int countInBase;
 	
-	private double countInBase;
-	
-	public double getCountInBase(){
+	public int getCountInBase(){
 		return countInBase;
-	}
-	
-	public void setCountInBase(double countInBase){
-		this.countInBase = countInBase;
 	}
 	
 	private String uomName;
@@ -58,23 +60,34 @@ public class OrderPickupItem implements IEntity {
 		return uomName;
 	}
 	
-	public void setUoMName(String uomName){
-		this.uomName = uomName;
-	}
-	
 	private int count;
 	
 	public int getCount(){
 		return count;
 	}
 	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 	private BigDecimal price;
 	
-	public BigDecimal getPrice(){
+	public BigDecimal getItemPrice(){
 		return price;
+	}
+	
+	public BigDecimal getPrice(){
+		return price.multiply(new BigDecimal(countInBase));
 	}
 	
 	public BigDecimal getAmount(){
 		return price.multiply(new BigDecimal(count)).multiply(new BigDecimal(countInBase));
+	}
+	
+	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){
+		productUomId = productUnitOfMeasure.getId();
+		uomId = productUnitOfMeasure.getUnitOfMeasureId();
+		uomName = productUnitOfMeasure.getUnitOfMeasureName();
+		countInBase = productUnitOfMeasure.getCountInBase();
 	}
 }
