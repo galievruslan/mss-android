@@ -1,0 +1,93 @@
+package com.mss.domain.models;
+
+import java.math.BigDecimal;
+
+import com.mss.infrastructure.data.IEntity;
+
+public class OrderPickedUpItem implements IEntity {
+	
+	public OrderPickedUpItem(long id, long productId, String productName, BigDecimal price, long productUomId, long uomId, String uomName, int countInBase) {
+		this.id = id;
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.productUomId = productUomId;
+		this.uomId = uomId;
+		this.uomName = uomName;
+		this.countInBase = countInBase;
+	}
+	
+	private long id;
+	
+	@Override
+	public long getId() {
+		return id;
+	}	
+	
+	private long productId;
+	
+	public long getProductId(){
+		return productId;
+	}
+	
+	private String productName;
+	
+	public String getProductName(){
+		return productName;
+	}
+	
+	private long productUomId;
+	
+	public long getProductUoMId(){
+		return productUomId;
+	}
+	
+	private long uomId;
+	
+	public long getUoMId(){
+		return uomId;
+	}
+	
+	private int countInBase;
+	
+	public int getCountInBase(){
+		return countInBase;
+	}
+	
+	private String uomName;
+	
+	public String getUoMName(){
+		return uomName;
+	}
+	
+	private int count;
+	
+	public int getCount(){
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	private BigDecimal price;
+	
+	public BigDecimal getItemPrice(){
+		return price;
+	}
+	
+	public BigDecimal getPrice(){
+		return price.multiply(new BigDecimal(countInBase));
+	}
+	
+	public BigDecimal getAmount(){
+		return price.multiply(new BigDecimal(count)).multiply(new BigDecimal(countInBase));
+	}
+	
+	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){
+		productUomId = productUnitOfMeasure.getId();
+		uomId = productUnitOfMeasure.getUnitOfMeasureId();
+		uomName = productUnitOfMeasure.getUnitOfMeasureName();
+		countInBase = productUnitOfMeasure.getCountInBase();
+	}
+}

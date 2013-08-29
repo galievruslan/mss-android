@@ -50,7 +50,6 @@ public class SynchronizationActivity extends Activity {
         mSyncFormView = findViewById(R.id.sync_form);
         mSyncStatusView = findViewById(R.id.sync_status);
         mSyncStatusMessageView = (TextView) findViewById(R.id.sync_status_message);
-
         
         mSyncTask=(SynchronizationTask)getLastNonConfigurationInstance();
         
@@ -70,7 +69,6 @@ public class SynchronizationActivity extends Activity {
             	finish();
         	}
         }
-        
         
         findViewById(R.id.synchronize_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -111,6 +109,9 @@ public class SynchronizationActivity extends Activity {
     }
     
     public void setLastSyncTime(Date time) {
+    	if (time == null)
+    		return;
+    	
     	SharedPreferences.Editor editor = sharedPreferences.edit();	
 		DateFormat format = SimpleDateFormat.getTimeInstance();
 		editor.putString("last_sync", format.format(time));

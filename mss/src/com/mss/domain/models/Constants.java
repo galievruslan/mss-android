@@ -76,7 +76,10 @@ public class Constants {
 			public static final String TABLE_NAME = "order_item";
 			public static final String ORDER_FIELD = "order_id";
 			public static final String PRODUCT_FIELD = "product_id";
+			public static final String PRODUCT_NAME_FIELD = "product_name";
+			public static final String PRODUCT_UNIT_OF_MEASURE_FIELD = "product_unit_of_measure_id";
 			public static final String UNIT_OF_MEASURE_FIELD = "unit_of_measure_id";
+			public static final String UNIT_OF_MEASURE_NAME_FIELD = "unit_of_measure_name";
 			public static final String UNIT_OF_MEASURE_COUNT_FIELD = "unit_of_measure_count";
 			public static final String COUNT_FIELD = "count";
 			public static final String PRICE_FIELD = "price";

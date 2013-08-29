@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderItem;
+import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
@@ -64,20 +65,46 @@ public class OrderService {
 		}
 	}
 	
+	public Iterable<OrderPickedUpItem> getOrderPickedUpItems(long orderId) {
+		try {			
+			Iterable<OrderItem> orderItems = orderItemRepo.findByOrderId(orderId);
+			ArrayList<OrderPickedUpItem> orderPickedUpItems = new ArrayList<OrderPickedUpItem>();
+			for (OrderItem orderItem : orderItems) {
+				orderPickedUpItems.add(
+						new OrderPickedUpItem(
+								orderItem.getProductId(),
+								orderItem.getProductName(), 
+								orderItem.getPrice(),
+								orderItem.getCount(), 
+								orderItem.getProductUnitOfMeasureId(),
+								orderItem.getUnitOfMeasureId(),
+								orderItem.getUnitOfMeasureName(),
+								orderItem.getCountInUnitOfMeasure()));
+			}	
+			
+			return orderPickedUpItems;
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+			return new ArrayList<OrderPickedUpItem>();
+		}
+	}
+	
 	public Order createOrder(Route route, RoutePoint routePoint) {
 		Order order = new Order(route, routePoint);		
 		return order;
 	}
 	
-	public void saveOrder(Order order, Iterable<OrderPickupItem> pickedUpItems){
+	public void saveOrder(Order order, Iterable<OrderPickedUpItem> pickedUpItems){
 		try {
 			orderRepo.save(order);
 			Iterable<OrderItem> items = orderItemRepo.findByOrderId(order.getId());
 			for (OrderItem orderItem : items) {
 				boolean found = false;				
-				for (OrderPickupItem pickedUpItem : pickedUpItems) {
-					if (orderItem.getProductId() == pickedUpItem.getProductId()) {
+				for (OrderPickedUpItem pickedUpItem : pickedUpItems) {
+					if (orderItem.getProductId() == pickedUpItem.getId()) {
+						orderItem.setProductUnitOfMeasureId(pickedUpItem.getProductUoMId());
 						orderItem.setUnitOfMeasureId(pickedUpItem.getUoMId());
+						orderItem.setUnitOfMeasureName(pickedUpItem.getUoMName());
 						orderItem.setCountInUnitOfMeasure(pickedUpItem.getCountInBase());
 						orderItem.setCount(pickedUpItem.getCount());
 						orderItem.setPrice(pickedUpItem.getItemPrice());
@@ -92,21 +119,25 @@ public class OrderService {
 					orderItemRepo.delete(orderItem);
 			}	
 			
-			for (OrderPickupItem pickedUpItem : pickedUpItems) {				
+			for (OrderPickedUpItem pickedUpItem : pickedUpItems) {				
 				boolean found = false;
 				for (OrderItem orderItem : items) {
-					if (orderItem.getProductId() == pickedUpItem.getProductId()) {
+					if (orderItem.getProductId() == pickedUpItem.getId()) {
 						found = true;						
 						break;
 					}
 				}
 				
 				if (!found) {
-					OrderItem newOrderItem = new OrderItem(order.getId(), pickedUpItem.getProductId());
-					newOrderItem.setUnitOfMeasureId(pickedUpItem.getUoMId());
-					newOrderItem.setCountInUnitOfMeasure(pickedUpItem.getCountInBase());
-					newOrderItem.setCount(pickedUpItem.getCount());
+					OrderItem newOrderItem = new OrderItem(order.getId());
+					newOrderItem.setProductId(pickedUpItem.getId());
+					newOrderItem.setProductName(pickedUpItem.getName());
+					newOrderItem.setProductUnitOfMeasureId(pickedUpItem.getProductUoMId());
 					newOrderItem.setPrice(pickedUpItem.getItemPrice());
+					newOrderItem.setCount(pickedUpItem.getCount());					
+					newOrderItem.setUnitOfMeasureId(pickedUpItem.getUoMId());
+					newOrderItem.setUnitOfMeasureName(pickedUpItem.getUoMName());
+					newOrderItem.setCountInUnitOfMeasure(pickedUpItem.getCountInBase());
 					orderItemRepo.save(newOrderItem);		
 				}
 			}

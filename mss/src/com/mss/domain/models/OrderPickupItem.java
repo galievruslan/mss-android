@@ -60,16 +60,6 @@ public class OrderPickupItem implements IEntity {
 		return uomName;
 	}
 	
-	private int count;
-	
-	public int getCount(){
-		return count;
-	}
-	
-	public void setCount(int count) {
-		this.count = count;
-	}
-	
 	private BigDecimal price;
 	
 	public BigDecimal getItemPrice(){
@@ -78,10 +68,6 @@ public class OrderPickupItem implements IEntity {
 	
 	public BigDecimal getPrice(){
 		return price.multiply(new BigDecimal(countInBase));
-	}
-	
-	public BigDecimal getAmount(){
-		return price.multiply(new BigDecimal(count)).multiply(new BigDecimal(countInBase));
 	}
 	
 	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){

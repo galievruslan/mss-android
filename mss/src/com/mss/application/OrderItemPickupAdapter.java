@@ -81,8 +81,8 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 
 		holder.mName.setText(n.getProductName());
 		holder.mPrice.setText(n.getPrice().toString());		
-		if (OrderEditContext.getPickedUpItems().containsKey(n.getId())) {
-			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getId()).getCount()));
+		if (OrderEditContext.getPickedUpItems().containsKey(n.getProductId())) {
+			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getCount()));
 			holder.mCount.setVisibility(View.VISIBLE);
 		} else {
 			holder.mCount.setVisibility(View.GONE);
