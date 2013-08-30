@@ -49,7 +49,6 @@
 <fullyQualifiedTypeName name="com.mss.domain.services.ProductService"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
 <fullyQualifiedTypeName name="com.mss.application.fragments.OrderPickupItemsFragment"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.OrderItem"/>
@@ -57,7 +56,8 @@
 <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderItem"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.ProductUnitOfMeasure"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
+<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
 </qualifiedTypeNameHistroy>

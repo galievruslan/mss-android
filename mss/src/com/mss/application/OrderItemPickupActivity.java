@@ -3,7 +3,7 @@ package com.mss.application;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.R;
-import com.mss.domain.models.OrderPickupItem;
+import com.mss.domain.models.OrderPickedUpItem;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -15,13 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class OrderItemPickupActivity extends SherlockFragmentActivity implements LoaderCallbacks<OrderPickupItem> {
+public class OrderItemPickupActivity extends SherlockFragmentActivity implements LoaderCallbacks<OrderPickedUpItem> {
 
 	private static final String TAG = OrderItemPickupActivity.class.getSimpleName();
 	public static final String KEY_ID = "id";
 	public static final String KEY_ORDER_PICKUP_ITEM_ID = "order_pickup_item_id";
 		
-	public static final int LOADER_ID_ORDER_PICKUP_ITEM = 0;
+	public static final int LOADER_ID_ORDER_PICKEDUP_ITEM = 0;
 	
 	static final int PICK_UNIT_OF_MEASURE_REQUEST = 1;
 
@@ -29,7 +29,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	private long mProductUnitOfMeasureId;
 	private int mSelectedCount;
 	
-	private OrderPickupItem mOrderPickupItem;
+	private OrderPickedUpItem mOrderPickedUpItem;
 	private TextView mDescription;
 	private TextView mPrice;
 	private TextView mCount;
@@ -64,7 +64,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 			@Override
 			public void onClick(View view) {
 				Intent activity = new Intent(getApplicationContext(), ProductUomsActivity.class);
-				activity.putExtra("product_id", mOrderPickupItem.getProductId());
+				activity.putExtra("product_id", mOrderPickedUpItem.getId());
 		    	startActivityForResult(activity, PICK_UNIT_OF_MEASURE_REQUEST);
 			}
         });
@@ -137,7 +137,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
             }
         });
 		
-		getSupportLoaderManager().initLoader(LOADER_ID_ORDER_PICKUP_ITEM, null, this);
+		getSupportLoaderManager().initLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
 		
 		// Let's show the application icon as the Up button
 		if (getSupportActionBar() != null)
@@ -152,7 +152,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		stringCount += String.valueOf(digit);
 		mSelectedCount = Integer.parseInt(stringCount);
 		
-		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEM, null, this);
+		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
 	}
 	
 	private void DeleteDigit() {
@@ -166,7 +166,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		else 
 			mSelectedCount = Integer.parseInt(stringCount);
 		
-		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEM, null, this);
+		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
 	}
 
 	@Override
@@ -181,8 +181,10 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	    if (requestCode == PICK_UNIT_OF_MEASURE_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	mProductUnitOfMeasureId = data.getLongExtra("product_uom_id", 0l);	      
-	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEM, null, this);
+	        	mProductUnitOfMeasureId = data.getLongExtra("product_uom_id", 0l);	    
+	        	m
+	        	
+	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
 	        }
 	    } 
 	}
@@ -195,9 +197,9 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 			return true;
 		case R.id.menu_item_save:
 			Intent intent=new Intent();
-		    intent.putExtra("order_pickup_item_id", mOrderPickupItem.getId());
-		    intent.putExtra("order_pickup_item_uom_id", mOrderPickupItem.getUoMId());
-		    intent.putExtra("order_pickup_item_count", mOrderPickupItem.getCount());
+		    intent.putExtra("order_pickup_item_id", mOrderPickupItemId);
+		    intent.putExtra("order_pickup_item_uom_id", mOrderPickedUpItem.getUoMId());
+		    intent.putExtra("order_pickup_item_count", mOrderPickedUpItem.getCount());
 		    setResult(RESULT_OK, intent);
 		    finish();
 		    return true;
@@ -207,12 +209,12 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	}
 
 	@Override
-	public Loader<OrderPickupItem> onCreateLoader(int id, Bundle args) {
+	public Loader<OrderPickedUpItem> onCreateLoader(int id, Bundle args) {
 		switch (id) {
-		case LOADER_ID_ORDER_PICKUP_ITEM:
+		case LOADER_ID_ORDER_PICKEDUP_ITEM:
 
 			try {
-				return new OrderPickupItemLoader(this, mOrderPickupItemId, mProductUnitOfMeasureId, mSelectedCount);
+				return new OrderPickedUpItemLoader(this, mOrderPickupItemId);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -222,19 +224,19 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	}
 
 	@Override
-	public void onLoadFinished(Loader<OrderPickupItem> loader, OrderPickupItem data) {
-		mOrderPickupItem = data;
+	public void onLoadFinished(Loader<OrderPickedUpItem> loader, OrderPickedUpItem data) {
+		mOrderPickedUpItem = data;
 				
-		if (mOrderPickupItem != null) {
+		if (mOrderPickedUpItem != null) {
 			try {
-				mSelectedCount = mOrderPickupItem.getCount();
-				mProductUnitOfMeasureId = mOrderPickupItem.getProductUoMId();
+				mSelectedCount = mOrderPickedUpItem.getCount();
+				mProductUnitOfMeasureId = mOrderPickedUpItem.getProductUoMId();
 				
-				mDescription.setText(mOrderPickupItem.getProductName());
-				mPrice.setText(mOrderPickupItem.getPrice().toString());
+				mDescription.setText(mOrderPickedUpItem.getName());
+				mPrice.setText(mOrderPickedUpItem.getPrice().toString());
 				mCount.setText(String.valueOf(mSelectedCount));
-				mAmount.setText(mOrderPickupItem.getAmount().toString());
-				mUnitOfMeasure.setText(mOrderPickupItem.getUoMName());				
+				mAmount.setText(mOrderPickedUpItem.getAmount().toString());
+				mUnitOfMeasure.setText(mOrderPickedUpItem.getUoMName());				
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}		
@@ -242,7 +244,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	}
 
 	@Override
-	public void onLoaderReset(Loader<OrderPickupItem> loader) {
-		mOrderPickupItem = null;
+	public void onLoaderReset(Loader<OrderPickedUpItem> loader) {
+		mOrderPickedUpItem = null;
 	}
 }
