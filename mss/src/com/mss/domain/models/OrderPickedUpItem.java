@@ -92,4 +92,15 @@ public class OrderPickedUpItem implements IEntity {
 	public BigDecimal getAmount(){
 		return price.multiply(new BigDecimal(count)).multiply(new BigDecimal(countInBase));
 	}
+	
+	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure) {
+		productUomId = productUnitOfMeasure.getId();
+		uomId = productUnitOfMeasure.getUnitOfMeasureId();
+		uomName = productUnitOfMeasure.getUnitOfMeasureName();
+		countInBase = productUnitOfMeasure.getCountInBase();
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
 }

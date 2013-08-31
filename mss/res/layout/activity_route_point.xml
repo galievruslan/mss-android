@@ -8,13 +8,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RoutePointActivity" >
 
-    <fragment
-        android:id="@+id/fragment_route_point"
-        android:name="com.mss.application.fragments.RoutePointFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        tools:layout="@layout/fragment_route_point" />
+        android:layout_alignParentTop="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <include
+                    android:id="@+id/tab_general"
+                    layout="@layout/route_point_fragment_tab_general" />
+
+                <include
+                    android:id="@+id/tab_details"
+                    layout="@layout/route_point_fragment_tab_details" />
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
 
 </RelativeLayout>

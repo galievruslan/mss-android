@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="example_description">Example description</string>
+    <string name="example_price">123.55</string>
+    <string name="example_count">1.5</string>
+    <string name="example_amount">185.33</string>
+    <string name="example_name">Some name</string>
+    <string name="example_address">Some address</string>
+    <string name="example_shipping_date">31/12/2013</string>
+    <string name="example_icon_context_description">31/12/2013</string>
+
+</resources>

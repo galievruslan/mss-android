@@ -30,9 +30,21 @@ public class OrderPickedUpItemLoader extends AsyncTaskLoader<OrderPickedUpItem> 
 	@Override
 	public OrderPickedUpItem loadInBackground() {
 		OrderPickupItem orderPickupItem = mOrderService.getOrderPickupItemById(mId);
-		if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId()))
-			mOrderPickedUpItem = OrderEditContext.getPickedUpItems().get(orderPickupItem.getProductId());
-		else 
+		if (PickupItemContext.getPickedUpItem() != null)
+			return PickupItemContext.getPickedUpItem();
+		
+		if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
+			OrderPickedUpItem orderPickedUpItem = OrderEditContext.getPickedUpItems().get(orderPickupItem.getProductId());
+			mOrderPickedUpItem = new OrderPickedUpItem(
+					orderPickedUpItem.getId(),
+					orderPickedUpItem.getName(),
+					orderPickedUpItem.getPrice(),
+					orderPickedUpItem.getCount(),
+					orderPickedUpItem.getProductUoMId(),
+					orderPickedUpItem.getUoMId(),
+					orderPickedUpItem.getUoMName(),
+					orderPickedUpItem.getCountInBase());
+		} else {
 			mOrderPickedUpItem = new OrderPickedUpItem(
 					orderPickupItem.getProductId(),
 					orderPickupItem.getProductName(),
@@ -42,7 +54,9 @@ public class OrderPickedUpItemLoader extends AsyncTaskLoader<OrderPickedUpItem> 
 					orderPickupItem.getUoMId(),
 					orderPickupItem.getUoMName(),
 					orderPickupItem.getCountInBase());
+		}
 		
+		PickupItemContext.setPickedUpItem(mOrderPickedUpItem);
 		return mOrderPickedUpItem;
 	}
 

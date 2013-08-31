@@ -2,8 +2,12 @@ package com.mss.application;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.R;
 import com.mss.domain.models.OrderPickedUpItem;
+import com.mss.domain.models.ProductUnitOfMeasure;
+import com.mss.domain.services.ProductService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -26,10 +30,12 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	static final int PICK_UNIT_OF_MEASURE_REQUEST = 1;
 
 	private long mOrderPickupItemId;
-	private long mProductUnitOfMeasureId;
-	private int mSelectedCount;
 	
 	private OrderPickedUpItem mOrderPickedUpItem;
+	
+	private DatabaseHelper mHelper;
+	private ProductService mProductService;
+	
 	private TextView mDescription;
 	private TextView mPrice;
 	private TextView mCount;
@@ -54,6 +60,17 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		setContentView(R.layout.activity_order_item_pickup);
 
 		mOrderPickupItemId = getIntent().getLongExtra(KEY_ORDER_PICKUP_ITEM_ID, RoutePointActivity.ROUTE_POINT_ID_NEW);
+		
+		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			mProductService = new ProductService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
+		if (savedInstanceState == null || !savedInstanceState.getBoolean("restart", false)) {
+			PickupItemContext.Init();
+		} 
 		
 		mDescription = (TextView) findViewById(R.id.description_text_view);
 		mPrice = (TextView) findViewById(R.id.price_text_view);
@@ -145,28 +162,41 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	}
 	
 	private void AddDigit(int digit) {
-		String stringCount = String.valueOf(mSelectedCount);
-		if (stringCount.length() == 5)
-			return;
+		if (mOrderPickedUpItem != null) {
+			String stringCount = String.valueOf(mOrderPickedUpItem.getCount());
+			if (stringCount.length() == 5)
+				return;
 		
-		stringCount += String.valueOf(digit);
-		mSelectedCount = Integer.parseInt(stringCount);
+			stringCount += String.valueOf(digit);		
+			mOrderPickedUpItem.setCount(Integer.parseInt(stringCount));
 		
-		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+			getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+		}
 	}
 	
 	private void DeleteDigit() {
-		String stringCount = String.valueOf(mSelectedCount);
+		if (mOrderPickedUpItem != null) {
+			String stringCount = String.valueOf(mOrderPickedUpItem.getCount());
 		
-		if (stringCount.length() > 0)
-			stringCount = stringCount.substring(0, stringCount.length() - 1);
+			if (stringCount.length() > 0)
+				stringCount = stringCount.substring(0, stringCount.length() - 1);
 		
-		if (stringCount.length() == 0)
-			mSelectedCount = 0;
-		else 
-			mSelectedCount = Integer.parseInt(stringCount);
+			if (stringCount.length() == 0)
+				mOrderPickedUpItem.setCount(0);
+			else 
+				mOrderPickedUpItem.setCount(Integer.parseInt(stringCount));
 		
-		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+			getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		  // Save UI state changes to the savedInstanceState.
+		  // This bundle will be passed to onCreate if the process is
+		  // killed and restarted.
+		  savedInstanceState.putBoolean("restart", true);
 	}
 
 	@Override
@@ -181,10 +211,13 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	    if (requestCode == PICK_UNIT_OF_MEASURE_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	mProductUnitOfMeasureId = data.getLongExtra("product_uom_id", 0l);	    
-	        	m
+	        	if (mOrderPickedUpItem != null) {
+	        		Long productUnitOfMeasureId = data.getLongExtra("product_uom_id", 0l);
+	        		ProductUnitOfMeasure productUnitOfMeasure = mProductService.getProductsUnitOfMeasure(productUnitOfMeasureId);
+	        		mOrderPickedUpItem.setProductUnitOfMeasure(productUnitOfMeasure);
 	        	
-	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+	        		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER_PICKEDUP_ITEM, null, this);
+	        	}
 	        }
 	    } 
 	}
@@ -198,8 +231,6 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		case R.id.menu_item_save:
 			Intent intent=new Intent();
 		    intent.putExtra("order_pickup_item_id", mOrderPickupItemId);
-		    intent.putExtra("order_pickup_item_uom_id", mOrderPickedUpItem.getUoMId());
-		    intent.putExtra("order_pickup_item_count", mOrderPickedUpItem.getCount());
 		    setResult(RESULT_OK, intent);
 		    finish();
 		    return true;
@@ -227,20 +258,13 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	public void onLoadFinished(Loader<OrderPickedUpItem> loader, OrderPickedUpItem data) {
 		mOrderPickedUpItem = data;
 				
-		if (mOrderPickedUpItem != null) {
-			try {
-				mSelectedCount = mOrderPickedUpItem.getCount();
-				mProductUnitOfMeasureId = mOrderPickedUpItem.getProductUoMId();
-				
-				mDescription.setText(mOrderPickedUpItem.getName());
-				mPrice.setText(mOrderPickedUpItem.getPrice().toString());
-				mCount.setText(String.valueOf(mSelectedCount));
-				mAmount.setText(mOrderPickedUpItem.getAmount().toString());
-				mUnitOfMeasure.setText(mOrderPickedUpItem.getUoMName());				
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}		
-		}
+		if (mOrderPickedUpItem != null) {			
+			mDescription.setText(mOrderPickedUpItem.getName());
+			mPrice.setText(mOrderPickedUpItem.getPrice().toString());
+			mCount.setText(String.valueOf(mOrderPickedUpItem.getCount()));
+			mAmount.setText(mOrderPickedUpItem.getAmount().toString());
+			mUnitOfMeasure.setText(mOrderPickedUpItem.getUoMName());		
+		}			
 	}
 
 	@Override

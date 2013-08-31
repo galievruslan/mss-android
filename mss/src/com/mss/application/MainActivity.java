@@ -1,56 +1,56 @@
 package com.mss.application;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.mss.application.fragments.MainMenuFragment;
+import com.mss.application.fragments.MainMenuFragment.OnMenuSelectedListener;
+
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.View;
+import android.util.Log;
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockFragmentActivity implements OnMenuSelectedListener {
 
+	private static final String TAG = CustomersActivity.class.getSimpleName();
+	
+	MainMenuAdapter mMainMenuAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		try {
+			mMainMenuAdapter = new MainMenuAdapter(this);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
 		
-		findViewById(R.id.route_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	showRoute();
-            }
-        });
-		
-		findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	showSettings();
-            }
-        });
-		
-		findViewById(R.id.sync_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-            	showSynchronization();
-            }
-        });
+		MainMenuFragment fragmentMenu = getMainMenuFragment();
+		fragmentMenu.addOnMenuSelectedListener(this);
+		fragmentMenu.setListAdapter(mMainMenuAdapter);
 	}
-
+	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+	public void onMenuSelected(MainMenuAdapter.MenuItem menuItem, int position, long id) {
+		switch (menuItem.getId()) {
+			case MainMenuAdapter.ROUTES_MENU: {
+				Intent mainActivity = new Intent(getApplicationContext(), RouteActivity.class);
+		    	startActivity(mainActivity);
+				break;
+			} 
+			case MainMenuAdapter.SETTINGS_MENU: {
+				Intent settingsActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+		    	startActivity(settingsActivity);
+				break;
+			} 
+			case MainMenuAdapter.SYNC_MENU: {
+				Intent syncActivity = new Intent(getApplicationContext(), SynchronizationActivity.class);
+		    	startActivity(syncActivity);
+				break;
+			} 
+		}
 	}
 	
-	private void showRoute(){
-		Intent mainActivity = new Intent(getApplicationContext(), RouteActivity.class);
-    	startActivity(mainActivity);
-	}
-	
-	private void showSettings(){
-		Intent settingsActivity = new Intent(getApplicationContext(), SettingsActivity.class);
-    	startActivity(settingsActivity);
-	}
-	
-	private void showSynchronization(){
-		Intent syncActivity = new Intent(getApplicationContext(), SynchronizationActivity.class);
-    	startActivity(syncActivity);
+	protected MainMenuFragment getMainMenuFragment() {
+		return (MainMenuFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main_menu_list);
 	}
 }

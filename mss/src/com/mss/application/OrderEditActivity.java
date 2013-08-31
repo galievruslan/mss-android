@@ -259,28 +259,25 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	    } else if (requestCode == REQUEST_EDIT_ORDER_PICKUP_ITEM) {
 	    	if (resultCode == RESULT_OK) {
 	        	long orderPickupItemId = data.getLongExtra("order_pickup_item_id", 0l);
-	        	long orderPickupItemUomId = data.getLongExtra("order_pickup_item_uom_id", 0l);
-	        	int orderPickupItemCount = data.getIntExtra("order_pickup_item_count", 0);
 	        	
 	        	OrderPickupItem orderPickupItem = 
 	        			mOrderService.getOrderPickupItemById(orderPickupItemId);
 	        	ProductUnitOfMeasure productUnitOfMeasure = 
-        				mProductService.getProductsUnitOfMeasure(orderPickupItemUomId);
+        				mProductService.getProductsUnitOfMeasure(PickupItemContext.getPickedUpItem().getProductUoMId());
 	        	
 	        	OrderPickedUpItem item = new OrderPickedUpItem(
 	        			orderPickupItem.getProductId(),
 	        			orderPickupItem.getProductName(), 
 	        			orderPickupItem.getItemPrice(), 
-	        			orderPickupItemCount, 
+	        			PickupItemContext.getPickedUpItem().getCount(), 
 	        			productUnitOfMeasure);
 	        	if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
-	        		item = OrderEditContext.getPickedUpItems().get(orderPickupItem.getProductId());
-	        		if (orderPickupItemCount == 0) {
+	        		if (PickupItemContext.getPickedUpItem().getCount() == 0) {
 	        			OrderEditContext.getPickedUpItems().remove(orderPickupItem.getProductId());
 	        		}
 	        	}
 	        	
-	        	if (orderPickupItemCount != 0) {
+	        	if (PickupItemContext.getPickedUpItem().getCount() != 0) {
 	        		OrderEditContext.getPickedUpItems().put(orderPickupItem.getProductId(), item);
 	        	}
 	        	

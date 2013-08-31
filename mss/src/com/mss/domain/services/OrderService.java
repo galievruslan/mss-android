@@ -1,5 +1,6 @@
 package com.mss.domain.services;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import android.util.Log;
@@ -97,6 +98,7 @@ public class OrderService {
 	public void saveOrder(Order order, Iterable<OrderPickedUpItem> pickedUpItems){
 		try {
 			orderRepo.save(order);
+			BigDecimal amount = new BigDecimal(0);
 			Iterable<OrderItem> items = orderItemRepo.findByOrderId(order.getId());
 			for (OrderItem orderItem : items) {
 				boolean found = false;				
@@ -110,6 +112,8 @@ public class OrderService {
 						orderItem.setPrice(pickedUpItem.getItemPrice());
 						orderItemRepo.save(orderItem);						
 						found = true;
+						
+						amount = amount.add(orderItem.getAmount());
 						
 						break;
 					}
@@ -139,8 +143,13 @@ public class OrderService {
 					newOrderItem.setUnitOfMeasureName(pickedUpItem.getUoMName());
 					newOrderItem.setCountInUnitOfMeasure(pickedUpItem.getCountInBase());
 					orderItemRepo.save(newOrderItem);		
+					
+					amount = amount.add(newOrderItem.getAmount());
 				}
 			}
+			
+			order.setAmount(amount);
+			orderRepo.save(order);
 			
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());

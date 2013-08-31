@@ -50,5 +50,8 @@
     <string name="title_activity_order_pickup_items_fragment">OrderPickupItemsFragment</string>
     <string name="title_activity_order_item_pickup">OrderItemPickupActivity</string>
     <string name="title_activity_product_uoms">ProductUomsActivity</string>
+    <string name="main_menu_routes">Routes</string>
+    <string name="main_menu_settings">Settings</string>
+    <string name="main_menu_sync">Synchronization</string>
 
 </resources>

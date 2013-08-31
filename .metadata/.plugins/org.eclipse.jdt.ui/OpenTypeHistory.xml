@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{PriceListsFragment.java[PriceListsFragment" modifiers="1" timestamp="1377846434830"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{WarehousesFragment.java[WarehousesFragment" modifiers="1" timestamp="1377846434830"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{ProductUomsFragment.java[ProductUomsFragment" modifiers="1" timestamp="1377846434830"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{OrderListFragment.java[OrderListFragment" modifiers="1" timestamp="1377846434830"/>
-<typeInfo handle="=mss/src&lt;com.mss.application.fragments{RoutePointFragment.java[RoutePointFragment" modifiers="1" timestamp="1377846434830"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{PriceListsFragment.java[PriceListsFragment" modifiers="1" timestamp="1376507388226"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{WarehousesFragment.java[WarehousesFragment" modifiers="1" timestamp="1376507367613"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{ProductUomsFragment.java[ProductUomsFragment" modifiers="1" timestamp="1376853707426"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{RoutePointFragment.java[RoutePointFragment" modifiers="1" timestamp="1377283842791"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{MainMenuFragment.java[MainMenuFragment" modifiers="1" timestamp="1377977178112"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{OrderListFragment.java[OrderListFragment" modifiers="1" timestamp="1377200325258"/>
+<typeInfo handle="=mss/src&lt;com.mss.application.fragments{RoutePointsOrdersFragment.java[RoutePointsOrdersFragment" modifiers="1" timestamp="1377114237284"/>
 </typeInfoHistroy>

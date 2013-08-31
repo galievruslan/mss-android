@@ -123,6 +123,10 @@ public class Order extends Entity {
 		return amount;
 	}
 	
+	public void setAmount(BigDecimal amount){
+		this.amount = amount;
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.STRING, width = 255, columnName = Constants.Tables.Order.NOTE_FIELD)
 	private String note;
 	
