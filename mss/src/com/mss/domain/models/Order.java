@@ -22,6 +22,10 @@ public class Order extends Entity {
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Order.ROUTE_POINT_FIELD)
 	private long routePointId;
 	
+	public long getRoutePointId(){
+		return this.routePointId;
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE, columnName = Constants.Tables.Order.ORDER_DATE_FIELD)
 	private Date orderDate;
 	
@@ -150,5 +154,9 @@ public class Order extends Entity {
 	
 	public boolean getIsSynchronized(){
 		return isSynchronized;
+	}
+	
+	public void setIsSynchronized(boolean isSynchronized){
+		this.isSynchronized = isSynchronized;
 	}
 }

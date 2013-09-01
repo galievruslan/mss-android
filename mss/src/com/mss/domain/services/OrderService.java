@@ -9,12 +9,14 @@ import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderItem;
 import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
+import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteOrderItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderPickupItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
+import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 
 public class OrderService {
 	private static final String TAG = OrderService.class.getSimpleName();
@@ -23,11 +25,16 @@ public class OrderService {
 	private OrmliteOrderRepository orderRepo;
 	private OrmliteOrderItemRepository orderItemRepo;
 	private OrmliteOrderPickupItemRepository orderPickUpItemRepo;
+	private OrmlitePreferencesRepository preferencesRepo;
+	private Preferences preferences;
+	
 	public OrderService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
 		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
 		orderItemRepo = new OrmliteOrderItemRepository(this.databaseHelper);
 		orderPickUpItemRepo = new OrmliteOrderPickupItemRepository(this.databaseHelper);
+		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);
+		preferences = preferencesRepo.getById(Preferences.ID);
 	}
 	
 	public Order getById(long id) {
@@ -150,6 +157,13 @@ public class OrderService {
 			
 			order.setAmount(amount);
 			orderRepo.save(order);
+			
+			RoutePointService routePointService = new RoutePointService(databaseHelper);
+			RoutePoint routePoint = routePointService.getById(order.getRoutePointId());
+			if (routePoint.getStatusId() == preferences.getDefaultRoutePointStatusId()) {
+				routePoint.setStatusId(preferences.getDefaultRoutePointAttendedStatusId());
+				routePointService.savePoint(routePoint);
+			}
 			
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());

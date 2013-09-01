@@ -58,8 +58,11 @@ public class SynchronizationActivity extends Activity {
         }
         else {
         	mSyncTask.attach(this);
-        	setStatusMessage(mSyncTask.getLastStatusMessageResId());
-        	showProgress(true);
+        	int lastStatusResId = mSyncTask.getLastStatusMessageResId();
+        	if (lastStatusResId != 0) {
+        		setStatusMessage(lastStatusResId);
+        		showProgress(true);
+        	}
         
         	if (mSyncTask.getStatus() == Status.FINISHED) {
         		setLastSyncTime(mSyncTask.getServerTimestamp());

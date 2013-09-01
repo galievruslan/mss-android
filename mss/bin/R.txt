@@ -540,6 +540,7 @@ int string example_menu_text 0x7f0a0015
 int string example_name 0x7f0a0011
 int string example_price 0x7f0a000e
 int string example_shipping_date 0x7f0a0013
+int string greetings 0x7f0a0088
 int string hello_world 0x7f0a0017
 int string key_id 0x7f0a002e
 int string label_address 0x7f0a006b
@@ -599,6 +600,7 @@ int string sub_title_activity_route_point 0x7f0a0020
 int string sync_categories 0x7f0a007c
 int string sync_clear_storage 0x7f0a007a
 int string sync_customers 0x7f0a007b
+int string sync_orders 0x7f0a008a
 int string sync_preferences 0x7f0a0087
 int string sync_price_lists 0x7f0a007d
 int string sync_price_lists_lines 0x7f0a0082
@@ -607,6 +609,7 @@ int string sync_products_units_of_measures 0x7f0a0080
 int string sync_progress 0x7f0a0079
 int string sync_route_points_templates 0x7f0a0086
 int string sync_route_templates 0x7f0a0085
+int string sync_routes 0x7f0a0089
 int string sync_shipping_addresses 0x7f0a007f
 int string sync_statuses 0x7f0a0083
 int string sync_units_of_measures 0x7f0a0081
@@ -629,7 +632,7 @@ int string title_activity_route_point 0x7f0a001f
 int string title_activity_route_point_fragment 0x7f0a0028
 int string title_activity_settings 0x7f0a006e
 int string title_activity_shipping_addresses 0x7f0a0025
-int string title_activity_sync 0x7f0a0088
+int string title_activity_sync 0x7f0a008b
 int string title_activity_time_picker_fragment 0x7f0a0041
 int string title_activity_warehouses 0x7f0a0040
 int style AppBaseTheme 0x7f0b0059

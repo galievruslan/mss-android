@@ -18,7 +18,10 @@
 	<string name="sync_statuses">Statuses synchronizing&#8230;</string>
 	<string name="sync_warehouses">Warehouses synchronizing&#8230;</string>
 	<string name="sync_route_templates">Route templates synchronizing&#8230;</string>
-	<string name="sync_route_points_templates">Route points templates synchronizing&#8230;</string>
+	<string name="sync_route_points_templates">Route points templates\nsynchronizing&#8230;</string>
 	<string name="sync_preferences">Preferences synchronizing&#8230;</string>
+	<string name="greetings">Greetings!</string>
+	<string name="sync_routes">Routes synchronizing&#8230;</string>
+	<string name="sync_orders">Orders synchronizing&#8230;</string>
 	<string name="title_activity_sync">Synchronization</string>
 </resources>

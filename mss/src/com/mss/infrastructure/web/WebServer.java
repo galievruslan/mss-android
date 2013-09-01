@@ -2,6 +2,7 @@ package com.mss.infrastructure.web;
 
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -62,8 +63,7 @@ public class WebServer {
 			
 			Get("/users/sign_in", new ArrayList<NameValuePair>());
 						
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();			
 			nameValuePairs.add(new BasicNameValuePair("user[username]", login));
 			nameValuePairs.add(new BasicNameValuePair("user[password]", password));
 			nameValuePairs.add(new BasicNameValuePair("user[remember_me]", "0"));
@@ -127,27 +127,12 @@ public class WebServer {
 	}
 	
 	public PostResult Post(String url, List<NameValuePair> params) throws JSONException, Exception {
+		params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
 		
 		HttpPost httpPost = new HttpPost(address + url);
 		httpPost.setEntity(new UrlEncodedFormEntity(params));
 		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
-		
-		HttpResponse response = Dispatch(httpPost);
-		String content = Parse(response);
-		String csrfToken = extractCsrfToken(content);
-		if (csrfToken != "") {
-			getCurrentConnection().setCsrf(csrfToken);
-			System.out.print("Get csrf token: " + csrfToken + '\n');
-		}
-		
-		return new PostResult(response.getStatusLine().getStatusCode(), content);
-	}
-	
-	public PostResult Post(String url, JSONObject json) throws JSONException, Exception {
-		
-		HttpPost httpPost = new HttpPost(address + url);
-		httpPost.setEntity(new StringEntity(json.toString()));
-		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
+		//httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
 		
 		HttpResponse response = Dispatch(httpPost);
 		String content = Parse(response);

@@ -13,6 +13,8 @@ import com.mss.application.SynchronizationActivity;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteCategoryRepository;
 import com.mss.infrastructure.ormlite.OrmliteCustomerRepository;
+import com.mss.infrastructure.ormlite.OrmliteOrderItemRepository;
+import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 import com.mss.infrastructure.ormlite.OrmlitePriceListLineRepository;
 import com.mss.infrastructure.ormlite.OrmlitePriceListRepository;
@@ -99,12 +101,26 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 				databaseHelper.clear();
 			}
 			
+			publishProgress(R.string.greetings);
+			PostGreetings postGreetings = 
+					new PostGreetings(webServer, "/synchronization/client_information.json");
+			postGreetings.execute((Void)null).get();
+			
+			publishProgress(R.string.sync_routes);
 			PostRoutes postRoutes = new 
 					PostRoutes(webServer, 
 							"/synchronization/routes.json", 
 							new OrmliteRouteRepository(databaseHelper), 
 							new OrmliteRoutePointRepository(databaseHelper));
 			postRoutes.execute((Void)null).get();
+			
+			publishProgress(R.string.sync_orders);
+			PostOrders postOrders = new 
+					PostOrders(webServer, 
+							"/synchronization/orders.json", 
+							new OrmliteOrderRepository(databaseHelper), 
+							new OrmliteOrderItemRepository(databaseHelper));
+			postOrders.execute((Void)null).get();
 			
 			serverTimestamp = webServer.getTime();
 			

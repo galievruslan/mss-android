@@ -59,6 +59,7 @@ public class RoutePoint extends Entity {
 	
 	public void setStatusId(long statusId){
 		this.statusId = statusId;
+		this.isSynchronized = false;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BOOLEAN, columnName = Constants.Tables.RoutePoint.SYNCHRONIZED_FIELD)
@@ -66,5 +67,9 @@ public class RoutePoint extends Entity {
 	
 	public boolean getIsSynchronized(){
 		return isSynchronized;
+	}
+	
+	public void setIsSynchronized(boolean isSynchronized){
+		this.isSynchronized = isSynchronized;
 	}
 }

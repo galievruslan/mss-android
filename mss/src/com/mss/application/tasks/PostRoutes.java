@@ -2,16 +2,16 @@ package com.mss.application.tasks;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
-import com.mss.infrastructure.data.IRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
 import com.mss.infrastructure.web.WebServer;
@@ -36,30 +36,41 @@ public class PostRoutes extends PostTask<com.mss.domain.models.Route> {
 		for (Route route : routes) {
 			Iterable<RoutePoint> points = routePointRepo.findByRouteId(route.getId());			
 			PostResult result = 
-					webServer.Post(url, ToJSON(route, IterableHelpers.toArray(RoutePoint.class, points)));
+					webServer.Post(url, ToPostParams(route, IterableHelpers.toArray(RoutePoint.class, points)));
 			result.getStatusCode();
+			
+			Pattern pattern = Pattern.compile("\"code\":100|\"code\":101");
+			Matcher matcher = pattern.matcher(result.getContent());
+			if (matcher.find()) {
+				for (RoutePoint routePoint : points) {
+					routePoint.setIsSynchronized(true);
+					routePointRepo.save(routePoint);
+				}
+			} else {
+				return false;
+			}
 		}
 		
 		return true;
 	}
 	
-	private JSONObject ToJSON(Route route, RoutePoint points[]) throws JSONException {
-		JSONObject routePointsAttributes = new JSONObject();		
-		for (int i = 0; i < points.length; i++) {
-			JSONObject jsonRoutePoint = new JSONObject();
-			jsonRoutePoint.put("shipping_address_id", points[i].getShippingAddressId());
-			jsonRoutePoint.put("status_id", points[i].getStatusId());
-			routePointsAttributes.put(String.valueOf(i), jsonRoutePoint);
-		}
+	private List<NameValuePair> ToPostParams(Route route, RoutePoint points[]) {		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
-		JSONObject routeAttributes = new JSONObject();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		routeAttributes.put("date", dateFormat.format(route.getDate()));
-		routeAttributes.put("route_points_attributes", routePointsAttributes);
-		
-		JSONObject routeObject = new JSONObject();		
-		routeObject.put("route", routeAttributes);
+		nameValuePairs.add(new BasicNameValuePair("route[date]", dateFormat.format(route.getDate())));
 				
-		return routeObject;		
+		for (int i = 0; i < points.length; i++) {
+			nameValuePairs.add(
+					new BasicNameValuePair(
+							"route[route_points_attributes][" + String.valueOf(i) + "][shipping_address_id]" , 
+							String.valueOf(points[i].getShippingAddressId())));			
+			nameValuePairs.add(
+					new BasicNameValuePair(
+							"route[route_points_attributes][" + String.valueOf(i) + "][status_id]" , 
+							String.valueOf(points[i].getStatusId())));
+		}
+				
+		return nameValuePairs;		
 	}
 }

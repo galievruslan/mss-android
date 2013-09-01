@@ -9506,3 +9506,18 @@ Java Model Exception: Java Model Status [Timed out while retrieving the attached
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1012 2013-09-01 19:56:39.875
 !MESSAGE Timed out while retrieving the attached javadoc for AsyncTask [in AsyncTask.class [in android.os [in C:\Users\Farid\android-sdks\platforms\android-17\android.jar]]] 
+!SESSION 2013-09-01 22:10:27.192 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-01 22:10:37.027
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project actionbarsherlock
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-01 22:10:37.034
+!MESSAGE projectOpenedWithWorkspace: failed to find manifest package for project mss
+
+!ENTRY org.eclipse.ui 2 2 2013-09-02 00:22:26.944
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)

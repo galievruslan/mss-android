@@ -16,4 +16,12 @@ public class OrmliteOrderRepository extends OrmliteGenericRepository<Order> {
 		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.Order.ROUTE_POINT_FIELD , id);
 		return dao.query(queryBuilder.prepare());
 	}
+	
+	public Iterable<Order> findNotSynchronized() throws Throwable {
+		
+		QueryBuilder<Order, Integer> queryBuilder = dao.queryBuilder();
+		
+		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.Order.SYNCHRONIZED_FIELD , false);
+		return dao.query(queryBuilder.prepare());
+	}
 }

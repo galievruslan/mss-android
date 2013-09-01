@@ -1254,6 +1254,7 @@ containing a value of this type.
         public static final int example_name=0x7f0a0011;
         public static final int example_price=0x7f0a000e;
         public static final int example_shipping_date=0x7f0a0013;
+        public static final int greetings=0x7f0a0088;
         public static final int hello_world=0x7f0a0017;
         public static final int key_id=0x7f0a002e;
         public static final int label_address=0x7f0a006b;
@@ -1324,6 +1325,7 @@ containing a value of this type.
         public static final int sync_categories=0x7f0a007c;
         public static final int sync_clear_storage=0x7f0a007a;
         public static final int sync_customers=0x7f0a007b;
+        public static final int sync_orders=0x7f0a008a;
         public static final int sync_preferences=0x7f0a0087;
         public static final int sync_price_lists=0x7f0a007d;
         public static final int sync_price_lists_lines=0x7f0a0082;
@@ -1332,6 +1334,7 @@ containing a value of this type.
         public static final int sync_progress=0x7f0a0079;
         public static final int sync_route_points_templates=0x7f0a0086;
         public static final int sync_route_templates=0x7f0a0085;
+        public static final int sync_routes=0x7f0a0089;
         public static final int sync_shipping_addresses=0x7f0a007f;
         public static final int sync_statuses=0x7f0a0083;
         public static final int sync_units_of_measures=0x7f0a0081;
@@ -1354,7 +1357,7 @@ containing a value of this type.
         public static final int title_activity_route_point_fragment=0x7f0a0028;
         public static final int title_activity_settings=0x7f0a006e;
         public static final int title_activity_shipping_addresses=0x7f0a0025;
-        public static final int title_activity_sync=0x7f0a0088;
+        public static final int title_activity_sync=0x7f0a008b;
         public static final int title_activity_time_picker_fragment=0x7f0a0041;
         public static final int title_activity_warehouses=0x7f0a0040;
     }
