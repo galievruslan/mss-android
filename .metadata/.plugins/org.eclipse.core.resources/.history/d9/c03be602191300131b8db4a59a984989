@@ -1,0 +1,19 @@
+package com.mss.application.tasks;
+
+import com.mss.domain.models.Route;
+import com.mss.infrastructure.data.IRepository;
+import com.mss.infrastructure.web.WebServer;
+
+public class PostRoutes extends PostTask<com.mss.domain.models.Route> {
+
+	public PostRoutes(WebServer webServer, String url,
+			IRepository<Route> modelRepo) {
+		super(webServer, url, modelRepo);
+	}
+
+	@Override
+	protected Boolean doAttemptInBackground(Void... arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -1,0 +1,22 @@
+package com.mss.application.tasks;
+
+import com.mss.domain.models.Route;
+import com.mss.infrastructure.data.IRepository;
+import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
+import com.mss.infrastructure.web.WebServer;
+
+public class PostRoutes extends PostTask<com.mss.domain.models.Route> {
+
+	OrmliteRouteRepository routeRepo;
+	public PostRoutes(WebServer webServer, String url,
+			OrmliteRouteRepository modelRepo) {
+		super(webServer, url, modelRepo);
+		this.routeRepo = modelRepo;
+	}
+
+	@Override
+	protected Boolean doAttemptInBackground(Void... arg0) throws Throwable {
+		// TODO Auto-generated method stub
+		Iterable<Route> routes = routeRepo.findNotSynchronized();
+	}
+}

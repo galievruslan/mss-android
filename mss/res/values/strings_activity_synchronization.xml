@@ -12,7 +12,7 @@
 	<string name="sync_price_lists">Price lists synchronizing&#8230;</string>
 	<string name="sync_products">Products synchronizing&#8230;</string>
 	<string name="sync_shipping_addresses">Shipping addresses synchronizing&#8230;</string>
-	<string name="sync_products_units_of_measures">Products units of measures synchronizing&#8230;</string>
+	<string name="sync_products_units_of_measures">Products units of measures\nsynchronizing&#8230;</string>
 	<string name="sync_units_of_measures">Units of measures synchronizing&#8230;</string>
 	<string name="sync_price_lists_lines">Price lists lines synchronizing&#8230;</string>
 	<string name="sync_statuses">Statuses synchronizing&#8230;</string>

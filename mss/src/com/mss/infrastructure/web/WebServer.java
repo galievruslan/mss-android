@@ -24,12 +24,14 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -67,7 +69,7 @@ public class WebServer {
 			nameValuePairs.add(new BasicNameValuePair("user[remember_me]", "0"));
 			nameValuePairs.add(new BasicNameValuePair("commit", "Sign in"));
 			
-			int status = Post("/users/sign_in", nameValuePairs);
+			int status = Post("/users/sign_in", nameValuePairs).getStatusCode();
 			System.out.print("Logon status: " + status + '\n');
 			if (status != 302)
 				throw new AuthenticationFailedException();
@@ -124,7 +126,7 @@ public class WebServer {
 		return content;
 	}
 	
-	public int Post(String url, List<NameValuePair> params) throws JSONException, Exception {
+	public PostResult Post(String url, List<NameValuePair> params) throws JSONException, Exception {
 		
 		HttpPost httpPost = new HttpPost(address + url);
 		httpPost.setEntity(new UrlEncodedFormEntity(params));
@@ -138,7 +140,24 @@ public class WebServer {
 			System.out.print("Get csrf token: " + csrfToken + '\n');
 		}
 		
-		return response.getStatusLine().getStatusCode();
+		return new PostResult(response.getStatusLine().getStatusCode(), content);
+	}
+	
+	public PostResult Post(String url, JSONObject json) throws JSONException, Exception {
+		
+		HttpPost httpPost = new HttpPost(address + url);
+		httpPost.setEntity(new StringEntity(json.toString()));
+		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
+		
+		HttpResponse response = Dispatch(httpPost);
+		String content = Parse(response);
+		String csrfToken = extractCsrfToken(content);
+		if (csrfToken != "") {
+			getCurrentConnection().setCsrf(csrfToken);
+			System.out.print("Get csrf token: " + csrfToken + '\n');
+		}
+		
+		return new PostResult(response.getStatusLine().getStatusCode(), content);
 	}
 	
 	private HttpResponse Dispatch(HttpUriRequest request) throws IOException {
@@ -181,6 +200,25 @@ public class WebServer {
 	private WebConnection webConnection;
 	public WebConnection getCurrentConnection(){
 		return webConnection;
+	}
+	
+	public class PostResult {
+		public PostResult(int statusCode, String content) {
+			this.statusCode = statusCode;
+			this.content = content;
+		}
+		
+		private int statusCode;
+		
+		public int getStatusCode(){
+			return statusCode;
+		}
+		
+		private String content;
+		
+		public String getContent(){
+			return content;
+		}
 	}
 
 	class ServerTime {

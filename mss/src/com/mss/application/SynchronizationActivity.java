@@ -104,7 +104,7 @@ public class SynchronizationActivity extends Activity {
     
     public Date getLastSyncTime() throws ParseException{
     	String lastSync = sharedPreferences.getString("last_sync", "");
-		DateFormat format = SimpleDateFormat.getTimeInstance();
+		DateFormat format = SimpleDateFormat.getDateTimeInstance();
 		return format.parse(lastSync);
     }
     
@@ -113,7 +113,7 @@ public class SynchronizationActivity extends Activity {
     		return;
     	
     	SharedPreferences.Editor editor = sharedPreferences.edit();	
-		DateFormat format = SimpleDateFormat.getTimeInstance();
+		DateFormat format = SimpleDateFormat.getDateTimeInstance();
 		editor.putString("last_sync", format.format(time));
 		editor.commit();
     }

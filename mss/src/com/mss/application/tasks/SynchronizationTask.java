@@ -18,7 +18,9 @@ import com.mss.infrastructure.ormlite.OrmlitePriceListLineRepository;
 import com.mss.infrastructure.ormlite.OrmlitePriceListRepository;
 import com.mss.infrastructure.ormlite.OrmliteProductRepository;
 import com.mss.infrastructure.ormlite.OrmliteProductUnitOfMeasureRepository;
+import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointTemplateRepository;
+import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
 import com.mss.infrastructure.ormlite.OrmliteRouteTemplateRepository;
 import com.mss.infrastructure.ormlite.OrmliteShippingAddressRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
@@ -74,7 +76,7 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 		
 		serverAddress = synchronizationActivity.getServerAddress();
 		try {
-			synchronizationActivity.getLastSyncTime();
+			lastSyncDate = synchronizationActivity.getLastSyncTime();
 		} catch (Throwable e) {					
 			isFull = true;
 		}
@@ -96,6 +98,13 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 				publishProgress(R.string.sync_clear_storage);
 				databaseHelper.clear();
 			}
+			
+			PostRoutes postRoutes = new 
+					PostRoutes(webServer, 
+							"/synchronization/routes.json", 
+							new OrmliteRouteRepository(databaseHelper), 
+							new OrmliteRoutePointRepository(databaseHelper));
+			postRoutes.execute((Void)null).get();
 			
 			serverTimestamp = webServer.getTime();
 			
@@ -154,11 +163,21 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 			syncShippingAddresses.execute((Void)null).get();
 			
 			publishProgress(R.string.sync_products);
-			SyncProducts syncProducts = new SyncProducts(
-					new ProductWebRepository(webServer.getCurrentConnection()), 
-					new OrmliteProductRepository(databaseHelper),
-					new ProductTranslator(),
-					pageSize);
+			SyncProducts syncProducts = null;
+			if (isFull) {
+				syncProducts = new SyncProducts(
+						new ProductWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteProductRepository(databaseHelper),
+						new ProductTranslator(),
+						pageSize);
+			} else {
+				syncProducts = new SyncProducts(
+						new ProductWebRepository(webServer.getCurrentConnection()), 
+						new OrmliteProductRepository(databaseHelper),
+						new ProductTranslator(),
+						pageSize,
+						lastSyncDate);
+			}			
 			syncProducts.execute((Void)null).get();
 			
 			publishProgress(R.string.sync_price_lists);

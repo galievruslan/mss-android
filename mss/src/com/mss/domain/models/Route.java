@@ -10,6 +10,11 @@ public class Route extends Entity {
 	public Route() {				
 	}
 	
+	public Route(Long id, Date date) {
+		this.id = id;
+		this.date = date;				
+	}
+	
 	public Route(Date date) {
 		this.date = date;				
 	}
