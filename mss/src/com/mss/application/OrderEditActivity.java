@@ -59,7 +59,9 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 
     public static final int LOADER_ID_ORDER = 0;
     
-	public static final int REQUEST_EDIT_ORDER = 5;
+    public static final int REQUEST_ADD_ORDER = 10;
+	public static final int REQUEST_EDIT_ORDER = 11;
+	
 	public static final String KEY_ORDER_ID = "id";
 	public static final String KEY_ROUTE_POINT_ID = "route_point_id";
 	public static final String KEY_PRICE_LIST_ID = "price_list_id";
@@ -298,6 +300,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 					String note = mOrderNotes.getText().toString();
 					mOrder.setNote(note);
 					mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
+					
+					Intent intent=new Intent();
+					setResult(RESULT_OK, intent);
+				    finish();
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}

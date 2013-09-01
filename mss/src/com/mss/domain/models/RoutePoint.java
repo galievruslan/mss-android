@@ -44,11 +44,21 @@ public class RoutePoint extends Entity {
 		return shippingAddressValue;
 	}
 	
+	public void setShippingAddress(ShippingAddress shippingAddress){
+		this.shippingAddressId = shippingAddress.getId();
+		this.shippingAddressName = shippingAddress.getName();
+		this.shippingAddressValue = shippingAddress.getAddress();
+	}
+	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.STATUS_FIELD)
 	private long statusId;
 	
 	public long getStatusId(){
 		return statusId;
+	}
+	
+	public void setStatusId(long statusId){
+		this.statusId = statusId;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.BOOLEAN, columnName = Constants.Tables.RoutePoint.SYNCHRONIZED_FIELD)

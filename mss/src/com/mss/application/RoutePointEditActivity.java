@@ -41,9 +41,12 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	static final int PICK_SHIPPING_ADDRESS_REQUEST = 2;
 
 	private Date mRouteDate;
+	private long mRoutePointId;
 	private RoutePoint mRoutePoint;
-	private EditText mCustomer;
-	private EditText mShippinAddress;
+	private Customer mCustomer;
+	private ShippingAddress mShippingAddress;
+	private EditText mCustomerEditText;
+	private EditText mShippinAddressEditText;
 
 	private DatabaseHelper mHelper;
 	private RoutePointService mRoutePointService;
@@ -55,20 +58,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_route_point_edit);
 
-		long id = getIntent().getLongExtra(getString(R.string.key_id), RoutePointActivity.ROUTE_POINT_ID_NEW);
+		mRoutePointId = getIntent().getLongExtra(KEY_ROUTE_POINT_ID, RoutePointActivity.ROUTE_POINT_ID_NEW);
 
-		if (id != RoutePointActivity.ROUTE_POINT_ID_NEW) {
-			Bundle args = new Bundle();
-			args.putLong(KEY_ROUTE_POINT_ID, id);
-			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, args, this);
-		}
-		
-		DateFormat format = SimpleDateFormat.getDateInstance();
-		try {
-			mRouteDate = format.parse(getIntent().getStringExtra(KEY_ROUTE_DATE));
-		} catch (ParseException e) {
-			Log.e(TAG, e.getMessage());
-		}				
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
 			mRoutePointService = new RoutePointService(mHelper);
@@ -78,9 +69,28 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			Log.e(TAG, e.getMessage());
 		}
 		
-		mCustomer = (EditText) findViewById(R.id.customer_edit_text);
-		mShippinAddress = (EditText) findViewById(R.id.shipping_address_edit_text);
-		mCustomer.setOnClickListener(new TextView.OnClickListener() {
+		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
+			mRoutePoint = mRoutePointService.getById(mRoutePointId);
+			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
+			if (mShippingAddress != null)
+				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
+			
+			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
+		}
+		
+		String routeDateStr = getIntent().getStringExtra(KEY_ROUTE_DATE);		
+		if (routeDateStr != null && routeDateStr != "") {
+			try {
+				DateFormat format = SimpleDateFormat.getDateInstance();
+				mRouteDate = format.parse(getIntent().getStringExtra(KEY_ROUTE_DATE));
+			} catch (ParseException e) {
+				Log.e(TAG, e.getMessage());
+			}
+		}		
+		
+		mCustomerEditText = (EditText) findViewById(R.id.customer_edit_text);
+		mShippinAddressEditText = (EditText) findViewById(R.id.shipping_address_edit_text);
+		mCustomerEditText.setOnClickListener(new TextView.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent customersActivity = new Intent(getApplicationContext(), CustomersActivity.class);
@@ -88,12 +98,12 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			}
         });
 		
-		mShippinAddress.setOnClickListener(new TextView.OnClickListener() {
+		mShippinAddressEditText.setOnClickListener(new TextView.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Intent shippingAddressesActivity = new Intent(getApplicationContext(), ShippingAddressesActivity.class);
-				if (mCustomer.getTag() != null) {
-					shippingAddressesActivity.putExtra("customer_id", (Long)mCustomer.getTag());
+				if (mCustomer != null) {
+					shippingAddressesActivity.putExtra("customer_id", (Long)mCustomer.getId());
 				}
 				startActivityForResult(shippingAddressesActivity, PICK_SHIPPING_ADDRESS_REQUEST);
 			}
@@ -117,39 +127,33 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
 	        	long customerId = data.getLongExtra("customer_id", 0l);
-	        	mCustomer.setTag(customerId);
 	        	
 	        	try {
-	        		Customer customer = mCustomerService.getById(customerId);
-	        		mCustomer.setText(customer.getName());
-	        		Iterable<ShippingAddress> shippingAddresses = mShippingAddressService.findByCustomer(customer);
+	        		mCustomer = mCustomerService.getById(customerId);	        		
+	        		Iterable<ShippingAddress> shippingAddresses = mShippingAddressService.findByCustomer(mCustomer);
 					if (IterableHelpers.size(ShippingAddress.class, shippingAddresses) == 1) {
-						ShippingAddress shippingAddress = shippingAddresses.iterator().next();
-						mShippinAddress.setTag(shippingAddress.getId());
-			        	mShippinAddress.setText(shippingAddress.getName());
+						mShippingAddress = shippingAddresses.iterator().next();
 					} else {	        		
-						mShippinAddress.setTag(0);
-			        	mShippinAddress.setText("");
+						mShippingAddress = null;
 					}
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
-				}	        	
+				}	        
+	        	
+	        	getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
 	        }
 	    } else if (requestCode == PICK_SHIPPING_ADDRESS_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
-	        	long shippingAddressId = data.getLongExtra("shipping_address_id", 0l);
-	        		        	
-	        	mShippinAddress.setTag(shippingAddressId);	        		        	
+	        	long shippingAddressId = data.getLongExtra("shipping_address_id", 0l);	        		        	
 	        	try {
-	        		ShippingAddress shippingAddress = mShippingAddressService.getById(shippingAddressId);
-	        		mShippinAddress.setText(shippingAddress.getName());
-					Customer customer = mCustomerService.getById(shippingAddress.getCustomerId());
-					mCustomer.setTag(customer.getId());
-		        	mCustomer.setText(customer.getName());
+	        		mShippingAddress = mShippingAddressService.getById(shippingAddressId);
+					mCustomer = mCustomerService.getById(mShippingAddress.getCustomerId());
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
+	        	
+	        	getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
 	        }
 	    }
 	}
@@ -168,18 +172,13 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			return true;
 		case R.id.menu_item_save:
 			if (mRoutePoint == null && mRouteDate != null) {
-				ShippingAddress shippingAddress;
 				try {
-					shippingAddress = mShippingAddressService.getById((Long)mShippinAddress.getTag());
-					mRoutePointService.cratePoint(mRouteDate, shippingAddress);
+					mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}			
-				
-				//mRoutePoint = new RoutePoint(  mTitle.getText().toString(), mText.getText().toString());
 			} else {
-				//mRoutePoint.setTitle(mTitle.getText().toString());
-				//mRoutePoint.setText(mText.getText().toString());
+				mRoutePoint.setShippingAddress(mShippingAddress);				
 			}
 
 			onRoutePointSaved(mRoutePoint);
@@ -203,10 +202,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	public Loader<RoutePoint> onCreateLoader(int id, Bundle args) {
 		switch (id) {
 		case LOADER_ID_ROUTE_POINT:
-			long routePointId = args.getLong(KEY_ROUTE_POINT_ID);
-
 			try {
-				return new RoutePointLoader(this, routePointId);
+				return new RoutePointLoader(this, mRoutePointId);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -218,19 +215,16 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	@Override
 	public void onLoadFinished(Loader<RoutePoint> loader, RoutePoint data) {
 		mRoutePoint = data;
-				
-		if (mRoutePoint != null) {
-			try {
-				ShippingAddress shippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
-				Customer customer = mCustomerService.getById(shippingAddress.getCustomerId());
-				mCustomer.setTag(customer.getId());
-				mCustomer.setText(customer.getName());
-				mShippinAddress.setTag(shippingAddress.getAddress());
-				mShippinAddress.setText(shippingAddress.getAddress());
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}		
-		}
+		
+		if (mCustomer != null)
+			mCustomerEditText.setText(mCustomer.getName());
+		else 
+			mCustomerEditText.setText("");
+		
+		if (mShippingAddress != null)
+			mShippinAddressEditText.setText(mShippingAddress.getAddress());
+		else
+			mShippinAddressEditText.setText("");
 	}
 
 	@Override

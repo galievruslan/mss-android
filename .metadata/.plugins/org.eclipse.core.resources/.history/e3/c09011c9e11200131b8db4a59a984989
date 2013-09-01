@@ -1,0 +1,38 @@
+package com.mss.domain.services;
+
+import android.util.Log;
+
+import com.mss.application.RoutePointEditActivity;
+import com.mss.domain.models.Customer;
+import com.mss.domain.models.ShippingAddress;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.OrmliteCustomerRepository;
+
+public class CustomerService {
+	private static final String TAG = CustomerService.class.getSimpleName();
+	
+	private DatabaseHelper databaseHelper;
+	private OrmliteCustomerRepository customerRepo;
+	public CustomerService(DatabaseHelper databaseHelper) throws Throwable{
+		this.databaseHelper = databaseHelper;
+		customerRepo = new OrmliteCustomerRepository(this.databaseHelper);
+	}
+	
+	public Customer getById(long id) {
+		try {
+			return customerRepo.getById(id);
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return null;
+	}
+	
+	public Customer getByShippingAddress(ShippingAddress shippingAddress) {
+		return customerRepo.getById(id);
+	}
+	
+	public Iterable<Customer> getCustomers() throws Throwable{		 
+		return customerRepo.find();
+	}
+}

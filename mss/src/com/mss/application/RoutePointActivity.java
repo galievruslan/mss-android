@@ -30,7 +30,8 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
     
     public static final int LOADER_ID_ROUTE_POINT = 0;
     
-	public static final int REQUEST_SHOW_ROUTE_POINT = 1;
+	public static final int REQUEST_SHOW_ROUTE_POINT = 0;
+	
 	public static final long ROUTE_POINT_ID_NEW = 0;
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
 	
@@ -107,7 +108,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	public void onOrderSelected(Order order, int position, long id) {
 		Intent intent = new Intent(this, OrderEditActivity.class);
 		intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
-		startActivity(intent);
+		startActivityForResult(intent, OrderEditActivity.REQUEST_EDIT_ORDER);
 	}
 
 	@Override
@@ -116,8 +117,13 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 
 		switch (requestCode) {
 		case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:
-			// We are coming back from the NoteEditActivity
-			
+			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
+			break;
+		case OrderEditActivity.REQUEST_ADD_ORDER:
+			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
+			break;
+		case OrderEditActivity.REQUEST_EDIT_ORDER:
+			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
 			break;
 		default:
 			break;
@@ -156,7 +162,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		case R.id.menu_item_add:
 			Intent intent = new Intent(this, OrderEditActivity.class);
 			intent.putExtra(OrderEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
-			startActivityForResult(intent, 0);
+			startActivityForResult(intent, OrderEditActivity.REQUEST_ADD_ORDER);
 			return true;
 		default:
 			return false;

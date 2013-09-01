@@ -1,11 +1,17 @@
 package com.mss.domain.services;
 
+import java.util.ArrayList;
+
+import android.util.Log;
+
 import com.mss.domain.models.Customer;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteShippingAddressRepository;
 
 public class ShippingAddressService {
+	private static final String TAG = ShippingAddressService.class.getSimpleName();
+	
 	private DatabaseHelper databaseHelper;
 	OrmliteShippingAddressRepository shippingAddressRepo;
 	public ShippingAddressService(DatabaseHelper databaseHelper) throws Throwable{
@@ -13,15 +19,34 @@ public class ShippingAddressService {
 		shippingAddressRepo = new OrmliteShippingAddressRepository(this.databaseHelper);
 	}
 	
-	public ShippingAddress getById(long id) throws Throwable{		
-		return shippingAddressRepo.getById(id);
+	public ShippingAddress getById(long id) {
+		try {
+			return shippingAddressRepo.getById(id);
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return null;
+		
 	}
 	
-	public Iterable<ShippingAddress> findByCustomer(Customer customer) throws Throwable{		 
-		return shippingAddressRepo.findByCustomerId(customer.getId());
+	public Iterable<ShippingAddress> findByCustomer(Customer customer) {
+		try {
+			return shippingAddressRepo.findByCustomerId(customer.getId());
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return new ArrayList<ShippingAddress>();
 	}
 	
-	public Iterable<ShippingAddress> find() throws Throwable{		 
-		return shippingAddressRepo.find();
+	public Iterable<ShippingAddress> find() {	
+		try {
+			return shippingAddressRepo.find();
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return new ArrayList<ShippingAddress>();
 	}
 }

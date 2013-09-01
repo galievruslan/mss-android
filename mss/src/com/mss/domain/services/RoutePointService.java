@@ -1,6 +1,9 @@
 package com.mss.domain.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import android.util.Log;
 
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
@@ -13,6 +16,7 @@ import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
 
 public class RoutePointService {
+	private static final String TAG = RoutePointService.class.getSimpleName();
 	
 	private DatabaseHelper databaseHelper;
 	private OrmliteRoutePointRepository routePointRepo;
@@ -29,34 +33,60 @@ public class RoutePointService {
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
 	}
 	
-	public RoutePoint getById(long id) throws Throwable {
-		return routePointRepo.getById(id);
-	}
-	
-	public Iterable<RoutePoint> getPointsByRoute(Route route) throws Throwable {
-		return routePointRepo.findByRouteId(route.getId());
-	}
-	
-	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress) throws Throwable{
-		RouteService routeService = new RouteService(databaseHelper);
-		Route route = routeService.getOnDate(date);
-		// if not created yet
-		if (route == null) {
-			route = routeService.createRoute(date);
-			routeService.saveRoute(route);
+	public RoutePoint getById(long id) {
+		try {
+			return routePointRepo.getById(id);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
 		}
 		
-		Status status = statusRepo.getById(preferences.getDefaultRoutePointStatusId());
-		RoutePoint routePoint = new RoutePoint(route, shippingAddress, status);
-		savePoint(routePoint);
-		return routePoint;
+		return null;
 	}
 	
-	public void savePoint(RoutePoint routePoint) throws Throwable {
-		routePointRepo.save(routePoint);
+	public Iterable<RoutePoint> getPointsByRoute(Route route) {
+		try {
+			return routePointRepo.findByRouteId(route.getId());
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return new ArrayList<RoutePoint>();
 	}
 	
-	public void deletePoint(RoutePoint routePoint) throws Throwable {
-		routePointRepo.delete(routePoint);
+	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress){
+		try {
+			RouteService routeService = new RouteService(databaseHelper);
+			Route route = routeService.getOnDate(date);
+			// if not created yet
+			if (route == null) {
+				route = routeService.createRoute(date);
+				routeService.saveRoute(route);
+			}
+		
+			Status status = statusRepo.getById(preferences.getDefaultRoutePointStatusId());
+			RoutePoint routePoint = new RoutePoint(route, shippingAddress, status);
+			savePoint(routePoint);
+			return routePoint;
+			} catch (Throwable e) {
+				Log.e(TAG, e.getMessage());			
+			}
+		
+		return null;
+	}
+	
+	public void savePoint(RoutePoint routePoint) {
+		try {
+			routePointRepo.save(routePoint);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+	}
+	
+	public void deletePoint(RoutePoint routePoint) {
+		try {
+			routePointRepo.delete(routePoint);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
 	}
 }

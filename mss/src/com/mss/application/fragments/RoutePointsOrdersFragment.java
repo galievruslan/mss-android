@@ -54,6 +54,7 @@ public class RoutePointsOrdersFragment extends SherlockListFragment implements C
 		
 		try {
 			mOrderAdapter = new OrderAdapter(v.getContext());
+			getLoaderManager().initLoader(LOADER_ID_ORDERS, null, this);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -63,7 +64,7 @@ public class RoutePointsOrdersFragment extends SherlockListFragment implements C
 	
 	public void refresh(long routePointId) {
 		mRoutePointId = routePointId;
-		getLoaderManager().initLoader(LOADER_ID_ORDERS, null, this);
+		getLoaderManager().restartLoader(LOADER_ID_ORDERS, null, this);
 	}
 
 	@Override
