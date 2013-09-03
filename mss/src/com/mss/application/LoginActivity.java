@@ -8,10 +8,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -46,16 +47,8 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
 
-        //AccountManager accountManager = AccountManager.get(getApplicationContext());
-        //Account[] accounts = accountManager.getAccountsByType("MSS_ACCOUNT");
-        //if (accounts.length > 1) {
-        //	for (Account account : accounts) {
-        //		accountManager.removeAccount(account, null, null);
-		//	}        	
-        //} else if (accounts.length == 1) {
-        //	Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-        //	startActivity(mainActivity);
-        //}
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());        
+        mServer = sharedPreferences.getString("server_address", "");
         
         // Set up the login form.
         mServerView = (EditText) findViewById(R.id.server);
@@ -231,13 +224,8 @@ public class LoginActivity extends Activity {
             showProgress(false);
 
             if (success) {
-            	//Account account = new Account(login, "MSS_ACCOUNT");
-            	//AccountManager accountManager = AccountManager.get(getApplicationContext());            	
-            	//accountManager.addAccountExplicitly(account, password, null);
-            	
-            	Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-            	startActivity(mainActivity);
-            	
+            	//AuthenticationService authenticationService = new AuthenticationService(getApplicationContext());
+            	//authenticationService.setCredentials(new Credentials(login, password));            	
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

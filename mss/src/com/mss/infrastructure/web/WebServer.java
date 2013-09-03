@@ -2,7 +2,6 @@ package com.mss.infrastructure.web;
 
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,14 +24,12 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -132,7 +129,7 @@ public class WebServer {
 		HttpPost httpPost = new HttpPost(address + url);
 		httpPost.setEntity(new UrlEncodedFormEntity(params));
 		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
-		//httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
+		httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
 		
 		HttpResponse response = Dispatch(httpPost);
 		String content = Parse(response);

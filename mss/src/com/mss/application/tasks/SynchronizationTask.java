@@ -76,9 +76,9 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 		this.synchronizationActivity = synchronizationActivity;
 		this.databaseHelper = OpenHelperManager.getHelper(synchronizationActivity, DatabaseHelper.class);
 		
-		serverAddress = synchronizationActivity.getServerAddress();
+		//serverAddress = synchronizationActivity.getServerAddress();
 		try {
-			lastSyncDate = synchronizationActivity.getLastSyncTime();
+			//lastSyncDate = synchronizationActivity.getLastSyncTime();
 		} catch (Throwable e) {					
 			isFull = true;
 		}
@@ -95,11 +95,6 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
        	try {
 			webServer.connect("manager", "423200");				
 			int pageSize = 250;
-			
-			if (isFull) {
-				publishProgress(R.string.sync_clear_storage);
-				databaseHelper.clear();
-			}
 			
 			publishProgress(R.string.greetings);
 			PostGreetings postGreetings = 
@@ -121,6 +116,11 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
 							new OrmliteOrderRepository(databaseHelper), 
 							new OrmliteOrderItemRepository(databaseHelper));
 			postOrders.execute((Void)null).get();
+			
+			if (isFull) {
+				publishProgress(R.string.sync_clear_storage);
+				databaseHelper.clear();
+			}
 			
 			serverTimestamp = webServer.getTime();
 			
@@ -389,7 +389,7 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
     	lastStatusResId = resId;
     	if (synchronizationActivity != null) {
     		//now update the progress dialog
-    		synchronizationActivity.setStatusMessage(resId);
+    		//synchronizationActivity.setStatusMessage(resId);
     	}
     }
     
@@ -401,8 +401,8 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
     protected void onPostExecute(final Boolean success) {
     	
     	if (synchronizationActivity != null) {
-    		synchronizationActivity.setLastSyncTime(serverTimestamp);
-    		synchronizationActivity.setSynchronizationTask(null);
+    		//synchronizationActivity.setLastSyncTime(serverTimestamp);
+    		//synchronizationActivity.setSynchronizationTask(null);
     		synchronizationActivity.showProgress(false);
 
         	if (success) {        	
@@ -428,7 +428,7 @@ public class SynchronizationTask extends AsyncTask<Void, Integer, Boolean> {
     @Override
     protected void onCancelled() {
     	if (synchronizationActivity != null) {
-    		synchronizationActivity.setSynchronizationTask(null);
+    		//synchronizationActivity.setSynchronizationTask(null);
     		synchronizationActivity.showProgress(false);
     	}
     }

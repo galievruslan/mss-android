@@ -5,14 +5,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.mss.application.services.AuthenticationService;
+import com.mss.application.services.Constants;
+import com.mss.application.services.DummyProvider;
 import com.mss.application.tasks.*;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SyncStatusObserver;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +29,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-public class SynchronizationActivity extends Activity {  
+public class SynchronizationActivity extends Activity implements SyncStatusObserver {  
 
     // Values for email and password at the time of the login attempt.
     private boolean mFullSync;
@@ -38,40 +45,17 @@ public class SynchronizationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synchronization);
         
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         
         // Set up the login form.
         mFullSyncView = (CheckBox) findViewById(R.id.full_synchronization_checkbox);
         mLastSync = (TextView) findViewById(R.id.last_sync_text_view);
         
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String lastSync = sharedPreferences.getString("last_sync", "");
         mLastSync.setText(lastSync);
 
         mSyncFormView = findViewById(R.id.sync_form);
         mSyncStatusView = findViewById(R.id.sync_status);
-        mSyncStatusMessageView = (TextView) findViewById(R.id.sync_status_message);
-        
-        mSyncTask=(SynchronizationTask)getLastNonConfigurationInstance();
-        
-        if (mSyncTask == null) {
-        	mSyncTask = new SynchronizationTask(this);
-        }
-        else {
-        	mSyncTask.attach(this);
-        	int lastStatusResId = mSyncTask.getLastStatusMessageResId();
-        	if (lastStatusResId != 0) {
-        		setStatusMessage(lastStatusResId);
-        		showProgress(true);
-        	}
-        
-        	if (mSyncTask.getStatus() == Status.FINISHED) {
-        		setLastSyncTime(mSyncTask.getServerTimestamp());
-  	
-            	Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-            	startActivity(mainActivity);        	
-            	finish();
-        	}
-        }
         
         findViewById(R.id.synchronize_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -83,54 +67,12 @@ public class SynchronizationActivity extends Activity {
             }
         });
     }
-    
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-    	if (mSyncTask != null)
-    		mSyncTask.detach();
-    	
-    	return(mSyncTask);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_login, menu);
         return true;
-    }
-    
-    private SharedPreferences sharedPreferences = null;
-    
-    public String getServerAddress(){
-    	return sharedPreferences.getString("server_address", "");
-    }
-    
-    public Date getLastSyncTime() throws ParseException{
-    	String lastSync = sharedPreferences.getString("last_sync", "");
-		DateFormat format = SimpleDateFormat.getDateTimeInstance();
-		return format.parse(lastSync);
-    }
-    
-    public void setLastSyncTime(Date time) {
-    	if (time == null)
-    		return;
-    	
-    	SharedPreferences.Editor editor = sharedPreferences.edit();	
-		DateFormat format = SimpleDateFormat.getDateTimeInstance();
-		editor.putString("last_sync", format.format(time));
-		editor.commit();
-    }
-    
-    private SynchronizationTask mSyncTask = null;
-    
-    public void setSynchronizationTask(SynchronizationTask synchronizationTask) {
-    	mSyncTask = synchronizationTask;
-    } 
-    
-    private TextView mSyncStatusMessageView;
-    
-    public void setStatusMessage(Integer resId) {
-    	mSyncStatusMessageView.setText(resId);
     }
 
     /**
@@ -139,13 +81,30 @@ public class SynchronizationActivity extends Activity {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptSync() {
+    	//AuthenticationService authenticationService = new AuthenticationService(getApplicationContext());
+    	//if (!authenticationService.isAuthenticated()) {
+    	//	Intent intent = new Intent(this, LoginActivity.class);
+    	//	startActivityForResult(intent, 0);
+    	//	return;
+    	//}
+    	    	
         mFullSyncView = (CheckBox)findViewById(R.id.full_synchronization_checkbox);
         mFullSync = mFullSyncView.isChecked();
 
-        mSyncStatusMessageView.setText(R.string.sync_progress);
-        showProgress(true);
-        mSyncTask.setFull(mFullSync);
-        mSyncTask.execute((Void) null);
+        AccountManager accountManager = AccountManager.get(getApplicationContext());
+        Account account = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE)[0];
+        
+        //mSyncStatusMessageView.setText(R.string.sync_progress);
+        //showProgress(true);
+        //mSyncTask = new SynchronizationTask(this);
+        //mSyncTask.setFull(mFullSync);
+        //mSyncTask.execute((Void) null);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        bundle.putBoolean("full_sync", mFullSync);
+        ContentResolver.requestSync(account, DummyProvider.getAuthority(), bundle);
     }
 
     /**
@@ -187,6 +146,12 @@ public class SynchronizationActivity extends Activity {
         	mSyncFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
+
+	@Override
+	public void onStatusChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 

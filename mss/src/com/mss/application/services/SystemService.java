@@ -1,10 +1,5 @@
 package com.mss.application.services;
 
-import android.app.Activity;
-import android.content.pm.PackageInfo;
-import android.content.Context;
-import android.content.Intent;
-
 public class SystemService {
 	public static String getSystemVersion(){
 		String version = android.os.Build.MODEL + ";" +					
