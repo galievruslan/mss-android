@@ -23,10 +23,12 @@ import android.accounts.OperationCanceledException;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import org.apache.http.NameValuePair;
@@ -34,13 +36,13 @@ import org.apache.http.ParseException;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.R;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderItem;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.infrastructure.data.IEntity;
 import com.mss.infrastructure.data.IRepository;
-import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.*;
 import com.mss.infrastructure.web.WebRepository;
 import com.mss.infrastructure.web.WebServer;
@@ -48,7 +50,6 @@ import com.mss.infrastructure.web.WebServer.PostResult;
 import com.mss.infrastructure.web.dtos.Dto;
 import com.mss.infrastructure.web.dtos.ISO8601Utils;
 import com.mss.infrastructure.web.dtos.translators.*;
-import com.mss.infrastructure.web.dtos.translators.Translator;
 import com.mss.infrastructure.web.repositories.*;
 import com.mss.utils.IterableHelpers;
 
@@ -67,6 +68,10 @@ import java.util.regex.Pattern;
  */
 public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SyncAdapter";
+    public static final String SYNC_EVENT_KEY = "sync_event";
+    public static final String SYNC_FINISHED_KEY = "sync_finished";
+    public static final String MESSAGE_KEY = "message_id";
+    public static final String STATUS_KEY = "status";
 
     private final AccountManager mAccountManager;
     private final Context mContext;
@@ -94,7 +99,13 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
              
              String lastSyncStr = sharedPreferences.getString("last_sync", "");
      		 DateFormat format = SimpleDateFormat.getDateTimeInstance();
-     		 Date lastSync = format.parse(lastSyncStr);
+     		 Date lastSync = null;
+     		 try {
+     			 lastSync = format.parse(lastSyncStr);
+     		 }
+     		 catch (Exception e) {
+     			 Log.e(TAG, e.getMessage());
+     		 }
              
              WebServer webServer = new WebServer(server);
              webServer.connect(account.name, authtoken);
@@ -104,69 +115,110 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
              int pageSize = 250;
              Boolean fullSync = extras.getBoolean("full_sync");
              
+             Intent event = new Intent(SYNC_EVENT_KEY); 
+             LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+             
+              
+             event.putExtra(MESSAGE_KEY, R.string.greetings);
+             localBroadcastManager.sendBroadcast(event);
              PostGreetings(webServer);
+             
+             event.putExtra(MESSAGE_KEY, R.string.sync_routes);
+             localBroadcastManager.sendBroadcast(event);
              PostRoutes(webServer, 
             		 new OrmliteRouteRepository(databaseHelper), 
             		 new OrmliteRoutePointRepository(databaseHelper));
+             
+             event.putExtra(MESSAGE_KEY, R.string.sync_orders);
+             localBroadcastManager.sendBroadcast(event);
              PostOrders(webServer, 
             		 new OrmliteOrderRepository(databaseHelper), 
             		 new OrmliteOrderItemRepository(databaseHelper));
              
              if (fullSync) {
- 				databaseHelper.clear();
- 				lastSync = null;
+            	 event.putExtra(MESSAGE_KEY, R.string.sync_clear_storage);
+                 localBroadcastManager.sendBroadcast(event);
+            	 
+                 databaseHelper.clear();
+                 lastSync = null;
  			}
  			
  			Date serverTimestamp = webServer.getTime();
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_categories);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new CategoryWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteCategoryRepository(databaseHelper), 
  					new CategoryTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_customers);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new CustomerWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteCustomerRepository(databaseHelper), 
  					new CustomerTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_shipping_addresses);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new ShippingAddressWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteShippingAddressRepository(databaseHelper), 
  					new ShippingAddressTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_products);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new ProductWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteProductRepository(databaseHelper), 
  					new ProductTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_price_lists);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new PriceListWebRepository(webServer.getCurrentConnection()), 
  					new OrmlitePriceListRepository(databaseHelper), 
  					new PriceListTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_price_lists_lines);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new PriceListLineWebRepository(webServer.getCurrentConnection()), 
  					new OrmlitePriceListLineRepository(databaseHelper), 
  					new PriceListLineTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_units_of_measures);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new UnitOfMeasureWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteUnitOfMeasureRepository(databaseHelper), 
  					new UnitOfMeasureTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_products_units_of_measures);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new ProductUoMWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteProductUnitOfMeasureRepository(databaseHelper), 
  					new ProductUnitOfMeasureTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_statuses);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new StatusWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteStatusRepository(databaseHelper), 
  					new StatusTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_warehouses);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new WarehouseWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteWarehouseRepository(databaseHelper), 
  					new WarehouseTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_route_templates);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new RouteTemplateWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteRouteTemplateRepository(databaseHelper), 
  					new RouteTemplateTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_route_points_templates);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new RoutePointTemplateWebRepository(webServer.getCurrentConnection()), 
  					new OrmliteRoutePointTemplateRepository(databaseHelper), 
  					new RoutePointTemplateTranslator(), lastSync, pageSize);
  			
+ 			event.putExtra(MESSAGE_KEY, R.string.sync_preferences);
+            localBroadcastManager.sendBroadcast(event);
  			Sync(new PreferencesWebRepository(webServer.getCurrentConnection()), 
  					new OrmlitePreferencesRepository(databaseHelper), 
  					new PreferencesTranslator(), lastSync, pageSize);
@@ -174,6 +226,9 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
  			SharedPreferences.Editor editor = sharedPreferences.edit();	
  			editor.putString("last_sync", format.format(serverTimestamp));
  			editor.commit();
+ 			
+ 			event.putExtra(STATUS_KEY, SYNC_FINISHED_KEY);
+            localBroadcastManager.sendBroadcast(event);
              
         } catch (final AuthenticatorException e) {
             syncResult.stats.numParseExceptions++;
@@ -190,7 +245,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
         	syncResult.stats.numParseExceptions++;
         	Log.e(TAG, "Unknown exception", e);
         }
-    }
+    }    
     
     private <TDto extends Dto, TModel extends IEntity> void Sync(
     		WebRepository<TDto> webRepo, 
@@ -328,3 +383,4 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		return nameValuePairs;		
 	}
 }
+

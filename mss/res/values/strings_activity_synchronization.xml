@@ -2,6 +2,7 @@
 
     <!-- Strings related to login --> 
     <string name="action_synchronize">Synchronize</string>
+    <string name="action_cancel">Cancel</string>
     <string name="label_full_synchronization">Full synchronization</string>
     <string name="label_last_synchronization">Last synchronization</string>
     <string name="last_synchronization">Last synchronization date</string>
@@ -24,4 +25,5 @@
 	<string name="sync_routes">Routes synchronizing&#8230;</string>
 	<string name="sync_orders">Orders synchronizing&#8230;</string>
 	<string name="title_activity_sync">Synchronization</string>
+	<string name="menu_cancel_sync">Cancel synchronization</string>
 </resources>
