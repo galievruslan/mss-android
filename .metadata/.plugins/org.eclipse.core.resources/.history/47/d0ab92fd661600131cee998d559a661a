@@ -443,8 +443,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		mOrderCustomer.setText(mOrder.getCustomerName());
 		mOrderShippingAddress.setText(mOrder.getShippingAddressName());
 		mOrderPriceList.setText(mOrder.getPriceListName());
-		mOrderWarehouse.setText(mOrder.getWarehouseName());	
-		mOrderNotes.setText(mOrder.getNote());
+		mOrderWarehouse.setText(mOrder.getWarehouseName());		
 			
 		if (mOrder.getPriceListId() != 0) {
 			getOrderPickupItemsFragment().refresh(mOrder.getPriceListId());
