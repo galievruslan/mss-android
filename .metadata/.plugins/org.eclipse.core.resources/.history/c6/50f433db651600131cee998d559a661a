@@ -1,7 +1,6 @@
 package com.mss.domain.models;
 
 import com.mss.infrastructure.data.IEntity;
-import com.mss.utils.MathHelpers;
 
 public class OrderPickedUpItem implements IEntity {
 	
@@ -85,11 +84,11 @@ public class OrderPickedUpItem implements IEntity {
 	}
 	
 	public double getPrice(){
-		return MathHelpers.Round(price * countInBase, 2);
+		return price * countInBase;
 	}
 	
 	public double getAmount(){
-		return MathHelpers.Round(price * count * countInBase, 2);
+		return price * count * countInBase;
 	}
 	
 	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure) {

@@ -163,7 +163,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			return true;
 		case R.id.menu_item_edit: {
 				if (mRoutePoint != null && mRoutePointService.hasOrders(mRoutePoint)) {
-					Toast.makeText(this, getString(R.string.alert_cant_edit_route_point), Toast.LENGTH_LONG).show();					
+					Toast toast = Toast.makeText(this, getString(R.string.alert_cant_edit_route_point), Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 0);
+					toast.show();
+					
 				} else {
 					Intent i = new Intent(this, RoutePointEditActivity.class);				
 					i.putExtra(RoutePointEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);

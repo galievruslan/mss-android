@@ -2,13 +2,10 @@ package com.mss.application;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.RoutePointsOrdersFragment;
 import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.RoutePoint;
-import com.mss.domain.services.RoutePointService;
-import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -17,12 +14,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RoutePointActivity extends SherlockFragmentActivity implements OnTabChangeListener, OnOrderSelectedListener, LoaderCallbacks<RoutePoint> {
 
@@ -42,9 +37,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	
 	private long mRoutePointId;
 	private RoutePoint mRoutePoint;
-	
-	private DatabaseHelper mDatabaseHelper;
-	private RoutePointService mRoutePointService;
 	
 	private TextView mName;
 	private TextView mAddress;
@@ -68,13 +60,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
         
 		RoutePointsOrdersFragment fragment = getRoutePointsOrdersFragment();		
 		fragment.addOnOrderSelectedListener(this);
-		
-		mDatabaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-		try {
-			mRoutePointService = new RoutePointService(mDatabaseHelper);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
 		
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);;
@@ -162,13 +147,9 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			}
 			return true;
 		case R.id.menu_item_edit: {
-				if (mRoutePoint != null && mRoutePointService.hasOrders(mRoutePoint)) {
-					Toast.makeText(this, getString(R.string.alert_cant_edit_route_point), Toast.LENGTH_LONG).show();					
-				} else {
-					Intent i = new Intent(this, RoutePointEditActivity.class);				
-					i.putExtra(RoutePointEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
-					startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
-				}
+				Intent i = new Intent(this, RoutePointEditActivity.class);				
+				i.putExtra(RoutePointEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
+				startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
 			}
 			return true;
 		case R.id.menu_item_delete:

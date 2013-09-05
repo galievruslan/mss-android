@@ -2,7 +2,6 @@ package com.mss.domain.models;
 
 import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
-import com.mss.utils.MathHelpers;
 
 @DatabaseTable(tableName = Constants.Tables.OrderItem.TABLE_NAME)
 public class OrderItem extends Entity {
@@ -109,6 +108,6 @@ public class OrderItem extends Entity {
 	}
 	
 	public double getAmount(){
-		return MathHelpers.Round(count * countInUnitOfMeasure * price, 2);
+		return  count * countInUnitOfMeasure * price;
 	}
 }

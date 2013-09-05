@@ -57,13 +57,7 @@ public class RoutePointService {
 	}
 	
 	public boolean hasOrders(RoutePoint routePoint){
-		try {
-			return orderRepo.existForRoutePointId(routePoint.getId());
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());			
-		}
 		
-		return false;
 	}
 	
 	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress){

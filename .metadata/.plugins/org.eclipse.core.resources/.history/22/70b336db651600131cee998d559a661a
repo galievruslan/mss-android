@@ -1,7 +1,6 @@
 package com.mss.domain.models;
 
 import com.mss.infrastructure.data.IEntity;
-import com.mss.utils.MathHelpers;
 
 public class OrderPickupItem implements IEntity {
 	
@@ -66,7 +65,7 @@ public class OrderPickupItem implements IEntity {
 	}
 	
 	public double getPrice(){
-		return MathHelpers.Round(price * countInBase, 2);
+		return price * countInBase;
 	}
 	
 	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){

@@ -11,7 +11,6 @@ import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.domain.models.Status;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
-import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
@@ -23,7 +22,6 @@ public class RoutePointService {
 	private OrmliteRoutePointRepository routePointRepo;
 	private OrmlitePreferencesRepository preferencesRepo;
 	private OrmliteStatusRepository statusRepo;
-	private OrmliteOrderRepository orderRepo;
 	
 	private Preferences preferences;
 	
@@ -33,7 +31,6 @@ public class RoutePointService {
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);
 		preferences = preferencesRepo.getById(Preferences.ID);
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
-		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
 	}
 	
 	public RoutePoint getById(long id) {
@@ -54,16 +51,6 @@ public class RoutePointService {
 		}
 		
 		return new ArrayList<RoutePoint>();
-	}
-	
-	public boolean hasOrders(RoutePoint routePoint){
-		try {
-			return orderRepo.existForRoutePointId(routePoint.getId());
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());			
-		}
-		
-		return false;
 	}
 	
 	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress){
