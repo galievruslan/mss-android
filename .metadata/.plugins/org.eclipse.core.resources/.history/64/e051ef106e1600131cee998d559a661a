@@ -26,7 +26,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SynchronizationActivity extends Activity {  
 
@@ -99,21 +98,13 @@ public class SynchronizationActivity extends Activity {
     	    // Extract data included in the Intent
     	    int messageId = intent.getIntExtra(SynchronizationAdapter.MESSAGE_KEY, 0);
     	    String status = intent.getStringExtra(SynchronizationAdapter.STATUS_KEY);
-    	    if (status == null || 
-    	    	(!status.equals(SynchronizationAdapter.SYNC_FINISHED_KEY) &&
-    	    	!status.equals(SynchronizationAdapter.SYNC_FAILED_KEY))) {    	    	
+    	    if (status == null || !status.equals(SynchronizationAdapter.SYNC_FINISHED_KEY)) {    	    	
     	    	mSyncStatusMessageTextView.setText(getString(messageId));    	    
     	    } else {
     	    	Log.d("receiver", "Got status: " + status);
     	    	String lastSync = mSharedPreferences.getString("last_sync", "");    	    	
                 mLastSync.setText(lastSync);
     	    	showProgress(false);
-    	    	
-    	    	if (status.equals(SynchronizationAdapter.SYNC_FINISHED_KEY)) {
-    	    		Toast.makeText(context, getString(R.string.alert_sync_finished), Toast.LENGTH_LONG).show();
-    	    	} else if (status.equals(SynchronizationAdapter.SYNC_FAILED_KEY)) {
-    	    		Toast.makeText(context, getString(R.string.alert_sync_failed), Toast.LENGTH_LONG).show();
-    	    	}
     	    }
     	}
     };

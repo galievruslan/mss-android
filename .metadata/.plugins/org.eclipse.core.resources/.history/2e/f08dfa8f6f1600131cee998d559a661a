@@ -100,8 +100,8 @@ public class SynchronizationActivity extends Activity {
     	    int messageId = intent.getIntExtra(SynchronizationAdapter.MESSAGE_KEY, 0);
     	    String status = intent.getStringExtra(SynchronizationAdapter.STATUS_KEY);
     	    if (status == null || 
-    	    	(!status.equals(SynchronizationAdapter.SYNC_FINISHED_KEY) &&
-    	    	!status.equals(SynchronizationAdapter.SYNC_FAILED_KEY))) {    	    	
+    	    	!status.equals(SynchronizationAdapter.SYNC_FINISHED_KEY) ||
+    	    	!status.equals(SynchronizationAdapter.SYNC_FAILED_KEY)) {    	    	
     	    	mSyncStatusMessageTextView.setText(getString(messageId));    	    
     	    } else {
     	    	Log.d("receiver", "Got status: " + status);

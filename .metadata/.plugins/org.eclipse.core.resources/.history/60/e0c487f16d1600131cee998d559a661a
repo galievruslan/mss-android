@@ -70,12 +70,13 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SyncAdapter";
     public static final String SYNC_EVENT_KEY = "sync_event";
     public static final String SYNC_FINISHED_KEY = "sync_finished";
-    public static final String SYNC_FAILED_KEY = "sync_failed";
     public static final String MESSAGE_KEY = "message_id";
     public static final String STATUS_KEY = "status";
 
     private final AccountManager mAccountManager;
     private final Context mContext;
+
+    private Date mLastUpdated;
 
     public SynchronizationAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -87,9 +88,6 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
         //String authtoken = null;
-    	Intent event = new Intent(SYNC_EVENT_KEY); 
-        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
-    	
          try {
              // use the account manager to request the credentials
         	 String authtoken =
@@ -116,6 +114,10 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
              
              int pageSize = 250;
              Boolean fullSync = extras.getBoolean("full_sync");
+             
+             Intent event = new Intent(SYNC_EVENT_KEY); 
+             LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+             
               
              event.putExtra(MESSAGE_KEY, R.string.greetings);
              localBroadcastManager.sendBroadcast(event);
@@ -227,11 +229,10 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
  			
  			event.putExtra(STATUS_KEY, SYNC_FINISHED_KEY);
             localBroadcastManager.sendBroadcast(event);
-            return;
              
         } catch (final AuthenticatorException e) {
             syncResult.stats.numParseExceptions++;
-            Log.e(TAG, "AuthenticatorException", e);            
+            Log.e(TAG, "AuthenticatorException", e);
         } catch (final OperationCanceledException e) {
             Log.e(TAG, "OperationCanceledExcetpion", e);
         } catch (final IOException e) {
@@ -244,9 +245,6 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
         	syncResult.stats.numParseExceptions++;
         	Log.e(TAG, "Unknown exception", e);
         }
-         
-        event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
-        localBroadcastManager.sendBroadcast(event);            
     }    
     
     private <TDto extends Dto, TModel extends IEntity> void Sync(

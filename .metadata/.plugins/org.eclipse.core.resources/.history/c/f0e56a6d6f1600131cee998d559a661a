@@ -77,6 +77,8 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     private final AccountManager mAccountManager;
     private final Context mContext;
 
+    private Date mLastUpdated;
+
     public SynchronizationAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         mContext = context;
@@ -227,26 +229,32 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
  			
  			event.putExtra(STATUS_KEY, SYNC_FINISHED_KEY);
             localBroadcastManager.sendBroadcast(event);
-            return;
              
         } catch (final AuthenticatorException e) {
             syncResult.stats.numParseExceptions++;
-            Log.e(TAG, "AuthenticatorException", e);            
+            Log.e(TAG, "AuthenticatorException", e);
+            event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
+            localBroadcastManager.sendBroadcast(event);            
         } catch (final OperationCanceledException e) {
             Log.e(TAG, "OperationCanceledExcetpion", e);
+            event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
+            localBroadcastManager.sendBroadcast(event);
         } catch (final IOException e) {
             Log.e(TAG, "IOException", e);
             syncResult.stats.numIoExceptions++;
+            event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
+            localBroadcastManager.sendBroadcast(event);
         } catch (final ParseException e) {
             syncResult.stats.numParseExceptions++;
             Log.e(TAG, "ParseException", e);
+            event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
+            localBroadcastManager.sendBroadcast(event);
         }  catch (final Throwable e) {
         	syncResult.stats.numParseExceptions++;
         	Log.e(TAG, "Unknown exception", e);
+        	event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
+            localBroadcastManager.sendBroadcast(event);
         }
-         
-        event.putExtra(STATUS_KEY, SYNC_FAILED_KEY);
-        localBroadcastManager.sendBroadcast(event);            
     }    
     
     private <TDto extends Dto, TModel extends IEntity> void Sync(
