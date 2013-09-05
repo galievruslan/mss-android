@@ -260,9 +260,9 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 				
 		if (mOrderPickedUpItem != null) {			
 			mDescription.setText(mOrderPickedUpItem.getName());
-			mPrice.setText(mOrderPickedUpItem.getPrice().toString());
+			mPrice.setText(String.valueOf(mOrderPickedUpItem.getPrice()));
 			mCount.setText(String.valueOf(mOrderPickedUpItem.getCount()));
-			mAmount.setText(mOrderPickedUpItem.getAmount().toString());
+			mAmount.setText(String.valueOf(mOrderPickedUpItem.getAmount()));
 			mUnitOfMeasure.setText(mOrderPickedUpItem.getUoMName());		
 		}			
 	}

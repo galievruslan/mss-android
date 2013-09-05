@@ -1,6 +1,5 @@
 package com.mss.domain.models;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 import com.j256.ormlite.field.*;
@@ -14,7 +13,7 @@ public class Order extends Entity {
 	public Order(Route route, RoutePoint routePoint) {
 		orderDate = route.getDate();
 		routePointId = routePoint.getId();		
-		amount = new BigDecimal(0);
+		amount = 0;
 		note = "";
 		uid = UUID.randomUUID();
 	}
@@ -120,14 +119,14 @@ public class Order extends Entity {
 		warehouseName = warehouse.getName();
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.Order.AMOUNT_FIELD)
-	private BigDecimal amount;
+	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.Order.AMOUNT_FIELD)
+	private double amount;
 	
-	public BigDecimal getAmount(){
+	public double getAmount(){
 		return amount;
 	}
 	
-	public void setAmount(BigDecimal amount){
+	public void setAmount(double amount){
 		this.amount = amount;
 	}
 	

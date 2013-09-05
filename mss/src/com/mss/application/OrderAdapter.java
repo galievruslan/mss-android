@@ -79,7 +79,7 @@ public class OrderAdapter extends BaseAdapter implements OnClickListener {
 		Order n = mOrderList.get(position);
 
 		holder.mShippingDate.setText(DateFormat.getDateFormat(v.getContext()).format(n.getShippingDate()));
-		holder.mAmount.setText(n.getAmount().toString());
+		holder.mAmount.setText(String.valueOf(n.getAmount()));
 
 		return v;
 	}

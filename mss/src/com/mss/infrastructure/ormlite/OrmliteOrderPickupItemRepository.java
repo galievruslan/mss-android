@@ -1,10 +1,5 @@
 package com.mss.infrastructure.ormlite;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.dao.RawRowMapper;
@@ -47,20 +42,11 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 				priceListLineDao.queryRaw(rawQuery + " where " + Constants.Tables.PriceListLine.TABLE_NAME + "." + Constants.Tables.Entity.ID_FIELD + " = " + Long.toString(id) ,
 				    new RawRowMapper<OrderPickupItem>() {
 				            public OrderPickupItem mapRow(String[] columnNames,
-				              String[] resultColumns) {
-				            	DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getInstance();
-				            	decimalFormat.setParseBigDecimal(true);
-				            	BigDecimal price = null;
-				            	try {
-									price = (BigDecimal)decimalFormat.parse(resultColumns[3]);
-								} catch (ParseException e) {
-									price = new BigDecimal(0);
-								}
-				            	
+				              String[] resultColumns) {				            	
 				            	return new OrderPickupItem(Long.parseLong(resultColumns[0]),
 				                		Long.parseLong(resultColumns[1]),
 				                		resultColumns[2],
-				                		price,
+				                		Double.parseDouble(resultColumns[3]),
 				                		Long.parseLong(resultColumns[4]),
 				                		Long.parseLong(resultColumns[5]),
 				                		resultColumns[6],
@@ -79,20 +65,11 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 				priceListLineDao.queryRaw(rawQuery,
 				    new RawRowMapper<OrderPickupItem>() {
 				            public OrderPickupItem mapRow(String[] columnNames,
-				              String[] resultColumns) {
-				            	DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getInstance();
-				            	decimalFormat.setParseBigDecimal(true);
-				            	BigDecimal price = null;
-				            	try {
-									price = (BigDecimal)decimalFormat.parse(resultColumns[3]);
-								} catch (ParseException e) {
-									price = new BigDecimal(0);
-								}
-				            	
+				              String[] resultColumns) {				            	
 				            	return new OrderPickupItem(Long.parseLong(resultColumns[0]),
 				                		Long.parseLong(resultColumns[1]),
 				                		resultColumns[2],
-				                		price,
+				                		Double.parseDouble(resultColumns[3]),
 				                		Long.parseLong(resultColumns[4]),
 				                		Long.parseLong(resultColumns[5]),
 				                		resultColumns[6],
@@ -112,19 +89,11 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 				    new RawRowMapper<OrderPickupItem>() {
 				            public OrderPickupItem mapRow(String[] columnNames,
 				              String[] resultColumns) {
-				            	DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getInstance();
-				            	decimalFormat.setParseBigDecimal(true);
-				            	BigDecimal price = null;
-				            	try {
-									price = (BigDecimal)decimalFormat.parse(resultColumns[3]);
-								} catch (ParseException e) {
-									price = new BigDecimal(0);
-								}
 				            	
 				            	return new OrderPickupItem(Long.parseLong(resultColumns[0]),
 				                		Long.parseLong(resultColumns[1]),
 				                		resultColumns[2],
-				                		price,
+				                		Double.parseDouble(resultColumns[3]),
 				                		Long.parseLong(resultColumns[4]),
 				                		Long.parseLong(resultColumns[5]),
 				                		resultColumns[6],

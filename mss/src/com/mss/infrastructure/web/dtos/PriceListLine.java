@@ -1,7 +1,5 @@
 package com.mss.infrastructure.web.dtos;
 
-import java.math.BigDecimal;
-
 import com.google.gson.annotations.SerializedName;
 
 public class PriceListLine extends Dto {
@@ -20,9 +18,9 @@ public class PriceListLine extends Dto {
 		return productId;
 	}
 	
-	private BigDecimal price;
+	private double price;
 	
-	public BigDecimal getPrice(){
+	public double getPrice(){
 		return price;
 	}
 }

@@ -1,7 +1,5 @@
 package com.mss.domain.models;
 
-import java.math.BigDecimal;
-
 import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
 
@@ -10,7 +8,7 @@ public class PriceListLine extends Entity {
 	
 	public PriceListLine() {}
 	
-	public PriceListLine(long id, long priceListId, long productId, BigDecimal price)  {
+	public PriceListLine(long id, long priceListId, long productId, double price)  {
 		super(id);
 		this.priceListId = priceListId;
 		this.productId = productId;
@@ -31,10 +29,10 @@ public class PriceListLine extends Entity {
 		return productId;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.PriceListLine.PRICE_FIELD)
-	private BigDecimal price;
+	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.PriceListLine.PRICE_FIELD)
+	private double price;
 	
-	public BigDecimal getPrice(){
+	public double getPrice(){
 		return price;
 	}	
 }

@@ -80,7 +80,7 @@ public class OrderFragment extends SherlockFragment implements OnTabChangeListen
 			//mShippingDate = (TextView) v.findViewById(R.id.order_shipping_date_text_view);
 			mShippingDate.setText(DateFormat.getDateFormat(mView.getContext()).format(mOrder.getShippingDate()));
 			//mAmount = (TextView) v.findViewById(R.id.order_amount_text_view);
-			mAmount.setText(mOrder.getAmount().toString());
+			mAmount.setText(String.valueOf(mOrder.getAmount()));
 		}
 
 		return mView;
@@ -168,6 +168,6 @@ public class OrderFragment extends SherlockFragment implements OnTabChangeListen
 	public void updateContent(Order order) {
 		mOrder = order;
 		mShippingDate.setText(DateFormat.getDateFormat(getView().getContext()).format(mOrder.getShippingDate()));
-		mAmount.setText(mOrder.getAmount().toString());
+		mAmount.setText(String.valueOf(mOrder.getAmount()));
 	}
 }

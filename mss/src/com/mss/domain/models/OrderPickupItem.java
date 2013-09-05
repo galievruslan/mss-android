@@ -1,12 +1,10 @@
 package com.mss.domain.models;
 
-import java.math.BigDecimal;
-
 import com.mss.infrastructure.data.IEntity;
 
 public class OrderPickupItem implements IEntity {
 	
-	public OrderPickupItem(long id, long productId, String productName, BigDecimal price, long productUomId, long uomId, String uomName, int countInBase) {
+	public OrderPickupItem(long id, long productId, String productName, double price, long productUomId, long uomId, String uomName, int countInBase) {
 		this.id = id;
 		this.productId = productId;
 		this.productName = productName;
@@ -60,14 +58,14 @@ public class OrderPickupItem implements IEntity {
 		return uomName;
 	}
 	
-	private BigDecimal price;
+	private double price;
 	
-	public BigDecimal getItemPrice(){
+	public double getItemPrice(){
 		return price;
 	}
 	
-	public BigDecimal getPrice(){
-		return price.multiply(new BigDecimal(countInBase));
+	public double getPrice(){
+		return price * countInBase;
 	}
 	
 	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){

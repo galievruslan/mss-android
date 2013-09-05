@@ -1,6 +1,5 @@
 package com.mss.domain.models;
 
-import java.math.BigDecimal;
 import com.j256.ormlite.field.*;
 import com.j256.ormlite.table.*;
 
@@ -97,18 +96,18 @@ public class OrderItem extends Entity {
 		this.count = count;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.BIG_DECIMAL, columnName = Constants.Tables.OrderItem.PRICE_FIELD)
-	private BigDecimal price;
+	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.OrderItem.PRICE_FIELD)
+	private double price;
 	
-	public BigDecimal getPrice(){
+	public double getPrice(){
 		return price;
 	}
 	
-	public void setPrice(BigDecimal price){
+	public void setPrice(double price){
 		this.price = price;
 	}
 	
-	public BigDecimal getAmount(){
-		return new BigDecimal(count * countInUnitOfMeasure).multiply(price);
+	public double getAmount(){
+		return count * countInUnitOfMeasure * price;
 	}
 }
