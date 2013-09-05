@@ -127,7 +127,7 @@ public class WebServer {
 		params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
 		
 		HttpPost httpPost = new HttpPost(address + url);
-		httpPost.setEntity(new UrlEncodedFormEntity(ParametersEscape(params), "UTF-8"));
+		httpPost.setEntity(new UrlEncodedFormEntity(ParametersEscape(params)));
 		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
 		httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
 		
@@ -147,7 +147,7 @@ public class WebServer {
 		for (NameValuePair nameValuePair : params) {
 			escapedParameters.add(new BasicNameValuePair(
 					nameValuePair.getName(), 
-					EscapeChars.forJSON(nameValuePair.getValue())));
+					EscapeChars.forJSON(EscapeChars.forURL(nameValuePair.getValue()))));
 		}
 		
 		return escapedParameters;
