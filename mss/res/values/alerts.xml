@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="alert_cant_edit_route_point">Where are orders related to point. Editing not allowed.</string>
+    <string name="alert_cant_change_point_status">Where are orders related to point. Status changing not allowed.</string>
     <string name="alert_sync_finished">Synchronization finished successfully.</string>
     <string name="alert_sync_failed">Synchronization failed.</string>
 </resources>

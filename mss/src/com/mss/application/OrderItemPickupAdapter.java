@@ -64,7 +64,7 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.order_pickup_item_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_order_pickup_item , null, false);
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);

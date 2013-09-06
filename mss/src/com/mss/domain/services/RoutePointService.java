@@ -87,6 +87,11 @@ public class RoutePointService {
 		return null;
 	}
 	
+	public void changePointStatus(RoutePoint routePoint, Status status){
+		routePoint.setStatus(status);
+		savePoint(routePoint);
+	}
+	
 	public void savePoint(RoutePoint routePoint) {
 		try {
 			routePointRepo.save(routePoint);

@@ -1,2 +1,25 @@
 1378153679344	Delete element
 1378325826369	Copy file
+1378493519960	Rename resource 'warehouse_item_layout.xml'
+1378493536163	Rename resource 'shipping_address_item_layout.xml'
+1378496018839	Rename resource 'route_point_item_layout.xml'
+1378496040948	Rename resource 'product_uom_layout.xml'
+1378496056466	Rename resource 'price_list_item_layout.xml'
+1378496072349	Rename resource 'order_pickup_item_layout.xml'
+1378496087330	Rename resource 'order_item_layout.xml'
+1378496120871	Rename resource 'customer_item_layout.xml'
+1378496171926	Rename resource 'main_menu_item_layout.xml'
+1378496182378	Delete elements
+1378496195760	Delete element
+1378496262795	Rename resource 'time_picker_fragment.xml'
+1378496297038	Rename resource 'order_fragment_tab_details.xml'
+1378496315004	Rename resource 'order_fragment_tab_general.xml'
+1378496328285	Rename resource 'order_fragment_tab_notes.xml'
+1378496342117	Rename resource 'route_point_fragment_tab_details.xml'
+1378496359830	Rename resource 'route_point_fragment_tab_general.xml'
+1378496370073	Rename resource 'tab_route_point_details.xml'
+1378496404125	Copy file
+1378496420391	Copy compilation unit
+1378496845468	Copy file
+1378496973426	Copy compilation unit
+1378497440571	Copy compilation unit

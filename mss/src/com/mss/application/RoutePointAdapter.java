@@ -64,7 +64,7 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.route_point_item_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_route_point , null, false);
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);

@@ -33,15 +33,15 @@
 
                 <include
                     android:id="@+id/tab_general"
-                    layout="@layout/order_fragment_tab_general" />
+                    layout="@layout/tab_order_general" />
 
                 <include
                     android:id="@+id/tab_details"
-                    layout="@layout/order_fragment_tab_details" />
+                    layout="@layout/tab_order_details" />
 
                 <include
                     android:id="@+id/tab_notes"
-                    layout="@layout/order_fragment_tab_notes" />
+                    layout="@layout/tab_order_notes" />
 
             </FrameLayout>
         </LinearLayout>

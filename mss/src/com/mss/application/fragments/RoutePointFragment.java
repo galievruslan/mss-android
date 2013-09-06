@@ -31,6 +31,7 @@ public class RoutePointFragment extends SherlockListFragment implements Callback
 	private RoutePoint mRoutePoint;
 	private TextView mName;
 	private TextView mAddress;
+	private TextView mStatus;
 
 	private final Set<OnOrderSelectedListener> mOnOrderSelectedListeners = 
 			new HashSet<RoutePointFragment.OnOrderSelectedListener>(1);
@@ -79,6 +80,8 @@ public class RoutePointFragment extends SherlockListFragment implements Callback
 			mName.setText(mRoutePoint.getShippingAddressName());
 			mAddress = (TextView) v.findViewById(R.id.route_point_address_text_view);
 			mAddress.setText(mRoutePoint.getShippingAddressValue());
+			mStatus = (TextView) v.findViewById(R.id.route_point_status_text_view);
+			mStatus.setText(mRoutePoint.getStatusName());
 			
 			try {
 		    	mOrderAdapter = new OrderAdapter(v.getContext());
@@ -138,6 +141,7 @@ public class RoutePointFragment extends SherlockListFragment implements Callback
 		mRoutePoint = routePoint;
 		mName.setText(mRoutePoint.getShippingAddressName());
 		mAddress.setText(mRoutePoint.getShippingAddressValue());
+		mStatus.setText(mRoutePoint.getStatusName());
 	}
 	
 	@Override

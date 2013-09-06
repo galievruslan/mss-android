@@ -65,7 +65,7 @@ public class ProductUnitsOfMeasuresAdapter extends BaseAdapter implements OnClic
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.product_uom_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_product_unit_of_measure , null, false);
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);

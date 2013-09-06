@@ -11,11 +11,13 @@ import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.models.Status;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteOrderItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderPickupItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
+import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
 
 public class OrderService {
 	private static final String TAG = OrderService.class.getSimpleName();
@@ -25,7 +27,7 @@ public class OrderService {
 	private OrmliteOrderItemRepository orderItemRepo;
 	private OrmliteOrderPickupItemRepository orderPickUpItemRepo;
 	private OrmlitePreferencesRepository preferencesRepo;
-	private Preferences preferences;
+	private OrmliteStatusRepository statusRepo;
 	
 	public OrderService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
@@ -33,7 +35,7 @@ public class OrderService {
 		orderItemRepo = new OrmliteOrderItemRepository(this.databaseHelper);
 		orderPickUpItemRepo = new OrmliteOrderPickupItemRepository(this.databaseHelper);
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);
-		preferences = preferencesRepo.getById(Preferences.ID);
+		statusRepo = new OrmliteStatusRepository(this.databaseHelper);		
 	}
 	
 	public Order getById(long id) {
@@ -103,6 +105,7 @@ public class OrderService {
 	
 	public void saveOrder(Order order, Iterable<OrderPickedUpItem> pickedUpItems){
 		try {
+			Preferences preferences = preferencesRepo.getById(Preferences.ID);
 			orderRepo.save(order);
 			double amount = 0;
 			Iterable<OrderItem> items = orderItemRepo.findByOrderId(order.getId());
@@ -160,7 +163,9 @@ public class OrderService {
 			RoutePointService routePointService = new RoutePointService(databaseHelper);
 			RoutePoint routePoint = routePointService.getById(order.getRoutePointId());
 			if (routePoint.getStatusId() == preferences.getDefaultRoutePointStatusId()) {
-				routePoint.setStatusId(preferences.getDefaultRoutePointAttendedStatusId());
+				Status defaultAttendedStatus = statusRepo.getById(preferences.getDefaultRoutePointAttendedStatusId());
+				
+				routePoint.setStatus(defaultAttendedStatus);
 				routePointService.savePoint(routePoint);
 			}
 			

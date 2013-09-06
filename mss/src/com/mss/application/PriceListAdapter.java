@@ -65,7 +65,7 @@ public class PriceListAdapter extends BaseAdapter implements OnClickListener {
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.price_list_item_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_price_list , null, false);
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);

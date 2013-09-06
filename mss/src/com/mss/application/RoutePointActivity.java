@@ -7,7 +7,9 @@ import com.mss.application.fragments.RoutePointsOrdersFragment;
 import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.models.Status;
 import com.mss.domain.services.RoutePointService;
+import com.mss.domain.services.StatusService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
@@ -32,9 +34,9 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
     private TabHost mTabHost;
     private int mCurrentTab;
     
-    public static final int LOADER_ID_ROUTE_POINT = 0;
-    
+    public static final int LOADER_ID_ROUTE_POINT = 0;    
 	public static final int REQUEST_SHOW_ROUTE_POINT = 0;
+	static final int PICK_STATUS_REQUEST = 1;
 	
 	public static final long ROUTE_POINT_ID_NEW = 0;
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
@@ -44,9 +46,11 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	
 	private DatabaseHelper mDatabaseHelper;
 	private RoutePointService mRoutePointService;
+	private StatusService mStatusService;
 	
 	private TextView mName;
 	private TextView mAddress;
+	private TextView mStatus;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 
         mName = (TextView) findViewById(R.id.route_point_name_text_view);
         mAddress = (TextView) findViewById(R.id.route_point_address_text_view);
+        mStatus = (TextView) findViewById(R.id.route_point_status_text_view);
         
         mRoutePointId = getIntent().getLongExtra(getString(R.string.key_id), ROUTE_POINT_ID_NEW);
 		getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
@@ -71,6 +76,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		mDatabaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
 			mRoutePointService = new RoutePointService(mDatabaseHelper);
+			mStatusService = new StatusService(mDatabaseHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -129,21 +135,28 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		switch (requestCode) {
-		case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:
-			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
-			break;
-		case OrderEditActivity.REQUEST_ADD_ORDER:
-			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
-			break;
-		case OrderEditActivity.REQUEST_EDIT_ORDER:
-			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);			
-			break;
-		default:
-			break;
-		}
+		if (resultCode == RESULT_OK) {
+			switch (requestCode) {
+			case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:			
+				break;
+			case OrderEditActivity.REQUEST_ADD_ORDER:			
+				break;
+			case OrderEditActivity.REQUEST_EDIT_ORDER:			
+				break;
+			case PICK_STATUS_REQUEST:
+				long statusId = data.getLongExtra("status_id", 0l);
+				
+				Status status = mStatusService.getById(statusId);
+				if (status != null && mRoutePoint != null) {
+					mRoutePointService.changePointStatus(mRoutePoint, status);
+				}
+				break;
+			default:
+				break;
+			}
 		
-		getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
+			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
+		}
 	}
 
 	@Override
@@ -169,6 +182,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 					startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
 				}
 			}
+			return true;
+		case R.id.menu_item_change_status:
+			Intent i = new Intent(this, StatusesActivity.class);	
+			startActivityForResult(i, PICK_STATUS_REQUEST);
 			return true;
 		case R.id.menu_item_delete:
 			try {
@@ -207,7 +224,8 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		
 		if (mRoutePoint != null) {
 			mName.setText(mRoutePoint.getShippingAddressName());
-			mAddress.setText(mRoutePoint.getShippingAddressValue());		
+			mAddress.setText(mRoutePoint.getShippingAddressValue());	
+			mStatus.setText(mRoutePoint.getStatusName());
 			
 			getRoutePointsOrdersFragment().refresh(mRoutePointId);
 		}

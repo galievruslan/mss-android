@@ -129,7 +129,7 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	        	long customerId = data.getLongExtra("customer_id", 0l);
 	        	
 	        	try {
-	        		mCustomer = mCustomerService.getById(customerId);	        		
+	        		mCustomer = mCustomerService.getById(customerId);
 	        		Iterable<ShippingAddress> shippingAddresses = mShippingAddressService.findByCustomer(mCustomer);
 					if (IterableHelpers.size(ShippingAddress.class, shippingAddresses) == 1) {
 						mShippingAddress = shippingAddresses.iterator().next();

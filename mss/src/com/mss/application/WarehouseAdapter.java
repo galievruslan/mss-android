@@ -65,7 +65,7 @@ public class WarehouseAdapter extends BaseAdapter implements OnClickListener {
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.warehouse_item_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_warehouse , null, false);
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);

@@ -20,6 +20,7 @@
     <string name="menu_new_route_point">New</string>
     <string name="title_activity_route_fragment">RouteFragment</string>
     <string name="title_activity_route_point_fragment">RoutePointFragment</string>
+    <string name="menu_item_change_status">Change Status</string>
     <string name="menu_item_add">Add</string>
     <string name="menu_item_edit">Edit</string>
     <string name="menu_item_delete">Delete</string>
@@ -44,6 +45,7 @@
     <string name="label_uom_base">Base</string>
     <string name="label_uom_count_in_base">Count in base</string>
     <string name="label_orders">Orders</string>
+    <string name="label_status">Status</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
@@ -55,79 +57,60 @@
     <string name="main_menu_sync">Synchronization</string>
     <string name="title_activity_authenticator">AuthenticatorActivity</string>
 
-    
     <!-- Label for this package -->
-    <string
-        name="label">MSS Synchronization adapter</string>
+    <string name="label">MSS Synchronization adapter</string>
 
     <!-- Permission label -->
-    <string
-        name="permlab_samplesyncadapterAuthPassword">access to passwords for Sample SyncAdapter accounts</string>
+    <string name="permlab_samplesyncadapterAuthPassword">access to passwords for Sample SyncAdapter accounts</string>
     <!-- Permission description -->
-    <string
-        name="permdesc_samplesyncadapterAuthPassword">Allows applications direct access to the passwords for the
+    <string name="permdesc_samplesyncadapterAuthPassword">Allows applications direct access to the passwords for the
         Sample SyncAdapter account(s) you have configured.</string>
 
     <!-- Permission label -->
-    <string
-        name="permlab_samplesyncadapterAuth">view configured accounts</string>
+    <string name="permlab_samplesyncadapterAuth">view configured accounts</string>
     <!-- Permission description -->
-    <string
-        name="permdesc_samplesyncadapterAuth">Allows applications to see the usernames (email addresses) of
+    <string name="permdesc_samplesyncadapterAuth">Allows applications to see the usernames (email addresses) of
         the Sample SyncAdapter account(s) you have configured.</string>
-    <string
-        name="notification_login_error">Touch to sign into your Sample SyncAdapter account.</string>
+    <string name="notification_login_error">Touch to sign into your Sample SyncAdapter account.</string>
 
-    <!-- Title string for Login activity-->
-    <string
-        name="ui_activity_title">Sign-in</string>
+    <!-- Title string for Login activity -->
+    <string name="ui_activity_title">Sign-in</string>
     <!-- Message shown in progress dialog while app connects to the server -->
-    <string
-        name="ui_activity_authenticating">Authenticating\u2026</string>
+    <string name="ui_activity_authenticating">Authenticating\u2026</string>
 
     <!-- AuthenticatorActivity -->
     <skip />
-    <string
-        name="login_activity_server_label">Server url</string>
+
+    <string name="login_activity_server_label">Server url</string>
     <!-- Label above username EditText -->
-    <string
-        name="login_activity_username_label">Username</string>
+    <string name="login_activity_username_label">Username</string>
     <!-- Label above password EditText -->
-    <string
-        name="login_activity_password_label">Password</string>
+    <string name="login_activity_password_label">Password</string>
     <!-- Button to sign in after entering username and password -->
-    <string
-        name="login_activity_ok_button">Sign in</string>
+    <string name="login_activity_ok_button">Sign in</string>
 
     <!-- Message shown in dialog if the username or password is invalid. -->
-    <string
-        name="login_activity_loginfail_text_both">The username or password isn\'t valid. A Sample SyncAdapter account is
+    <string name="login_activity_loginfail_text_both">The username or password isn\'t valid. A Sample SyncAdapter account is
         required. Please try again. </string>
     <!-- Message shown in dialog if the password is invalid -->
-    <string
-        name="login_activity_loginfail_text_pwonly">You entered the wrong password or your account has changed.
+    <string name="login_activity_loginfail_text_pwonly">You entered the wrong password or your account has changed.
         Please re-enter your password.</string>
     <!-- Message shown in dialog to prompt the user for their password -->
-    <string
-        name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
+    <string name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
     <!--
         Message shown if the provided account doesn't support the current
-        activity.
+        activity.
     -->
-    <string
-        name="login_activity_newaccount_text">Sign in to your MSS account. </string>
+    <string name="login_activity_newaccount_text">Sign in to your MSS account. </string>
 
     <!-- Button that takes the user to the "sign in" screen -->
-    <string
-        name="sign_in_button_label">Sign in</string>
+    <string name="sign_in_button_label">Sign in</string>
     <!-- Button for going to the previous screen or step -->
-    <string
-        name="back_button_label">Back</string>
+    <string name="back_button_label">Back</string>
     <!-- Button to cancel the current operation -->
-    <string
-        name="cancel_button_label">Cancel</string>
-    <string
-        name="profile_action">Sample profile</string>
-    <string
-        name="view_profile">View Profile</string>
+    <string name="cancel_button_label">Cancel</string>
+    <string name="profile_action">Sample profile</string>
+    <string name="view_profile">View Profile</string>
+    <string name="title_activity_statuses">StatusesActivity</string>
+
 </resources>

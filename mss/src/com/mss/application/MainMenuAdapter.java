@@ -75,7 +75,7 @@ public class MainMenuAdapter extends BaseAdapter implements OnClickListener {
 		ViewHolder holder;
 
 		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.main_menu_item_layout , null, false);
+			v = mLayoutInflater.inflate(R.layout.item_layout_main_menu , null, false);
 
 			holder = new ViewHolder();
 			holder.mMenu = (TextView) v.findViewById(R.id.menu_text);

@@ -33,11 +33,11 @@
 
                 <include
                     android:id="@+id/tab_general"
-                    layout="@layout/route_point_fragment_tab_general" />
+                    layout="@layout/tab_route_point_general" />
 
                 <include
                     android:id="@+id/tab_details"
-                    layout="@layout/route_point_fragment_tab_details" />
+                    layout="@layout/tab_route_point_orders" />
 
             </FrameLayout>
         </LinearLayout>

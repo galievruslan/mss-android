@@ -13,7 +13,8 @@ public class RoutePoint extends Entity {
 		shippingAddressId = shippingAddress.getId();
 		shippingAddressName = shippingAddress.getName();
 		shippingAddressValue = shippingAddress.getAddress();
-		statusId = status.id;
+		statusId = status.getId();
+		statusName = status.getName();
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.ROUTE_FIELD)
@@ -55,10 +56,18 @@ public class RoutePoint extends Entity {
 	
 	public long getStatusId(){
 		return statusId;
+	}	
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.RoutePoint.STATUS_NAME_FIELD)
+	private String statusName;
+	
+	public String getStatusName(){
+		return statusName;
 	}
 	
-	public void setStatusId(long statusId){
-		this.statusId = statusId;
+	public void setStatus(Status status){
+		this.statusId = status.getId();
+		this.statusName = status.getName();
 		this.isSynchronized = false;
 	}
 	

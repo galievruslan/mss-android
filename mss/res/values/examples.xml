@@ -10,4 +10,5 @@
     <string name="example_shipping_date">31/12/2013</string>
     <string name="example_menu_icon_context_description">Icon</string>
 	<string name="example_menu_text">Menu</string>
+	<string name="example_status">Attended</string>
 </resources>
