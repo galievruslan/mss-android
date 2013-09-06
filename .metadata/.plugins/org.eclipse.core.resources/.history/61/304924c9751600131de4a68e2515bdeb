@@ -273,9 +273,9 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 					TModel invalidModel = modelRepo.getById(dto.getId());
 					if (invalidModel != null)
 						modelRepo.delete(invalidModel);
-				} else {
-					modelRepo.save(translator.Translate(dto));
-				}
+				}					
+			
+				modelRepo.save(translator.Translate(dto));			
 			}
 				
 			pageNo ++;

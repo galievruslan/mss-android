@@ -24,14 +24,14 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 				Constants.Tables.UnitOfMeasure.TABLE_NAME + "." + Constants.Tables.UnitOfMeasure.NAME_FIELD + " as [uom_name], " +
 				Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.ProductUnitOfMeasure.COUNT_IN_BASE_FIELD + " as [uom_count_in_base] " +
 				" from " + Constants.Tables.PriceListLine.TABLE_NAME + " as " + Constants.Tables.PriceListLine.TABLE_NAME + " " +
-				" inner join " + Constants.Tables.Product.TABLE_NAME + " as " + Constants.Tables.Product.TABLE_NAME + " on " +
+				" left join " + Constants.Tables.Product.TABLE_NAME + " as " + Constants.Tables.Product.TABLE_NAME + " on " +
 				Constants.Tables.PriceListLine.TABLE_NAME + "." + Constants.Tables.PriceListLine.PRODUCT_FIELD + " = " +
 				Constants.Tables.Product.TABLE_NAME + "." + Constants.Tables.Entity.ID_FIELD + 
-				" inner join " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + " as " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + " on " +
+				" left join " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + " as " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + " on " +
 				Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.ProductUnitOfMeasure.PRODUCT_FIELD + " = " +
 				Constants.Tables.Product.TABLE_NAME + "." + Constants.Tables.Entity.ID_FIELD + " And " +
 				Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.ProductUnitOfMeasure.BASE_FIELD + " = 1 " +
-				" inner join " + Constants.Tables.UnitOfMeasure.TABLE_NAME + " as " + Constants.Tables.UnitOfMeasure.TABLE_NAME + " on " +
+				" left join " + Constants.Tables.UnitOfMeasure.TABLE_NAME + " as " + Constants.Tables.UnitOfMeasure.TABLE_NAME + " on " +
 				Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.ProductUnitOfMeasure.UNIT_OF_MEASURE_FIELD + " = " +
 				Constants.Tables.UnitOfMeasure.TABLE_NAME + "." + Constants.Tables.Entity.ID_FIELD;
 	}
