@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -63,16 +62,12 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
         mSyncStatusView = findViewById(R.id.sync_status);
         mSyncStatusMessageTextView = (TextView)findViewById(R.id.sync_status_message);
         
+        AccountManager accountManager = AccountManager.get(getApplicationContext());
+        mAccount = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE)[0];
+        
         findViewById(R.id.sync_run_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-            	try {
-            		AccountManager accountManager = AccountManager.get(getApplicationContext());
-                    Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-                    if (accounts.length == 0) {
-                    	startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
-                    	return;
-                    }
-            		
+            	try {					
             		mFullSyncView = (CheckBox)findViewById(R.id.full_synchronization_checkbox);
                     mFullSync = mFullSyncView.isChecked();
 
@@ -89,12 +84,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
             }
         });
         
-        AccountManager accountManager = AccountManager.get(getApplicationContext());
-        Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-        if (accounts.length > 0) {
-        	mAccount = accounts[0];        
-        	showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
-        }
+        showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
         
         if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -107,13 +97,6 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
       // Register mMessageReceiver to receive messages.
       LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
           new IntentFilter(SynchronizationAdapter.SYNC_EVENT_KEY));
-    }
-    
-    @Override
-    public void onPause() {
-        super.onPause();  // Always call the superclass method first
-
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     }
     
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {

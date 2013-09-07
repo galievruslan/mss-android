@@ -68,7 +68,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
             	try {
             		AccountManager accountManager = AccountManager.get(getApplicationContext());
                     Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-                    if (accounts.length == 0) {
+                    if (accounts.length > 0 || accounts[0] == null) {
                     	startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
                     	return;
                     }

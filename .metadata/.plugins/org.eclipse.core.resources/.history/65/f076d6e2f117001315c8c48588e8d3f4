@@ -68,7 +68,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
             	try {
             		AccountManager accountManager = AccountManager.get(getApplicationContext());
                     Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-                    if (accounts.length == 0) {
+                    if (accounts.length > 0 || accounts[0] == null) {
                     	startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
                     	return;
                     }
@@ -90,11 +90,8 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
         });
         
         AccountManager accountManager = AccountManager.get(getApplicationContext());
-        Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-        if (accounts.length > 0) {
-        	mAccount = accounts[0];        
-        	showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
-        }
+        mAccount = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE)[0];        
+        showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
         
         if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
