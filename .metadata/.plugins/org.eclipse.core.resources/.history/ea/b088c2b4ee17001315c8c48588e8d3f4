@@ -188,7 +188,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_settings, menu);
+		inflater.inflate(R.menu.menu_synchronization, menu);
 		
         return true;
     }
@@ -205,6 +205,10 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				NavUtils.navigateUpTo(this, upIntent);
 			}
 			return true;
+		case R.id.menu_item_cancel_sync:
+			ContentResolver.cancelSync(mAccount, DummyProvider.getAuthority());
+    		showProgress(false);		
+    		return true;
 		default:
 			break;
 		}

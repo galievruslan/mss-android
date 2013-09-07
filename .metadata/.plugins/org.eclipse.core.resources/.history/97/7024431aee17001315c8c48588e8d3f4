@@ -13,6 +13,7 @@ import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,8 +23,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
@@ -127,7 +126,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_synchronization, menu);
+		inflater.inflate(R.menu.menu_s, menu);
 		
         return true;
     }
@@ -135,15 +134,6 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
     @Override
 	public boolean onOptionsItemSelected(MenuItem item)  {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent upIntent = new Intent(this, MainActivity.class);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
-				finish();
-			} else {
-				NavUtils.navigateUpTo(this, upIntent);
-			}
-			return true;
 		case R.id.menu_item_cancel_sync:
 			ContentResolver.cancelSync(mAccount, DummyProvider.getAuthority());
     		showProgress(false);		

@@ -1,9 +1,5 @@
 package com.mss.application;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.services.Constants;
 import com.mss.application.services.DummyProvider;
 import com.mss.application.services.SynchronizationAdapter;
@@ -13,6 +9,7 @@ import android.accounts.AccountManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -22,16 +19,16 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SynchronizationActivity extends SherlockFragmentActivity {  
+public class SynchronizationActivity extends Activity {  
 
     private Account mAccount;
     private boolean mFullSync;
@@ -85,9 +82,6 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
         });
         
         showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
-        
-        if (getSupportActionBar() != null)
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     
     @Override
@@ -126,24 +120,14 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_synchronization, menu);
-		
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.activity_synchronization, menu);
         return true;
     }
 
     @Override
 	public boolean onOptionsItemSelected(MenuItem item)  {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent upIntent = new Intent(this, MainActivity.class);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
-				finish();
-			} else {
-				NavUtils.navigateUpTo(this, upIntent);
-			}
-			return true;
 		case R.id.menu_item_cancel_sync:
 			ContentResolver.cancelSync(mAccount, DummyProvider.getAuthority());
     		showProgress(false);		
