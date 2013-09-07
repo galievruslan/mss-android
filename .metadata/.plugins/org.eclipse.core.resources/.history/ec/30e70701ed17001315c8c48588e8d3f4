@@ -192,24 +192,22 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		case R.id.menu_item_delete: {
 				if (mRoutePoint != null) {
 					new AlertDialog.Builder(this)
-			        	.setTitle(R.string.dialog_delete_confirmation_title) 
-			        	.setMessage(R.string.dialog_delete_confirmation_message) 
+			        	.setTitle("Delete") 
+			        	.setMessage("Do you want to Delete") 
 			        	.setIcon(R.drawable.ic_action_delete)
-			        	.setPositiveButton(R.string.dialog_delete_confirmation_positive_button, 
-			        			new DialogInterface.OnClickListener() {
+			        	.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 			        		public void onClick(DialogInterface dialog, int whichButton) { 
 			        			mRoutePointService.deletePoint(mRoutePoint);
 			        			finish();
 			        			dialog.dismiss();
 			        		}   
 			        	})
-			        	.setNegativeButton(R.string.dialog_delete_confirmation_negative_button, new DialogInterface.OnClickListener() {
+			        	.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
 			        		public void onClick(DialogInterface dialog, int which) {
 			        			dialog.dismiss();
 			        		}
 			        	})
-			        	.create()
-			        	.show();
+			        	.create();
 				}
 				return true;
 			}

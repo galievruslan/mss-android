@@ -208,8 +208,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			        			dialog.dismiss();
 			        		}
 			        	})
-			        	.create()
-			        	.show();
+			        	.create();
 				}
 				return true;
 			}
