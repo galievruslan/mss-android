@@ -1201,15 +1201,16 @@ containing a value of this type.
         public static final int menu_route=0x7f0d000c;
         public static final int menu_route_point=0x7f0d000d;
         public static final int menu_route_point_edit=0x7f0d000e;
-        public static final int order=0x7f0d000f;
-        public static final int order_item_pickup=0x7f0d0010;
-        public static final int order_pickup_items=0x7f0d0011;
-        public static final int orders=0x7f0d0012;
-        public static final int price_lists=0x7f0d0013;
-        public static final int product_uoms=0x7f0d0014;
-        public static final int statuses=0x7f0d0015;
-        public static final int time_picker=0x7f0d0016;
-        public static final int warehouses=0x7f0d0017;
+        public static final int menu_route_point_editable=0x7f0d000f;
+        public static final int order=0x7f0d0010;
+        public static final int order_item_pickup=0x7f0d0011;
+        public static final int order_pickup_items=0x7f0d0012;
+        public static final int orders=0x7f0d0013;
+        public static final int price_lists=0x7f0d0014;
+        public static final int product_uoms=0x7f0d0015;
+        public static final int statuses=0x7f0d0016;
+        public static final int time_picker=0x7f0d0017;
+        public static final int warehouses=0x7f0d0018;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

@@ -115,7 +115,8 @@ public class OrderService {
 			return new ArrayList<OrderItem>();
 		}
 	}
-		
+	
+	
 	public Order createOrder(Route route, RoutePoint routePoint) {
 		Order order = new Order(route, routePoint);		
 		return order;
@@ -198,15 +199,5 @@ public class OrderService {
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
-	}
-	
-	public boolean canBeEditedOrDeleted(long orderId) {
-		try {
-			return !orderRepo.getById(orderId).getIsSynchronized();
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return false;
 	}
 }

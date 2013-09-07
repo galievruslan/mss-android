@@ -23,6 +23,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RoutePointActivity extends SherlockFragmentActivity implements OnTabChangeListener, OnOrderSelectedListener, LoaderCallbacks<RoutePoint> {
 
@@ -177,15 +178,18 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			}
 			return true;
 		case R.id.menu_item_edit: {
-			Intent i = new Intent(this, RoutePointEditActivity.class);				
-			i.putExtra(RoutePointEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
-			startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
+				if (mRoutePoint != null && mRoutePointService.hasOrders(mRoutePoint)) {
+					Toast.makeText(this, getString(R.string.alert_cant_edit_route_point), Toast.LENGTH_LONG).show();					
+				} else {
+					Intent i = new Intent(this, RoutePointEditActivity.class);				
+					i.putExtra(RoutePointEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
+					startActivityForResult(i, RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT);
+				}
 			}
 			return true;
-		case R.id.menu_item_change_status: {
+		case R.id.menu_item_change_status:
 			Intent i = new Intent(this, StatusesActivity.class);	
 			startActivityForResult(i, PICK_STATUS_REQUEST);
-			}
 			return true;
 		case R.id.menu_item_delete:
 			try {
@@ -194,11 +198,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 				e.printStackTrace();
 			}
 			finish();
-		case R.id.menu_item_add: {
-				Intent intent = new Intent(this, OrderEditActivity.class);
-				intent.putExtra(OrderEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
-				startActivityForResult(intent, OrderEditActivity.REQUEST_ADD_ORDER);
-			}
+		case R.id.menu_item_add:
+			Intent intent = new Intent(this, OrderEditActivity.class);
+			intent.putExtra(OrderEditActivity.KEY_ROUTE_POINT_ID, mRoutePointId);
+			startActivityForResult(intent, OrderEditActivity.REQUEST_ADD_ORDER);
 			return true;
 		default:
 			return false;

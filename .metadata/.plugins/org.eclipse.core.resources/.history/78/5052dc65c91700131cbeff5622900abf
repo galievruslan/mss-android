@@ -56,6 +56,16 @@ public class RoutePointService {
 		return new ArrayList<RoutePoint>();
 	}
 	
+	public boolean hasOrders(RoutePoint routePoint){
+		try {
+			return orderRepo.existForRoutePointId(routePoint.getId());
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return false;
+	}
+	
 	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress){
 		try {
 			RouteService routeService = new RouteService(databaseHelper);
@@ -96,15 +106,5 @@ public class RoutePointService {
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());			
 		}
-	}
-	
-	public boolean canBeEditedOrDeleted(long routePointId) {
-		try {
-			return !orderRepo.existForRoutePointId(routePointId);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return false;
 	}
 }

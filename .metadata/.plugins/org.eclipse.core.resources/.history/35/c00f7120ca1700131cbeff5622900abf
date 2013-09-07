@@ -200,7 +200,7 @@ public class OrderService {
 		}
 	}
 	
-	public boolean canBeEditedOrDeleted(long orderId) {
+	public boolean canBeEdited(long orderId) {
 		try {
 			return !orderRepo.getById(orderId).getIsSynchronized();
 		} catch (Throwable e) {

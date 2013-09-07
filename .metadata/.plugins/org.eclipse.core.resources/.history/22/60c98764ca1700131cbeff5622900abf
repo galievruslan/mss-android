@@ -11,5 +11,4 @@
         android:icon="@drawable/ic_menu_change_status"
         android:showAsAction="always"
         android:title="@string/menu_item_change_status"/>
-    
 </menu>

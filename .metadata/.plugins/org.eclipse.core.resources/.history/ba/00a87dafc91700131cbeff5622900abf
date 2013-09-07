@@ -3,18 +3,8 @@ package com.mss.application;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.OrderItemsFragment;
 import com.mss.domain.models.Order;
-import com.mss.domain.services.CustomerService;
-import com.mss.domain.services.OrderService;
-import com.mss.domain.services.PriceListService;
-import com.mss.domain.services.ProductService;
-import com.mss.domain.services.RoutePointService;
-import com.mss.domain.services.RouteService;
-import com.mss.domain.services.ShippingAddressService;
-import com.mss.domain.services.WarehouseService;
-import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
 import android.content.Intent;
@@ -54,22 +44,12 @@ public class OrderActivity extends SherlockFragmentActivity implements OnTabChan
 	private TextView mOrderPriceList;
 	private TextView mOrderWarehouse;
 	private TextView mOrderNotes;
-	
-	private DatabaseHelper mHelper;
-	private OrderService mOrderService;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_order);
 						
-		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-		try {
-			mOrderService = new OrderService(mHelper);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
 		mOrderDate = (TextView)findViewById(R.id.order_date_text_view);
 		mOrderShippingDate = (TextView)findViewById(R.id.order_shipping_date_text_view);
 		mOrderShippingTime = (TextView)findViewById(R.id.order_shipping_time_text_view);
@@ -139,9 +119,7 @@ public class OrderActivity extends SherlockFragmentActivity implements OnTabChan
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		if (mOrderService.canBeEditedOrDeleted(mOrderId)) {
-			getSupportMenuInflater().inflate(R.menu.menu_order, menu);
-		}
+		getSupportMenuInflater().inflate(R.menu.menu_order, menu);
 		return true;
 	}
 	
@@ -214,6 +192,14 @@ public class OrderActivity extends SherlockFragmentActivity implements OnTabChan
 			mOrderWarehouse.setText(mOrder.getWarehouseName());	
 			mOrderNotes.setText(mOrder.getNote());
 			getOrderItemsFragment().refresh(mOrder.getId());
+			
+			if (mOrder.getIsSynchronized()) {
+				MenuItem menuItem = (MenuItem)findViewById(R.id.menu_item_edit);
+				menuItem.setVisible(false);
+				menuItem = (MenuItem)findViewById(R.id.menu_item_delete);
+				menuItem.setVisible(false);
+				invalidateOptionsMenu();
+			}
 		}
 	}
 

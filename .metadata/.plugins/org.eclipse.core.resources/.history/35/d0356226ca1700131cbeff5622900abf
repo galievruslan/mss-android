@@ -139,7 +139,7 @@ public class OrderActivity extends SherlockFragmentActivity implements OnTabChan
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		if (mOrderService.canBeEditedOrDeleted(mOrderId)) {
+		if (mOrderService.canBeEdited(mOrderId)) {
 			getSupportMenuInflater().inflate(R.menu.menu_order, menu);
 		}
 		return true;
