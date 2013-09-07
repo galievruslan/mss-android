@@ -98,6 +98,25 @@ public class OrderService {
 		}
 	}
 	
+	public OrderItem getOrderItemById(long id) {
+		try {
+			return orderItemRepo.getById(id);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+			return null;
+		}
+	}
+	
+	public Iterable<OrderItem> getOrderItems(long orderId) {
+		try {			
+			return orderItemRepo.findByOrderId(orderId);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+			return new ArrayList<OrderItem>();
+		}
+	}
+	
+	
 	public Order createOrder(Route route, RoutePoint routePoint) {
 		Order order = new Order(route, routePoint);		
 		return order;

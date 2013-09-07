@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RoutePointEditActivity" >
+    tools:context=".OrderEditActivity" >
     
     <TabHost
         android:id="@android:id/tabhost"
@@ -33,15 +33,15 @@
 
                 <include
                     android:id="@+id/tab_general"
-                    layout="@layout/tab_order_general" />
+                    layout="@layout/tab_order_edit_general" />
 
                 <include
                     android:id="@+id/tab_details"
-                    layout="@layout/tab_order_details" />
+                    layout="@layout/tab_order_edit_details" />
 
                 <include
                     android:id="@+id/tab_notes"
-                    layout="@layout/tab_order_notes" />
+                    layout="@layout/tab_order_edit_notes" />
 
             </FrameLayout>
         </LinearLayout>

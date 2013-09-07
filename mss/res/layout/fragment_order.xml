@@ -35,15 +35,15 @@
 
                 <include
                     android1:id="@+id/tab_general"
-                    layout="@layout/tab_order_general" />
+                    layout="@layout/tab_order_edit_general" />
 
                 <include
                     android1:id="@+id/tab_details"
-                    layout="@layout/tab_order_details" />
+                    layout="@layout/tab_order_edit_details" />
 
                 <include
                     android1:id="@+id/tab_notes"
-                    layout="@layout/tab_order_notes" />
+                    layout="@layout/tab_order_edit_notes" />
 
             </FrameLayout>
         </LinearLayout>

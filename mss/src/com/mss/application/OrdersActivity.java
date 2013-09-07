@@ -85,14 +85,14 @@ public class OrdersActivity extends SherlockFragmentActivity implements OnOrderS
 		getSupportLoaderManager().restartLoader(LOADER_ID_ORDERS, null, this);
 		
 		switch (requestCode) {
-			case OrderActivity.REQUEST_SHOW_ORDER:
-				if (data != null) {
-					long routePointId = data.getLongExtra(RoutePointActivity.EXTRA_ROUTE_POINT_ID, 0l);
-					if (routePointId != 0l) {
-						showOrderById(routePointId);
-					}
-				}
-				break;
+			//case OrderActivity.REQUEST_SHOW_ORDER:
+			//	if (data != null) {
+			//		long routePointId = data.getLongExtra(RoutePointActivity.EXTRA_ROUTE_POINT_ID, 0l);
+			//		if (routePointId != 0l) {
+			//			showOrderById(routePointId);
+			//		}
+			//	}
+			//	break;
 			case OrderEditActivity.REQUEST_EDIT_ORDER:
 				if (resultCode == RESULT_OK) {
 					
@@ -348,11 +348,11 @@ public class OrdersActivity extends SherlockFragmentActivity implements OnOrderS
 
 		@Override
 		public void onOrderSelected(Order n, int position, long id) {
-			OrdersActivity activity = mWeakActivity.get();
+			//OrdersActivity activity = mWeakActivity.get();
 
-			Intent intent = new Intent(activity, OrderEditActivity.class);
-			intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
-			activity.startActivityForResult(intent, OrderActivity.REQUEST_SHOW_ORDER);
+			//Intent intent = new Intent(activity, OrderEditActivity.class);
+			//intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
+			//activity.startActivityForResult(intent, OrderActivity.REQUEST_SHOW_ORDER);
 		}
 
 		@Override

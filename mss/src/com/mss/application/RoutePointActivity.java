@@ -126,9 +126,9 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	
 	@Override
 	public void onOrderSelected(Order order, int position, long id) {
-		Intent intent = new Intent(this, OrderEditActivity.class);
-		intent.putExtra(OrderEditActivity.KEY_ORDER_ID, id);
-		startActivityForResult(intent, OrderEditActivity.REQUEST_EDIT_ORDER);
+		Intent intent = new Intent(this, OrderActivity.class);
+		intent.putExtra(OrderActivity.KEY_ORDER_ID, id);
+		startActivityForResult(intent, OrderActivity.REQUEST_SHOW_ORDER);
 	}
 
 	@Override
@@ -140,9 +140,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:			
 				break;
 			case OrderEditActivity.REQUEST_ADD_ORDER:			
-				break;
-			case OrderEditActivity.REQUEST_EDIT_ORDER:			
-				break;
+				break;			
 			case PICK_STATUS_REQUEST:
 				long statusId = data.getLongExtra("status_id", 0l);
 				
@@ -155,6 +153,8 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 				break;
 			}
 		
+			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
+		} else if (requestCode == OrderActivity.REQUEST_SHOW_ORDER) {
 			getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINT, null, this);
 		}
 	}

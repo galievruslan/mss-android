@@ -8,7 +8,7 @@
         android:id="@+id/label_shipping_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/example_shipping_date"
+        android:text="@string/example_date"
         android:maxLines="1"
         android:textSize="20sp" />
 

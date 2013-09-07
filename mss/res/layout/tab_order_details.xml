@@ -7,10 +7,10 @@
     android:orientation="vertical" >
 
     <fragment
-        android:id="@+id/fragment_order_pickup_item_list"
-        android:name="com.mss.application.fragments.OrderPickupItemsFragment"
+        android:id="@+id/fragment_order_item_list"
+        android:name="com.mss.application.fragments.OrderItemsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_order_pickup_item_list" />
+        tools:layout="@layout/fragment_order_item_list" />
 
 </LinearLayout>

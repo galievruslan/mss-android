@@ -17,14 +17,13 @@
                 android:text="@string/label_order_date"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_date_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_date_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="date" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_date"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_shipping_date"
@@ -33,14 +32,13 @@
                 android:text="@string/label_order_shipping_date"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_shipping_date_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_shipping_date_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="date" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_date"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_shipping_time"
@@ -49,14 +47,13 @@
                 android:text="@string/label_order_shipping_time"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_shipping_time_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_shipping_time_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="time" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_time"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_customer"
@@ -65,14 +62,13 @@
                 android:text="@string/label_order_customer"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_customer_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_customer_name_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="text" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_name"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_shipping_address"
@@ -81,14 +77,13 @@
                 android:text="@string/label_order_shipping_address"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_shipping_address_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_shipping_address_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="textPostalAddress" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_address"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_price_list"
@@ -97,14 +92,13 @@
                 android:text="@string/label_order_price_list"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_price_list_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_price_list_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="text" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_price_list"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/label_order_warehouse"
@@ -113,14 +107,13 @@
                 android:text="@string/label_order_warehouse"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <EditText
-                android:id="@+id/order_warehouse_edit_text"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/order_warehouse_text_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-        		android:focusableInTouchMode="false"
-                android:inputType="text" />
+                android:layout_marginBottom="10dp"
+                android:text="@string/example_warehouse"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
