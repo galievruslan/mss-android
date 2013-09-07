@@ -269,12 +269,16 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 				
 			dtos = webRepo.find(params);
 			for (TDto dto : dtos) {
-				if (!dto.getIsValid()) {
-					TModel invalidModel = modelRepo.getById(dto.getId());
-					if (invalidModel != null)
-						modelRepo.delete(invalidModel);
-				} else {
-					modelRepo.save(translator.Translate(dto));
+				try {
+					if (!dto.getIsValid()) {
+						TModel invalidModel = modelRepo.getById(dto.getId());
+						if (invalidModel != null)
+							modelRepo.delete(invalidModel);
+					} else {
+						modelRepo.save(translator.Translate(dto));
+					}
+				}catch(Throwable e) {
+					Log.e(TAG, e.getMessage());
 				}
 			}
 				

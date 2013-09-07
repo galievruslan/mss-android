@@ -13,7 +13,7 @@ public class OrmliteRoutePointRepository extends OrmliteGenericRepository<RouteP
 		
 		QueryBuilder<RoutePoint, Integer> queryBuilder = dao.queryBuilder();
 		
-		queryBuilder.where().like(com.mss.domain.models.Constants.Tables.RoutePoint.ROUTE_FIELD , id);
+		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.RoutePoint.ROUTE_FIELD , id);
 		return dao.query(queryBuilder.prepare());
 	}
 }

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
+        android:id="@+id/menu_item_copy_from_template"
+		android:icon="@drawable/ic_menu_copy_route"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/menu_item_copy_route_from_template"/>
+        
+    <item
         android:id="@+id/menu_item_add"
 		android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="withText|ifRoom"

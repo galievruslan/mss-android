@@ -7,7 +7,7 @@ public class RouteTemplateTranslator extends Translator<com.mss.infrastructure.w
 
 	@Override
 	public com.mss.domain.models.RouteTemplate Translate(com.mss.infrastructure.web.dtos.RouteTemplate dto) {
-		Week.Days dayOfWeek = Days.Monday;
+		Week.Days dayOfWeek = null;
 		switch (dto.getDayOfWeekNo()){
 		case 1: 
 			dayOfWeek = Days.Monday;
@@ -27,7 +27,7 @@ public class RouteTemplateTranslator extends Translator<com.mss.infrastructure.w
 		case 6:
 			dayOfWeek = Days.Saturday;
 			break;
-		case 7:
+		case 0:
 			dayOfWeek = Days.Sunday;
 			break;
 		}

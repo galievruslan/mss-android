@@ -10,11 +10,15 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.MenuInflater;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.RouteFragment;
 import com.mss.application.fragments.RouteFragment.OnRouteDateChangedListener;
 import com.mss.application.fragments.RouteFragment.OnRoutePointSelectedListener;
 import com.mss.application.fragments.RoutePointFragment;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.services.OrderService;
+import com.mss.domain.services.RouteService;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,12 +41,22 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 	private ActionMode mActionMode;
 	private RoutePointAdapter mRoutePointAdapter;
 	
+	private DatabaseHelper mHelper;
+	private RouteService mRouteService;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_route);
 
+		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			mRouteService = new RouteService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
 		try {
 			mRoutePointAdapter = new RoutePointAdapter(this);
 		} catch (Throwable e) {
@@ -112,7 +126,7 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.menu_list, menu);
+		inflater.inflate(R.menu.menu_route, menu);
 
 		return true;
 	}
@@ -135,9 +149,15 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 					NavUtils.navigateUpTo(this, upIntent);
 				}
 				return true;
-			case R.id.menu_item_add:
+			case R.id.menu_item_copy_from_template: {
+					mRouteService.copyRouteFromTemplate(getRouteFragment().getRouteDate());
+					getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINTS, null, this);
+					return true;
+				}				
+			case R.id.menu_item_add: {
 				mPaneMode.onAddRoutePoint();
-				return true;
+					return true;
+				}				
 			case R.id.menu_item_delete:
 				RoutePointFragment frag = getRoutePointFragment();
 				if (frag != null) {

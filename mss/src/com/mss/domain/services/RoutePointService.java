@@ -24,14 +24,11 @@ public class RoutePointService {
 	private OrmlitePreferencesRepository preferencesRepo;
 	private OrmliteStatusRepository statusRepo;
 	private OrmliteOrderRepository orderRepo;
-	
-	private Preferences preferences;
-	
+		
 	public RoutePointService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
 		routePointRepo = new OrmliteRoutePointRepository(this.databaseHelper);
-		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);
-		preferences = preferencesRepo.getById(Preferences.ID);
+		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);		
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
 		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
 	}
@@ -66,6 +63,7 @@ public class RoutePointService {
 				routeService.saveRoute(route);
 			}
 		
+			Preferences preferences = preferencesRepo.getById(Preferences.ID);
 			Status status = statusRepo.getById(preferences.getDefaultRoutePointStatusId());
 			RoutePoint routePoint = new RoutePoint(route, shippingAddress, status);
 			savePoint(routePoint);
