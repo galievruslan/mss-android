@@ -82,10 +82,23 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 		return orderPickupItems;
 	}
 	
-	public Iterable<OrderPickupItem> findByPriceListId(long priceListId) throws Throwable {
+	public Iterable<OrderPickupItem> findByPriceListId(long priceListId, Long[] categoryFilter) throws Throwable {
+		rawQuery = rawQuery + " where " + Constants.Tables.PriceListLine.TABLE_NAME + "." + Constants.Tables.PriceListLine.PRICE_LIST_FIELD + " = " + Long.toString(priceListId);
+		if (categoryFilter.length > 0) {
+			String categoryFilterQuery = "(";
+			for (int i = 0; i < categoryFilter.length; i++) {
+				categoryFilterQuery = categoryFilterQuery + String.valueOf(categoryFilter[i]);
+				if (i < categoryFilter.length - 1) {
+					categoryFilterQuery = categoryFilterQuery + ", ";
+				}				
+			}
+			categoryFilterQuery = categoryFilterQuery + ")";
+			
+			rawQuery = rawQuery + " AND " + Constants.Tables.Product.TABLE_NAME + "." + Constants.Tables.Product.CATEGORY_FIELD + " IN " + categoryFilterQuery; 
+		}
+		
 		GenericRawResults<OrderPickupItem> rawResults =
-				priceListLineDao.queryRaw(
-						rawQuery + " where " + Constants.Tables.PriceListLine.TABLE_NAME + "." + Constants.Tables.PriceListLine.PRICE_LIST_FIELD + " = " + Long.toString(priceListId),
+				priceListLineDao.queryRaw(rawQuery,
 				    new RawRowMapper<OrderPickupItem>() {
 				            public OrderPickupItem mapRow(String[] columnNames,
 				              String[] resultColumns) {

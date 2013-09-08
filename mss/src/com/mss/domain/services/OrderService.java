@@ -18,6 +18,7 @@ import com.mss.infrastructure.ormlite.OrmliteOrderPickupItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
+import com.mss.utils.IterableHelpers;
 
 public class OrderService {
 	private static final String TAG = OrderService.class.getSimpleName();
@@ -65,9 +66,9 @@ public class OrderService {
 		}
 	}
 	
-	public Iterable<OrderPickupItem> getOrderPickupItems(long priceListId) {
+	public Iterable<OrderPickupItem> getOrderPickupItems(long priceListId, Iterable<Long> categoryFilter) {
 		try {
-			return orderPickUpItemRepo.findByPriceListId(priceListId);
+			return orderPickUpItemRepo.findByPriceListId(priceListId, IterableHelpers.toArray(Long.class, categoryFilter));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 			return new ArrayList<OrderPickupItem>();

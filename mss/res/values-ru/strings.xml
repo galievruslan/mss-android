@@ -117,4 +117,9 @@
     <string name="cancel_button_label">Отмена</string>
     <string name="title_activity_statuses">Статусы</string>
 
+    <string name="expand_all_menu">Развернуть все</string>
+    <string name="expand_menu">Развернуть</string>
+    <string name="collapse_all_menu">Свернуть все</string>
+    <string name="select_all_menu">Выбрать все</string>
+    <string name="unselect_all_menu">Снять выбор</string>
 </resources>

@@ -1,101 +1,110 @@
 package com.mss.application;
 
-import java.util.List;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.mss.domain.models.Category;
 import com.mss.domain.services.CategoryService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
+import pl.polidea.treeview.AbstractTreeViewAdapter;
+import pl.polidea.treeview.TreeNodeInfo;
+import pl.polidea.treeview.TreeStateManager;
+
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View.OnClickListener;
-import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CategoriesAdapter extends BaseAdapter implements OnClickListener {
-	
-	private final Context mContext;
-	private final LayoutInflater mLayoutInflater;
-	private List<Category> mCategoryList;
-	private final DatabaseHelper mHelper;
-	private final CategoryService mCategoryService;
+public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
 
-	public CategoriesAdapter(Context ctx) throws Throwable {
-		mContext = ctx;
-		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	private static final String TAG = CategoriesAdapter.class.getSimpleName();
 
-		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
-		mCategoryService = new CategoryService(mHelper);
-		notifyDataSetChanged();		
-	}
-	
-	public Category getItemById(long id) throws Throwable {
-		return mCategoryService.getById(id);
-	}
+    private DatabaseHelper mHelper;
+    private CategoryService mCategoryService;
+    
+    private final OnCheckedChangeListener onCheckedChange = new OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(final CompoundButton buttonView,
+                final boolean isChecked) {
+            final Long id = (Long) buttonView.getTag();
+            changeSelected(isChecked, id);
+        }
 
-	@Override
-	public int getCount() {
-		if (mCategoryList == null || mCategoryList.isEmpty())
-			return 0;
-		return mCategoryList.size();
-	}
+    };
 
-	@Override
-	public Object getItem(int position) {
-		if (mCategoryList == null || mCategoryList.isEmpty())
-			return null;
-		return mCategoryList.get(position);
-	}
+    private void changeSelected(final boolean isChecked, final Long id) {
+        if (isChecked) {
+        	CategorySelectContext.getSelectedCategories().add(id);
+        } else {
+        	CategorySelectContext.getSelectedCategories().remove(id);
+        }
+    }
 
-	@Override
-	public long getItemId(int position) {
-		if (mCategoryList == null || mCategoryList.isEmpty())
-			return -1l;
-		return mCategoryList.get(position).getId();
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-
-		View v = convertView;
-		ViewHolder holder;
-
-		if (v == null) {
-			v = mLayoutInflater.inflate(R.layout.item_layout_category , null, false);
-
-			holder = new ViewHolder();
-			holder.mName = (TextView) v.findViewById(R.id.label_name);
-
-			v.setTag(holder);
-		} else {
-			holder = (ViewHolder) v.getTag();
+    public CategoriesAdapter(final CategoriesActivity categoriesActivity,
+            final TreeStateManager<Long> treeStateManager,
+            final int numberOfLevels) {
+        super(categoriesActivity, treeStateManager, numberOfLevels);
+        
+        mHelper = OpenHelperManager.getHelper(categoriesActivity, DatabaseHelper.class);
+		try {
+			mCategoryService = new CategoryService(mHelper);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
 		}
+    }
 
-		Category n = mCategoryList.get(position);
+    private String getDescription(final long id) {
+        //final Integer[] hierarchy = getManager().getHierarchyDescription(id);
+        return mCategoryService.getById(id).getName();
+    }
 
-		holder.mName.setText(n.getName());
+    @Override
+    public View getNewChildView(final TreeNodeInfo<Long> treeNodeInfo) {
+        final LinearLayout viewLayout = (LinearLayout) getActivity()
+                .getLayoutInflater().inflate(R.layout.item_layout_category, null);
+        return updateView(viewLayout, treeNodeInfo);
+    }
 
-		return v;
-	}
+    @Override
+    public LinearLayout updateView(final View view,
+            final TreeNodeInfo<Long> treeNodeInfo) {
+        final LinearLayout viewLayout = (LinearLayout) view;
+        final TextView descriptionView = (TextView) viewLayout
+                .findViewById(R.id.demo_list_item_description);
+        descriptionView.setText(getDescription(treeNodeInfo.getId()));
+        final CheckBox box = (CheckBox) viewLayout
+                .findViewById(R.id.demo_list_checkbox);
+        box.setTag(treeNodeInfo.getId());
+        if (treeNodeInfo.isWithChildren()) {
+            box.setVisibility(View.GONE);
+        } else {
+            box.setVisibility(View.VISIBLE);
+            box.setChecked(CategorySelectContext.getSelectedCategories().contains(treeNodeInfo.getId()));
+        }
+        box.setOnCheckedChangeListener(onCheckedChange);
+        return viewLayout;
+    }
 
-	@Override
-	public void onClick(View v) {}
+    @Override
+    public void handleItemClick(final View view, final Object id) {
+        final Long longId = (Long) id;
+        final TreeNodeInfo<Long> info = getManager().getNodeInfo(longId);
+        if (info.isWithChildren()) {
+            super.handleItemClick(view, id);
+        } else {
+            final ViewGroup vg = (ViewGroup) view;
+            final CheckBox cb = (CheckBox) vg
+                    .findViewById(R.id.demo_list_checkbox);
+            cb.performClick();
+        }
+    }
 
-	@Override
-	public void notifyDataSetChanged() {
-		super.notifyDataSetChanged();
-	}
-
-	public void swapData(List<Category> data) {
-		mCategoryList = data;
-		notifyDataSetChanged();
-	}
-
-	private static class ViewHolder {
-		TextView mName;
-	}
+    @Override
+    public long getItemId(final int position) {
+        return getTreeId(position);
+    }
 }
+

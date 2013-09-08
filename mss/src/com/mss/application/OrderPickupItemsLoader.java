@@ -31,7 +31,7 @@ public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem
 	 */
 	@Override
 	public List<OrderPickupItem> loadInBackground() {
-		mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId));
+		mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories()));
 		return mOrderPickupItemList;
 	}
 

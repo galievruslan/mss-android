@@ -124,4 +124,22 @@
     <string name="title_activity_statuses">StatusesActivity</string>
     <string name="title_activity_categories">CategoriesActivity</string>
 
+    <string name="simple_menu_name">simple_menu_name</string>
+    <string name="simple_menu_condensed">simple_menu_condensed</string>
+    <string name="fancy_menu_name">fancy_menu_name</string>
+    <string name="fancy_menu_condensed">fancy_menu_condensed</string>
+    <string name="expand_all_menu">expand_all_menu</string>
+    <string name="expand_all_condensed">expand_all_condensed</string>
+    <string name="collapse_all_menu">collapse_all_menu</string>
+    <string name="collapse_all_condesed">collapse_all_condesed</string>
+    <string name="collapsible_menu_disable">collapsible_menu_disable</string>
+    <string name="collapsible_condensed_disable">collapsible_condensed_disable</string>
+    <string name="collapsible_menu_enable">collapsible_menu_enable</string>
+    <string name="collapsible_condensed_enable">collapsible_condensed_enable</string>
+    
+    <string name="expand_all_menu">Expand all</string>
+    <string name="expand_menu">Expand menu</string>
+    <string name="collapse_all_menu">Collapse all</string>
+    <string name="select_all_menu">Select all</string>
+    <string name="unselect_all_menu">Unselect all</string>
 </resources>

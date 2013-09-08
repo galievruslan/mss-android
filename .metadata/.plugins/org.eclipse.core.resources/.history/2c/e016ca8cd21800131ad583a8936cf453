@@ -1,0 +1,21 @@
+package com.mss.application;
+
+import java.util.HashMap;
+import java.util.Set;
+
+import com.mss.domain.models.OrderPickedUpItem;
+
+public final class CategorySelectContext {
+	public static void Init(){
+		if (selectedCategories != null)
+			selectedCategories.clear();
+		
+		selectedCategories = new 
+	}
+	
+	private static Set<Long> selectedCategories;
+	
+	public static Set<Long> getSelectedCategories() {
+		return selectedCategories;
+	}
+}
