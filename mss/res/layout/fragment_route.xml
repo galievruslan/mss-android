@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
+        android:cursorVisible="false" 
         android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
         android:inputType="date"
         android:singleLine="true"
         android:textAlignment="center" >

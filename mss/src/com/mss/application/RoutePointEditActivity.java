@@ -8,6 +8,7 @@ import java.util.Date;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.LoginActivity.UserLoginTask;
 import com.mss.domain.models.Customer;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
@@ -23,6 +24,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -98,6 +100,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			}
         });
 		
+		mCustomerEditText.setKeyListener(null);
+		
 		mShippinAddressEditText.setOnClickListener(new TextView.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -108,6 +112,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 				startActivityForResult(shippingAddressesActivity, PICK_SHIPPING_ADDRESS_REQUEST);
 			}
         });
+		
+		mShippinAddressEditText.setKeyListener(null);
 
 		// Let's show the application icon as the Up button
 		if (getSupportActionBar() != null)
@@ -173,7 +179,40 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 		case R.id.menu_item_save:
 			if (mRoutePoint == null && mRouteDate != null) {
 				try {
-					mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
+					mCustomerEditText.setError(null);
+					mShippinAddressEditText.setError(null);
+					
+					boolean cancel = false;
+			        View focusView = null;
+			        
+			        if (mCustomer == null) {
+			        	mCustomerEditText.setError(getString(R.string.error_field_required));
+			            focusView = mCustomerEditText;
+			            cancel = true;
+			        }
+			        
+			        if (mShippingAddress == null) {
+			        	mShippinAddressEditText.setError(getString(R.string.error_field_required));
+			            focusView = mShippinAddressEditText;
+			            cancel = true;
+			        }
+			        
+			        if (!cancel) {
+			        	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
+			        		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
+			        		focusView = mShippinAddressEditText;
+			            	cancel = true;
+			        	}
+			        }
+			        
+			        if (cancel) {
+			            focusView.requestFocus();
+			        } else {
+			        	mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
+			        	mRoutePointService.savePoint(mRoutePoint);
+			        	finish();
+			        }					
+					
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}			
@@ -181,21 +220,10 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 				mRoutePoint.setShippingAddress(mShippingAddress);				
 			}
 
-			onRoutePointSaved(mRoutePoint);
-
 			return true;
 		default:
 			return false;
 		}
-	}
-
-	public void onRoutePointSaved(RoutePoint routePoint) {
-		try {
-			mRoutePointService.savePoint(routePoint);
-		} catch (Throwable e) {
-			Log.e(TAG, "Unable to create or update route point: " + routePoint);
-		}
-		finish();
 	}
 
 	@Override

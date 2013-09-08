@@ -3,5 +3,4 @@
     <string name="prompt_customer">Клиент</string>
     <string name="prompt_shipping_address">Адрес доставки</string>
     <string name="action_create">Создать</string>
-    <string name="error_field_required">Это поле обязательное для заполнения</string>
 </resources>

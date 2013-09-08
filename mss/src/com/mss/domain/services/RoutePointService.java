@@ -53,6 +53,19 @@ public class RoutePointService {
 		return new ArrayList<RoutePoint>();
 	}
 	
+	public RoutePoint getPointByDateAndAddress(Date date, ShippingAddress shippingAddress) {
+		try {
+			RouteService routeService = new RouteService(databaseHelper);
+			Route route = routeService.getOnDate(date);
+						
+			return routePointRepo.getByRouteAndAddress(route.getId(), shippingAddress.getId());
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return null;
+	}
+	
 	public RoutePoint cratePoint(Date date, ShippingAddress shippingAddress){
 		try {
 			RouteService routeService = new RouteService(databaseHelper);

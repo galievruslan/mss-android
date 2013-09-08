@@ -56,6 +56,8 @@ public class RouteFragment extends SherlockListFragment {
 			}
 		});
 		
+		mRouteDateEditText.setKeyListener(null);
+		
 	    try {
 			setListAdapter(new RoutePointAdapter(v.getContext()));
 		} catch (Throwable e) {
