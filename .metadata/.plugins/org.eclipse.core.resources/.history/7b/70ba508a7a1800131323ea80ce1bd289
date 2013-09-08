@@ -51,8 +51,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_synchronization);
                 
-        PreferenceManager.setDefaultValues(this, R.xml.pref_data_sync, false);
-        
+        // Set up the login form.
         mFullSyncView = (CheckBox) findViewById(R.id.full_synchronization_checkbox);
         mLastSync = (TextView) findViewById(R.id.last_sync_text_view);
         

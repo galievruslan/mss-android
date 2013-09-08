@@ -74,8 +74,6 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     private EditText mServerEdit;
     private String mUsername;
     private EditText mUsernameEdit;
-    
-    SharedPreferences sharedPreferences;     
 
     /**
      * {@inheritDoc}
@@ -91,10 +89,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         mAuthtokenType = intent.getStringExtra(PARAM_AUTHTOKEN_TYPE);
         mRequestNewAccount = mUsername == null;
         mConfirmCredentials =
-            intent.getBooleanExtra(PARAM_CONFIRMCREDENTIALS, false);        
-
-   	 	PreferenceManager.setDefaultValues(this, R.xml.pref_data_sync, false);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());        
+            intent.getBooleanExtra(PARAM_CONFIRMCREDENTIALS, false);
+        
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());        
         mServer = sharedPreferences.getString("server_address", "");
 
         Log.i(TAG, "    request new: " + mRequestNewAccount);
@@ -226,10 +223,6 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
         // Hide the progress dialog
         hideProgress();
         if (result) {
-        	SharedPreferences.Editor editor = sharedPreferences.edit();	
- 			editor.putString("server_address", mServer);
- 			editor.commit();
-        	
             if (!mConfirmCredentials) {
                 finishLogin();
             } else {
