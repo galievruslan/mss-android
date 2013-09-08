@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Strings related to route -->
+    <string name="prompt_route_date">Дата маршрута</string>
+    <string name="lable_route_date_default">01.01.2013</string>
+    <string name="title_activity_route">Маршрут</string>
+    <string name="label_name">Имя</string>
+    <string name="label_address">Адрес</string>    
+    <string name="description_name">Название точки</string>
+    <string name="description_address">Адрес точки</string>
+
+</resources>

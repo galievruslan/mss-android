@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alert_cant_edit_route_point">Есть заказы привязанные к точке. Режактирование не разрешено.</string>
+    <string name="alert_cant_change_point_status">Есть заказы привязанные к точке. Смена статуса не разрешена.</string>
+    <string name="alert_sync_finished">Синхронизация успешно выполена.</string>
+    <string name="alert_sync_failed">Синхронизация завершилась с ошибками.</string>
+</resources>

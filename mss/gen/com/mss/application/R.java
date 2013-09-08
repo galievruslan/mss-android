@@ -804,6 +804,7 @@ containing a value of this type.
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
+ Default screen margins, per the Android Design guidelines. 
          */
         public static final int activity_horizontal_margin=0x7f08000f;
         public static final int activity_vertical_margin=0x7f080010;
@@ -1261,6 +1262,7 @@ containing a value of this type.
         public static final int action_sign_in_register=0x7f0a0073;
         public static final int action_sign_in_short=0x7f0a0074;
         /**  Strings related to login 
+ Strings related to login 
          */
         public static final int action_synchronize=0x7f0a009d;
         public static final int alert_cant_change_point_status=0x7f0a000e;
@@ -1269,6 +1271,7 @@ containing a value of this type.
         public static final int alert_sync_finished=0x7f0a000f;
         public static final int app_name=0x7f0a0020;
         /**  Button for going to the previous screen or step 
+ Button for going to the previous screen or step 
          */
         public static final int back_button_label=0x7f0a006b;
         public static final int button_delete=0x7f0a008e;
@@ -1283,6 +1286,7 @@ containing a value of this type.
         public static final int button_three=0x7f0a0086;
         public static final int button_two=0x7f0a0085;
         /**  Button to cancel the current operation 
+ Button to cancel the current operation 
          */
         public static final int cancel_button_label=0x7f0a006c;
         public static final int description_address=0x7f0a0095;
@@ -1314,6 +1318,7 @@ containing a value of this type.
         public static final int hello_world=0x7f0a0021;
         public static final int key_id=0x7f0a003a;
         /**  Label for this package 
+ Label for this package 
          */
         public static final int label=0x7f0a005a;
         public static final int label_address=0x7f0a0093;
@@ -1343,12 +1348,15 @@ containing a value of this type.
         public static final int lable_route_date_default=0x7f0a0090;
         public static final int last_synchronization=0x7f0a00a1;
         /**  Message shown in dialog if the username or password is invalid. 
+ Message shown in dialog if the username or password is invalid. 
          */
         public static final int login_activity_loginfail_text_both=0x7f0a0066;
         /**  Message shown in dialog to prompt the user for their password 
+ Message shown in dialog to prompt the user for their password 
          */
         public static final int login_activity_loginfail_text_pwmissing=0x7f0a0068;
         /**  Message shown in dialog if the password is invalid 
+ Message shown in dialog if the password is invalid 
          */
         public static final int login_activity_loginfail_text_pwonly=0x7f0a0067;
         /** 
@@ -1356,16 +1364,24 @@ containing a value of this type.
         activity.
 
     
+
+        Message shown if the provided account doesn't support the current
+        activity.
+
+    
          */
         public static final int login_activity_newaccount_text=0x7f0a0069;
         /**  Button to sign in after entering username and password 
+ Button to sign in after entering username and password 
          */
         public static final int login_activity_ok_button=0x7f0a0065;
         /**  Label above password EditText 
+ Label above password EditText 
          */
         public static final int login_activity_password_label=0x7f0a0064;
         public static final int login_activity_server_label=0x7f0a0062;
         /**  Label above username EditText 
+ Label above username EditText 
          */
         public static final int login_activity_username_label=0x7f0a0063;
         public static final int login_progress_signing_in=0x7f0a0076;
@@ -1387,28 +1403,36 @@ containing a value of this type.
         public static final int menu_sync=0x7f0a0024;
         public static final int notification_login_error=0x7f0a005f;
         /**  Permission description 
+ Permission description 
          */
         public static final int permdesc_samplesyncadapterAuth=0x7f0a005e;
         /**  Permission description 
+ Permission description 
          */
         public static final int permdesc_samplesyncadapterAuthPassword=0x7f0a005c;
         /**  Permission label 
+ Permission label 
          */
         public static final int permlab_samplesyncadapterAuth=0x7f0a005d;
         /**  Permission label 
+ Permission label 
          */
         public static final int permlab_samplesyncadapterAuthPassword=0x7f0a005b;
         public static final int pref_default_last_sync=0x7f0a009c;
         public static final int pref_default_server_address=0x7f0a009a;
         /**  Example settings for Data & Sync 
+ Example settings for Data & Sync 
          */
         public static final int pref_header_data_sync=0x7f0a0098;
         /**  Strings related to Settings 
+ Example General settings 
+ Strings related to Settings 
  Example General settings 
          */
         public static final int pref_header_general=0x7f0a0097;
         public static final int pref_title_last_sync=0x7f0a009b;
         /**  Example settings for Data & Sync 
+ Example settings for Data & Sync 
          */
         public static final int pref_title_server_address=0x7f0a0099;
         public static final int profile_action=0x7f0a006d;
@@ -1416,14 +1440,17 @@ containing a value of this type.
         public static final int prompt_login=0x7f0a0071;
         public static final int prompt_password=0x7f0a0072;
         /**  Strings related to route 
+ Strings related to route 
          */
         public static final int prompt_route_date=0x7f0a008f;
         /**  Strings related to login 
+ Strings related to login 
          */
         public static final int prompt_server=0x7f0a0070;
         public static final int prompt_shipping_address=0x7f0a007c;
         public static final int prompt_unit_of_measure=0x7f0a0083;
         /**  Button that takes the user to the "sign in" screen 
+ Button that takes the user to the "sign in" screen 
          */
         public static final int sign_in_button_label=0x7f0a006a;
         public static final int sub_title_activity_orders=0x7f0a002d;
@@ -1469,9 +1496,11 @@ containing a value of this type.
         public static final int title_activity_time_picker_fragment=0x7f0a004e;
         public static final int title_activity_warehouses=0x7f0a004d;
         /**  Message shown in progress dialog while app connects to the server 
+ Message shown in progress dialog while app connects to the server 
          */
         public static final int ui_activity_authenticating=0x7f0a0061;
         /**  Title string for Login activity 
+ Title string for Login activity 
          */
         public static final int ui_activity_title=0x7f0a0060;
         public static final int view_profile=0x7f0a006e;
@@ -1499,9 +1528,22 @@ containing a value of this type.
         res/values-v11/styles.xml on API 14+ devices.
     
  API 14 theme customizations can go here. 
+
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+
+        
          */
         public static final int AppBaseTheme=0x7f0b0059;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+ Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b005a;

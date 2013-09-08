@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Strings related to login --> 
+    <string name="action_synchronize">Синхронизировать</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="label_full_synchronization">Полная синхронизация</string>
+    <string name="label_last_synchronization">Последняя синхронизация</string>
+    <string name="last_synchronization">Дата последней синхронизации</string>
+	<string name="sync_progress">Синхронизация&#8230;</string>
+	<string name="sync_clear_storage">Очистка&#8230;</string>
+	<string name="sync_customers">Синхронизация клиентов&#8230;</string>
+	<string name="sync_categories">Синхронизация категорий&#8230;</string>
+	<string name="sync_price_lists">Синхронизация прайс листов&#8230;</string>
+	<string name="sync_products">Синхронизация продуктов&#8230;</string>
+	<string name="sync_shipping_addresses">Синхронизация адресов поставки&#8230;</string>
+	<string name="sync_products_units_of_measures">Синхронизация единиц измерения\n продуктов&#8230;</string>
+	<string name="sync_units_of_measures">Синхронизация единиц измерения&#8230;</string>
+	<string name="sync_price_lists_lines">Синхронизация строк прайс листов&#8230;</string>
+	<string name="sync_statuses">Синхронизация статусов&#8230;</string>
+	<string name="sync_warehouses">Синхронизация складов&#8230;</string>
+	<string name="sync_route_templates">Синхронизация шаблонов маршрутов&#8230;</string>
+	<string name="sync_route_points_templates">Синхронизация шаблонов точек маршрутов&#8230;</string>
+	<string name="sync_preferences">Синхронизация настроек&#8230;</string>
+	<string name="greetings">Приветствие!</string>
+	<string name="sync_routes">Синхронизация маршрутов&#8230;</string>
+	<string name="sync_orders">Синхронизация заказов&#8230;</string>
+	<string name="title_activity_sync">Синхронизация</string>
+	<string name="menu_cancel_sync">Отмена синхронизации</string>
+</resources>
