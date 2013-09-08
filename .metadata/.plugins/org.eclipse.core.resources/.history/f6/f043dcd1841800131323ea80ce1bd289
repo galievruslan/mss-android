@@ -212,15 +212,9 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			    if (cancel) {
 			        focusView.requestFocus();
 			    } else {
-			    	if (mRoutePoint == null) {
+			    	if (mRoutePoint == null)
 			    		mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
-			    	} else {
-			    		mRoutePoint.setShippingAddress(mShippingAddress);
-			    	}
 			       	mRoutePointService.savePoint(mRoutePoint);
-			       	
-			       	Intent intent=new Intent();
-					setResult(RESULT_OK, intent);
 			       	finish();
 			    }					
 					

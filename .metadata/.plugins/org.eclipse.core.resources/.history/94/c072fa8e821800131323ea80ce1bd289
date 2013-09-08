@@ -8,13 +8,12 @@ import java.util.Date;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.LoginActivity.UserLoginTask;
 import com.mss.domain.models.Customer;
-import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.domain.services.CustomerService;
 import com.mss.domain.services.RoutePointService;
-import com.mss.domain.services.RouteService;
 import com.mss.domain.services.ShippingAddressService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.utils.IterableHelpers;
@@ -25,6 +24,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -51,7 +51,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	private EditText mShippinAddressEditText;
 
 	private DatabaseHelper mHelper;
-	private RouteService mRouteService;
 	private RoutePointService mRoutePointService;
 	private CustomerService mCustomerService;
 	private ShippingAddressService mShippingAddressService;
@@ -65,12 +64,20 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
-			mRouteService = new RouteService(mHelper);
 			mRoutePointService = new RoutePointService(mHelper);
 			mCustomerService = new CustomerService(mHelper);
 			mShippingAddressService = new ShippingAddressService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
+		}
+		
+		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
+			mRoutePoint = mRoutePointService.getById(mRoutePointId);
+			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
+			if (mShippingAddress != null)
+				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
+			
+			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
 		}
 		
 		String routeDateStr = getIntent().getStringExtra(KEY_ROUTE_DATE);		
@@ -82,18 +89,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 				Log.e(TAG, e.getMessage());
 			}
 		}		
-		
-		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
-			mRoutePoint = mRoutePointService.getById(mRoutePointId);
-			Route route = mRouteService.getById(mRoutePoint.getRouteId());
-			mRouteDate = route.getDate();
-			
-			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
-			if (mShippingAddress != null)
-				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
-			
-			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
-		}
 		
 		mCustomerEditText = (EditText) findViewById(R.id.customer_edit_text);
 		mShippinAddressEditText = (EditText) findViewById(R.id.shipping_address_edit_text);
@@ -182,51 +177,49 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			}
 			return true;
 		case R.id.menu_item_save:
-			try {
-				mCustomerEditText.setError(null);
-				mShippinAddressEditText.setError(null);
+			if (mRoutePoint == null && mRouteDate != null) {
+				try {
+					mCustomerEditText.setError(null);
+					mShippinAddressEditText.setError(null);
 					
-				boolean cancel = false;
-			    View focusView = null;
+					boolean cancel = false;
+			        View focusView = null;
 			        
-			    if (mCustomer == null) {
-			       	mCustomerEditText.setError(getString(R.string.error_field_required));
-			        focusView = mCustomerEditText;
-			        cancel = true;
-			    }
+			        if (mCustomer == null) {
+			        	mCustomerEditText.setError(getString(R.string.error_field_required));
+			            focusView = mCustomerEditText;
+			            cancel = true;
+			        }
 			        
-			    if (mShippingAddress == null) {
-			     	mShippinAddressEditText.setError(getString(R.string.error_field_required));
-			        focusView = mShippinAddressEditText;
-			        cancel = true;
-			    }
+			        if (mShippingAddress == null) {
+			        	mShippinAddressEditText.setError(getString(R.string.error_field_required));
+			            focusView = mShippinAddressEditText;
+			            cancel = true;
+			        }
 			        
-			    if (!cancel) {			    	
-			      	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
-			       		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
-			       		focusView = mShippinAddressEditText;
-			           	cancel = true;
-			       	}
-			    }
+			        if (!cancel) {
+			        	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
+			        		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
+			        		focusView = mShippinAddressEditText;
+			            	cancel = true;
+			        	}
+			        }
 			        
-			    if (cancel) {
-			        focusView.requestFocus();
-			    } else {
-			    	if (mRoutePoint == null) {
-			    		mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
-			    	} else {
-			    		mRoutePoint.setShippingAddress(mShippingAddress);
-			    	}
-			       	mRoutePointService.savePoint(mRoutePoint);
-			       	
-			       	Intent intent=new Intent();
-					setResult(RESULT_OK, intent);
-			       	finish();
-			    }					
+			        if (cancel) {
+			            focusView.requestFocus();
+			        } else {
+			        	mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
+			        	mRoutePointService.savePoint(mRoutePoint);
+			        	finish();
+			        }					
 					
-			} catch (Throwable e) {
-				Log.e(TAG, e.getMessage());
-			}		
+				} catch (Throwable e) {
+					Log.e(TAG, e.getMessage());
+				}			
+			} else {
+				mRoutePoint.setShippingAddress(mShippingAddress);				
+			}
+
 			return true;
 		default:
 			return false;

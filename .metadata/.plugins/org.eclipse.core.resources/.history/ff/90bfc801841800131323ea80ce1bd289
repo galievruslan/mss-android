@@ -47,27 +47,17 @@ public class RouteService {
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);		
 	}
 	
-	public Route getById(long id) {
-		try {
-			return routeRepo.getById(id);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return null;		
+	public Route getById(long id) throws Throwable {
+		return routeRepo.getById(id);
 	}
 	
-	public Route getOnDate(Date date) {
-		try {
-			Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());
+	public Route getOnDate(Date date) throws Throwable{
+		Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());
 		
-			Iterator<Route> iterator = routeRepo.findByDate(dateOnly).iterator();
-			if (iterator.hasNext())
-				return iterator.next();
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-	
+		Iterator<Route> iterator = routeRepo.findByDate(dateOnly).iterator();
+		if (iterator.hasNext())
+			return iterator.next();
+		
 		return null;
 	}
 	

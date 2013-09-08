@@ -218,9 +218,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			    		mRoutePoint.setShippingAddress(mShippingAddress);
 			    	}
 			       	mRoutePointService.savePoint(mRoutePoint);
-			       	
-			       	Intent intent=new Intent();
-					setResult(RESULT_OK, intent);
 			       	finish();
 			    }					
 					

@@ -86,8 +86,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
 			mRoutePoint = mRoutePointService.getById(mRoutePointId);
 			Route route = mRouteService.getById(mRoutePoint.getRouteId());
-			mRouteDate = route.getDate();
-			
 			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
 			if (mShippingAddress != null)
 				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
@@ -201,7 +199,12 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			        cancel = true;
 			    }
 			        
-			    if (!cancel) {			    	
+			    if (!cancel) {
+			    	Date routeDate = mRouteDate;
+			    	if (routeDate == null) {
+			    		routeDate = mRoute.get
+			    	}
+			    	
 			      	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
 			       		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
 			       		focusView = mShippinAddressEditText;
@@ -212,15 +215,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			    if (cancel) {
 			        focusView.requestFocus();
 			    } else {
-			    	if (mRoutePoint == null) {
-			    		mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
-			    	} else {
-			    		mRoutePoint.setShippingAddress(mShippingAddress);
-			    	}
+			      	mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
 			       	mRoutePointService.savePoint(mRoutePoint);
-			       	
-			       	Intent intent=new Intent();
-					setResult(RESULT_OK, intent);
 			       	finish();
 			    }					
 					

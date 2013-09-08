@@ -9,12 +9,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.domain.models.Customer;
-import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.domain.services.CustomerService;
 import com.mss.domain.services.RoutePointService;
-import com.mss.domain.services.RouteService;
 import com.mss.domain.services.ShippingAddressService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.utils.IterableHelpers;
@@ -51,7 +49,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 	private EditText mShippinAddressEditText;
 
 	private DatabaseHelper mHelper;
-	private RouteService mRouteService;
 	private RoutePointService mRoutePointService;
 	private CustomerService mCustomerService;
 	private ShippingAddressService mShippingAddressService;
@@ -65,12 +62,20 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
-			mRouteService = new RouteService(mHelper);
 			mRoutePointService = new RoutePointService(mHelper);
 			mCustomerService = new CustomerService(mHelper);
 			mShippingAddressService = new ShippingAddressService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
+		}
+		
+		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
+			mRoutePoint = mRoutePointService.getById(mRoutePointId);
+			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
+			if (mShippingAddress != null)
+				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
+			
+			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
 		}
 		
 		String routeDateStr = getIntent().getStringExtra(KEY_ROUTE_DATE);		
@@ -82,18 +87,6 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 				Log.e(TAG, e.getMessage());
 			}
 		}		
-		
-		if (mRoutePointId != RoutePointActivity.ROUTE_POINT_ID_NEW) {
-			mRoutePoint = mRoutePointService.getById(mRoutePointId);
-			Route route = mRouteService.getById(mRoutePoint.getRouteId());
-			mRouteDate = route.getDate();
-			
-			mShippingAddress = mShippingAddressService.getById(mRoutePoint.getShippingAddressId());
-			if (mShippingAddress != null)
-				mCustomer = mCustomerService.getByShippingAddress(mShippingAddress);
-			
-			getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
-		}
 		
 		mCustomerEditText = (EditText) findViewById(R.id.customer_edit_text);
 		mShippinAddressEditText = (EditText) findViewById(R.id.shipping_address_edit_text);
@@ -201,7 +194,7 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			        cancel = true;
 			    }
 			        
-			    if (!cancel) {			    	
+			    if (!cancel) {
 			      	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
 			       		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
 			       		focusView = mShippinAddressEditText;
@@ -212,15 +205,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			    if (cancel) {
 			        focusView.requestFocus();
 			    } else {
-			    	if (mRoutePoint == null) {
-			    		mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
-			    	} else {
-			    		mRoutePoint.setShippingAddress(mShippingAddress);
-			    	}
+			      	mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
 			       	mRoutePointService.savePoint(mRoutePoint);
-			       	
-			       	Intent intent=new Intent();
-					setResult(RESULT_OK, intent);
 			       	finish();
 			    }					
 					
