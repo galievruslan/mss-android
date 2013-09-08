@@ -223,13 +223,6 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
  					new OrmlitePreferencesRepository(databaseHelper), 
  					new PreferencesTranslator(), lastSync, pageSize);
  			
- 			event.putExtra(MESSAGE_KEY, R.string.sync_manager_settings);
-            localBroadcastManager.sendBroadcast(event);
- 			SyncManagerSettings(
- 					new ManagerWebRepository(webServer.getCurrentConnection()),
- 					new OrmliteWarehouseRepository(databaseHelper), 
- 					lastSync);
- 			
  			SharedPreferences.Editor editor = sharedPreferences.edit();	
  			editor.putString("last_sync", format.format(serverTimestamp));
  			editor.commit();
@@ -308,7 +301,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		List<Manager> managers = managerWebRepo.find(params);
 		for (Manager manager : managers) {
 			try {
-				if (manager.getIsValid()) {
+				if (!manager.getIsValid()) {
 					Iterable<Warehouse> defaultWarehouses = warehouseRepo.findDefault();
 					for (Warehouse warehouse : defaultWarehouses) {
 						warehouse.setIsDefault(false);

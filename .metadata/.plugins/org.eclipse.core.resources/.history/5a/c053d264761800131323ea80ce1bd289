@@ -24,7 +24,6 @@
 	<string name="greetings">Greetings!</string>
 	<string name="sync_routes">Routes synchronizing&#8230;</string>
 	<string name="sync_orders">Orders synchronizing&#8230;</string>
-	<string name="sync_manager_settings">Manager settings synchronizing&#8230;</string>
 	<string name="title_activity_sync">Synchronization</string>
 	<string name="menu_cancel_sync">Cancel synchronization</string>
 </resources>

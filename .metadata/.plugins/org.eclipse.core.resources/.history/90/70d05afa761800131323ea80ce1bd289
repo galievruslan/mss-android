@@ -39,9 +39,4 @@ public class Warehouse extends Entity {
 	public boolean getIsDefault(){
 		return isDefault;
 	}
-	
-	public void setIsDefault(boolean isDefault){
-		this.isDefault = isDefault;
-	}
 }
-

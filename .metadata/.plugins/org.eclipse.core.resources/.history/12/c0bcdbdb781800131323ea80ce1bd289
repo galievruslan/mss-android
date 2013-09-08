@@ -308,7 +308,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		List<Manager> managers = managerWebRepo.find(params);
 		for (Manager manager : managers) {
 			try {
-				if (manager.getIsValid()) {
+				if (!manager.getIsValid()) {
 					Iterable<Warehouse> defaultWarehouses = warehouseRepo.findDefault();
 					for (Warehouse warehouse : defaultWarehouses) {
 						warehouse.setIsDefault(false);

@@ -18,13 +18,15 @@ public class WarehouseService {
 		return warehouseRepo.getById(id);
 	}
 	
-	public Warehouse getDefault() throws Throwable {	
+	public Warehouse getDefault() throws Throwable {
+		Warehouse defaultWarehouse = null;
+		
 		Iterator<Warehouse> warehouses = warehouseRepo.findDefault().iterator();
 		if (warehouses.hasNext()) {
-			return warehouses.next();
+			defaultWarehouse = warehouses.next();
 		} 
 		
-		return null; 
+		return defaultWarehouse; 
 	}
 	
 	public Iterable<Warehouse> getWarehouses() throws Throwable{		 

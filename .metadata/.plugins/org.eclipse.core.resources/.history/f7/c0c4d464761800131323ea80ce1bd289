@@ -24,7 +24,6 @@
 	<string name="greetings">Приветствие!</string>
 	<string name="sync_routes">Синхронизация маршрутов&#8230;</string>
 	<string name="sync_orders">Синхронизация заказов&#8230;</string>
-	<string name="sync_manager_settings">Синхронизация настроек менеджера&#8230;</string>
 	<string name="title_activity_sync">Синхронизация</string>
 	<string name="menu_cancel_sync">Отмена синхронизации</string>
 </resources>

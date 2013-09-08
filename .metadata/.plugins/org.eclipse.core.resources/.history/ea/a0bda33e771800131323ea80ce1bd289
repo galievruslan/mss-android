@@ -223,13 +223,6 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
  					new OrmlitePreferencesRepository(databaseHelper), 
  					new PreferencesTranslator(), lastSync, pageSize);
  			
- 			event.putExtra(MESSAGE_KEY, R.string.sync_manager_settings);
-            localBroadcastManager.sendBroadcast(event);
- 			SyncManagerSettings(
- 					new ManagerWebRepository(webServer.getCurrentConnection()),
- 					new OrmliteWarehouseRepository(databaseHelper), 
- 					lastSync);
- 			
  			SharedPreferences.Editor editor = sharedPreferences.edit();	
  			editor.putString("last_sync", format.format(serverTimestamp));
  			editor.commit();
@@ -297,41 +290,28 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 	}
     
     private void SyncManagerSettings(
-    	WebRepository<Manager> managerWebRepo, 
-    	OrmliteWarehouseRepository warehouseRepo,
-    	Date lastSync) throws Throwable {
-		
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		if (lastSync != null) {
-			params.add(new BasicNameValuePair("updated_at", ISO8601Utils.format(lastSync)));
-		}				
-		List<Manager> managers = managerWebRepo.find(params);
-		for (Manager manager : managers) {
-			try {
-				if (manager.getIsValid()) {
-					Iterable<Warehouse> defaultWarehouses = warehouseRepo.findDefault();
-					for (Warehouse warehouse : defaultWarehouses) {
-						warehouse.setIsDefault(false);
-						warehouseRepo.save(warehouse);
-					}
-						
-					Warehouse warehouse = warehouseRepo.getById(manager.getDefaultWarehouseId());
-					if (warehouse != null) {
-						warehouse.setIsDefault(true);
-						warehouseRepo.save(warehouse);
-					}
-				} else {
-					Iterable<Warehouse> defaultWarehouses = warehouseRepo.findDefault();
-					for (Warehouse warehouse : defaultWarehouses) {
-						warehouse.setIsDefault(false);
-						warehouseRepo.save(warehouse);
-					}
-				}
+    		WebRepository<Manager> managerWebRepo, 
+    		IRepository<Warehouse> warehouseRepo,
+    		Date lastSync) throws Throwable {
 			
-			}catch(Throwable e) {
-				Log.e(TAG, e.getMessage());
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			if (lastSync != null) {
+				params.add(new BasicNameValuePair("updated_at", ISO8601Utils.format(lastSync)));
+			}				
+			List<Manager> managers = managerWebRepo.find(params);
+			for (Manager manager : managers) {
+				try {
+					if (!manager.getIsValid()) {
+						TModel invalidModel = modelRepo.getById(dto.getId());
+						if (invalidModel != null)
+							modelRepo.delete(invalidModel);
+					} else {
+						modelRepo.save(translator.Translate(dto));
+					}
+				}catch(Throwable e) {
+					Log.e(TAG, e.getMessage());
+				}
 			}
-		}
 	}
     
     private void PostGreetings(WebServer webServer) throws Throwable {

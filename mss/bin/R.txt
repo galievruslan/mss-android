@@ -577,11 +577,11 @@ int string dialog_delete_confirmation_message 0x7f0a0057
 int string dialog_delete_confirmation_negative_button 0x7f0a0059
 int string dialog_delete_confirmation_positive_button 0x7f0a0058
 int string dialog_delete_confirmation_title 0x7f0a0056
-int string error_field_required 0x7f0a00b9
-int string error_incorrect_password 0x7f0a00b8
-int string error_invalid_login 0x7f0a00b6
-int string error_invalid_password 0x7f0a00b7
-int string error_same_point_already_exist 0x7f0a00ba
+int string error_field_required 0x7f0a00ba
+int string error_incorrect_password 0x7f0a00b9
+int string error_invalid_login 0x7f0a00b7
+int string error_invalid_password 0x7f0a00b8
+int string error_same_point_already_exist 0x7f0a00bb
 int string example_address 0x7f0a0016
 int string example_amount 0x7f0a0014
 int string example_count 0x7f0a0013
@@ -639,7 +639,7 @@ int string login_progress_signing_in 0x7f0a007a
 int string main_menu_routes 0x7f0a0052
 int string main_menu_settings 0x7f0a0053
 int string main_menu_sync 0x7f0a0054
-int string menu_cancel_sync 0x7f0a00b5
+int string menu_cancel_sync 0x7f0a00b6
 int string menu_forgot_password 0x7f0a0079
 int string menu_item_add 0x7f0a0034
 int string menu_item_change_status 0x7f0a0033
@@ -677,6 +677,7 @@ int string sub_title_activity_route_point 0x7f0a002a
 int string sync_categories 0x7f0a00a5
 int string sync_clear_storage 0x7f0a00a3
 int string sync_customers 0x7f0a00a4
+int string sync_manager_settings 0x7f0a00b4
 int string sync_orders 0x7f0a00b3
 int string sync_preferences 0x7f0a00b0
 int string sync_price_lists 0x7f0a00a6
@@ -711,7 +712,7 @@ int string title_activity_route_point_fragment 0x7f0a0032
 int string title_activity_settings 0x7f0a0096
 int string title_activity_shipping_addresses 0x7f0a002f
 int string title_activity_statuses 0x7f0a0073
-int string title_activity_sync 0x7f0a00b4
+int string title_activity_sync 0x7f0a00b5
 int string title_activity_time_picker_fragment 0x7f0a004e
 int string title_activity_warehouses 0x7f0a004d
 int string ui_activity_authenticating 0x7f0a0065

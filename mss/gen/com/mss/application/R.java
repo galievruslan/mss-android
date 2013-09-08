@@ -1299,11 +1299,11 @@ containing a value of this type.
         public static final int dialog_delete_confirmation_negative_button=0x7f0a0059;
         public static final int dialog_delete_confirmation_positive_button=0x7f0a0058;
         public static final int dialog_delete_confirmation_title=0x7f0a0056;
-        public static final int error_field_required=0x7f0a00b9;
-        public static final int error_incorrect_password=0x7f0a00b8;
-        public static final int error_invalid_login=0x7f0a00b6;
-        public static final int error_invalid_password=0x7f0a00b7;
-        public static final int error_same_point_already_exist=0x7f0a00ba;
+        public static final int error_field_required=0x7f0a00ba;
+        public static final int error_incorrect_password=0x7f0a00b9;
+        public static final int error_invalid_login=0x7f0a00b7;
+        public static final int error_invalid_password=0x7f0a00b8;
+        public static final int error_same_point_already_exist=0x7f0a00bb;
         public static final int example_address=0x7f0a0016;
         public static final int example_amount=0x7f0a0014;
         public static final int example_count=0x7f0a0013;
@@ -1393,7 +1393,7 @@ containing a value of this type.
         public static final int main_menu_routes=0x7f0a0052;
         public static final int main_menu_settings=0x7f0a0053;
         public static final int main_menu_sync=0x7f0a0054;
-        public static final int menu_cancel_sync=0x7f0a00b5;
+        public static final int menu_cancel_sync=0x7f0a00b6;
         public static final int menu_forgot_password=0x7f0a0079;
         public static final int menu_item_add=0x7f0a0034;
         public static final int menu_item_change_status=0x7f0a0033;
@@ -1463,6 +1463,7 @@ containing a value of this type.
         public static final int sync_categories=0x7f0a00a5;
         public static final int sync_clear_storage=0x7f0a00a3;
         public static final int sync_customers=0x7f0a00a4;
+        public static final int sync_manager_settings=0x7f0a00b4;
         public static final int sync_orders=0x7f0a00b3;
         public static final int sync_preferences=0x7f0a00b0;
         public static final int sync_price_lists=0x7f0a00a6;
@@ -1497,7 +1498,7 @@ containing a value of this type.
         public static final int title_activity_settings=0x7f0a0096;
         public static final int title_activity_shipping_addresses=0x7f0a002f;
         public static final int title_activity_statuses=0x7f0a0073;
-        public static final int title_activity_sync=0x7f0a00b4;
+        public static final int title_activity_sync=0x7f0a00b5;
         public static final int title_activity_time_picker_fragment=0x7f0a004e;
         public static final int title_activity_warehouses=0x7f0a004d;
         /**  Message shown in progress dialog while app connects to the server 
