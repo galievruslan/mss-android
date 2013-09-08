@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-        		android:cursorVisible="false"
+                android:focusable="false"
+        		android:focusableInTouchMode="false"
                 android:inputType="date" />
 
             <TextView
@@ -53,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-        		android:cursorVisible="false"
+                android:focusable="false"
+        		android:focusableInTouchMode="false"
                 android:inputType="time" />
 
             <TextView
@@ -100,7 +102,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-        		android:cursorVisible="false"
+                android:focusable="false"
+        		android:focusableInTouchMode="false"
                 android:inputType="text" />
 
             <TextView
@@ -115,7 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-        		android:cursorVisible="false"
+                android:focusable="false"
+        		android:focusableInTouchMode="false"
                 android:inputType="text" />
 
         </LinearLayout>

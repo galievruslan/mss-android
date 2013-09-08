@@ -268,9 +268,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        	long priceListId = data.getLongExtra("price_list_id", 0l);
 	        		        	
 	        	try {
-	        		if (mOrder.getPriceListId() != priceListId) {
-	        			OrderEditContext.Init();
-	        		}
 	        		mPriceList = mPriceListService.getById(priceListId);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());

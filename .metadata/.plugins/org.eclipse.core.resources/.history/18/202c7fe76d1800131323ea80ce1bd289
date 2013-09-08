@@ -16,16 +16,17 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:cursorVisible="false" 
-        android:hint="@string/prompt_customer">
-		<requestFocus />
-	</EditText>
+        android:hint="@string/prompt_customer" />
+
     <EditText
         android:id="@+id/shipping_address_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:cursorVisible="false" 
-        android:hint="@string/prompt_shipping_address" >        
+        android:hint="@string/prompt_shipping_address" >
+
+        <requestFocus />
     </EditText>
 
 </LinearLayout>

@@ -150,30 +150,25 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		mOrderPriceList.setOnClickListener(new TextView.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (mOrder.getPriceListId() != 0 && OrderEditContext.getPickedUpItems().size() > 0) {
-					new AlertDialog.Builder(view.getContext())
-	        		.setTitle(R.string.dialog_change_price_confirmation_title) 
-	        		.setMessage(R.string.dialog_change_price_confirmation_message) 
-	        		.setIcon(R.drawable.ic_action_edit)
-	        		.setPositiveButton(R.string.dialog_change_price_confirmation_positive_button, 
-	        				new DialogInterface.OnClickListener() {
-	        			public void onClick(DialogInterface dialog, int whichButton) { 
-	        				Intent priceListsActivity = new Intent(getApplicationContext(), PriceListsActivity.class);
-	    		    		startActivityForResult(priceListsActivity, PICK_PRICE_LIST_REQUEST);
-	        				dialog.dismiss();
-	        			}   
-	        		})
-	        		.setNegativeButton(R.string.dialog_change_price_confirmation_negative_button, new DialogInterface.OnClickListener() {
-	        			public void onClick(DialogInterface dialog, int which) {
-	        				dialog.dismiss();
-	        			}
-	        		})
-	        		.create()
-	        		.show();
-				} else {
-					Intent priceListsActivity = new Intent(getApplicationContext(), PriceListsActivity.class);
-		    		startActivityForResult(priceListsActivity, PICK_PRICE_LIST_REQUEST);
-				}
+				new AlertDialog.Builder(view.getContext())
+	        	.setTitle(R.string.dialog_change_price_confirmation_title) 
+	        	.setMessage(R.string.dialog_change_price_confirmation_message) 
+	        	.setIcon(R.drawable.ic_action_edit)
+	        	.setPositiveButton(R.string.dialog_change_price_confirmation_positive_button, 
+	        			new DialogInterface.OnClickListener() {
+	        		public void onClick(DialogInterface dialog, int whichButton) { 
+	        			Intent priceListsActivity = new Intent(getApplicationContext(), PriceListsActivity.class);
+	    		    	startActivityForResult(priceListsActivity, PICK_PRICE_LIST_REQUEST);
+	        			dialog.dismiss();
+	        		}   
+	        	})
+	        	.setNegativeButton(R.string.dialog_change_price_confirmation_negative_button, new DialogInterface.OnClickListener() {
+	        		public void onClick(DialogInterface dialog, int which) {
+	        			dialog.dismiss();
+	        		}
+	        	})
+	        	.create()
+	        	.show();
 			}
         });
 		mOrderPriceList.setKeyListener(null);
@@ -268,9 +263,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        	long priceListId = data.getLongExtra("price_list_id", 0l);
 	        		        	
 	        	try {
-	        		if (mOrder.getPriceListId() != priceListId) {
-	        			OrderEditContext.Init();
-	        		}
 	        		mPriceList = mPriceListService.getById(priceListId);
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
