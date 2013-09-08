@@ -152,7 +152,7 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 				return true;
 			case R.id.menu_item_copy_from_template: {
 					if (!mRouteService.isRouteTemplateOnDateExist(getRouteFragment().getRouteDate())){
-						Toast.makeText(this, R.string.alert_route_template_not_found, Toast.LENGTH_LONG).show();
+						Toast.makeText(this, resId, duration)
 					} else {
 						mRouteService.copyRouteFromTemplate(getRouteFragment().getRouteDate());
 						getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINTS, null, this);

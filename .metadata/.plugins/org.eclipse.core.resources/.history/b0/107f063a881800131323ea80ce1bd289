@@ -76,45 +76,6 @@ public class RouteService {
 		return new Route(dateOnly);
 	}
 	
-	public boolean isRouteTemplateOnDateExist(Date date) {
-		try {
-			int day = date.getDay();
-			
-			Week.Days dayOfWeek = null;
-			switch (day){
-			case 1: 
-				dayOfWeek = Days.Monday;
-				break;
-			case 2:
-				dayOfWeek = Days.Tuesday;
-				break;
-			case 3:
-				dayOfWeek = Days.Wednesday;
-				break;
-			case 4:
-				dayOfWeek = Days.Thursday;
-				break;
-			case 5:
-				dayOfWeek = Days.Friday;
-				break;
-			case 6:
-				dayOfWeek = Days.Saturday;
-				break;
-			case 0:
-				dayOfWeek = Days.Sunday;
-				break;
-			}
-			
-			RouteTemplate routeTemplate = routeTemplateRepo.findByDayOfWeek(dayOfWeek);
-			return routeTemplate != null;
-		}
-		catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return false;
-	}
-	
 	public Route copyRouteFromTemplate(Date date) {
 		try {
 			int day = date.getDay();

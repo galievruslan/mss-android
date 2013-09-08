@@ -28,7 +28,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.Loader;
 import android.util.Log;
-import android.widget.Toast;
 
 public class RouteActivity extends SherlockFragmentActivity implements OnRoutePointSelectedListener, OnRouteDateChangedListener, Callback, LoaderCallbacks<List<RoutePoint>> {
 
@@ -151,12 +150,8 @@ public class RouteActivity extends SherlockFragmentActivity implements OnRoutePo
 				}
 				return true;
 			case R.id.menu_item_copy_from_template: {
-					if (!mRouteService.isRouteTemplateOnDateExist(getRouteFragment().getRouteDate())){
-						Toast.makeText(this, R.string.alert_route_template_not_found, Toast.LENGTH_LONG).show();
-					} else {
-						mRouteService.copyRouteFromTemplate(getRouteFragment().getRouteDate());
-						getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINTS, null, this);
-					}	
+					mRouteService.copyRouteFromTemplate(getRouteFragment().getRouteDate());
+					getSupportLoaderManager().restartLoader(LOADER_ID_ROUTE_POINTS, null, this);
 					return true;
 				}				
 			case R.id.menu_item_add: {

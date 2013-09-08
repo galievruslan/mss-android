@@ -4,5 +4,4 @@
     <string name="alert_cant_change_point_status">Where are orders related to point. Status changing not allowed.</string>
     <string name="alert_sync_finished">Synchronization finished successfully.</string>
     <string name="alert_sync_failed">Synchronization failed.</string>
-    <string name="alert_route_template_not_found">Where is on route template on date.</string>
 </resources>
