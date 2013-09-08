@@ -144,8 +144,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			switch (requestCode) {
 			case RoutePointEditActivity.REQUEST_EDIT_ROUTE_POINT:			
 				break;
-			case OrderEditActivity.REQUEST_ADD_ORDER:	
-				invalidateOptionsMenu();
+			case OrderEditActivity.REQUEST_ADD_ORDER:			
 				break;			
 			case PICK_STATUS_REQUEST:
 				long statusId = data.getLongExtra("status_id", 0l);
