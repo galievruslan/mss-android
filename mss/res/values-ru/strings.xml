@@ -22,6 +22,7 @@
     <string name="menu_item_edit">Редактировать</string>
     <string name="menu_item_delete">Удалить</string>
     <string name="menu_item_order_list">Заказы</string>
+    <string name="menu_item_filter">Фильтр</string>
     <string name="menu_item_save">Сохранить</string>
     <string name="menu_item_copy_route_from_template">Копировать из шаблона</string>
     <string name="key_id">id</string>

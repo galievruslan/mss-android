@@ -23,6 +23,7 @@
     <string name="menu_item_change_status">Change Status</string>
     <string name="menu_item_add">Add</string>
     <string name="menu_item_edit">Edit</string>
+    <string name="menu_item_filter">Filter</string>
     <string name="menu_item_delete">Delete</string>
     <string name="menu_item_order_list">Orders</string>
     <string name="menu_item_save">Save</string>
@@ -108,7 +109,7 @@
     <string name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
     <!--
         Message shown if the provided account doesn't support the current
-        activity.
+        activity.
     -->
     <string name="login_activity_newaccount_text">Sign in to your MSS account. </string>
 
@@ -121,5 +122,6 @@
     <string name="profile_action">Sample profile</string>
     <string name="view_profile">View Profile</string>
     <string name="title_activity_statuses">StatusesActivity</string>
+    <string name="title_activity_categories">CategoriesActivity</string>
 
 </resources>

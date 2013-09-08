@@ -72,6 +72,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	static final int PICK_WAREHOUSE_REQUEST = 2;
 	static final int PICK_PRODUCTS_REQUEST = 3;
 	static final int REQUEST_EDIT_ORDER_PICKUP_ITEM = 4;
+	static final int FILTER_REQUEST = 5;
 
 	private Long mOrderId;
 	private Long mRoutePointId;
@@ -255,7 +256,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.menu_route_point_edit, menu);
+		getSupportMenuInflater().inflate(R.menu.menu_order_edit, menu);
 		return true;
 	}
 	
@@ -324,6 +325,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			finish();
+			return true;
+		case R.id.menu_item_filter:
+			Intent filterActivity = new Intent(getApplicationContext(), CategoriesActivity.class);
+			startActivityForResult(filterActivity, FILTER_REQUEST);
 			return true;
 		case R.id.menu_item_save:
 			if (mOrder != null)

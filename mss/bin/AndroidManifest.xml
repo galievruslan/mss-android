@@ -137,12 +137,16 @@
 
             <!--
                 No intent-filter here! This activity is only ever launched by
-                someone who explicitly knows the class name
+                someone who explicitly knows the class name
             -->
         </activity>
         <activity
             android:name="com.mss.application.StatusesActivity"
             android:label="@string/title_activity_statuses" >
+        </activity>
+        <activity
+            android:name="com.mss.application.CategoriesActivity"
+            android:label="@string/title_activity_categories" >
         </activity>
     </application>
 
