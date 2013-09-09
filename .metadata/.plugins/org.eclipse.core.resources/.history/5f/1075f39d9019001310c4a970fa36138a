@@ -8,7 +8,6 @@ import com.mss.domain.services.OrderService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,10 +69,8 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);
-			holder.mPickedUpData = (TableRow)v.findViewById(R.id.tableRow2);
-			holder.mPrice = (TextView) v.findViewById(R.id.label_price);
 			holder.mCount = (TextView) v.findViewById(R.id.label_count);
-			holder.mUoM = (TextView) v.findViewById(R.id.label_uom);
+			holder.mPrice = (TextView) v.findViewById(R.id.label_price);
 			
 
 			v.setTag(holder);
@@ -87,12 +84,9 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 		holder.mPrice.setText(String.valueOf(n.getPrice()));		
 		if (OrderEditContext.getPickedUpItems().containsKey(n.getProductId())) {
 			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getCount()));
-			holder.mUoM.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getUoMName()));
-			holder.mPickedUpData.setVisibility(View.VISIBLE);
-			v.setBackgroundColor(Color.LTGRAY);
+			holder.mCount.setVisibility(View.VISIBLE);
 		} else {
-			holder.mPickedUpData.setVisibility(View.GONE);
-			v.setBackgroundColor(Color.TRANSPARENT);
+			holder.mCount.setVisibility(View.GONE);
 		}
 
 		return v;

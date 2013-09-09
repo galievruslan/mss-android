@@ -8,7 +8,6 @@ import com.mss.domain.services.OrderService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,10 +88,8 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getCount()));
 			holder.mUoM.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getUoMName()));
 			holder.mPickedUpData.setVisibility(View.VISIBLE);
-			v.setBackgroundColor(Color.LTGRAY);
 		} else {
 			holder.mPickedUpData.setVisibility(View.GONE);
-			v.setBackgroundColor(Color.TRANSPARENT);
 		}
 
 		return v;

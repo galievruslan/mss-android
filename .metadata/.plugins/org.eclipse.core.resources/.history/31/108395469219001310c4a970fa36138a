@@ -89,10 +89,9 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getCount()));
 			holder.mUoM.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getUoMName()));
 			holder.mPickedUpData.setVisibility(View.VISIBLE);
-			v.setBackgroundColor(Color.LTGRAY);
+			v.setBackgroundColor(Color.GREEN);
 		} else {
 			holder.mPickedUpData.setVisibility(View.GONE);
-			v.setBackgroundColor(Color.TRANSPARENT);
 		}
 
 		return v;

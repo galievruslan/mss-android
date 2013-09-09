@@ -3,13 +3,13 @@
         android:id="@+id/tableRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-		android:weightSum="3">
+		android:weightSum="4">
 
         <TextView
             android:id="@+id/label_name"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:text="@string/example_description"
             android:minLines="2"
             android:maxLines="2"
