@@ -201,9 +201,8 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			        cancel = true;
 			    }
 			        
-			    if (!cancel) {	
-			    	RoutePoint routePoint = mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress); 
-			      	if (routePoint != null && routePoint.getId() != mRoutePointId) {
+			    if (!cancel) {			    	
+			      	if (mRoutePointService.getPointByDateAndAddress(mRouteDate, mShippingAddress) != null) {
 			       		mShippinAddressEditText.setError(getString(R.string.error_same_point_already_exist));
 			       		focusView = mShippinAddressEditText;
 			           	cancel = true;
