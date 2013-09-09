@@ -5,5 +5,4 @@
     <string name="error_incorrect_password">Неверный пароль</string>
     <string name="error_field_required">Это поле обязательное для заполнения</string>
     <string name="error_same_point_already_exist">Точка с данным адресом уже существует</string>
-    <string name="error_shipping_date_must_be_greater_than_order_date">Дата отгрузки не может быть раньше даты заказа</string>
 </resources>

@@ -378,20 +378,18 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 				        cancel = true;
 					}
 					
-					if (cancel) {
-				        focusView.requestFocus();
-				    } else {					
-				    	String note = mOrderNotes.getText().toString();
-						mOrder.setNote(note);
-						mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
+					String note = mOrderNotes.getText().toString();
+					mOrder.setNote(note);
+					mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
 					
-						Intent intent=new Intent();
-						setResult(RESULT_OK, intent);
-				    	finish();
-				    }
+					Intent intent=new Intent();
+					setResult(RESULT_OK, intent);
+				    finish();
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
+				finish();
+
 			return true;
 		default:
 			return false;

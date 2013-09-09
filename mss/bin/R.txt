@@ -644,6 +644,7 @@ int string error_incorrect_password 0x7f0600cc
 int string error_invalid_login 0x7f0600ca
 int string error_invalid_password 0x7f0600cb
 int string error_same_point_already_exist 0x7f0600ce
+int string error_shipping_date_must_be_greater_than_order_date 0x7f0600cf
 int string example_address 0x7f060018
 int string example_amount 0x7f060016
 int string example_count 0x7f060015

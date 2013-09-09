@@ -353,45 +353,18 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		case R.id.menu_item_save:
 			if (mOrder != null)
 				try {
-					mOrderShippingDate.setError(null);
-					mOrderPriceList.setError(null);
-					mOrderWarehouse.setError(null);
+					String note = mOrderNotes.getText().toString();
+					mOrder.setNote(note);
+					mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
 					
-					boolean cancel = false;
-				    View focusView = null;
-					
-					if (mOrder.getPriceListId() == 0) {
-						mOrderPriceList.setError(getString(R.string.error_field_required));
-				        focusView = mOrderPriceList;
-				        cancel = true;
-					}
-					
-					if (mOrder.getWarehouseId() == 0) {
-						mOrderWarehouse.setError(getString(R.string.error_field_required));
-				        focusView = mOrderWarehouse;
-				        cancel = true;
-					}
-					
-					if (mOrder.getOrderDate().after(mOrder.getShippingDate())) {
-						mOrderShippingDate.setError(getString(R.string.error_shipping_date_must_be_greater_than_order_date));
-				        focusView = mOrderShippingDate;
-				        cancel = true;
-					}
-					
-					if (cancel) {
-				        focusView.requestFocus();
-				    } else {					
-				    	String note = mOrderNotes.getText().toString();
-						mOrder.setNote(note);
-						mOrderService.saveOrder(mOrder, OrderEditContext.getPickedUpItems().values());
-					
-						Intent intent=new Intent();
-						setResult(RESULT_OK, intent);
-				    	finish();
-				    }
+					Intent intent=new Intent();
+					setResult(RESULT_OK, intent);
+				    finish();
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
+				finish();
+
 			return true;
 		default:
 			return false;

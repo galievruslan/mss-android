@@ -1433,6 +1433,7 @@ containing a value of this type.
         public static final int error_invalid_login=0x7f0600ca;
         public static final int error_invalid_password=0x7f0600cb;
         public static final int error_same_point_already_exist=0x7f0600ce;
+        public static final int error_shipping_date_must_be_greater_than_order_date=0x7f0600cf;
         public static final int example_address=0x7f060018;
         public static final int example_amount=0x7f060016;
         public static final int example_count=0x7f060015;

@@ -5,5 +5,4 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_same_point_already_exist">Point with same address already exists</string>
-    <string name="error_shipping_date_must_be_greater_than_order_date">Order shiiping date must be equal or greater than order date</string>
 </resources>

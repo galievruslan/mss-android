@@ -392,6 +392,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 				} catch (Throwable e) {
 					Log.e(TAG, e.getMessage());
 				}
+				finish();
+
 			return true;
 		default:
 			return false;
