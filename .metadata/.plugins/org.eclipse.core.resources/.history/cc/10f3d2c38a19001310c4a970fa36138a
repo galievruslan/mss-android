@@ -104,17 +104,10 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
     @Override
     public void onResume() {
       super.onResume();
-      
-      AccountManager accountManager = AccountManager.get(getApplicationContext());
-      Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-      if (accounts.length > 0) {
-    	  mAccount = accounts[0];        
-    	  showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
-      }
 
       // Register mMessageReceiver to receive messages.
       LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-          new IntentFilter(SynchronizationAdapter.SYNC_EVENT_KEY));      
+          new IntentFilter(SynchronizationAdapter.SYNC_EVENT_KEY));
     }
     
     @Override

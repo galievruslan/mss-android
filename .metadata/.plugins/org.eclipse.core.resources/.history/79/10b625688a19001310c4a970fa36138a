@@ -168,11 +168,8 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home: {
-				Intent intent=new Intent();
-				setResult(RESULT_CANCELED, intent);
-				finish();
-			}
+		case android.R.id.home:
+			finish();
 			return true;
 		case R.id.menu_item_edit: {
 			Intent i = new Intent(this, RoutePointEditActivity.class);				
@@ -195,8 +192,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			        			new DialogInterface.OnClickListener() {
 			        		public void onClick(DialogInterface dialog, int whichButton) { 
 			        			mRoutePointService.deletePoint(mRoutePoint);
-			        			Intent intent=new Intent();
-			        			setResult(RESULT_OK, intent);
 			        			finish();
 			        			dialog.dismiss();
 			        		}   
