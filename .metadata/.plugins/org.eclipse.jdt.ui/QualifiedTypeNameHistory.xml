@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.Manager"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
-<fullyQualifiedTypeName name="com.mss.infrastructure.web.repositories.ManagerWebRepository"/>
-<fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteWarehouseRepository"/>
-<fullyQualifiedTypeName name="android.preference.PreferenceManager"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Route"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.RouteService"/>
@@ -60,4 +55,9 @@
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="com.mss.application.R.id"/>
 <fullyQualifiedTypeName name="com.mss.application.CategorySelectContext"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.RoutePoint"/>
+<fullyQualifiedTypeName name="javax.sql.RowSetWriter"/>
+<fullyQualifiedTypeName name="com.j256.ormlite.stmt.query.SetExpression"/>
+<fullyQualifiedTypeName name="android.widget.TableRow"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
 </qualifiedTypeNameHistroy>
