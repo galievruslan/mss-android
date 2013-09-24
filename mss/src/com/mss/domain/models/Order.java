@@ -76,9 +76,17 @@ public class Order extends Entity {
 		return shippingAddressName;
 	}
 	
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Order.SHIPPING_ADDRESS_VALUE_FIELD)
+	private String shippingAddressValue;
+	
+	public String getShippingAddressValue(){
+		return shippingAddressValue;
+	}
+	
 	public void setShippingAddress(ShippingAddress shippingAddress) {
 		shippingAddressId = shippingAddress.getId();
 		shippingAddressName = shippingAddress.getName();
+		shippingAddressValue = shippingAddress.getAddress();
 	}
 	
 	@DatabaseField(canBeNull = true, dataType = DataType.LONG, columnName = Constants.Tables.Order.PRICE_LIST_FIELD)

@@ -1,5 +1,7 @@
 package com.mss.infrastructure.ormlite;
 
+import java.util.Date;
+
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.mss.domain.models.Order;
 
@@ -24,6 +26,14 @@ public class OrmliteOrderRepository extends OrmliteGenericRepository<Order> {
 		return queryBuilder
 			.where().eq(com.mss.domain.models.Constants.Tables.Order.ROUTE_POINT_FIELD , id)
 			.countOf() > 0;
+	}
+	
+	public Iterable<Order> findByDate(Date date) throws Throwable {
+		
+		QueryBuilder<Order, Integer> queryBuilder = dao.queryBuilder();
+		
+		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.Order.ORDER_DATE_FIELD , date);
+		return dao.query(queryBuilder.prepare());
 	}
 	
 	public Iterable<Order> findNotSynchronized() throws Throwable {

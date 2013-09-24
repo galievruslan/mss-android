@@ -18,6 +18,7 @@ public class MainMenuAdapter extends BaseAdapter implements OnClickListener {
 	public final static int ROUTES_MENU = 0;
 	public final static int SETTINGS_MENU = 1;
 	public final static int SYNC_MENU = 2;
+	public final static int ORDERS_MENU = 3;
 	
 	private ArrayList<MainMenuAdapter.MenuItem> mMenuItems;
 	
@@ -35,6 +36,11 @@ public class MainMenuAdapter extends BaseAdapter implements OnClickListener {
 				MenuItem(ROUTES_MENU, 
 						 res.getString(R.string.main_menu_routes), 
 						 res.getDrawable(R.drawable.ic_menu_route)));	
+		
+		mMenuItems.add(new 
+				MenuItem(ORDERS_MENU, 
+						 res.getString(R.string.main_menu_orders), 
+						 res.getDrawable(R.drawable.ic_menu_orders)));
 		
 		mMenuItems.add(new 
 				MenuItem(SETTINGS_MENU, 

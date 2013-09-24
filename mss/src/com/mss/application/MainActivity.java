@@ -37,6 +37,11 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 		    	startActivity(mainActivity);
 				break;
 			} 
+			case MainMenuAdapter.ORDERS_MENU: {
+				Intent ordersActivity = new Intent(getApplicationContext(), DailyOrdersActivity.class);
+		    	startActivity(ordersActivity);
+				break;
+			} 
 			case MainMenuAdapter.SETTINGS_MENU: {
 				Intent settingsActivity = new Intent(getApplicationContext(), SettingsActivity.class);
 		    	startActivity(settingsActivity);

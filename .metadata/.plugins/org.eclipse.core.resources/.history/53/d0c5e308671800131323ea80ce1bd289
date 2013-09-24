@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>    
-    <string name="error_invalid_login">Неверный логин</string>
-    <string name="error_invalid_password">Пароль слишком короткий</string>
-    <string name="error_incorrect_password">Неверный пароль</string>
-    <string name="error_field_required">Это поле обязательное для заполнения</string>
-</resources>

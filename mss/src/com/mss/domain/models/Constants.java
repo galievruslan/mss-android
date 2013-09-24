@@ -62,6 +62,7 @@ public class Constants {
 			public static final String CUSTOMER_NAME_FIELD = "customer_name";
 			public static final String SHIPPING_ADDRESS_FIELD = "shipping_address_id";
 			public static final String SHIPPING_ADDRESS_NAME_FIELD = "shipping_address_name";
+			public static final String SHIPPING_ADDRESS_VALUE_FIELD = "shipping_address_value";
 			public static final String PRICE_LIST_FIELD = "price_list_id";
 			public static final String PRICE_LIST_NAME_FIELD = "price_list_name";
 			public static final String WAREHOUSE_FIELD = "warehouse_id";

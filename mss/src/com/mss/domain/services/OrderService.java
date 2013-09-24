@@ -1,6 +1,7 @@
 package com.mss.domain.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.util.Log;
 
@@ -51,6 +52,16 @@ public class OrderService {
 	public Iterable<Order> getByRoutePoint(RoutePoint routePoint){		
 		try {
 			return orderRepo.findByRoutePointId(routePoint.getId());
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+			return new ArrayList<Order>();
+		}
+	}
+	
+	public Iterable<Order> findByOrderDate(Date date){		
+		try {
+			Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());
+			return orderRepo.findByDate(dateOnly);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 			return new ArrayList<Order>();

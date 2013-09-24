@@ -14,7 +14,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.stmt.query.SetExpression;
 import com.mss.domain.models.Category;
 import com.mss.domain.services.CategoryService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;

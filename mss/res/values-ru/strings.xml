@@ -45,13 +45,17 @@
     <string name="label_uom_count_in_base">Количество в базовой</string>
     <string name="label_orders">Заказы</string>
     <string name="label_status">Статус</string>
+    <string name="label_count">Количество\u003A</string>
+    <string name="label_amount">Сумма\u003A</string>
     <string name="title_activity_price_lists">Прайс листы</string>
     <string name="title_activity_warehouses">Склады</string>
     <string name="title_activity_time_picker_fragment">Время</string>
     <string name="title_activity_order_pickup_items_fragment">Подбор товара</string>
     <string name="title_activity_order_item_pickup">Подбор товара</string>
     <string name="title_activity_product_uoms">Единицы измерения продукта</string>
+    <string name="title_activity_daily_orders">Заказы за день</string>
     <string name="main_menu_routes">Маршруты</string>
+    <string name="main_menu_orders">Заказы</string>
     <string name="main_menu_settings">Настройки</string>
     <string name="main_menu_sync">Синхронизация</string>
     <string name="title_activity_authenticator">Аутентификация</string>
@@ -121,5 +125,5 @@
     <string name="expand_menu">Развернуть</string>
     <string name="collapse_all_menu">Свернуть все</string>
     <string name="select_all_menu">Выбрать все</string>
-    <string name="unselect_all_menu">Снять выбор</string>
+    <string name="unselect_all_menu">Снять выбор</string>    
 </resources>

@@ -48,6 +48,8 @@
     <string name="label_uom_count_in_base">Count in base</string>
     <string name="label_orders">Orders</string>
     <string name="label_status">Status</string>
+    <string name="label_count">Count:</string>
+    <string name="label_amount">Amount:</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
@@ -55,6 +57,7 @@
     <string name="title_activity_order_item_pickup">OrderItemPickupActivity</string>
     <string name="title_activity_product_uoms">ProductUomsActivity</string>
     <string name="main_menu_routes">Routes</string>
+    <string name="main_menu_orders">Orders</string>
     <string name="main_menu_settings">Settings</string>
     <string name="main_menu_sync">Synchronization</string>
     <string name="title_activity_authenticator">AuthenticatorActivity</string>
@@ -109,7 +112,7 @@
     <string name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
     <!--
         Message shown if the provided account doesn't support the current
-        activity.
+        activity.
     -->
     <string name="login_activity_newaccount_text">Sign in to your MSS account. </string>
 
@@ -123,7 +126,6 @@
     <string name="view_profile">View Profile</string>
     <string name="title_activity_statuses">StatusesActivity</string>
     <string name="title_activity_categories">CategoriesActivity</string>
-
     <string name="simple_menu_name">simple_menu_name</string>
     <string name="simple_menu_condensed">simple_menu_condensed</string>
     <string name="fancy_menu_name">fancy_menu_name</string>
@@ -136,10 +138,11 @@
     <string name="collapsible_condensed_disable">collapsible_condensed_disable</string>
     <string name="collapsible_menu_enable">collapsible_menu_enable</string>
     <string name="collapsible_condensed_enable">collapsible_condensed_enable</string>
-    
     <string name="expand_all_menu">Expand all</string>
     <string name="expand_menu">Expand menu</string>
     <string name="collapse_all_menu">Collapse all</string>
     <string name="select_all_menu">Select all</string>
     <string name="unselect_all_menu">Unselect all</string>
+    <string name="title_activity_daily_orders">DailyOrdersActivity</string>
+
 </resources>
