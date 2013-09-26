@@ -1,5 +1,8 @@
 package com.mss.infrastructure.ormlite;
 
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.dao.RawRowMapper;
@@ -118,4 +121,17 @@ public class OrmliteOrderPickupItemRepository implements IReadonlyRepository<Ord
 		rawResults.close();
 		return orderPickupItems;
 	}
+	
+	public Iterable<OrderPickupItem> findByPriceListId(long priceListId, Long[] categoryFilter, String searchCriteria) throws Throwable {		
+		ArrayList<OrderPickupItem> filtredItems = new ArrayList<OrderPickupItem>();
+		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);
+			
+		Iterable<OrderPickupItem> items = findByPriceListId(priceListId, categoryFilter);
+		for (OrderPickupItem item : items) {
+			if (pattern.matcher(item.getProductName()).find())
+				filtredItems.add(item);
+		}			
+		return filtredItems;
+	}
+	
 }

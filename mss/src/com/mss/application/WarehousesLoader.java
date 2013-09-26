@@ -10,6 +10,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class WarehousesLoader extends AsyncTaskLoader<List<Warehouse>> {
@@ -20,10 +21,12 @@ public class WarehousesLoader extends AsyncTaskLoader<List<Warehouse>> {
 
 	private final DatabaseHelper mHelper;
 	private final WarehouseService mWarehouseService;
+	private final String mSearchCriteria;
 
-	public WarehousesLoader(Context ctx) throws Throwable {
+	public WarehousesLoader(Context ctx, String searchCriteria) throws Throwable {
 		super(ctx);
 		
+		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mWarehouseService = new WarehouseService(mHelper);
 	}
@@ -34,7 +37,10 @@ public class WarehousesLoader extends AsyncTaskLoader<List<Warehouse>> {
 	@Override
 	public List<Warehouse> loadInBackground() {
 		try {
-			mWarehouseList = IterableHelpers.toList(Warehouse.class, mWarehouseService.getWarehouses());
+			if (TextUtils.isEmpty(mSearchCriteria))
+				mWarehouseList = IterableHelpers.toList(Warehouse.class, mWarehouseService.getWarehouses());
+			else 
+				mWarehouseList = IterableHelpers.toList(Warehouse.class, mWarehouseService.getWarehouses(mSearchCriteria));
 		} catch (Throwable e) {
 			Log.e(TAG, e.toString());
 		}

@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.widget.SearchView;
 import com.mss.application.fragments.PriceListsFragment;
 import com.mss.application.fragments.PriceListsFragment.OnPriceListSelectedListener;
 import com.mss.domain.models.PriceList;
@@ -19,8 +21,9 @@ public class PriceListsActivity extends SherlockFragmentActivity implements OnPr
 
 	private static final String TAG = PriceListsActivity.class.getSimpleName();
 	private static final int LOADER_ID_PRICE_LISTS = 0;
-	
-	PriceListAdapter mPriceListsAdapter;
+		
+	private PriceListAdapter mPriceListsAdapter;
+	private String mSearchCriteria;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,34 @@ public class PriceListsActivity extends SherlockFragmentActivity implements OnPr
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_price_lists, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+        	public boolean onQueryTextChange(String newText) { 
+        		search(newText); 
+        		return true; 
+        	}
+
+        	public boolean onQueryTextSubmit(String query) 
+        	{
+        		search(query);
+        		return true;
+        	}
+        };
+    
+        searchView.setOnQueryTextListener(queryTextListener);		
+		return true;
+	}
+	
+	public void search(String criteria) { 
+		mSearchCriteria = criteria;
+		getSupportLoaderManager().restartLoader(LOADER_ID_PRICE_LISTS, null, this);
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		// Note that we handle Edit and Delete items here, even if they were
 		// added by the NoteFragment.
@@ -71,7 +102,7 @@ public class PriceListsActivity extends SherlockFragmentActivity implements OnPr
 		switch (id) {
 		case LOADER_ID_PRICE_LISTS:
 			try {
-				return new PriceListsLoader(this);
+				return new PriceListsLoader(this, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}

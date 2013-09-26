@@ -10,6 +10,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class PriceListsLoader extends AsyncTaskLoader<List<PriceList>> {
@@ -20,10 +21,12 @@ public class PriceListsLoader extends AsyncTaskLoader<List<PriceList>> {
 
 	private final DatabaseHelper mHelper;
 	private final PriceListService mPriceListService;
-
-	public PriceListsLoader(Context ctx) throws Throwable {
+	private final String mSearchCriteria;
+	
+	public PriceListsLoader(Context ctx, String searchCriteria) throws Throwable {
 		super(ctx);
 		
+		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mPriceListService = new PriceListService(mHelper);
 	}
@@ -34,7 +37,10 @@ public class PriceListsLoader extends AsyncTaskLoader<List<PriceList>> {
 	@Override
 	public List<PriceList> loadInBackground() {
 		try {
-			mPriceLists = IterableHelpers.toList(PriceList.class, mPriceListService.getPriceLists());
+			if (TextUtils.isEmpty(mSearchCriteria))
+				mPriceLists = IterableHelpers.toList(PriceList.class, mPriceListService.getPriceLists());
+			else 
+				mPriceLists = IterableHelpers.toList(PriceList.class, mPriceListService.getPriceLists(mSearchCriteria));
 		} catch (Throwable e) {
 			Log.e(TAG, e.toString());
 		}

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.DatePickerFragment;
 import com.mss.application.fragments.OrderPickupItemsFragment;
@@ -101,7 +102,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	private WarehouseService mWarehouseService;
 	private OrderService mOrderService;
 	private ProductService mProductService;
-		
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -259,7 +260,27 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_order_edit, menu);
+		
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+        	public boolean onQueryTextChange(String newText) { 
+        		search(newText); 
+        		return true; 
+        	}
+
+        	public boolean onQueryTextSubmit(String query) 
+        	{
+        		search(query);
+        		return true;
+        	}
+        };
+    
+        searchView.setOnQueryTextListener(queryTextListener);		
 		return true;
+	}
+	
+	public void search(String criteria) { 
+		getOrderPickupItemsFragment().applyFilter(criteria);
 	}
 	
 	@Override

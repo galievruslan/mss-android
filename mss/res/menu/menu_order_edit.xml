@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/action_search"
+        android:title="@string/title_search"
+        android:icon="@drawable/ic_menu_search"
+        android:showAsAction="always"
+        android:actionViewClass="com.actionbarsherlock.widget.SearchView"/>
+    
     <item
         android:id="@+id/menu_item_filter"
         android:icon="@drawable/ic_menu_filter"
@@ -9,6 +16,6 @@
     <item
         android:id="@+id/menu_item_save"
         android:icon="@android:drawable/ic_menu_save"
-        android:showAsAction="withText|ifRoom"
+        android:showAsAction="always"
         android:title="@string/menu_item_save"/>
 </menu>

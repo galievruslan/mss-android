@@ -37,4 +37,14 @@ public class StatusService {
 		
 		return new ArrayList<Status>();
 	}
+	
+	public Iterable<Status> getStatuses(String searchCriteria){		 
+		try {
+			return statusRepo.find(searchCriteria);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return new ArrayList<Status>();
+	}
 }

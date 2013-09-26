@@ -10,6 +10,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class StatusesLoader extends AsyncTaskLoader<List<Status>> {
@@ -20,10 +21,12 @@ public class StatusesLoader extends AsyncTaskLoader<List<Status>> {
 
 	private final DatabaseHelper mHelper;
 	private final StatusService mStatusService;
+	private final String mSearchCriteria;
 
-	public StatusesLoader(Context ctx) throws Throwable {
+	public StatusesLoader(Context ctx, String searchCriteria) throws Throwable {
 		super(ctx);
 		
+		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mStatusService = new StatusService(mHelper);
 	}
@@ -34,7 +37,10 @@ public class StatusesLoader extends AsyncTaskLoader<List<Status>> {
 	@Override
 	public List<Status> loadInBackground() {
 		try {
-			mStatuses = IterableHelpers.toList(Status.class, mStatusService.getStatuses());
+			if (TextUtils.isEmpty(mSearchCriteria))
+				mStatuses = IterableHelpers.toList(Status.class, mStatusService.getStatuses());
+			else 
+				mStatuses = IterableHelpers.toList(Status.class, mStatusService.getStatuses(mSearchCriteria));
 		} catch (Throwable e) {
 			Log.e(TAG, e.toString());
 		}

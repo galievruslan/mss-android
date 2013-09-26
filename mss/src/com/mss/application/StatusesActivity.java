@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.widget.SearchView;
 import com.mss.application.fragments.StatusesFragment;
 import com.mss.application.fragments.StatusesFragment.OnStatusSelectedListener;
 import com.mss.domain.models.Status;
@@ -20,7 +22,8 @@ public class StatusesActivity extends SherlockFragmentActivity implements OnStat
 	private static final String TAG = StatusesActivity.class.getSimpleName();
 	private static final int LOADER_ID_STATUSES = 0;
 	
-	StatusAdapter mStatusAdapter;
+	private StatusAdapter mStatusAdapter;
+	private String mSearchCriteria;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,35 @@ public class StatusesActivity extends SherlockFragmentActivity implements OnStat
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_statuses, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+        	public boolean onQueryTextChange(String newText) { 
+        		search(newText); 
+        		return true; 
+        	}
+
+        	public boolean onQueryTextSubmit(String query) 
+        	{
+        		search(query);
+        		return true;
+        	}
+        };
+    
+        searchView.setOnQueryTextListener(queryTextListener);		
+		return true;
+	}
+	
+	public void search(String criteria) { 
+		mSearchCriteria = criteria;
+		getSupportLoaderManager().restartLoader(LOADER_ID_STATUSES, null, this);
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
-		// Note that we handle Edit and Delete items here, even if they were
-		// added by the NoteFragment.
 
 		switch (item.getItemId()) {
 			case android.R.id.home:
@@ -71,7 +100,7 @@ public class StatusesActivity extends SherlockFragmentActivity implements OnStat
 		switch (id) {
 		case LOADER_ID_STATUSES:
 			try {
-				return new StatusesLoader(this);
+				return new StatusesLoader(this, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}

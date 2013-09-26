@@ -14,14 +14,14 @@ public class Customer extends Entity {
 		this.address = address;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD)
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.NAME_FIELD, columnDefinition = "COLLATE NOCASE")
 	private String name;
 	
 	public String getName(){
 		return name;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.ADDRESS_FIELD)
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.Customer.ADDRESS_FIELD, columnDefinition = "COLLATE NOCASE")
 	private String address;
 	
 	public String getAddress(){

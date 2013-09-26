@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 
-public class MainActivity extends SherlockFragmentActivity implements OnMenuSelectedListener {
-
+public class MainActivity extends SherlockFragmentActivity implements OnMenuSelectedListener {	
 	private static final String TAG = CustomersActivity.class.getSimpleName();
 	
 	MainMenuAdapter mMainMenuAdapter;

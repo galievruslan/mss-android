@@ -10,6 +10,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 
 public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem>> {
 	private long priceListId;
@@ -17,11 +18,13 @@ public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem
 
 	private final DatabaseHelper mHelper;
 	private final OrderService mOrderService;
+	private final String mSearchCriteria;
 
-	public OrderPickupItemsLoader(Context ctx, long priceListId) throws Throwable {
+	public OrderPickupItemsLoader(Context ctx, long priceListId, String searchCriteria) throws Throwable {
 		super(ctx);
 		
 		this.priceListId = priceListId;
+		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mOrderService = new OrderService(mHelper);
 	}
@@ -31,7 +34,10 @@ public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem
 	 */
 	@Override
 	public List<OrderPickupItem> loadInBackground() {
-		mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories()));
+		if (TextUtils.isEmpty(mSearchCriteria))
+			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories()));
+		else 
+			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories(), mSearchCriteria));
 		return mOrderPickupItemList;
 	}
 

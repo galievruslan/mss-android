@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.widget.SearchView;
 import com.mss.application.fragments.ShippingAddressesFragment;
 import com.mss.application.fragments.ShippingAddressesFragment.OnShippingAddressSelectedListener;
 import com.mss.domain.models.ShippingAddress;
@@ -21,7 +23,8 @@ public class ShippingAddressesActivity extends SherlockFragmentActivity implemen
 	private static final int LOADER_ID_SHIPPING_ADDRESSES = 0;
 	
 	private Long mCustomerId;
-	ShippingAddressAdapter mShippingAddressesAdapter;
+	private ShippingAddressAdapter mShippingAddressesAdapter;
+	private String mSearchCriteria;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +41,7 @@ public class ShippingAddressesActivity extends SherlockFragmentActivity implemen
 		ShippingAddressesFragment fragmentShippingAddresses = getShippingAddressesFragment();
 		fragmentShippingAddresses.addOnShippingAddressSelectedListener(this);
 		
-		Bundle bundle = new Bundle();
-		bundle.putLong("customer_id", mCustomerId);
-		getSupportLoaderManager().initLoader(LOADER_ID_SHIPPING_ADDRESSES, bundle, this);
+		getSupportLoaderManager().initLoader(LOADER_ID_SHIPPING_ADDRESSES, null, this);
 		if (getSupportActionBar() != null)
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -55,6 +56,34 @@ public class ShippingAddressesActivity extends SherlockFragmentActivity implemen
 	
 	protected ShippingAddressesFragment getShippingAddressesFragment() {
 		return (ShippingAddressesFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_shipping_address_list);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_shipping_addresses, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+        	public boolean onQueryTextChange(String newText) { 
+        		search(newText); 
+        		return true; 
+        	}
+
+        	public boolean onQueryTextSubmit(String query) 
+        	{
+        		search(query);
+        		return true;
+        	}
+        };
+    
+        searchView.setOnQueryTextListener(queryTextListener);		
+		return true;
+	}
+	
+	public void search(String criteria) { 
+		mSearchCriteria = criteria;
+		getSupportLoaderManager().restartLoader(LOADER_ID_SHIPPING_ADDRESSES, null, this);
 	}
 	
 	@Override
@@ -76,7 +105,7 @@ public class ShippingAddressesActivity extends SherlockFragmentActivity implemen
 		switch (id) {
 		case LOADER_ID_SHIPPING_ADDRESSES:
 			try {
-				return new ShippingAddressesLoader(this, arg1.getLong("customer_id"));
+				return new ShippingAddressesLoader(this, mCustomerId, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}

@@ -53,4 +53,14 @@ public class PriceListService {
 		
 		return new ArrayList<PriceList>();
 	}
+	
+	public Iterable<PriceList> getPriceLists(String searchCriteria) {		 
+		try {
+			return priceListRepo.find(searchCriteria);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return new ArrayList<PriceList>();
+	}
 }

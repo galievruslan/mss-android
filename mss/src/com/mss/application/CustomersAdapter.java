@@ -23,7 +23,7 @@ public class CustomersAdapter extends BaseAdapter implements OnClickListener {
 	private List<Customer> mCustomerList;
 	private final DatabaseHelper mHelper;
 	private final CustomerService mCustomerService;
-
+	
 	public CustomersAdapter(Context ctx) throws Throwable {
 		mContext = ctx;
 		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

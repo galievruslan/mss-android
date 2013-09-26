@@ -69,6 +69,7 @@
     <string name="dialog_change_price_confirmation_message">Are you shure, you want to change price list, all selected items will be deleted?</string>
     <string name="dialog_change_price_confirmation_positive_button">Change</string>
     <string name="dialog_change_price_confirmation_negative_button">Cancel</string>
+    <string name="title_search">Search</string>
 
     <!-- Label for this package -->
     <string name="label">MSS Synchronization adapter</string>

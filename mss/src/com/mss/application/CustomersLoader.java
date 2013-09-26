@@ -10,6 +10,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class CustomersLoader extends AsyncTaskLoader<List<Customer>> {
@@ -20,10 +21,13 @@ public class CustomersLoader extends AsyncTaskLoader<List<Customer>> {
 
 	private final DatabaseHelper mHelper;
 	private final CustomerService mCustomerService;
+	
+	private final String mSearchCriteria;
 
-	public CustomersLoader(Context ctx) throws Throwable {
+	public CustomersLoader(Context ctx, String searchCriteria) throws Throwable {
 		super(ctx);
 		
+		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
 		mCustomerService = new CustomerService(mHelper);
 	}
@@ -34,7 +38,12 @@ public class CustomersLoader extends AsyncTaskLoader<List<Customer>> {
 	@Override
 	public List<Customer> loadInBackground() {
 		try {
-			mCustomerList = IterableHelpers.toList(Customer.class, mCustomerService.getCustomers());
+			if (TextUtils.isEmpty(mSearchCriteria)) {
+				mCustomerList = IterableHelpers.toList(Customer.class, mCustomerService.getCustomers());
+			}
+			else {
+				mCustomerList = IterableHelpers.toList(Customer.class, mCustomerService.getCustomers(mSearchCriteria));
+			}
 		} catch (Throwable e) {
 			Log.e(TAG, e.toString());
 		}

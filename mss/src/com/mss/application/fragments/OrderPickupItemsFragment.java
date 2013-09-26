@@ -30,6 +30,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 	private static final int LOADER_ID_ORDER_PICKUP_ITEMS = 0;
 	
 	private long mPriceListId;
+	private String mSearchCriteria;
 	
 	private final Set<OnOrderPickupItemSelectedListener> mOnOrderPickupItemSelectedListeners = 
 			new HashSet<OrderPickupItemsFragment.OnOrderPickupItemSelectedListener>(1);
@@ -66,6 +67,11 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		for (OnOrderPickupItemSelectedListener listener : mOnOrderPickupItemSelectedListeners) {
 			listener.onOrderPickupItemSelected((OrderPickupItem) getListAdapter().getItem(position), position, id);
 		}
+	}
+	
+	public void applyFilter(String criteria) {
+		mSearchCriteria = criteria;
+		getLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEMS, null, this);
 	}
 
 	private void setLastClickedPosition(int position) {
@@ -111,7 +117,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		switch (id) {
 		case LOADER_ID_ORDER_PICKUP_ITEMS:
 			try {
-				return new OrderPickupItemsLoader(getSherlockActivity(), mPriceListId);
+				return new OrderPickupItemsLoader(getSherlockActivity(), mPriceListId, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}

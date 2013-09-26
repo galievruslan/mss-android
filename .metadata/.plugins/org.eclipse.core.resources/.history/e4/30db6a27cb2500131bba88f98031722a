@@ -1,0 +1,22 @@
+package com.mss.infrastructure.ormlite;
+
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.mss.domain.models.Customer;
+
+public class OrmliteCustomerRepository extends OrmliteGenericRepository<Customer> {
+
+	public OrmliteCustomerRepository(DatabaseHelper databaseHelper) throws Throwable{
+		super(databaseHelper.getCustomerDao());
+	}
+	
+	public Iterable<Customer> find(String searchCriteria) throws Throwable {
+		
+		QueryBuilder<Customer, Integer> queryBuilder = dao.queryBuilder();
+		
+		queryBuilder.where()
+			.raw(com.mss.domain.models.Constants.Tables.Customer.NAME_FIELD + " like " + '%' + searchCriteria + '%' + "COLLATE NOCASE")
+			.or()
+			.raw(com.mss.domain.models.Constants.Tables.Customer.ADDRESS_FIELD + " like " + '%' + searchCriteria + '%' + "COLLATE NOCASE");
+		return dao.query(queryBuilder.prepare());
+	}
+}

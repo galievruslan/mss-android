@@ -86,6 +86,15 @@ public class OrderService {
 		}
 	}
 	
+	public Iterable<OrderPickupItem> getOrderPickupItems(long priceListId, Iterable<Long> categoryFilter, String searchCriteria) {
+		try {
+			return orderPickUpItemRepo.findByPriceListId(priceListId, IterableHelpers.toArray(Long.class, categoryFilter), searchCriteria);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+			return new ArrayList<OrderPickupItem>();
+		}
+	}
+	
 	public Iterable<OrderPickedUpItem> getOrderPickedUpItems(long orderId) {
 		try {			
 			Iterable<OrderItem> orderItems = orderItemRepo.findByOrderId(orderId);

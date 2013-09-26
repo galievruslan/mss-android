@@ -3,3 +3,14 @@
 1380019276303	Copy compilation unit
 1380052821871	Copy compilation unit
 1380052856685	Copy file
+1380099796271	Rename resource 'customers.xml'
+1380119919283	Delete element
+1380132219868	Move file
+1380132223205	Delete element
+1380132902257	Move file
+1380135337251	Delete element
+1380135358054	Delete element
+1380137017874	Copy file
+1380177956896	Rename resource 'warehouses.xml'
+1380177979458	Rename resource 'price_lists.xml'
+1380179401837	Rename resource 'statuses.xml'

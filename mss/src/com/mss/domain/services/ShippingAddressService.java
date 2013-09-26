@@ -40,9 +40,29 @@ public class ShippingAddressService {
 		return new ArrayList<ShippingAddress>();
 	}
 	
+	public Iterable<ShippingAddress> findByCustomer(Customer customer, String searchCriteria) {
+		try {
+			return shippingAddressRepo.findByCustomerId(customer.getId(), searchCriteria);
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return new ArrayList<ShippingAddress>();
+	}
+	
 	public Iterable<ShippingAddress> find() {	
 		try {
 			return shippingAddressRepo.find();
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return new ArrayList<ShippingAddress>();
+	}
+	
+	public Iterable<ShippingAddress> find(String searchCriteria) {	
+		try {
+			return shippingAddressRepo.find(searchCriteria);
 		} catch (Throwable throwable) {
 			Log.e(TAG, throwable.getMessage());			
 		}

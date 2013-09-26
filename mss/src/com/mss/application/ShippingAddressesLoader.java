@@ -12,6 +12,7 @@ import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class ShippingAddressesLoader extends AsyncTaskLoader<List<ShippingAddress>> {
@@ -23,11 +24,15 @@ public class ShippingAddressesLoader extends AsyncTaskLoader<List<ShippingAddres
 
 	private final DatabaseHelper mHelper;
 	private final ShippingAddressService mShippingAddressService;
+	
+	private final String mSearchCriteria;
 
-	public ShippingAddressesLoader(Context ctx, Long customerId) throws Throwable {
+	public ShippingAddressesLoader(Context ctx, Long customerId, String searchCriteria) throws Throwable {
 		super(ctx);
 		
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
+		mSearchCriteria = searchCriteria;
+		
 		CustomerService customerService = new CustomerService(mHelper);
 		mShippingAddressService = new ShippingAddressService(mHelper);
 		mCustomer = customerService.getById(customerId);
@@ -40,9 +45,15 @@ public class ShippingAddressesLoader extends AsyncTaskLoader<List<ShippingAddres
 		try {
 			Iterable<ShippingAddress> shippingAddresses;
 			if (mCustomer != null) {
-				shippingAddresses = mShippingAddressService.findByCustomer(mCustomer);
+				if (TextUtils.isEmpty(mSearchCriteria))
+					shippingAddresses = mShippingAddressService.findByCustomer(mCustomer);
+				else
+					shippingAddresses = mShippingAddressService.findByCustomer(mCustomer, mSearchCriteria);					
 			} else {
-				shippingAddresses = mShippingAddressService.find();
+				if (TextUtils.isEmpty(mSearchCriteria))
+					shippingAddresses = mShippingAddressService.find();
+				else
+					shippingAddresses = mShippingAddressService.find(mSearchCriteria);
 			}
 			
 			mShippingAddressList = IterableHelpers.toList(ShippingAddress.class, shippingAddresses);

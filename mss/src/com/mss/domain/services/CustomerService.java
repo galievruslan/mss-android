@@ -48,4 +48,14 @@ public class CustomerService {
 		
 		return new ArrayList<Customer>();
 	}
+	
+	public Iterable<Customer> getCustomers(String searchCriteria) {
+		try {
+			return customerRepo.find(searchCriteria);
+		} catch (Throwable throwable) {
+			Log.e(TAG, throwable.getMessage());			
+		}
+		
+		return new ArrayList<Customer>();
+	}
 }

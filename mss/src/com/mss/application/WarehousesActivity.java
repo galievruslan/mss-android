@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.widget.SearchView;
 import com.mss.application.fragments.WarehousesFragment;
 import com.mss.application.fragments.WarehousesFragment.OnWarehouseSelectedListener;
 import com.mss.domain.models.Warehouse;
@@ -20,7 +22,8 @@ public class WarehousesActivity extends SherlockFragmentActivity implements OnWa
 	private static final String TAG = WarehousesActivity.class.getSimpleName();
 	private static final int LOADER_ID_WAREHOUSES = 0;
 	
-	WarehouseAdapter mWarehousesAdapter;
+	private WarehouseAdapter mWarehousesAdapter;
+	private String mSearchCriteria;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,34 @@ public class WarehousesActivity extends SherlockFragmentActivity implements OnWa
 	}
 	
 	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.menu_warehouses, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
+        	public boolean onQueryTextChange(String newText) { 
+        		search(newText); 
+        		return true; 
+        	}
+
+        	public boolean onQueryTextSubmit(String query) 
+        	{
+        		search(query);
+        		return true;
+        	}
+        };
+    
+        searchView.setOnQueryTextListener(queryTextListener);		
+		return true;
+	}
+	
+	public void search(String criteria) { 
+		mSearchCriteria = criteria;
+		getSupportLoaderManager().restartLoader(LOADER_ID_WAREHOUSES, null, this);
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		// Note that we handle Edit and Delete items here, even if they were
 		// added by the NoteFragment.
@@ -71,7 +102,7 @@ public class WarehousesActivity extends SherlockFragmentActivity implements OnWa
 		switch (id) {
 		case LOADER_ID_WAREHOUSES:
 			try {
-				return new WarehousesLoader(this);
+				return new WarehousesLoader(this, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
