@@ -58,6 +58,7 @@
     <string name="main_menu_orders">Заказы</string>
     <string name="main_menu_settings">Настройки</string>
     <string name="main_menu_sync">Синхронизация</string>
+    <string name="main_menu_update">Обновления</string>
     <string name="title_activity_authenticator">Аутентификация</string>
     <string name="dialog_delete_confirmation_title">Подтверждение удаления</string>
     <string name="dialog_delete_confirmation_message">Вы уверены, что хотите удалить?</string>
@@ -127,4 +128,9 @@
     <string name="collapse_all_menu">Свернуть все</string>
     <string name="select_all_menu">Выбрать все</string>
     <string name="unselect_all_menu">Снять выбор</string>    
+    <string name="notify_check_if_updates_available">Проверка наличия обновлений</string>
+    <string name="notify_updates_available">Доступна новая версия</string>
+    <string name="notify_lastests_version_is_installed">У Вас установлена самая последняя версия приложения</string>
+    <string name="notify_download_updates">Получение обновлений</string>
+    <string name="notify_install_updates">Установка обновлений</string>
 </resources>

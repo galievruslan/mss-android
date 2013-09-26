@@ -19,7 +19,7 @@ public class CustomerWebRepository extends WebRepository<Customer> {
 	}
 	
 	public List<Customer> find(List<NameValuePair> params) throws URISyntaxException, Exception {
-		String json = connection.getWebServer().Get(PATH, params);
+		String json = connection.getWebServer().get(PATH, params);
 		
 		Type listType = new TypeToken<List<Customer>>() {}.getType();
 		return new Gson().fromJson(json, listType);

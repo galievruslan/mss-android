@@ -339,7 +339,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		
 		nameValuePairs.add(new BasicNameValuePair("client_type", "Android (" + SystemService.getSystemVersion() + ")"));
 		nameValuePairs.add(new BasicNameValuePair("client_version",SystemService.getApplicationVersion()));
-		webServer.Post("/synchronization/client_information.json", nameValuePairs);
+		webServer.post("/synchronization/client_information.json", nameValuePairs);
     }
     
     private void PostRoutes(WebServer webServer,
@@ -349,7 +349,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		for (Route route : routes) {
 			Iterable<RoutePoint> points = routePointRepo.findByRouteId(route.getId());			
 			PostResult result = 
-					webServer.Post("/synchronization/routes.json", ToPostParams(route, IterableHelpers.toArray(RoutePoint.class, points)));
+					webServer.post("/synchronization/routes.json", ToPostParams(route, IterableHelpers.toArray(RoutePoint.class, points)));
 			result.getStatusCode();
 			
 			Pattern pattern = Pattern.compile("\"code\":100|\"code\":101");
@@ -392,7 +392,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		for (Order order : orders) {
 			Iterable<OrderItem> items = orderItemRepo.findByOrderId(order.getId());			
 			PostResult result = 
-					webServer.Post("/synchronization/orders.json", ToPostParams(order, IterableHelpers.toArray(OrderItem.class, items)));
+					webServer.post("/synchronization/orders.json", ToPostParams(order, IterableHelpers.toArray(OrderItem.class, items)));
 			result.getStatusCode();
 			
 			Pattern pattern = Pattern.compile("\"code\":100|\"code\":101");

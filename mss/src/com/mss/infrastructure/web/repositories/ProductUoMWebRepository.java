@@ -19,7 +19,7 @@ public class ProductUoMWebRepository extends WebRepository<ProductUnitOfMeasure>
 	}
 	
 	public List<ProductUnitOfMeasure> find(List<NameValuePair> params) throws URISyntaxException, Exception {
-		String json = connection.getWebServer().Get(PATH, params);
+		String json = connection.getWebServer().get(PATH, params);
 		
 		Type listType = new TypeToken<List<ProductUnitOfMeasure>>() {}.getType();
 		return new Gson().fromJson(json, listType);

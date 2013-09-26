@@ -19,7 +19,7 @@ public class RoutePointTemplateWebRepository extends WebRepository<RoutePointTem
 	}
 	
 	public List<RoutePointTemplate> find(List<NameValuePair> params) throws URISyntaxException, Exception {
-		String json = connection.getWebServer().Get(PATH, params);
+		String json = connection.getWebServer().get(PATH, params);
 		
 		Type listType = new TypeToken<List<RoutePointTemplate>>() {}.getType();
 		return new Gson().fromJson(json, listType);

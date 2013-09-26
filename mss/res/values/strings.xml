@@ -60,6 +60,7 @@
     <string name="main_menu_orders">Orders</string>
     <string name="main_menu_settings">Settings</string>
     <string name="main_menu_sync">Synchronization</string>
+    <string name="main_menu_update">Update</string>
     <string name="title_activity_authenticator">AuthenticatorActivity</string>
     <string name="dialog_delete_confirmation_title">Delete confirmation</string>
     <string name="dialog_delete_confirmation_message">Are you shure, you want to delete?</string>
@@ -145,5 +146,10 @@
     <string name="select_all_menu">Select all</string>
     <string name="unselect_all_menu">Unselect all</string>
     <string name="title_activity_daily_orders">DailyOrdersActivity</string>
+    <string name="notify_check_if_updates_available">Check if updates available</string>
+    <string name="notify_updates_available">Updates available</string>
+    <string name="notify_lastests_version_is_installed">You have lastest varsion</string>
+    <string name="notify_download_updates">Download updates</string>
+    <string name="notify_install_updates">Install updates</string>
 
 </resources>

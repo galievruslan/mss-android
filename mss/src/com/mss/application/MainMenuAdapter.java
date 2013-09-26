@@ -19,6 +19,7 @@ public class MainMenuAdapter extends BaseAdapter implements OnClickListener {
 	public final static int SETTINGS_MENU = 1;
 	public final static int SYNC_MENU = 2;
 	public final static int ORDERS_MENU = 3;
+	public final static int UPDATES_MENU = 4;
 	
 	private ArrayList<MainMenuAdapter.MenuItem> mMenuItems;
 	
@@ -51,6 +52,11 @@ public class MainMenuAdapter extends BaseAdapter implements OnClickListener {
 				MenuItem(SYNC_MENU, 
 						 res.getString(R.string.main_menu_sync), 
 						 res.getDrawable(R.drawable.ic_menu_sync)));	
+		
+		mMenuItems.add(new 
+				MenuItem(UPDATES_MENU, 
+						 res.getString(R.string.main_menu_update), 
+						 res.getDrawable(R.drawable.ic_menu_update)));	
 				
 		notifyDataSetChanged();		
 	}

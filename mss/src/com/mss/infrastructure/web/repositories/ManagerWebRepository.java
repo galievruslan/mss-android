@@ -20,7 +20,7 @@ public class ManagerWebRepository extends WebRepository<Manager> {
 	}
 	
 	public List<Manager> find(List<NameValuePair> params) throws URISyntaxException, Exception {
-		String json = connection.getWebServer().Get(PATH, params);
+		String json = connection.getWebServer().get(PATH, params);
 				
 		Type type = new TypeToken<Manager>() {}.getType();
 		ArrayList<Manager> managers = new ArrayList<Manager>();
