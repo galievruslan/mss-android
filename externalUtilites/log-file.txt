@@ -35,3 +35,8 @@
 151 2013-09-27 23:35:01,506 [1] [INFO ] - Current version is: 1.0.0
 151 2013-09-27 23:35:01,506 [1] [INFO ] - New version is: 1.0.1
 152 2013-09-27 23:35:01,507 [1] [INFO ] - Version incrementer finished
+356 2013-09-27 23:49:21,981 [1] [INFO ] - Version incrementer started
+373 2013-09-27 23:49:21,998 [1] [INFO ] - Update version in mss
+376 2013-09-27 23:49:22,001 [1] [INFO ] - Current version is: 1.0.3
+376 2013-09-27 23:49:22,001 [1] [INFO ] - New version is: 1.0.4
+377 2013-09-27 23:49:22,002 [1] [INFO ] - Version incrementer finished

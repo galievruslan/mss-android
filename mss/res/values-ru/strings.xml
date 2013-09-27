@@ -133,4 +133,5 @@
     <string name="notify_lastests_version_is_installed">У Вас установлена самая последняя версия приложения</string>
     <string name="notify_download_updates">Получение обновлений</string>
     <string name="notify_install_updates">Установка обновлений</string>
+    <string name="notify_update_in_progress">Обновление уже запущено</string>
 </resources>

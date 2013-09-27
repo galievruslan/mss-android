@@ -35,6 +35,7 @@ import android.widget.Toast;
 public class MainActivity extends SherlockFragmentActivity implements OnMenuSelectedListener {	
 	private static final String TAG = CustomersActivity.class.getSimpleName();
 	
+	private static AsyncTask<Void, Void, Void> mTask;
 	MainMenuAdapter mMainMenuAdapter;
 	
 	@Override
@@ -50,6 +51,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 		MainMenuFragment fragmentMenu = getMainMenuFragment();
 		fragmentMenu.addOnMenuSelectedListener(this);
 		fragmentMenu.setListAdapter(mMainMenuAdapter);
+		
+		mTask = new UpdateTask(this);
 	}
 	
 	@Override
@@ -76,6 +79,14 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 				break;
 			}
 			case MainMenuAdapter.UPDATES_MENU: {
+				if(mTask.getStatus() == AsyncTask.Status.FINISHED){
+		            mTask = new UpdateTask(this).execute(new Void[0]);
+		        }else if(mTask.getStatus() == AsyncTask.Status.PENDING){
+		            mTask.execute(new Void[0]);
+		        }else{
+		            Toast.makeText(this, R.string.notify_update_in_progress, Toast.LENGTH_LONG).show();
+		        }
+				
 				UpdateTask updateTask = new UpdateTask(this);
 				updateTask.execute(new Void[0]);
 			} 
@@ -126,22 +137,17 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
     	}
     };
     
-    private static class UpdateTask extends AsyncTask<Void, Void, Void> {
+    private class UpdateTask extends AsyncTask<Void, Void, Void> {
 
     	private Context mContext;
-    	private boolean mInProcess = false;
     	
     	public UpdateTask(Context context){
     		mContext = context;
     	}
     	
 		@Override
-		protected Void doInBackground(Void... params) {
-			if (mInProcess)
-				return null;
-			
+		protected Void doInBackground(Void... params) {			
 			try {
-				mInProcess = true;
 				UpdateRequest.Builder builder=new UpdateRequest.Builder(mContext);
 
 				PreferenceManager.setDefaultValues(mContext, R.xml.pref_data_sync, false);	
@@ -190,9 +196,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 			}
 			catch (Exception exception) {
 				Log.e(TAG, exception.getMessage());
-			}
-			finally {
-				mInProcess = false;
 			}
 			
 			return null;

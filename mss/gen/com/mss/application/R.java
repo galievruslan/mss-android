@@ -1390,15 +1390,15 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f060008;
-        public static final int action_cancel=0x7f0600ba;
-        public static final int action_create=0x7f06009b;
+        public static final int action_cancel=0x7f0600bb;
+        public static final int action_create=0x7f06009c;
         public static final int action_settings=0x7f06002a;
-        public static final int action_sign_in_register=0x7f060095;
-        public static final int action_sign_in_short=0x7f060096;
+        public static final int action_sign_in_register=0x7f060096;
+        public static final int action_sign_in_short=0x7f060097;
         /**  Strings related to login 
  Strings related to login 
          */
-        public static final int action_synchronize=0x7f0600b9;
+        public static final int action_synchronize=0x7f0600ba;
         public static final int alert_cant_change_point_status=0x7f06000f;
         public static final int alert_cant_edit_route_point=0x7f06000e;
         public static final int alert_route_template_not_found=0x7f060012;
@@ -1409,17 +1409,17 @@ containing a value of this type.
  Button for going to the previous screen or step 
          */
         public static final int back_button_label=0x7f060077;
-        public static final int button_delete=0x7f0600aa;
-        public static final int button_eight=0x7f0600a7;
-        public static final int button_five=0x7f0600a4;
-        public static final int button_four=0x7f0600a3;
-        public static final int button_nil=0x7f0600a9;
-        public static final int button_nine=0x7f0600a8;
-        public static final int button_one=0x7f0600a0;
-        public static final int button_seven=0x7f0600a6;
-        public static final int button_six=0x7f0600a5;
-        public static final int button_three=0x7f0600a2;
-        public static final int button_two=0x7f0600a1;
+        public static final int button_delete=0x7f0600ab;
+        public static final int button_eight=0x7f0600a8;
+        public static final int button_five=0x7f0600a5;
+        public static final int button_four=0x7f0600a4;
+        public static final int button_nil=0x7f0600aa;
+        public static final int button_nine=0x7f0600a9;
+        public static final int button_one=0x7f0600a1;
+        public static final int button_seven=0x7f0600a7;
+        public static final int button_six=0x7f0600a6;
+        public static final int button_three=0x7f0600a3;
+        public static final int button_two=0x7f0600a2;
         /**  Button to cancel the current operation 
  Button to cancel the current operation 
          */
@@ -1431,8 +1431,8 @@ containing a value of this type.
         public static final int collapsible_condensed_enable=0x7f060088;
         public static final int collapsible_menu_disable=0x7f060085;
         public static final int collapsible_menu_enable=0x7f060087;
-        public static final int description_address=0x7f0600b1;
-        public static final int description_name=0x7f0600b0;
+        public static final int description_address=0x7f0600b2;
+        public static final int description_name=0x7f0600b1;
         public static final int dialog_change_price_confirmation_message=0x7f060062;
         public static final int dialog_change_price_confirmation_negative_button=0x7f060064;
         public static final int dialog_change_price_confirmation_positive_button=0x7f060063;
@@ -1441,12 +1441,12 @@ containing a value of this type.
         public static final int dialog_delete_confirmation_negative_button=0x7f060060;
         public static final int dialog_delete_confirmation_positive_button=0x7f06005f;
         public static final int dialog_delete_confirmation_title=0x7f06005d;
-        public static final int error_field_required=0x7f0600d6;
-        public static final int error_incorrect_password=0x7f0600d5;
-        public static final int error_invalid_login=0x7f0600d3;
-        public static final int error_invalid_password=0x7f0600d4;
-        public static final int error_same_point_already_exist=0x7f0600d7;
-        public static final int error_shipping_date_must_be_greater_than_order_date=0x7f0600d8;
+        public static final int error_field_required=0x7f0600d7;
+        public static final int error_incorrect_password=0x7f0600d6;
+        public static final int error_invalid_login=0x7f0600d4;
+        public static final int error_invalid_password=0x7f0600d5;
+        public static final int error_same_point_already_exist=0x7f0600d8;
+        public static final int error_shipping_date_must_be_greater_than_order_date=0x7f0600d9;
         public static final int example_address=0x7f060018;
         public static final int example_amount=0x7f060016;
         public static final int example_count=0x7f060015;
@@ -1467,20 +1467,20 @@ containing a value of this type.
         public static final int expand_menu=0x7f060089;
         public static final int fancy_menu_condensed=0x7f060080;
         public static final int fancy_menu_name=0x7f06007f;
-        public static final int greetings=0x7f0600cd;
+        public static final int greetings=0x7f0600ce;
         public static final int hello_world=0x7f060023;
         public static final int key_id=0x7f06003d;
         /**  Label for this package 
  Label for this package 
          */
         public static final int label=0x7f060066;
-        public static final int label_address=0x7f0600af;
+        public static final int label_address=0x7f0600b0;
         public static final int label_amount=0x7f060050;
         public static final int label_count=0x7f06004f;
-        public static final int label_description=0x7f06009c;
-        public static final int label_full_synchronization=0x7f0600bb;
-        public static final int label_last_synchronization=0x7f0600bc;
-        public static final int label_name=0x7f0600ae;
+        public static final int label_description=0x7f06009d;
+        public static final int label_full_synchronization=0x7f0600bc;
+        public static final int label_last_synchronization=0x7f0600bd;
+        public static final int label_name=0x7f0600af;
         public static final int label_order_customer=0x7f060046;
         public static final int label_order_date=0x7f060043;
         public static final int label_order_notes=0x7f06004a;
@@ -1490,16 +1490,16 @@ containing a value of this type.
         public static final int label_order_shipping_time=0x7f060045;
         public static final int label_order_warehouse=0x7f060049;
         public static final int label_orders=0x7f06004d;
-        public static final int label_price=0x7f06009d;
+        public static final int label_price=0x7f06009e;
         public static final int label_status=0x7f06004e;
         public static final int label_tab_details=0x7f060041;
         public static final int label_tab_general=0x7f060040;
         public static final int label_tab_notes=0x7f060042;
-        public static final int label_unit_of_measure=0x7f06009e;
+        public static final int label_unit_of_measure=0x7f06009f;
         public static final int label_uom_base=0x7f06004b;
         public static final int label_uom_count_in_base=0x7f06004c;
-        public static final int lable_route_date_default=0x7f0600ac;
-        public static final int last_synchronization=0x7f0600bd;
+        public static final int lable_route_date_default=0x7f0600ad;
+        public static final int last_synchronization=0x7f0600be;
         /**  Message shown in dialog if the username or password is invalid. 
  Message shown in dialog if the username or password is invalid. 
          */
@@ -1539,14 +1539,14 @@ containing a value of this type.
  Label above username EditText 
          */
         public static final int login_activity_username_label=0x7f06006f;
-        public static final int login_progress_signing_in=0x7f060098;
+        public static final int login_progress_signing_in=0x7f060099;
         public static final int main_menu_orders=0x7f060058;
         public static final int main_menu_routes=0x7f060057;
         public static final int main_menu_settings=0x7f060059;
         public static final int main_menu_sync=0x7f06005a;
         public static final int main_menu_update=0x7f06005b;
-        public static final int menu_cancel_sync=0x7f0600d2;
-        public static final int menu_forgot_password=0x7f060097;
+        public static final int menu_cancel_sync=0x7f0600d3;
+        public static final int menu_forgot_password=0x7f060098;
         public static final int menu_item_add=0x7f060036;
         public static final int menu_item_change_status=0x7f060035;
         public static final int menu_item_copy_route_from_template=0x7f06003c;
@@ -1564,6 +1564,7 @@ containing a value of this type.
         public static final int notify_download_updates=0x7f060090;
         public static final int notify_install_updates=0x7f060091;
         public static final int notify_lastests_version_is_installed=0x7f06008f;
+        public static final int notify_update_in_progress=0x7f060092;
         public static final int notify_updates_available=0x7f06008e;
         /**  Permission description 
  Permission description 
@@ -1581,37 +1582,37 @@ containing a value of this type.
  Permission label 
          */
         public static final int permlab_samplesyncadapterAuthPassword=0x7f060067;
-        public static final int pref_default_last_sync=0x7f0600b8;
-        public static final int pref_default_server_address=0x7f0600b6;
+        public static final int pref_default_last_sync=0x7f0600b9;
+        public static final int pref_default_server_address=0x7f0600b7;
         /**  Example settings for Data & Sync 
  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f0600b4;
+        public static final int pref_header_data_sync=0x7f0600b5;
         /**  Strings related to Settings 
  Example General settings 
  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f0600b3;
-        public static final int pref_title_last_sync=0x7f0600b7;
+        public static final int pref_header_general=0x7f0600b4;
+        public static final int pref_title_last_sync=0x7f0600b8;
         /**  Example settings for Data & Sync 
  Example settings for Data & Sync 
          */
-        public static final int pref_title_server_address=0x7f0600b5;
+        public static final int pref_title_server_address=0x7f0600b6;
         public static final int profile_action=0x7f060079;
-        public static final int prompt_customer=0x7f060099;
-        public static final int prompt_login=0x7f060093;
-        public static final int prompt_password=0x7f060094;
+        public static final int prompt_customer=0x7f06009a;
+        public static final int prompt_login=0x7f060094;
+        public static final int prompt_password=0x7f060095;
         /**  Strings related to route 
  Strings related to route 
          */
-        public static final int prompt_route_date=0x7f0600ab;
+        public static final int prompt_route_date=0x7f0600ac;
         /**  Strings related to login 
  Strings related to login 
          */
-        public static final int prompt_server=0x7f060092;
-        public static final int prompt_shipping_address=0x7f06009a;
-        public static final int prompt_unit_of_measure=0x7f06009f;
+        public static final int prompt_server=0x7f060093;
+        public static final int prompt_shipping_address=0x7f06009b;
+        public static final int prompt_unit_of_measure=0x7f0600a0;
         public static final int select_all_menu=0x7f06008a;
         /**  Button that takes the user to the "sign in" screen 
  Button that takes the user to the "sign in" screen 
@@ -1621,24 +1622,24 @@ containing a value of this type.
         public static final int simple_menu_name=0x7f06007d;
         public static final int sub_title_activity_orders=0x7f06002f;
         public static final int sub_title_activity_route_point=0x7f06002c;
-        public static final int sync_categories=0x7f0600c1;
-        public static final int sync_clear_storage=0x7f0600bf;
-        public static final int sync_customers=0x7f0600c0;
-        public static final int sync_manager_settings=0x7f0600d0;
-        public static final int sync_orders=0x7f0600cf;
-        public static final int sync_preferences=0x7f0600cc;
-        public static final int sync_price_lists=0x7f0600c2;
-        public static final int sync_price_lists_lines=0x7f0600c7;
-        public static final int sync_products=0x7f0600c3;
-        public static final int sync_products_units_of_measures=0x7f0600c5;
-        public static final int sync_progress=0x7f0600be;
-        public static final int sync_route_points_templates=0x7f0600cb;
-        public static final int sync_route_templates=0x7f0600ca;
-        public static final int sync_routes=0x7f0600ce;
-        public static final int sync_shipping_addresses=0x7f0600c4;
-        public static final int sync_statuses=0x7f0600c8;
-        public static final int sync_units_of_measures=0x7f0600c6;
-        public static final int sync_warehouses=0x7f0600c9;
+        public static final int sync_categories=0x7f0600c2;
+        public static final int sync_clear_storage=0x7f0600c0;
+        public static final int sync_customers=0x7f0600c1;
+        public static final int sync_manager_settings=0x7f0600d1;
+        public static final int sync_orders=0x7f0600d0;
+        public static final int sync_preferences=0x7f0600cd;
+        public static final int sync_price_lists=0x7f0600c3;
+        public static final int sync_price_lists_lines=0x7f0600c8;
+        public static final int sync_products=0x7f0600c4;
+        public static final int sync_products_units_of_measures=0x7f0600c6;
+        public static final int sync_progress=0x7f0600bf;
+        public static final int sync_route_points_templates=0x7f0600cc;
+        public static final int sync_route_templates=0x7f0600cb;
+        public static final int sync_routes=0x7f0600cf;
+        public static final int sync_shipping_addresses=0x7f0600c5;
+        public static final int sync_statuses=0x7f0600c9;
+        public static final int sync_units_of_measures=0x7f0600c7;
+        public static final int sync_warehouses=0x7f0600ca;
         public static final int title_activity_abstract=0x7f06003f;
         public static final int title_activity_authenticator=0x7f06005c;
         public static final int title_activity_categories=0x7f06007c;
@@ -1654,14 +1655,14 @@ containing a value of this type.
         public static final int title_activity_orders=0x7f06002e;
         public static final int title_activity_price_lists=0x7f060051;
         public static final int title_activity_product_uoms=0x7f060056;
-        public static final int title_activity_route=0x7f0600ad;
+        public static final int title_activity_route=0x7f0600ae;
         public static final int title_activity_route_fragment=0x7f060033;
         public static final int title_activity_route_point=0x7f06002b;
         public static final int title_activity_route_point_fragment=0x7f060034;
-        public static final int title_activity_settings=0x7f0600b2;
+        public static final int title_activity_settings=0x7f0600b3;
         public static final int title_activity_shipping_addresses=0x7f060031;
         public static final int title_activity_statuses=0x7f06007b;
-        public static final int title_activity_sync=0x7f0600d1;
+        public static final int title_activity_sync=0x7f0600d2;
         public static final int title_activity_time_picker_fragment=0x7f060053;
         public static final int title_activity_warehouses=0x7f060052;
         public static final int title_search=0x7f060065;
