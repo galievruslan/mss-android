@@ -1,0 +1,37 @@
+117 2013-09-27 23:30:31,630 [1] [INFO ] - Version incrementer started
+136 2013-09-27 23:30:31,649 [1] [INFO ] - Update version in mss
+138 2013-09-27 23:30:31,651 [1] [INFO ] - Current version is: 1.0.1
+139 2013-09-27 23:30:31,652 [1] [INFO ] - New version is: 1.0.2
+140 2013-09-27 23:30:31,653 [1] [INFO ] - Version incrementer finished
+117 2013-09-27 23:31:32,033 [1] [INFO ] - Version incrementer started
+137 2013-09-27 23:31:32,053 [1] [INFO ] - Update version in mss.web
+140 2013-09-27 23:31:32,056 [1] [INFO ] - Current version is: 1.0.1
+140 2013-09-27 23:31:32,056 [1] [INFO ] - New version is: 1.0.2
+141 2013-09-27 23:31:32,057 [1] [INFO ] - Version incrementer finished
+116 2013-09-27 23:31:34,097 [1] [INFO ] - Version incrementer started
+138 2013-09-27 23:31:34,119 [1] [INFO ] - Update version in mss
+142 2013-09-27 23:31:34,123 [1] [INFO ] - Current version is: 1.0.2
+142 2013-09-27 23:31:34,123 [1] [INFO ] - New version is: 1.0.3
+143 2013-09-27 23:31:34,124 [1] [INFO ] - Version incrementer finished
+116 2013-09-27 23:32:32,099 [1] [INFO ] - Version incrementer started
+134 2013-09-27 23:32:32,117 [1] [INFO ] - Update version in updater
+137 2013-09-27 23:32:32,120 [1] [INFO ] - Current version is: 1.0.0
+137 2013-09-27 23:32:32,120 [1] [INFO ] - New version is: 1.0.1
+138 2013-09-27 23:32:32,121 [1] [INFO ] - Version incrementer finished
+121 2013-09-27 23:33:44,020 [1] [INFO ] - Version incrementer started
+139 2013-09-27 23:33:44,038 [1] [INFO ] - Update version in tree-view-android-master
+155 2013-09-27 23:33:44,054 [1] [ERROR] - System.IO.DirectoryNotFoundException: Ќе удалось найти часть пути "C:\Projects\mss-android\tree-view-android-master\AndroidManifest.xml".
+   в System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   в System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   в System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   в System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   в System.IO.StreamReader..ctor(String path, Encoding encoding)
+   в System.IO.File.ReadAllText(String path, Encoding encoding)
+   в System.IO.File.ReadAllText(String path)
+   в AndroidVersionIncrementer.Program.UpdateVersion(String directory)
+163 2013-09-27 23:33:44,062 [1] [INFO ] - Version incrementer finished
+130 2013-09-27 23:35:01,485 [1] [INFO ] - Version incrementer started
+148 2013-09-27 23:35:01,503 [1] [INFO ] - Update version in tree-view-list-android-master
+151 2013-09-27 23:35:01,506 [1] [INFO ] - Current version is: 1.0.0
+151 2013-09-27 23:35:01,506 [1] [INFO ] - New version is: 1.0.1
+152 2013-09-27 23:35:01,507 [1] [INFO ] - Version incrementer finished

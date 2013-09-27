@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -169,6 +170,9 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 						}
 					}
 				}
+				
+				PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+				String version = pInfo.versionName;
 	        
 				DownloadStrategy downloadStrategy = null;
 				if (Build.VERSION.SDK_INT>=11) {
@@ -177,7 +181,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 					downloadStrategy = new MssHttpDownloadStrategy(serverAddress, login, password);
 				}
 	        
-				builder.setVersionCheckStrategy(new MssHttpVersionCheckStrategy(serverAddress, login, password, "0.0.9"))
+				builder.setVersionCheckStrategy(new MssHttpVersionCheckStrategy(serverAddress, login, password, version))
 					.setPreDownloadConfirmationStrategy(new ImmediateConfirmationStrategy())
 					.setDownloadStrategy(downloadStrategy)
 					.setPreInstallConfirmationStrategy(new ImmediateConfirmationStrategy())
