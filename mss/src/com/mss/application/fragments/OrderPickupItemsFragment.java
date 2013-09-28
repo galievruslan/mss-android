@@ -11,9 +11,11 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.OrderAdapter;
+import com.mss.application.OrderEditContext;
 import com.mss.application.OrderItemPickupAdapter;
 import com.mss.application.OrderPickupItemsLoader;
 import com.mss.application.R;
+import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
 
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class OrderPickupItemsFragment extends SherlockListFragment implements Callback, LoaderCallbacks<List<OrderPickupItem>> {
 	private static final String TAG = OrderPickupItemsFragment.class.getSimpleName();
@@ -37,6 +40,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 	
 	private int mLastPosition;
 	private OrderItemPickupAdapter mOrderPickupItemAdapter;
+	private TextView mAmountTextView;
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -49,7 +53,8 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_order_pickup_item_list, container, false);
-				
+		mAmountTextView = (TextView) v.findViewById(R.id.amount_text_view);		
+		
 		try {
 			mOrderPickupItemAdapter = new OrderItemPickupAdapter(v.getContext());			
 			setListAdapter(new OrderAdapter(v.getContext()));
@@ -134,6 +139,13 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 			mOrderPickupItemAdapter.swapData(data);
 			setListAdapter(mOrderPickupItemAdapter);
 			setSelection(mLastPosition);
+						
+			double amount = 0;
+			for (OrderPickedUpItem orderPickedUpItem : OrderEditContext.getPickedUpItems().values()) {
+				amount += orderPickedUpItem.getAmount();
+			}
+			
+			mAmountTextView.setText(String.valueOf(amount));
 			break;
 		default:
 			break;
