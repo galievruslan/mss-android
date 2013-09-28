@@ -133,7 +133,7 @@ public class CategoriesActivity extends SherlockFragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final MenuInflater inflater = getSupportMenuInflater();
-        inflater.inflate(R.menu.categories, menu);
+        inflater.inflate(R.menu.menu_categories, menu);
         return true;
     }
 
@@ -159,6 +159,9 @@ public class CategoriesActivity extends SherlockFragmentActivity {
             manager.expandEverythingBelow(null);
         } else if (item.getItemId() == R.id.collapse_all_menu_item) {
             manager.collapseChildren(null);
+        } else if (item.getItemId() == R.id.clear_filter_menu_item) {
+            CategorySelectContext.Init();
+            treeView.setAdapter(simpleAdapter);
         } else {
             return false;
         }

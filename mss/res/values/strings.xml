@@ -27,6 +27,7 @@
     <string name="menu_item_delete">Delete</string>
     <string name="menu_item_order_list">Orders</string>
     <string name="menu_item_save">Save</string>
+    <string name="menu_item_clear_filter">Clear filter</string>
     <string name="menu_item_copy_route_from_template">Copy From Template</string>
     <string name="key_id">id</string>
     <string name="title_activity_route_point">RoutePointActivity</string>
