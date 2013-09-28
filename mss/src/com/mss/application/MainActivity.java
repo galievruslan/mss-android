@@ -1,7 +1,5 @@
 package com.mss.application;
 
-import java.io.IOException;
-
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.commonsware.cwac.updater.DownloadStrategy;
 import com.commonsware.cwac.updater.ImmediateConfirmationStrategy;
@@ -14,14 +12,11 @@ import com.mss.application.fragments.MainMenuFragment;
 import com.mss.application.fragments.MainMenuFragment.OnMenuSelectedListener;
 import com.mss.application.services.Constants;
 
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +30,8 @@ import android.widget.Toast;
 public class MainActivity extends SherlockFragmentActivity implements OnMenuSelectedListener {	
 	private static final String TAG = CustomersActivity.class.getSimpleName();
 	
-	private static AsyncTask<Void, Void, Void> mTask;
+	private static boolean IN_UPDATE = false;
+	
 	MainMenuAdapter mMainMenuAdapter;
 	
 	@Override
@@ -51,8 +47,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 		MainMenuFragment fragmentMenu = getMainMenuFragment();
 		fragmentMenu.addOnMenuSelectedListener(this);
 		fragmentMenu.setListAdapter(mMainMenuAdapter);
-		
-		mTask = new UpdateTask(this);
 	}
 	
 	@Override
@@ -79,16 +73,52 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 				break;
 			}
 			case MainMenuAdapter.UPDATES_MENU: {
-				if(mTask.getStatus() == AsyncTask.Status.FINISHED){
-		            mTask = new UpdateTask(this).execute(new Void[0]);
-		        }else if(mTask.getStatus() == AsyncTask.Status.PENDING){
-		            mTask.execute(new Void[0]);
-		        }else{
-		            Toast.makeText(this, R.string.notify_update_in_progress, Toast.LENGTH_LONG).show();
-		        }
-				
-				UpdateTask updateTask = new UpdateTask(this);
-				updateTask.execute(new Void[0]);
+				if (!IN_UPDATE) {
+					IN_UPDATE = true;
+					
+					try {
+						UpdateRequest.Builder builder=new UpdateRequest.Builder(this);
+
+						PreferenceManager.setDefaultValues(this, R.xml.pref_data_sync, false);	
+						SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+						String serverAddress = sharedPreferences.getString("server_address", "");
+		        
+						AccountManager accountManager = AccountManager.get(this);
+						Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
+		        
+						String login = "";
+						String password = "";
+						if (accounts.length > 0) {
+							Account account = accounts[0];   
+							if (account != null) {
+								login = account.name;
+								password = accountManager.blockingGetAuthToken(account,
+										Constants.AUTHTOKEN_TYPE, true);
+							}
+						}
+					
+						PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+						String version = pInfo.versionName;
+		        
+						DownloadStrategy downloadStrategy = null;
+						if (Build.VERSION.SDK_INT>=11) {
+							downloadStrategy = new InternalHttpDownloadStrategy(serverAddress, login, password);
+						} else {			    
+							downloadStrategy = new MssHttpDownloadStrategy(serverAddress, login, password);
+						}
+		        
+						builder.setVersionCheckStrategy(new MssHttpVersionCheckStrategy(serverAddress, login, password, version))
+							.setPreDownloadConfirmationStrategy(new ImmediateConfirmationStrategy())
+							.setDownloadStrategy(downloadStrategy)
+							.setPreInstallConfirmationStrategy(new ImmediateConfirmationStrategy())
+							.execute();
+					} catch (Exception e) {
+						Log.e(TAG, e.getMessage());
+						IN_UPDATE = false;
+					}
+				} else {
+					Toast.makeText(this, R.string.notify_update_in_progress, Toast.LENGTH_LONG).show();
+				}
 			} 
 		}
 	}
@@ -123,6 +153,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 	    	    Toast.makeText(context, R.string.notify_updates_available, Toast.LENGTH_SHORT).show();
 				break;
 			case UpdateService.EVENT_NEWEST_VERSION_IS_INSTALLED:
+				IN_UPDATE = false;
 	    	    Toast.makeText(context, R.string.notify_lastests_version_is_installed, Toast.LENGTH_SHORT).show();
 				break;
 			case UpdateService.EVENT_DOWNLOAD_UPDATES:
@@ -131,74 +162,13 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 			case UpdateService.EVENT_INSTALL_UPDATES:
 	    	    Toast.makeText(context, R.string.notify_install_updates, Toast.LENGTH_SHORT).show();
 				break;
+			case UpdateService.EVENT_UPDATE_FAILED:
+				IN_UPDATE = false;
+	    	    Toast.makeText(context, R.string.notify_update_failed, Toast.LENGTH_LONG).show();
+				break;
 			default:
 				break;
 			}
     	}
     };
-    
-    private class UpdateTask extends AsyncTask<Void, Void, Void> {
-
-    	private Context mContext;
-    	
-    	public UpdateTask(Context context){
-    		mContext = context;
-    	}
-    	
-		@Override
-		protected Void doInBackground(Void... params) {			
-			try {
-				UpdateRequest.Builder builder=new UpdateRequest.Builder(mContext);
-
-				PreferenceManager.setDefaultValues(mContext, R.xml.pref_data_sync, false);	
-				SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-				String serverAddress = sharedPreferences.getString("server_address", "");
-	        
-				AccountManager accountManager = AccountManager.get(mContext);
-				Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
-	        
-				String login = "";
-				String password = "";
-				if (accounts.length > 0) {
-					Account account = accounts[0];   
-					if (account != null) {
-						login = account.name;
-	        		
-						try {
-							password = accountManager.blockingGetAuthToken(account,
-						            Constants.AUTHTOKEN_TYPE, true);
-						} catch (OperationCanceledException e) {
-							e.printStackTrace();
-						} catch (AuthenticatorException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				
-				PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-				String version = pInfo.versionName;
-	        
-				DownloadStrategy downloadStrategy = null;
-				if (Build.VERSION.SDK_INT>=11) {
-					downloadStrategy = new InternalHttpDownloadStrategy(serverAddress, login, password);
-				} else {			    
-					downloadStrategy = new MssHttpDownloadStrategy(serverAddress, login, password);
-				}
-	        
-				builder.setVersionCheckStrategy(new MssHttpVersionCheckStrategy(serverAddress, login, password, version))
-					.setPreDownloadConfirmationStrategy(new ImmediateConfirmationStrategy())
-					.setDownloadStrategy(downloadStrategy)
-					.setPreInstallConfirmationStrategy(new ImmediateConfirmationStrategy())
-					.execute();
-		    
-			}
-			catch (Exception exception) {
-				Log.e(TAG, exception.getMessage());
-			}
-			
-			return null;
-		}    	
-    }
 }

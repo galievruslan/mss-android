@@ -30,6 +30,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONException;
@@ -188,6 +189,9 @@ public class WebServer {
 	private HttpResponse Dispatch(HttpUriRequest request) throws IOException {
 		HttpClient httpClient = new DefaultHttpClient();
 		httpClient.getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, Boolean.FALSE);
+		HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 60000);
+		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 60000);
+		
 		HttpResponse response = httpClient.execute(request, httpContext);
 		
 		return response;

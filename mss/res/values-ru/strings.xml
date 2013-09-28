@@ -134,4 +134,5 @@
     <string name="notify_download_updates">Получение обновлений</string>
     <string name="notify_install_updates">Установка обновлений</string>
     <string name="notify_update_in_progress">Обновление уже запущено</string>
+    <string name="notify_update_failed">Не удалось обновить приложение</string>
 </resources>

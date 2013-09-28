@@ -30,14 +30,14 @@ public class UpdateService extends WakefulIntentService {
 	public static final int EVENT_NEWEST_VERSION_IS_INSTALLED = 2;
 	public static final int EVENT_DOWNLOAD_UPDATES = 3;
 	public static final int EVENT_INSTALL_UPDATES = 4;
+	public static final int EVENT_UPDATE_FAILED = 5;
 	
 	Intent event;
     LocalBroadcastManager localBroadcastManager;
 	
 	public UpdateService() {
 		super("UpdateService");
-		
-		
+				
 		event = new Intent(UPDATE_EVENT_KEY);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
 	}
@@ -101,6 +101,8 @@ public class UpdateService extends WakefulIntentService {
 			}
     	}
     	catch (Exception e) {
+    		event.putExtra(MESSAGE_KEY, EVENT_UPDATE_FAILED);
+            localBroadcastManager.sendBroadcast(event);
     		Log.e("CWAC-Update", "Exception in applying update", e);
     	}
   	}

@@ -48,16 +48,16 @@
 <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
 <fullyQualifiedTypeName name="android.content.SharedPreferences"/>
 <fullyQualifiedTypeName name="com.commonsware.cwac.updater.DownloadStrategy"/>
-<fullyQualifiedTypeName name="com.mss.application.R.string"/>
-<fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.os.AsyncTask"/>
 <fullyQualifiedTypeName name="com.mss.application.MainActivity.Update"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="com.mss.application.MainActivity.UpdateTask"/>
 <fullyQualifiedTypeName name="java.lang.Void"/>
 <fullyQualifiedTypeName name="com.commonsware.cwac.updater.UpdateService"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageInfo"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.WebRepository"/>
+<fullyQualifiedTypeName name="com.mss.application.MainActivity.UpdateTask"/>
+<fullyQualifiedTypeName name="com.mss.application.R.string"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
 </qualifiedTypeNameHistroy>

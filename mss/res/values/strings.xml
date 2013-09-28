@@ -152,5 +152,6 @@
     <string name="notify_download_updates">Download updates</string>
     <string name="notify_install_updates">Install updates</string>
     <string name="notify_update_in_progress">Updates already runned</string>
+    <string name="notify_update_failed">Update failed</string>
 
 </resources>
