@@ -12,7 +12,6 @@ INDEX VERSION 1.126+C:\Projects\mss-android\.metadata\.plugins\org.eclipse.jdt.c
 926130550.index
 2591329778.index
 2276777045.index
-764296646.index
 837815740.index
 1898837130.index
 1554924982.index

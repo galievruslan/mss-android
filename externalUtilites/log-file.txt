@@ -415,3 +415,8 @@
 376 2013-09-28 23:58:14,475 [1] [INFO ] - Current version is: 1.0.78
 376 2013-09-28 23:58:14,475 [1] [INFO ] - New version is: 1.0.79
 377 2013-09-28 23:58:14,476 [1] [INFO ] - Version incrementer finished
+623 2013-09-29 00:28:13,931 [1] [INFO ] - Version incrementer started
+653 2013-09-29 00:28:13,961 [1] [INFO ] - Update version in mss
+656 2013-09-29 00:28:13,964 [1] [INFO ] - Current version is: 1.0.79
+656 2013-09-29 00:28:13,964 [1] [INFO ] - New version is: 1.0.80
+657 2013-09-29 00:28:13,965 [1] [INFO ] - Version incrementer finished
