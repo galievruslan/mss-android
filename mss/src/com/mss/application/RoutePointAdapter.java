@@ -69,6 +69,7 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);
 			holder.mAddress = (TextView) v.findViewById(R.id.label_address);
+			holder.mStatus = (TextView) v.findViewById(R.id.label_status);
 
 			v.setTag(holder);
 		} else {
@@ -79,6 +80,7 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 
 		holder.mName.setText(n.getShippingAddressName());
 		holder.mAddress.setText(n.getShippingAddressValue());
+		holder.mStatus.setText(n.getStatusName());
 
 		return v;
 	}
@@ -107,5 +109,6 @@ public class RoutePointAdapter extends BaseAdapter implements OnClickListener {
 	private static class ViewHolder {
 		TextView mName;
 		TextView mAddress;
+		TextView mStatus;
 	}
 }
