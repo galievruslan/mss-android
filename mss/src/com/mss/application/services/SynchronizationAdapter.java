@@ -116,7 +116,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
              
              DatabaseHelper databaseHelper = OpenHelperManager.getHelper(mContext, DatabaseHelper.class);
              
-             int pageSize = 250;
+             int pageSize = sharedPreferences.getInt("buffer_size", 250);
              Boolean fullSync = extras.getBoolean("full_sync");
               
              event.putExtra(MESSAGE_KEY, R.string.greetings);

@@ -71,8 +71,9 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_data_sync);
 
-		bindPreferenceSummaryToValue(findPreference("server_address"));
-		bindPreferenceSummaryToValue(findPreference("last_sync"));
+		bindStringPreferenceSummaryToValue(findPreference("server_address"));
+		bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
+		bindStringPreferenceSummaryToValue(findPreference("last_sync"));
 	}
 
 	/**
@@ -124,16 +125,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		}
 	};
 
-	/**
-	 * Binds a preference's summary to its value. More specifically, when the
-	 * preference's value is changed, its summary (line of text below the
-	 * preference title) is updated to reflect the value. The summary is also
-	 * immediately updated upon calling this method. The exact display format is
-	 * dependent on the type of preference.
-	 * 
-	 * @see #sBindPreferenceSummaryToValueListener
-	 */
-	private static void bindPreferenceSummaryToValue(Preference preference) {
+	private static void bindStringPreferenceSummaryToValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
 				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -145,6 +137,20 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 				PreferenceManager.getDefaultSharedPreferences(
 						preference.getContext()).getString(preference.getKey(),
 						""));
+	}
+	
+	private static void bindIntegerPreferenceSummaryToValue(Preference preference) {
+		// Set the listener to watch for value changes.
+		preference
+				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+
+		// Trigger the listener immediately with the preference's
+		// current value.
+		sBindPreferenceSummaryToValueListener.onPreferenceChange(
+				preference,
+				PreferenceManager.getDefaultSharedPreferences(
+						preference.getContext()).getInt(preference.getKey(),
+						0));
 	}
 
 	/**
@@ -171,12 +177,9 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_data_sync);
 
-			// Bind the summaries of EditText/List/Dialog/Ringtone preferences
-			// to their values. When their values change, their summaries are
-			// updated to reflect the new value, per the Android Design
-			// guidelines.
-			bindPreferenceSummaryToValue(findPreference("server_address"));
-			bindPreferenceSummaryToValue(findPreference("last_sync"));
+			bindStringPreferenceSummaryToValue(findPreference("server_address"));
+			bindIntegerPreferenceSummaryToValue(findPreference("last_sync"));
+			bindStringPreferenceSummaryToValue(findPreference("buffer_size"));
 		}
 	}
 	

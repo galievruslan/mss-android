@@ -8,6 +8,13 @@
         android:singleLine="true"
         android:title="@string/pref_title_server_address" />
    
+   <com.mss.android.extensions.IntEditTextPreference
+       	android:defaultValue="@string/pref_default_buffer_size"
+    	android:key="buffer_size"
+    	android:title="@string/pref_title_buffer_size"
+    	android:numeric="integer"
+    	android:maxLength="4" />
+   
    <EditTextPreference
         android:defaultValue="@string/pref_default_last_sync"
         android:key="last_sync"
