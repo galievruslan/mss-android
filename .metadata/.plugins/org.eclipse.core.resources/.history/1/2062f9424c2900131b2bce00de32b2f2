@@ -76,12 +76,13 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     public static final String MESSAGE_KEY = "message_id";
     public static final String STATUS_KEY = "status";
 
-    private AccountManager mAccountManager;
+    private final AccountManager mAccountManager;
     private final Context mContext;
 
     public SynchronizationAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
-        mContext = context;        
+        mContext = context;
+        mAccountManager = AccountManager.get(context);
     }
 
     @Override
@@ -92,8 +93,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
     	
         try {
-        	mAccountManager = AccountManager.get(mContext);
-        	PreferenceManager.setDefaultValues(mContext, R.xml.pref_data_sync, false);
+        	PreferenceManager.setDefaultValues(this, R.xml.pref_data_sync, false);
              // use the account manager to request the credentials
         	 String authtoken =
                 mAccountManager.blockingGetAuthToken(account,

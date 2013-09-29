@@ -215,11 +215,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
      * Hides the progress UI for a lengthy operation.
      */
     protected void hideProgress() {
-    	try {
-    		dismissDialog(0);
-    	} catch (Exception e) {
-    		Log.e(TAG, e.getMessage());
-    	}
+        dismissDialog(0);
     }
 
     /**
