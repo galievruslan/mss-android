@@ -37,4 +37,14 @@ public class CategoryService {
 		
 		return new ArrayList<Category>();
 	}
+	
+	public Iterable<Category> getCategoriesByIds(long[] ids){		 
+		try {
+			return categoryRepo.find(ids);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return new ArrayList<Category>();
+	}
 }

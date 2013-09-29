@@ -48,6 +48,8 @@
     <string name="label_status">Статус</string>
     <string name="label_count">Количество\u003A</string>
     <string name="label_amount">Сумма\u003A</string>
+    <string name="label_in_order">В заказе</string>
+    <string name="label_categories">Категории</string>
     <string name="title_activity_price_lists">Прайс листы</string>
     <string name="title_activity_warehouses">Склады</string>
     <string name="title_activity_time_picker_fragment">Время</string>
@@ -136,4 +138,7 @@
     <string name="notify_install_updates">Установка обновлений</string>
     <string name="notify_update_in_progress">Обновление уже запущено</string>
     <string name="notify_update_failed">Не удалось обновить приложение</string>
+    <string name="title_activity_order_item_pickup_filter">Фильтр товаров</string>
+    <string name="description_in_order_filter">Отобразить только выбранные товары</string>
+	<string name="description_categories_filter">Выберите категории, для фильтрации списка товаров</string>
 </resources>

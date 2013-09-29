@@ -1,8 +1,6 @@
 package com.mss.application;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
@@ -302,14 +300,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        	getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	        }
 	    } else if (requestCode == FILTER_REQUEST) {
-	    	if (resultCode == RESULT_OK) {
-	    		long[] categories = data.getLongArrayExtra("categories");
-	    		Set<Long> categoriesSet = new HashSet<Long>();
-	    		for (long category : categories) {
-					categoriesSet.add(category);
-				}
-	    		OrderEditContext.setSelectedCategories(categoriesSet);
-	    		
+	    	if (resultCode == RESULT_OK) {	    		
 	    		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	    	}
 	    } else if (requestCode == PICK_WAREHOUSE_REQUEST) {
@@ -361,14 +352,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			finish();
 			return true;
 		case R.id.menu_item_filter: 
-			Long[] selected = OrderEditContext.getSelectedCategories().toArray(new Long[0]);
-        	long[] returns = new long[selected.length];
-        	for (int i = 0; i < selected.length; i++) {
-				returns[i] = selected[i];
-			}
-			
-			Intent filterActivity = new Intent(getApplicationContext(), CategoriesActivity.class);
-			filterActivity.putExtra("categories", returns);
+			Intent filterActivity = new Intent(getApplicationContext(), OrderItemPickupFilterActivity.class);
 			startActivityForResult(filterActivity, FILTER_REQUEST);
 			return true;
 		case R.id.menu_item_save:

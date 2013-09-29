@@ -1,5 +1,6 @@
 package com.mss.application;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.mss.utils.*;
 
@@ -38,6 +39,18 @@ public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem
 			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories()));
 		else 
 			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories(), mSearchCriteria));
+		
+		if (OrderEditContext.getInOrder()) {			
+			List<OrderPickupItem> pickedUpItems = new ArrayList<OrderPickupItem>();
+			for (OrderPickupItem orderPickupItem : mOrderPickupItemList) {
+				if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
+					pickedUpItems.add(orderPickupItem);
+				}
+			}			
+			
+			mOrderPickupItemList = pickedUpItems;
+		}
+		
 		return mOrderPickupItemList;
 	}
 

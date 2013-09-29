@@ -1,0 +1,32 @@
+package com.mss.application;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.CheckBox;
+import android.widget.EditText;
+
+public class OrderItemPickupFilterActivity extends Activity {
+
+	static final int FILTER_REQUEST = 1;
+	
+	private CheckBox mInOrder;
+	private EditText mCategories;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_order_item_pickup_filter);
+		
+		mInOrder = (CheckBox)findViewById(R.id.in_order_filter_check_box);
+		mCategories = (EditText)findViewById(R.id.categories_filter_text_edit);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_order_item_pickup_filter, menu);
+		return true;
+	}
+
+}

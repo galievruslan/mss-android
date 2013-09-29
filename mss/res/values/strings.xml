@@ -51,6 +51,8 @@
     <string name="label_status">Status</string>
     <string name="label_count">Count:</string>
     <string name="label_amount">Amount:</string>
+    <string name="label_in_order">In order</string>
+    <string name="label_categories">Categories</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
     <string name="title_activity_warehouses">WarehousesActivity</string>
     <string name="title_activity_time_picker_fragment">TimePickerFragment</string>
@@ -115,7 +117,7 @@
     <string name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
     <!--
         Message shown if the provided account doesn't support the current
-        activity.
+        activity.
     -->
     <string name="login_activity_newaccount_text">Sign in to your MSS account. </string>
 
@@ -154,5 +156,7 @@
     <string name="notify_install_updates">Install updates</string>
     <string name="notify_update_in_progress">Updates already runned</string>
     <string name="notify_update_failed">Update failed</string>
-
+    <string name="title_activity_order_item_pickup_filter">Items filter</string>
+    <string name="description_in_order_filter">Show only selected items</string>
+	<string name="description_categories_filter">Select categories, to filter item list</string>
 </resources>

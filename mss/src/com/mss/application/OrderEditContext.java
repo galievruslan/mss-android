@@ -17,6 +17,8 @@ public final class OrderEditContext {
 			selectedCategories.clear();
 		
 		selectedCategories = new HashSet<Long>();
+		
+		inOrderOnly = false;
 	}
 	
 	private static HashMap<Long, OrderPickedUpItem> pickedUpItems;
@@ -33,5 +35,15 @@ public final class OrderEditContext {
 	
 	public static void setSelectedCategories(Set<Long> categories) {
 		selectedCategories = categories;
+	}
+	
+	private static boolean inOrderOnly;
+	
+	public static boolean getInOrder() {
+		return inOrderOnly;
+	}
+	
+	public static void setInOrder(boolean showinOrderOnly) {
+		inOrderOnly = showinOrderOnly;
 	}
 }

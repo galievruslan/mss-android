@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mss.application"
     android:versionCode="1"
-    android:versionName="1.0.80" >
+    android:versionName="1.0.106" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -56,15 +56,20 @@
             android:name="com.mss.application.services.DummyProvider"
             android:authorities="com.mss.application.services"
             android:syncable="true" />
-		<service android:name="com.commonsware.cwac.updater.UpdateService">
+
+        <service android:name="com.commonsware.cwac.updater.UpdateService" >
         </service>
-        <receiver android:name="com.commonsware.cwac.updater.WakefulReceiver"></receiver>
+
+        <receiver android:name="com.commonsware.cwac.updater.WakefulReceiver" >
+        </receiver>
+
         <activity
             android:name="com.mss.application.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -140,7 +145,7 @@
 
             <!--
                 No intent-filter here! This activity is only ever launched by
-                someone who explicitly knows the class name
+                someone who explicitly knows the class name
             -->
         </activity>
         <activity
@@ -154,6 +159,10 @@
         <activity
             android:name="com.mss.application.DailyOrdersActivity"
             android:label="@string/title_activity_daily_orders" >
+        </activity>
+        <activity
+            android:name="com.mss.application.OrderItemPickupFilterActivity"
+            android:label="@string/title_activity_order_item_pickup_filter" >
         </activity>
     </application>
 

@@ -178,8 +178,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			addPreferencesFromResource(R.xml.pref_data_sync);
 
 			bindStringPreferenceSummaryToValue(findPreference("server_address"));
-			bindIntegerPreferenceSummaryToValue(findPreference("last_sync"));
-			bindStringPreferenceSummaryToValue(findPreference("buffer_size"));
+			bindStringPreferenceSummaryToValue(findPreference("last_sync"));
+			bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
 		}
 	}
 	
