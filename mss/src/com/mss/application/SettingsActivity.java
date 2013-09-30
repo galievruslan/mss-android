@@ -17,6 +17,7 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.mss.application.services.SystemService;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -37,11 +38,13 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-
+	private static SystemService mSystemService;
+	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 
+		mSystemService = new SystemService(this);
 		setupSimplePreferencesScreen();
 		
 		if (getSupportActionBar() != null)
@@ -68,12 +71,13 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		// Add 'data and sync' preferences, and a corresponding header.
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_data_sync);
-		getPreferenceScreen().addPreference(fakeHeader);
+		getPreferenceScreen().addPreference(fakeHeader);		
 		addPreferencesFromResource(R.xml.pref_data_sync);
 
+		bindStringPreferenceSummaryToValue(findPreference("version"));
 		bindStringPreferenceSummaryToValue(findPreference("server_address"));
 		bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
-		bindStringPreferenceSummaryToValue(findPreference("last_sync"));
+		bindConstStringPreferenceSummaryToValue(findPreference("version"), mSystemService.getApplicationVersion());
 	}
 
 	/**
@@ -124,7 +128,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			return true;
 		}
 	};
-
+	
 	private static void bindStringPreferenceSummaryToValue(Preference preference) {
 		// Set the listener to watch for value changes.
 		preference
@@ -152,6 +156,18 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 						preference.getContext()).getInt(preference.getKey(),
 						0));
 	}
+	
+	private static void bindConstStringPreferenceSummaryToValue(Preference preference, String value) {
+		// Set the listener to watch for value changes.
+		preference
+				.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+
+		// Trigger the listener immediately with the preference's
+		// current value.
+		sBindPreferenceSummaryToValueListener.onPreferenceChange(
+				preference,
+				value);
+	}
 
 	/**
 	 * This fragment shows general preferences only. It is used when the
@@ -163,6 +179,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
+			
+			bindConstStringPreferenceSummaryToValue(findPreference("version"), mSystemService.getApplicationVersion());
 		}
 	}
 
@@ -179,7 +197,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 
 			bindStringPreferenceSummaryToValue(findPreference("server_address"));
 			bindStringPreferenceSummaryToValue(findPreference("last_sync"));
-			bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
+			bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));			
 		}
 	}
 	

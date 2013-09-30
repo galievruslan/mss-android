@@ -336,10 +336,12 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 	}
     
     private void PostGreetings(WebServer webServer) throws Throwable {
+    	SystemService systemService = new SystemService(mContext);
+    	
     	List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
-		nameValuePairs.add(new BasicNameValuePair("client_type", "Android (" + SystemService.getSystemVersion() + ")"));
-		nameValuePairs.add(new BasicNameValuePair("client_version",SystemService.getApplicationVersion()));
+		nameValuePairs.add(new BasicNameValuePair("client_type", "Android (" + systemService.getSystemVersion() + ")"));
+		nameValuePairs.add(new BasicNameValuePair("client_version",systemService.getApplicationVersion()));
 		webServer.post("/synchronization/client_information.json", nameValuePairs);
     }
     

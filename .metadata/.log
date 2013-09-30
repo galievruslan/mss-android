@@ -14451,3 +14451,12 @@ Caused by: org.eclipse.core.commands.NotHandledException: There is no handler to
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 00:07:18.754
 !MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 01:00:40.915
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 01:00:40.916
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 01:00:40.918
+!MESSAGE fileChanged: failed to find manifest package for project mss

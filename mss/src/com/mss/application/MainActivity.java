@@ -11,6 +11,7 @@ import com.commonsware.cwac.updater.UpdateService;
 import com.mss.application.fragments.MainMenuFragment;
 import com.mss.application.fragments.MainMenuFragment.OnMenuSelectedListener;
 import com.mss.application.services.Constants;
+import com.mss.application.services.SystemService;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -97,8 +97,8 @@ public class MainActivity extends SherlockFragmentActivity implements OnMenuSele
 							}
 						}
 					
-						PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-						String version = pInfo.versionName;
+						SystemService systemService = new SystemService(this);
+						String version = systemService.getApplicationVersion();
 		        
 						DownloadStrategy downloadStrategy = null;
 						if (Build.VERSION.SDK_INT>=11) {
