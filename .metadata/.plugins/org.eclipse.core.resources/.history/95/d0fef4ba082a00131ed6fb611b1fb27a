@@ -13,10 +13,7 @@ public class OrmliteOrderItemRepository extends OrmliteGenericRepository<OrderIt
 		
 		QueryBuilder<OrderItem, Integer> queryBuilder = dao.queryBuilder();
 		
-		queryBuilder
-			.orderBy(com.mss.domain.models.Constants.Tables.OrderItem.PRODUCT_NAME_FIELD, true)
-			.where()
-			.eq(com.mss.domain.models.Constants.Tables.OrderItem.ORDER_FIELD , id);
+		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.OrderItem.ORDER_FIELD , id);
 		return dao.query(queryBuilder.prepare());
 	}
 }

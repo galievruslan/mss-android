@@ -1475,3 +1475,13 @@
 414 2013-09-30 23:37:34,790 [1] [INFO ] - Current version is: 1.0.271
 414 2013-09-30 23:37:34,790 [1] [INFO ] - New version is: 1.0.272
 416 2013-09-30 23:37:34,792 [1] [INFO ] - Version incrementer finished
+120 2013-09-30 23:41:26,842 [1] [INFO ] - Version incrementer started
+137 2013-09-30 23:41:26,859 [1] [INFO ] - Update version in mss
+140 2013-09-30 23:41:26,862 [1] [INFO ] - Current version is: 1.0.272
+140 2013-09-30 23:41:26,862 [1] [INFO ] - New version is: 1.0.273
+141 2013-09-30 23:41:26,863 [1] [INFO ] - Version incrementer finished
+302 2013-09-30 23:44:34,373 [1] [INFO ] - Version incrementer started
+320 2013-09-30 23:44:34,391 [1] [INFO ] - Update version in mss
+323 2013-09-30 23:44:34,394 [1] [INFO ] - Current version is: 1.0.273
+323 2013-09-30 23:44:34,394 [1] [INFO ] - New version is: 1.0.274
+324 2013-09-30 23:44:34,395 [1] [INFO ] - Version incrementer finished
