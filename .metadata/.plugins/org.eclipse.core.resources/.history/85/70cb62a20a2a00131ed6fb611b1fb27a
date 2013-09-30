@@ -19,7 +19,7 @@ public final class OrderEditContext {
 		selectedCategories = new HashSet<Long>();
 		
 		inOrderOnly = false;
-		modifyed = false;
+		modifyed = false
 	}
 	
 	private static HashMap<Long, OrderPickedUpItem> pickedUpItems;

@@ -352,28 +352,24 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			if (OrderEditContext.getIsModifyed()) {
-				new AlertDialog.Builder(this)
-    			.setTitle(R.string.dialog_leave_changed_order_confirmation_title) 
-    			.setMessage(R.string.dialog_leave_changed_order_confirmation_message) 
-    			.setIcon(R.drawable.ic_action_edit)	
-    			.setPositiveButton(R.string.dialog_leave_changed_order_confirmation_positive_button, 
-    					new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int whichButton) {
-    					finish();
-    					dialog.dismiss();
-    				}   
-    			})
-    			.setNegativeButton(R.string.dialog_leave_changed_order_confirmationn_negative_button, new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int which) {
-    					dialog.dismiss();
-    				}
-    			})
-    			.create()
-    			.show();
-			} else {
-				finish();
-			}
+			new AlertDialog.Builder(this)
+    		.setTitle(R.string.dialog_leave_changed_order_confirmation_title) 
+    		.setMessage(R.string.dialog_leave_changed_order_confirmation_message) 
+    		.setIcon(R.drawable.ic_action_edit)
+    		.setPositiveButton(R.string.dialog_change_price_confirmation_positive_button, 
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int whichButton) {
+    				finish();
+    				dialog.dismiss();
+    			}   
+    		})
+    		.setNegativeButton(R.string.dialog_change_price_confirmation_negative_button, new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int which) {
+    				dialog.dismiss();
+    			}
+    		})
+    		.create()
+    		.show();
 			
 			return true;
 		case R.id.menu_item_filter: 

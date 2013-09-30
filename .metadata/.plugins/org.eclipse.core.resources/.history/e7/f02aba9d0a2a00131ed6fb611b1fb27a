@@ -19,7 +19,6 @@ public final class OrderEditContext {
 		selectedCategories = new HashSet<Long>();
 		
 		inOrderOnly = false;
-		modifyed = false;
 	}
 	
 	private static HashMap<Long, OrderPickedUpItem> pickedUpItems;
@@ -46,15 +45,5 @@ public final class OrderEditContext {
 	
 	public static void setInOrder(boolean showinOrderOnly) {
 		inOrderOnly = showinOrderOnly;
-	}
-	
-	private static boolean modifyed;
-	
-	public static boolean getIsModifyed(){
-		return modifyed;
-	}
-	
-	public static void setIsModifyed(boolean isModifyed){
-		modifyed = isModifyed;
 	}
 }

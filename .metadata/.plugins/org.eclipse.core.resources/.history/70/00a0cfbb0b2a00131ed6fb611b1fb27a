@@ -352,29 +352,27 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			if (OrderEditContext.getIsModifyed()) {
-				new AlertDialog.Builder(this)
-    			.setTitle(R.string.dialog_leave_changed_order_confirmation_title) 
-    			.setMessage(R.string.dialog_leave_changed_order_confirmation_message) 
-    			.setIcon(R.drawable.ic_action_edit)	
-    			.setPositiveButton(R.string.dialog_leave_changed_order_confirmation_positive_button, 
-    					new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int whichButton) {
-    					finish();
-    					dialog.dismiss();
-    				}   
-    			})
-    			.setNegativeButton(R.string.dialog_leave_changed_order_confirmationn_negative_button, new DialogInterface.OnClickListener() {
-    				public void onClick(DialogInterface dialog, int which) {
-    					dialog.dismiss();
-    				}
-    			})
-    			.create()
-    			.show();
-			} else {
-				finish();
-			}
+			new AlertDialog.Builder(this)
+    		.setTitle(R.string.dialog_change_price_confirmation_title) 
+    		.setMessage(R.string.dialog_change_price_confirmation_message) 
+    		.setIcon(R.drawable.ic_action_edit)
+    		.setPositiveButton(R.string.dialog_change_price_confirmation_positive_button, 
+    				new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int whichButton) { 
+    				Intent priceListsActivity = new Intent(getApplicationContext(), PriceListsActivity.class);
+		    		startActivityForResult(priceListsActivity, PICK_PRICE_LIST_REQUEST);
+    				dialog.dismiss();
+    			}   
+    		})
+    		.setNegativeButton(R.string.dialog_change_price_confirmation_negative_button, new DialogInterface.OnClickListener() {
+    			public void onClick(DialogInterface dialog, int which) {
+    				dialog.dismiss();
+    			}
+    		})
+    		.create()
+    		.show();
 			
+			finish();
 			return true;
 		case R.id.menu_item_filter: 
 			Intent filterActivity = new Intent(getApplicationContext(), OrderItemPickupFilterActivity.class);
@@ -453,10 +451,9 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			final Calendar c = Calendar.getInstance();
 			c.setTime(mOrder.getShippingDate());
 			c.set(year, monthOfYear, dayOfMonth);
-			
 			mOrder.setShippingDate(c.getTime());
+
 			mOrderShippingDate.setText(DateFormat.getDateFormat(getApplicationContext()).format(mOrder.getShippingDate()));
-			OrderEditContext.setIsModifyed(true);
 		}
 	};
 	
@@ -487,8 +484,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			c.set(Calendar.MINUTE, minute);
 			
 			mOrder.setShippingDate(c.getTime());
-			mOrderShippingTime.setText(DateFormat.getTimeFormat(getApplicationContext()).format(mOrder.getShippingDate()));
-			OrderEditContext.setIsModifyed(true);
+
+			mOrderShippingTime.setText(DateFormat.getTimeFormat(getApplicationContext()).format(mOrder.getShippingDate()));			
 		}
 	};
 

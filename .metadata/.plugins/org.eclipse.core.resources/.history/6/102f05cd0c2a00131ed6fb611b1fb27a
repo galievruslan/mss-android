@@ -162,7 +162,7 @@
 	<string name="button_ok">OK</string>
 	<string name="label_shipping_at">Shipping at\u003A </string>
 	<string name="label_to_the_amount_of">To the amount of\u003A </string>
-	<string name="dialog_leave_changed_order_confirmation_title">Leave order confirmation</string>
+	<string name="dialog_leave_changed_order_confirmation_title">Leave order confirmation?</string>
     <string name="dialog_leave_changed_order_confirmation_message">Order is changed, do you really want to leave order, all changes will be lost?</string>
     <string name="dialog_leave_changed_order_confirmation_positive_button">Leave</string>
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Cancel</string>

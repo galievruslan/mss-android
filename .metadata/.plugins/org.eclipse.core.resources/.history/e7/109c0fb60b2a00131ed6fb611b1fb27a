@@ -144,8 +144,4 @@
 	<string name="button_ok">OK</string>
 	<string name="label_shipping_at">Отгрузка\u003A </string>
 	<string name="label_to_the_amount_of">На сумму\u003A </string>
-	<string name="dialog_leave_changed_order_confirmation_title">Подтврждение выхода из заказа</string>
-    <string name="dialog_leave_changed_order_confirmation_message">Изменения в заказе не сохранены, Вы действительно хотите покинуть форму?</string>
-    <string name="dialog_leave_changed_order_confirmation_positive_button">Покинуть</string>
-    <string name="dialog_leave_changed_order_confirmationn_negative_button">Отмена</string>
 </resources>

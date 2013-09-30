@@ -14442,3 +14442,12 @@ Caused by: org.eclipse.core.commands.NotHandledException: There is no handler to
 	at java.lang.reflect.Method.invoke(Unknown Source)
 	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
 	... 48 more
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 00:07:18.749
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 00:07:18.751
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-01 00:07:18.754
+!MESSAGE fileChanged: failed to find manifest package for project mss
