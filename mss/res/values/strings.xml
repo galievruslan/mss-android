@@ -159,4 +159,5 @@
     <string name="title_activity_order_item_pickup_filter">Items filter</string>
     <string name="description_in_order_filter">Show only selected items</string>
 	<string name="description_categories_filter">Select categories, to filter item list</string>
+	<string name="button_ok">OK</string>
 </resources>

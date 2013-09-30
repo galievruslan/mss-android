@@ -141,4 +141,5 @@
     <string name="title_activity_order_item_pickup_filter">Фильтр товаров</string>
     <string name="description_in_order_filter">Отобразить только выбранные товары</string>
 	<string name="description_categories_filter">Выберите категории, для фильтрации списка товаров</string>
+	<string name="button_ok">OK</string>
 </resources>

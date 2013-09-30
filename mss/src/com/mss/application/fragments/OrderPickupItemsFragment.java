@@ -18,6 +18,8 @@ import com.mss.application.R;
 import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -25,8 +27,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class OrderPickupItemsFragment extends SherlockListFragment implements Callback, LoaderCallbacks<List<OrderPickupItem>> {
 	private static final String TAG = OrderPickupItemsFragment.class.getSimpleName();
@@ -63,6 +67,53 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		}
 	    
 	    return v;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+	        @Override
+	        public boolean onItemLongClick(AdapterView<?> adapter, View view,
+	                int position, long id) {
+	            
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	            // Get the layout inflater
+	            LayoutInflater inflater = getActivity().getLayoutInflater();
+	            View dialogView = inflater.inflate(R.layout.dialog_product_info, null);
+	            TextView description = (TextView) dialogView.findViewById(R.id.description_text_view);
+	            TextView uom = (TextView) dialogView.findViewById(R.id.uom_text_view);
+	            TextView price = (TextView) dialogView.findViewById(R.id.price_text_view);
+	            TextView count = (TextView) dialogView.findViewById(R.id.count_text_view);
+	            TextView amount = (TextView) dialogView.findViewById(R.id.amount_text_view);
+	            
+	            OrderPickupItem orderPickupItem = (OrderPickupItem) getListAdapter().getItem(position);
+	            description.setText(orderPickupItem.getProductName());
+	            uom.setText(orderPickupItem.getUoMName());
+	            price.setText(String.valueOf(orderPickupItem.getPrice()));
+	            if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
+	            	OrderPickedUpItem orderPickedUpItem = OrderEditContext.getPickedUpItems().get(orderPickupItem.getProductId());
+	            	count.setText(String.valueOf(orderPickedUpItem.getCount()));
+	            	amount.setText(String.valueOf(orderPickedUpItem.getAmount()));
+	            }
+
+	            // Inflate and set the layout for the dialog
+	            // Pass null as the parent view because its going in the dialog layout
+	        	builder.setView(dialogView)
+	        		// Add action buttons
+	                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+	                	@Override
+	                    public void onClick(DialogInterface dialog, int id) {
+	                		dialog.dismiss();
+	                	}
+	                });
+	                   
+	        	builder.create().show();
+	            return true;
+
+	        }
+	    });
 	}
 	
 	@Override

@@ -3,12 +3,17 @@ package com.mss.application.fragments;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.mss.application.PriceListAdapter;
@@ -45,6 +50,42 @@ public class PriceListsFragment extends SherlockListFragment {
 		}
 
 	    return v;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
+	        @Override
+	        public boolean onItemLongClick(AdapterView<?> adapter, View view,
+	                int position, long id) {
+	            
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	            // Get the layout inflater
+	            LayoutInflater inflater = getActivity().getLayoutInflater();
+	            View dialogView = inflater.inflate(R.layout.dialog_price_list_info, null);
+	            TextView name = (TextView) dialogView.findViewById(R.id.name_text_view);
+	            
+	            PriceList priceList = (PriceList) getListAdapter().getItem(position);
+	            name.setText(priceList.getName());
+
+	            // Inflate and set the layout for the dialog
+	            // Pass null as the parent view because its going in the dialog layout
+	        	builder.setView(dialogView)
+	        		// Add action buttons
+	                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+	                	@Override
+	                    public void onClick(DialogInterface dialog, int id) {
+	                		dialog.dismiss();
+	                	}
+	                });
+	                   
+	        	builder.create().show();
+	            return true;
+
+	        }
+	    });
 	}
 
 	@Override
