@@ -143,5 +143,5 @@
 	<string name="description_categories_filter">Выберите категории, для фильтрации списка товаров</string>
 	<string name="button_ok">OK</string>
 	<string name="label_shipping_at">Отгрузка\u003A </string>
-	<string name="label_to_the_amount_of">На сумму\u003A </string>
+	<string name="label_on_amount">На сумму\u003A </string>
 </resources>

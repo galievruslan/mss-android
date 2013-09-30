@@ -161,5 +161,5 @@
 	<string name="description_categories_filter">Select categories, to filter item list</string>
 	<string name="button_ok">OK</string>
 	<string name="label_shipping_at">Shipping at\u003A </string>
-	<string name="label_to_the_amount_of">To the amount of\u003A </string>
+	<string name="label_on_amount">To the amount of\u003A </string>
 </resources>

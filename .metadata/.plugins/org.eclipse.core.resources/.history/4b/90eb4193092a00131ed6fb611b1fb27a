@@ -49,8 +49,8 @@
     <string name="label_uom_count_in_base">Count in base</string>
     <string name="label_orders">Orders</string>
     <string name="label_status">Status</string>
-    <string name="label_count">Count\u003A</string>
-    <string name="label_amount">Amount\u003A</string>
+    <string name="label_count">Count:</string>
+    <string name="label_amount">Amount:</string>
     <string name="label_in_order">In order</string>
     <string name="label_categories">Categories</string>
     <string name="title_activity_price_lists">PriceListsActivity</string>
@@ -160,6 +160,4 @@
     <string name="description_in_order_filter">Show only selected items</string>
 	<string name="description_categories_filter">Select categories, to filter item list</string>
 	<string name="button_ok">OK</string>
-	<string name="label_shipping_at">Shipping at\u003A </string>
-	<string name="label_to_the_amount_of">To the amount of\u003A </string>
 </resources>
