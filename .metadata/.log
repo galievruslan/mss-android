@@ -13377,3 +13377,150 @@ java.lang.NullPointerException
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2013-09-29 23:13:48.383
 !MESSAGE fileChanged: failed to find manifest package for project mss
+!SESSION 2013-09-30 09:47:57.967 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 2 2 2013-09-30 10:02:08.327
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-09-30 10:02:14.161 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:02:34.765
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:02:34.773
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:02:34.776
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY org.eclipse.ui 2 2 2013-09-30 10:06:26.486
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-09-30 10:06:29.498 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-09-30 10:06:32.054
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:48.048
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:48.055
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:48.057
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:52.494
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:52.496
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:06:52.498
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY org.eclipse.ui 2 2 2013-09-30 10:10:49.676
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-09-30 10:10:54.992 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-09-30 10:10:57.225
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:11:12.885
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:11:12.892
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:11:12.894
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY org.eclipse.ui 2 2 2013-09-30 10:11:34.502
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-09-30 10:11:48.693 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:12:09.196
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:12:09.204
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 10:12:09.207
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY org.eclipse.ui 2 2 2013-09-30 10:15:28.461
+!MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-09-30 12:58:23.279 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2013-09-30 12:58:25.901
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 12:58:44.591
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 12:58:44.599
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 12:58:44.601
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 12:58:46.325
+!MESSAGE fileChanged: failed to find manifest package for project mss.web
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:03.793
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:03.795
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:03.797
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:17.623
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:17.625
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:17.626
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:58.919
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:58.920
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:58.921
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-09-30 13:00:58.923
+!MESSAGE fileChanged: failed to find manifest package for project mss.web

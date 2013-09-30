@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.mss.domain.models.Constants"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Product"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.lang.Iterable"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
-<fullyQualifiedTypeName name="com.mss.utils.IterableHelpers"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="com.mss.application.R.id"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.RoutePoint"/>
-<fullyQualifiedTypeName name="javax.sql.RowSetWriter"/>
-<fullyQualifiedTypeName name="com.j256.ormlite.stmt.query.SetExpression"/>
-<fullyQualifiedTypeName name="android.widget.TableRow"/>
 <fullyQualifiedTypeName name="android.graphics.Color"/>
 <fullyQualifiedTypeName name="android.app.SearchManager"/>
 <fullyQualifiedTypeName name="com.actionbarsherlock.widget.SearchView"/>
@@ -27,7 +13,6 @@
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageManager"/>
 <fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.apache.http.message.BasicNameValuePair"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="org.apache.http.HttpEntity"/>
@@ -46,18 +31,33 @@
 <fullyQualifiedTypeName name="com.mss.application.MainActivity.Update"/>
 <fullyQualifiedTypeName name="java.lang.Void"/>
 <fullyQualifiedTypeName name="com.commonsware.cwac.updater.UpdateService"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageInfo"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.WebRepository"/>
 <fullyQualifiedTypeName name="com.mss.application.MainActivity.UpdateTask"/>
 <fullyQualifiedTypeName name="com.mss.application.R.string"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="org.apache.http.params.HttpConnectionParams"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
 <fullyQualifiedTypeName name="android.preference.EditTextPreference"/>
 <fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.util.AttributeSet"/>
 <fullyQualifiedTypeName name="com.mss.application.CategorySelectContext"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="android.widget.CheckBox"/>
+<fullyQualifiedTypeName name="com.actionbarsherlock.app.SherlockFragmentActivity"/>
+<fullyQualifiedTypeName name="com.actionbarsherlock.view.Menu"/>
+<fullyQualifiedTypeName name="java.lang.Long"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Entity"/>
+<fullyQualifiedTypeName name="com.mss.domain.services.CategoryService"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.mss.utils.IterableHelpers"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Category"/>
+<fullyQualifiedTypeName name="java.lang.Iterable"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteCategoryRepository"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>
