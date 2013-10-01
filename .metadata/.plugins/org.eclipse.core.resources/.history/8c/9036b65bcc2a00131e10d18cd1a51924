@@ -2,7 +2,6 @@ package com.mss.application;
 
 import java.util.Calendar;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
@@ -244,17 +243,14 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
     public void onTabChanged(String tabId) {
         if (TAB_GENERAL.equals(tabId)) {
             mCurrentTab = 0;
-            supportInvalidateOptionsMenu();
             return;
         }
         if (TAB_DETAILS.equals(tabId)) {
             mCurrentTab = 1;
-            supportInvalidateOptionsMenu();
             return;
         }
         if (TAB_NOTES.equals(tabId)) {
             mCurrentTab = 2;
-            supportInvalidateOptionsMenu();
             return;
         }
     }
@@ -286,7 +282,8 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 			getSupportMenuInflater().inflate(R.menu.menu_order_edit, menu);
 			break;
 		}
-					
+		
+			
 		return true;
 	}
 	

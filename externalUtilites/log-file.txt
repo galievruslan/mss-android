@@ -1650,3 +1650,8 @@
 138 2013-10-01 22:26:36,227 [1] [INFO ] - Current version is: 1.0.303
 138 2013-10-01 22:26:36,227 [1] [INFO ] - New version is: 1.0.304
 139 2013-10-01 22:26:36,228 [1] [INFO ] - Version incrementer finished
+284 2013-10-01 23:06:37,047 [1] [INFO ] - Version incrementer started
+301 2013-10-01 23:06:37,064 [1] [INFO ] - Update version in mss
+304 2013-10-01 23:06:37,067 [1] [INFO ] - Current version is: 1.0.304
+304 2013-10-01 23:06:37,067 [1] [INFO ] - New version is: 1.0.305
+305 2013-10-01 23:06:37,068 [1] [INFO ] - Version incrementer finished
