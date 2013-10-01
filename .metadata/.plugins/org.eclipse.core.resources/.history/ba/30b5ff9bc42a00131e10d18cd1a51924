@@ -13,7 +13,6 @@
     <string name="title_activity_order">Заказ</string>
     <string name="title_activity_orders">Заказы</string>
     <string name="title_activity_customers">Клиенты</string>
-    <string name="title_activity_categories">Категории</string>
     <string name="title_activity_shipping_addresses">Точки</string>
     <string name="menu_new_route_point">Новый</string>
     <string name="title_activity_route_fragment">Маршрут</string>

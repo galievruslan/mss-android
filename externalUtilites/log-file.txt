@@ -1630,3 +1630,8 @@
 299 2013-10-01 22:01:27,968 [1] [INFO ] - Current version is: 1.0.299
 299 2013-10-01 22:01:27,968 [1] [INFO ] - New version is: 1.0.300
 300 2013-10-01 22:01:27,969 [1] [INFO ] - Version incrementer finished
+278 2013-10-01 22:09:46,646 [1] [INFO ] - Version incrementer started
+295 2013-10-01 22:09:46,663 [1] [INFO ] - Update version in mss
+297 2013-10-01 22:09:46,665 [1] [INFO ] - Current version is: 1.0.300
+298 2013-10-01 22:09:46,666 [1] [INFO ] - New version is: 1.0.301
+299 2013-10-01 22:09:46,667 [1] [INFO ] - Version incrementer finished
