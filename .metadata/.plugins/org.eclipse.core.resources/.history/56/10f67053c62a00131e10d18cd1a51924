@@ -20,7 +20,6 @@ import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
 import com.mss.utils.IterableHelpers;
-import com.mss.utils.MathHelpers;
 
 public class OrderService {
 	private static final String TAG = OrderService.class.getSimpleName();
@@ -162,7 +161,8 @@ public class OrderService {
 						orderItemRepo.save(orderItem);						
 						found = true;
 						
-						amount = amount + orderItem.getAmount();						
+						amount = amount + orderItem.getAmount();
+						
 						break;
 					}
 				}
@@ -196,7 +196,7 @@ public class OrderService {
 				}
 			}
 			
-			order.setAmount(MathHelpers.Round(amount, 2));
+			order.setAmount(amount);
 			orderRepo.save(order);
 			
 			RoutePointService routePointService = new RoutePointService(databaseHelper);

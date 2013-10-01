@@ -161,7 +161,7 @@ public class DailyOrdersActivity extends SherlockFragmentActivity implements OnO
 		case LOADER_ID_DAILY_ORDERS:
 
 			int count = 0;
-			double amount = 0;
+			int amount = 0;
 			for (Order order : data) {
 				count ++;				
 				amount += order.getAmount();

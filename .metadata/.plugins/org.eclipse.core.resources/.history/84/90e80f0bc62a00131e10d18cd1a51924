@@ -17,7 +17,6 @@ import com.mss.application.OrderPickupItemsLoader;
 import com.mss.application.R;
 import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
-import com.mss.utils.MathHelpers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -197,7 +196,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 				amount += orderPickedUpItem.getAmount();
 			}
 			
-			mAmountTextView.setText(String.valueOf(MathHelpers.Round(amount, 2)));
+			mAmountTextView.setText(String.valueOf(amount));
 			break;
 		default:
 			break;
