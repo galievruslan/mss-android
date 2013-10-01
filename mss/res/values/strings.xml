@@ -166,4 +166,6 @@
     <string name="dialog_leave_changed_order_confirmation_message">Order is changed, do you really want to leave order, all changes will be lost?</string>
     <string name="dialog_leave_changed_order_confirmation_positive_button">Leave</string>
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Cancel</string>
+    <string name="collapse_all_condesed">Collapse all</string>
+    <string name="expand_all_condensed">Expand all</string>
 </resources>

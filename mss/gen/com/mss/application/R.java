@@ -8,11 +8,6 @@
 package com.mss.application;
 
 public final class R {
-    public static final class array {
-        public static final int activity_logos=0x7f0c0001;
-        public static final int activity_subtitles=0x7f0c0002;
-        public static final int activity_titles=0x7f0c0000;
-    }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -1001,34 +996,31 @@ containing a value of this type.
         public static final int divider=0x7f020071;
         public static final int expanded=0x7f020072;
         public static final int ic_action_add=0x7f020073;
-        public static final int ic_action_delete=0x7f020074;
-        public static final int ic_action_edit=0x7f020075;
-        public static final int ic_action_save=0x7f020076;
-        public static final int ic_button_expand_selected=0x7f020077;
-        public static final int ic_button_expand_unselected=0x7f020078;
-        public static final int ic_drop_down=0x7f020079;
-        public static final int ic_launcher=0x7f02007a;
-        public static final int ic_logo_route_point=0x7f02007b;
-        public static final int ic_menu_add_route_point=0x7f02007c;
-        public static final int ic_menu_change_status=0x7f02007d;
-        public static final int ic_menu_clear_filter=0x7f02007e;
-        public static final int ic_menu_collapse_all=0x7f02007f;
-        public static final int ic_menu_copy_route=0x7f020080;
-        public static final int ic_menu_expand_all=0x7f020081;
-        public static final int ic_menu_filter=0x7f020082;
-        public static final int ic_menu_order_list=0x7f020083;
-        public static final int ic_menu_orders=0x7f020084;
-        public static final int ic_menu_route=0x7f020085;
-        public static final int ic_menu_search=0x7f020086;
-        public static final int ic_menu_settings=0x7f020087;
-        public static final int ic_menu_sync=0x7f020088;
-        public static final int ic_menu_update=0x7f020089;
-        public static final int list_selector_background=0x7f02008a;
-        public static final int list_selector_background_disabled=0x7f02008b;
-        public static final int list_selector_background_focus=0x7f02008c;
-        public static final int list_selector_background_longpress=0x7f02008d;
-        public static final int list_selector_background_pressed=0x7f02008e;
-        public static final int list_selector_background_transition=0x7f02008f;
+        public static final int ic_action_clear_filter=0x7f020074;
+        public static final int ic_action_collapse_all=0x7f020075;
+        public static final int ic_action_copy=0x7f020076;
+        public static final int ic_action_delete=0x7f020077;
+        public static final int ic_action_edit=0x7f020078;
+        public static final int ic_action_expand_all=0x7f020079;
+        public static final int ic_action_filter=0x7f02007a;
+        public static final int ic_action_new=0x7f02007b;
+        public static final int ic_action_save=0x7f02007c;
+        public static final int ic_action_status=0x7f02007d;
+        public static final int ic_button_expand_selected=0x7f02007e;
+        public static final int ic_button_expand_unselected=0x7f02007f;
+        public static final int ic_launcher=0x7f020080;
+        public static final int ic_menu_orders=0x7f020081;
+        public static final int ic_menu_route=0x7f020082;
+        public static final int ic_menu_search=0x7f020083;
+        public static final int ic_menu_settings=0x7f020084;
+        public static final int ic_menu_sync=0x7f020085;
+        public static final int ic_menu_update=0x7f020086;
+        public static final int list_selector_background=0x7f020087;
+        public static final int list_selector_background_disabled=0x7f020088;
+        public static final int list_selector_background_focus=0x7f020089;
+        public static final int list_selector_background_longpress=0x7f02008a;
+        public static final int list_selector_background_pressed=0x7f02008b;
+        public static final int list_selector_background_transition=0x7f02008c;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f05002c;
@@ -1071,8 +1063,8 @@ containing a value of this type.
         public static final int abs__title=0x7f050027;
         public static final int abs__up=0x7f050017;
         public static final int action_item_delete=0x7f0500be;
-        public static final int action_search=0x7f0500c9;
-        public static final int action_settings=0x7f0500c2;
+        public static final int action_search=0x7f0500c8;
+        public static final int action_settings=0x7f0500c1;
         public static final int address_text_view=0x7f050084;
         public static final int amount_text_view=0x7f05005f;
         public static final int bottom=0x7f050001;
@@ -1091,12 +1083,12 @@ containing a value of this type.
         public static final int center=0x7f050008;
         public static final int center_horizontal=0x7f050006;
         public static final int center_vertical=0x7f050004;
-        public static final int clear_filter_menu_item=0x7f0500c5;
+        public static final int clear_filter_menu_item=0x7f0500c4;
         public static final int clip_horizontal=0x7f05000b;
         public static final int clip_vertical=0x7f05000a;
-        public static final int collapse_all_menu_item=0x7f0500c4;
-        public static final int context_menu_select_all=0x7f0500c7;
-        public static final int context_menu_unselect_all=0x7f0500c8;
+        public static final int collapse_all_menu_item=0x7f0500c3;
+        public static final int context_menu_select_all=0x7f0500c6;
+        public static final int context_menu_unselect_all=0x7f0500c7;
         public static final int count_text_view=0x7f05005e;
         public static final int customer_edit_text=0x7f050077;
         public static final int date_edit_text=0x7f050088;
@@ -1105,7 +1097,7 @@ containing a value of this type.
         public static final int description_text_view=0x7f050056;
         public static final int disableHome=0x7f050015;
         public static final int edit_query=0x7f050032;
-        public static final int expand_all_menu_item=0x7f0500c3;
+        public static final int expand_all_menu_item=0x7f0500c2;
         public static final int fill=0x7f050009;
         public static final int fill_horizontal=0x7f050007;
         public static final int fill_vertical=0x7f050005;
@@ -1158,15 +1150,14 @@ containing a value of this type.
         public static final int login_status_message=0x7f050049;
         public static final int mainTreeView=0x7f050045;
         public static final int menu_cancel_sync=0x7f0500bf;
-        public static final int menu_item_add=0x7f0500ca;
-        public static final int menu_item_cancel_sync=0x7f0500d1;
-        public static final int menu_item_change_status=0x7f0500d0;
-        public static final int menu_item_copy_from_template=0x7f0500cf;
-        public static final int menu_item_delete=0x7f0500cc;
-        public static final int menu_item_edit=0x7f0500cb;
-        public static final int menu_item_filter=0x7f0500ce;
-        public static final int menu_item_save=0x7f0500cd;
-        public static final int menu_new_route_point=0x7f0500c1;
+        public static final int menu_item_add=0x7f0500c9;
+        public static final int menu_item_cancel_sync=0x7f0500d0;
+        public static final int menu_item_change_status=0x7f0500cf;
+        public static final int menu_item_copy_from_template=0x7f0500ce;
+        public static final int menu_item_delete=0x7f0500cb;
+        public static final int menu_item_edit=0x7f0500ca;
+        public static final int menu_item_filter=0x7f0500cd;
+        public static final int menu_item_save=0x7f0500cc;
         public static final int menu_settings=0x7f0500c0;
         public static final int menu_text=0x7f050099;
         public static final int message=0x7f05003e;
@@ -1200,7 +1191,7 @@ containing a value of this type.
         public static final int route_point_address_text_view=0x7f050090;
         public static final int route_point_name_text_view=0x7f05008f;
         public static final int route_point_status_text_view=0x7f0500ba;
-        public static final int save_menu_item=0x7f0500c6;
+        public static final int save_menu_item=0x7f0500c5;
         public static final int scrollView1=0x7f050054;
         public static final int server=0x7f05004b;
         public static final int server_edit=0x7f05003f;
@@ -1335,38 +1326,37 @@ containing a value of this type.
         public static final int tree_list_item_wrapper=0x7f030056;
     }
     public static final class menu {
-        public static final int action_mode_list=0x7f0d0000;
-        public static final int activity_login=0x7f0d0001;
-        public static final int activity_main=0x7f0d0002;
-        public static final int activity_route=0x7f0d0003;
-        public static final int authenticator=0x7f0d0004;
-        public static final int daily_orders=0x7f0d0005;
-        public static final int date_picker=0x7f0d0006;
-        public static final int menu_categories=0x7f0d0007;
-        public static final int menu_context_categories=0x7f0d0008;
-        public static final int menu_customers=0x7f0d0009;
-        public static final int menu_list=0x7f0d000a;
-        public static final int menu_order=0x7f0d000b;
-        public static final int menu_order_edit=0x7f0d000c;
-        public static final int menu_order_edit_details_tab=0x7f0d000d;
-        public static final int menu_order_item_pickup=0x7f0d000e;
-        public static final int menu_order_item_pickup_filter=0x7f0d000f;
-        public static final int menu_price_lists=0x7f0d0010;
-        public static final int menu_route=0x7f0d0011;
-        public static final int menu_route_point=0x7f0d0012;
-        public static final int menu_route_point_edit=0x7f0d0013;
-        public static final int menu_route_point_editable=0x7f0d0014;
-        public static final int menu_settings=0x7f0d0015;
-        public static final int menu_shipping_addresses=0x7f0d0016;
-        public static final int menu_statuses=0x7f0d0017;
-        public static final int menu_synchronization=0x7f0d0018;
-        public static final int menu_warehouses=0x7f0d0019;
-        public static final int order=0x7f0d001a;
-        public static final int order_item_pickup=0x7f0d001b;
-        public static final int order_pickup_items=0x7f0d001c;
-        public static final int orders=0x7f0d001d;
-        public static final int product_uoms=0x7f0d001e;
-        public static final int time_picker=0x7f0d001f;
+        public static final int action_mode_list=0x7f0c0000;
+        public static final int activity_login=0x7f0c0001;
+        public static final int activity_main=0x7f0c0002;
+        public static final int authenticator=0x7f0c0003;
+        public static final int daily_orders=0x7f0c0004;
+        public static final int date_picker=0x7f0c0005;
+        public static final int menu_categories=0x7f0c0006;
+        public static final int menu_context_categories=0x7f0c0007;
+        public static final int menu_customers=0x7f0c0008;
+        public static final int menu_list=0x7f0c0009;
+        public static final int menu_order=0x7f0c000a;
+        public static final int menu_order_edit=0x7f0c000b;
+        public static final int menu_order_edit_details_tab=0x7f0c000c;
+        public static final int menu_order_item_pickup=0x7f0c000d;
+        public static final int menu_order_item_pickup_filter=0x7f0c000e;
+        public static final int menu_price_lists=0x7f0c000f;
+        public static final int menu_route=0x7f0c0010;
+        public static final int menu_route_point=0x7f0c0011;
+        public static final int menu_route_point_edit=0x7f0c0012;
+        public static final int menu_route_point_editable=0x7f0c0013;
+        public static final int menu_settings=0x7f0c0014;
+        public static final int menu_shipping_addresses=0x7f0c0015;
+        public static final int menu_statuses=0x7f0c0016;
+        public static final int menu_synchronization=0x7f0c0017;
+        public static final int menu_warehouses=0x7f0c0018;
+        public static final int order=0x7f0c0019;
+        public static final int order_item_pickup=0x7f0c001a;
+        public static final int order_pickup_items=0x7f0c001b;
+        public static final int orders=0x7f0c001c;
+        public static final int product_uoms=0x7f0c001d;
+        public static final int time_picker=0x7f0c001e;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

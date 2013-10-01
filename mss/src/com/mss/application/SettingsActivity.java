@@ -59,21 +59,17 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		if (!isSimplePreferences(this)) {
 			return;
 		}
-
-		PreferenceCategory fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_general);
-		getPreferenceScreen().addPreference(fakeHeader);	
 		
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.xml.pref_general);
 
 		// Add 'data and sync' preferences, and a corresponding header.
-		fakeHeader = new PreferenceCategory(this);
+		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_data_sync);
 		getPreferenceScreen().addPreference(fakeHeader);		
 		addPreferencesFromResource(R.xml.pref_data_sync);
 
-		bindStringPreferenceSummaryToValue(findPreference("version"));
+		bindStringPreferenceSummaryToValue(findPreference("last_sync"));
 		bindStringPreferenceSummaryToValue(findPreference("server_address"));
 		bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
 		

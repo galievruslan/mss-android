@@ -109,7 +109,12 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
       Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);
       if (accounts.length > 0) {
     	  mAccount = accounts[0];        
-    	  showProgress(ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority()));
+    	  boolean syncActive = ContentResolver.isSyncActive(mAccount, DummyProvider.getAuthority());
+    	  showProgress(syncActive);
+    	  if (!syncActive) {
+    		  String lastSync = mSharedPreferences.getString("last_sync", "");    	    	
+              mLastSync.setText(lastSync);
+    	  }
       }
 
       // Register mMessageReceiver to receive messages.

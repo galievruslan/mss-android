@@ -1655,3 +1655,93 @@
 304 2013-10-01 23:06:37,067 [1] [INFO ] - Current version is: 1.0.304
 304 2013-10-01 23:06:37,067 [1] [INFO ] - New version is: 1.0.305
 305 2013-10-01 23:06:37,068 [1] [INFO ] - Version incrementer finished
+286 2013-10-01 23:41:30,700 [1] [INFO ] - Version incrementer started
+303 2013-10-01 23:41:30,717 [1] [INFO ] - Update version in mss
+306 2013-10-01 23:41:30,720 [1] [INFO ] - Current version is: 1.0.305
+306 2013-10-01 23:41:30,720 [1] [INFO ] - New version is: 1.0.306
+307 2013-10-01 23:41:30,721 [1] [INFO ] - Version incrementer finished
+117 2013-10-01 23:41:31,187 [1] [INFO ] - Version incrementer started
+135 2013-10-01 23:41:31,205 [1] [INFO ] - Update version in mss.web
+137 2013-10-01 23:41:31,207 [1] [INFO ] - Current version is: 1.0.12
+137 2013-10-01 23:41:31,207 [1] [INFO ] - New version is: 1.0.13
+138 2013-10-01 23:41:31,208 [1] [INFO ] - Version incrementer finished
+119 2013-10-01 23:41:31,645 [1] [INFO ] - Version incrementer started
+138 2013-10-01 23:41:31,664 [1] [INFO ] - Update version in tree-view-list-android-master
+141 2013-10-01 23:41:31,667 [1] [INFO ] - Current version is: 1.0.7
+141 2013-10-01 23:41:31,667 [1] [INFO ] - New version is: 1.0.8
+142 2013-10-01 23:41:31,668 [1] [INFO ] - Version incrementer finished
+116 2013-10-01 23:41:32,104 [1] [INFO ] - Version incrementer started
+132 2013-10-01 23:41:32,120 [1] [INFO ] - Update version in updater
+135 2013-10-01 23:41:32,123 [1] [INFO ] - Current version is: 1.0.7
+135 2013-10-01 23:41:32,123 [1] [INFO ] - New version is: 1.0.8
+136 2013-10-01 23:41:32,124 [1] [INFO ] - Version incrementer finished
+279 2013-10-01 23:42:47,021 [1] [INFO ] - Version incrementer started
+296 2013-10-01 23:42:47,038 [1] [INFO ] - Update version in mss
+299 2013-10-01 23:42:47,041 [1] [INFO ] - Current version is: 1.0.306
+299 2013-10-01 23:42:47,041 [1] [INFO ] - New version is: 1.0.307
+300 2013-10-01 23:42:47,042 [1] [INFO ] - Version incrementer finished
+130 2013-10-01 23:42:47,487 [1] [INFO ] - Version incrementer started
+147 2013-10-01 23:42:47,504 [1] [INFO ] - Update version in tree-view-list-android-master
+150 2013-10-01 23:42:47,507 [1] [INFO ] - Current version is: 1.0.8
+150 2013-10-01 23:42:47,507 [1] [INFO ] - New version is: 1.0.9
+151 2013-10-01 23:42:47,508 [1] [INFO ] - Version incrementer finished
+118 2013-10-01 23:44:47,802 [1] [INFO ] - Version incrementer started
+137 2013-10-01 23:44:47,821 [1] [INFO ] - Update version in mss
+140 2013-10-01 23:44:47,824 [1] [INFO ] - Current version is: 1.0.307
+140 2013-10-01 23:44:47,824 [1] [INFO ] - New version is: 1.0.308
+141 2013-10-01 23:44:47,825 [1] [INFO ] - Version incrementer finished
+277 2013-10-01 23:45:45,773 [1] [INFO ] - Version incrementer started
+294 2013-10-01 23:45:45,790 [1] [INFO ] - Update version in mss
+296 2013-10-01 23:45:45,792 [1] [INFO ] - Current version is: 1.0.308
+296 2013-10-01 23:45:45,792 [1] [INFO ] - New version is: 1.0.309
+297 2013-10-01 23:45:45,793 [1] [INFO ] - Version incrementer finished
+115 2013-10-01 23:47:08,844 [1] [INFO ] - Version incrementer started
+133 2013-10-01 23:47:08,862 [1] [INFO ] - Update version in mss
+136 2013-10-01 23:47:08,865 [1] [INFO ] - Current version is: 1.0.309
+136 2013-10-01 23:47:08,865 [1] [INFO ] - New version is: 1.0.310
+137 2013-10-01 23:47:08,866 [1] [INFO ] - Version incrementer finished
+287 2013-10-01 23:54:28,363 [1] [INFO ] - Version incrementer started
+304 2013-10-01 23:54:28,380 [1] [INFO ] - Update version in mss
+306 2013-10-01 23:54:28,382 [1] [INFO ] - Current version is: 1.0.310
+306 2013-10-01 23:54:28,382 [1] [INFO ] - New version is: 1.0.311
+307 2013-10-01 23:54:28,383 [1] [INFO ] - Version incrementer finished
+282 2013-10-01 23:56:29,226 [1] [INFO ] - Version incrementer started
+299 2013-10-01 23:56:29,243 [1] [INFO ] - Update version in mss
+302 2013-10-01 23:56:29,246 [1] [INFO ] - Current version is: 1.0.311
+302 2013-10-01 23:56:29,246 [1] [INFO ] - New version is: 1.0.312
+304 2013-10-01 23:56:29,248 [1] [INFO ] - Version incrementer finished
+359 2013-10-02 00:00:55,462 [1] [INFO ] - Version incrementer started
+376 2013-10-02 00:00:55,479 [1] [INFO ] - Update version in mss
+379 2013-10-02 00:00:55,482 [1] [INFO ] - Current version is: 1.0.312
+379 2013-10-02 00:00:55,482 [1] [INFO ] - New version is: 1.0.313
+380 2013-10-02 00:00:55,483 [1] [INFO ] - Version incrementer finished
+288 2013-10-02 00:03:47,217 [1] [INFO ] - Version incrementer started
+307 2013-10-02 00:03:47,236 [1] [INFO ] - Update version in mss
+310 2013-10-02 00:03:47,239 [1] [INFO ] - Current version is: 1.0.313
+310 2013-10-02 00:03:47,239 [1] [INFO ] - New version is: 1.0.314
+311 2013-10-02 00:03:47,240 [1] [INFO ] - Version incrementer finished
+292 2013-10-02 00:04:32,323 [1] [INFO ] - Version incrementer started
+309 2013-10-02 00:04:32,340 [1] [INFO ] - Update version in mss
+311 2013-10-02 00:04:32,342 [1] [INFO ] - Current version is: 1.0.314
+311 2013-10-02 00:04:32,342 [1] [INFO ] - New version is: 1.0.315
+313 2013-10-02 00:04:32,344 [1] [INFO ] - Version incrementer finished
+289 2013-10-02 00:14:30,495 [1] [INFO ] - Version incrementer started
+307 2013-10-02 00:14:30,513 [1] [INFO ] - Update version in mss
+309 2013-10-02 00:14:30,515 [1] [INFO ] - Current version is: 1.0.315
+309 2013-10-02 00:14:30,515 [1] [INFO ] - New version is: 1.0.316
+310 2013-10-02 00:14:30,516 [1] [INFO ] - Version incrementer finished
+333 2013-10-02 00:20:34,899 [1] [INFO ] - Version incrementer started
+352 2013-10-02 00:20:34,918 [1] [INFO ] - Update version in mss
+354 2013-10-02 00:20:34,920 [1] [INFO ] - Current version is: 1.0.316
+354 2013-10-02 00:20:34,920 [1] [INFO ] - New version is: 1.0.317
+357 2013-10-02 00:20:34,923 [1] [INFO ] - Version incrementer finished
+362 2013-10-02 00:27:58,364 [1] [INFO ] - Version incrementer started
+379 2013-10-02 00:27:58,381 [1] [INFO ] - Update version in mss
+381 2013-10-02 00:27:58,383 [1] [INFO ] - Current version is: 1.0.317
+381 2013-10-02 00:27:58,383 [1] [INFO ] - New version is: 1.0.318
+382 2013-10-02 00:27:58,384 [1] [INFO ] - Version incrementer finished
+116 2013-10-02 00:29:30,125 [1] [INFO ] - Version incrementer started
+133 2013-10-02 00:29:30,142 [1] [INFO ] - Update version in mss
+136 2013-10-02 00:29:30,145 [1] [INFO ] - Current version is: 1.0.318
+136 2013-10-02 00:29:30,145 [1] [INFO ] - New version is: 1.0.319
+149 2013-10-02 00:29:30,158 [1] [INFO ] - Version incrementer finished
