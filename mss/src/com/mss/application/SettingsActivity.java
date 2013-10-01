@@ -38,13 +38,11 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-	private static SystemService mSystemService;
 	
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 
-		mSystemService = new SystemService(this);
 		setupSimplePreferencesScreen();
 		
 		if (getSupportActionBar() != null)
@@ -62,14 +60,15 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			return;
 		}
 
-		// In the simplified UI, fragments are not used at all and we instead
-		// use the older PreferenceActivity APIs.
-
+		PreferenceCategory fakeHeader = new PreferenceCategory(this);
+		fakeHeader.setTitle(R.string.pref_header_general);
+		getPreferenceScreen().addPreference(fakeHeader);	
+		
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.xml.pref_general);
 
 		// Add 'data and sync' preferences, and a corresponding header.
-		PreferenceCategory fakeHeader = new PreferenceCategory(this);
+		fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_data_sync);
 		getPreferenceScreen().addPreference(fakeHeader);		
 		addPreferencesFromResource(R.xml.pref_data_sync);
@@ -77,7 +76,9 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 		bindStringPreferenceSummaryToValue(findPreference("version"));
 		bindStringPreferenceSummaryToValue(findPreference("server_address"));
 		bindIntegerPreferenceSummaryToValue(findPreference("buffer_size"));
-		bindConstStringPreferenceSummaryToValue(findPreference("version"), mSystemService.getApplicationVersion());
+		
+		SystemService systemService = new SystemService(this);
+		bindConstStringPreferenceSummaryToValue(findPreference("version"), systemService.getApplicationVersion());
 	}
 
 	/**
@@ -180,7 +181,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
 			
-			bindConstStringPreferenceSummaryToValue(findPreference("version"), mSystemService.getApplicationVersion());
+			SystemService systemService = new SystemService(this.getActivity());			
+			bindConstStringPreferenceSummaryToValue(findPreference("version"), systemService.getApplicationVersion());
 		}
 	}
 

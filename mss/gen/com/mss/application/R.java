@@ -1613,27 +1613,24 @@ containing a value of this type.
  Permission label 
          */
         public static final int permlab_samplesyncadapterAuthPassword=0x7f06006a;
-        public static final int pref_default_buffer_size=0x7f0600c9;
-        public static final int pref_default_last_sync=0x7f0600c7;
-        public static final int pref_default_server_address=0x7f0600c5;
+        public static final int pref_default_buffer_size=0x7f0600cb;
+        public static final int pref_default_last_sync=0x7f0600c9;
+        public static final int pref_default_server_address=0x7f0600c7;
         /**  Example settings for Data & Sync 
- Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f0600c3;
+        public static final int pref_header_data_sync=0x7f0600c5;
         /**  Strings related to Settings 
- Example General settings 
  Strings related to Settings 
  Example General settings 
          */
         public static final int pref_header_general=0x7f0600c2;
-        public static final int pref_title_buffer_size=0x7f0600c8;
-        public static final int pref_title_last_sync=0x7f0600c6;
+        public static final int pref_title_buffer_size=0x7f0600ca;
+        public static final int pref_title_last_sync=0x7f0600c8;
         /**  Example settings for Data & Sync 
- Example settings for Data & Sync 
          */
-        public static final int pref_title_server_address=0x7f0600c4;
-        public static final int pref_title_version=0x7f0600ca;
-        public static final int pref_unknown_version=0x7f0600cb;
+        public static final int pref_title_server_address=0x7f0600c6;
+        public static final int pref_title_version=0x7f0600c3;
+        public static final int pref_unknown_version=0x7f0600c4;
         public static final int profile_action=0x7f06007c;
         public static final int prompt_customer=0x7f0600a8;
         public static final int prompt_login=0x7f0600a2;

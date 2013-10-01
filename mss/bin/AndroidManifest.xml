@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mss.application"
     android:versionCode="1"
-    android:versionName="1.0.288" >
+    android:versionName="1.0.300" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -69,7 +69,6 @@
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -142,11 +141,6 @@
             android:name="com.mss.application.AuthenticatorActivity"
             android:excludeFromRecents="true"
             android:label="@string/ui_activity_title" >
-
-            <!--
-                No intent-filter here! This activity is only ever launched by
-                someone who explicitly knows the class name
-            -->
         </activity>
         <activity
             android:name="com.mss.application.StatusesActivity"
@@ -165,5 +159,4 @@
             android:label="@string/title_activity_order_item_pickup_filter" >
         </activity>
     </application>
-
 </manifest>

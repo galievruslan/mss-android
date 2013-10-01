@@ -6,7 +6,7 @@
 
 
     <!-- Example General settings -->
-    <string name="pref_header_general">Общее</string>
+    <string name="pref_header_general">Общие</string>
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Данные &amp; синхронизация</string>

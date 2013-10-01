@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.graphics.Color"/>
-<fullyQualifiedTypeName name="android.app.SearchManager"/>
-<fullyQualifiedTypeName name="com.actionbarsherlock.widget.SearchView"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Customer"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.Customer"/>
-<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
-<fullyQualifiedTypeName name="android.text.TextUtils"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="android.app.Notification"/>
-<fullyQualifiedTypeName name="android.os.Build"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageManager"/>
 <fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
@@ -35,11 +25,8 @@
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.WebRepository"/>
 <fullyQualifiedTypeName name="com.mss.application.MainActivity.UpdateTask"/>
 <fullyQualifiedTypeName name="com.mss.application.R.string"/>
-<fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="org.apache.http.params.HttpConnectionParams"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
 <fullyQualifiedTypeName name="android.preference.EditTextPreference"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.util.AttributeSet"/>
 <fullyQualifiedTypeName name="com.mss.application.CategorySelectContext"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
@@ -49,15 +36,28 @@
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Entity"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.CategoryService"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.mss.utils.IterableHelpers"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Category"/>
 <fullyQualifiedTypeName name="java.lang.Iterable"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteCategoryRepository"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemLongClickListener"/>
+<fullyQualifiedTypeName name="android.widget.AdapterView"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog"/>
+<fullyQualifiedTypeName name="android.content.DialogInterface"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.ShippingAddress"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.PriceList"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
+<fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
+<fullyQualifiedTypeName name="android.preference.Preference"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.mss.application.services.SystemService"/>
 </qualifiedTypeNameHistroy>
