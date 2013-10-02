@@ -1092,8 +1092,6 @@ containing a value of this type.
         public static final int count_text_view=0x7f05005e;
         public static final int customer_edit_text=0x7f050077;
         public static final int date_edit_text=0x7f050088;
-        public static final int demo_list_checkbox=0x7f050092;
-        public static final int demo_list_item_description=0x7f050091;
         public static final int description_text_view=0x7f050056;
         public static final int disableHome=0x7f050015;
         public static final int edit_query=0x7f050032;
@@ -1144,6 +1142,8 @@ containing a value of this type.
         public static final int last_sync_text_view=0x7f050080;
         public static final int left=0x7f050002;
         public static final int listMode=0x7f05000e;
+        public static final int list_checkbox=0x7f050092;
+        public static final int list_item_description=0x7f050091;
         public static final int login=0x7f05004c;
         public static final int login_form=0x7f05004a;
         public static final int login_status=0x7f050048;

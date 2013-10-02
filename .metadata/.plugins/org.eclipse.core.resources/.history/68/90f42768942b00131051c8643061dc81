@@ -73,10 +73,10 @@ public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
             final TreeNodeInfo<Long> treeNodeInfo) {
         final LinearLayout viewLayout = (LinearLayout) view;
         final TextView descriptionView = (TextView) viewLayout
-                .findViewById(R.id.list_item_description);
+                .findViewById(R.id.demo_list_item_description);
         descriptionView.setText(getDescription(treeNodeInfo.getId()));
         final CheckBox box = (CheckBox) viewLayout
-                .findViewById(R.id.list_checkbox);
+                .findViewById(R.id.demo_list_checkbox);
         box.setTag(treeNodeInfo.getId());
         if (treeNodeInfo.isWithChildren()) {
             box.setVisibility(View.GONE);
@@ -97,7 +97,7 @@ public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
         } else {
             final ViewGroup vg = (ViewGroup) view;
             final CheckBox cb = (CheckBox) vg
-                    .findViewById(R.id.list_checkbox);
+                    .findViewById(R.id.demo_list_checkbox);
             cb.performClick();
         }
     }

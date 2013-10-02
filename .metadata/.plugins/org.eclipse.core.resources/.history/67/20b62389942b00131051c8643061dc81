@@ -97,7 +97,7 @@ public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
         } else {
             final ViewGroup vg = (ViewGroup) view;
             final CheckBox cb = (CheckBox) vg
-                    .findViewById(R.id.list_checkbox);
+                    .findViewById(R.id.demo_list_checkbox);
             cb.performClick();
         }
     }

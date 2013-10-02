@@ -348,8 +348,6 @@ int id context_menu_unselect_all 0x7f0500c7
 int id count_text_view 0x7f05005e
 int id customer_edit_text 0x7f050077
 int id date_edit_text 0x7f050088
-int id demo_list_checkbox 0x7f050092
-int id demo_list_item_description 0x7f050091
 int id description_text_view 0x7f050056
 int id disableHome 0x7f050015
 int id edit_query 0x7f050032
@@ -400,6 +398,8 @@ int id last_sync_label 0x7f05007f
 int id last_sync_text_view 0x7f050080
 int id left 0x7f050002
 int id listMode 0x7f05000e
+int id list_checkbox 0x7f050092
+int id list_item_description 0x7f050091
 int id login 0x7f05004c
 int id login_form 0x7f05004a
 int id login_status 0x7f050048
