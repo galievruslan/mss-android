@@ -303,7 +303,7 @@ public class UpdateService extends IntentService {
 				mHelper.clear();
 				
 				SharedPreferences.Editor editor = sharedPreferences.edit();	
-	 			editor.putString("last_sync", getString(R.string.pref_default_last_sync));
+	 			editor.putString("last_sync", R.string.pref_default_last_sync);
 	 			editor.commit();
 				
 				installUpdates(apk);

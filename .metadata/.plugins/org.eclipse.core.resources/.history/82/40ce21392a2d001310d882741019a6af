@@ -300,11 +300,7 @@ public class UpdateService extends IntentService {
 				localBroadcastManager.sendBroadcast(event);
 				
 				DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-				mHelper.clear();
-				
-				SharedPreferences.Editor editor = sharedPreferences.edit();	
-	 			editor.putString("last_sync", getString(R.string.pref_default_last_sync));
-	 			editor.commit();
+				mHelper.clear();				
 				
 				installUpdates(apk);
 			} else {

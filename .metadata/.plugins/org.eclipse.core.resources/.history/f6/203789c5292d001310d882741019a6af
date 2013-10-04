@@ -30,9 +30,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.R;
-import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.web.WebServer;
 
 import android.accounts.Account;
@@ -298,14 +296,6 @@ public class UpdateService extends IntentService {
 				File apk = extractUpdates(zipArchive);
 				event.putExtra(MESSAGE_KEY, R.string.update_install);
 				localBroadcastManager.sendBroadcast(event);
-				
-				DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
-				mHelper.clear();
-				
-				SharedPreferences.Editor editor = sharedPreferences.edit();	
-	 			editor.putString("last_sync", getString(R.string.pref_default_last_sync));
-	 			editor.commit();
-				
 				installUpdates(apk);
 			} else {
 				event.putExtra(STATUS_KEY, UPDATE_FINISHED_KEY);
