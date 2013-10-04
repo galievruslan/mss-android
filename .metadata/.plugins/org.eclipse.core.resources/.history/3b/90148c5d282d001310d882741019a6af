@@ -213,16 +213,6 @@ public class OrderService {
 		}
 	}
 	
-	public boolean hasNotSynchronizedData(){
-		try {
-			return orderRepo.findNotSynchronized().iterator().hasNext();
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return false;
-	}
-	
 	public void deleteOrder(Order order) {
 		try {
 			orderRepo.delete(order);

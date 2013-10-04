@@ -10,8 +10,14 @@ import com.mss.application.services.DummyProvider;
 import com.mss.application.services.SynchronizationAdapter;
 import com.mss.application.services.SystemService;
 import com.mss.application.services.UpdateService;
+import com.mss.domain.services.CustomerService;
 import com.mss.domain.services.OrderService;
+import com.mss.domain.services.PriceListService;
+import com.mss.domain.services.ProductService;
+import com.mss.domain.services.RoutePointService;
 import com.mss.domain.services.RouteService;
+import com.mss.domain.services.ShippingAddressService;
+import com.mss.domain.services.WarehouseService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.accounts.Account;
@@ -75,8 +81,7 @@ public class UpdateActivity extends SherlockFragmentActivity {
             	try {
             		if (mRouteService.hasNotSynchronizedData() ||
             			mOrderService.hasNotSynchronizedData()) {
-            			Toast.makeText(getApplicationContext(), getString(R.string.notification_sync_before_update), Toast.LENGTH_LONG).show();
-            			return;
+            			
             		}
             		
             		AccountManager accountManager = AccountManager.get(getApplicationContext());

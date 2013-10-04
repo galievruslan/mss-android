@@ -156,5 +156,4 @@
     <string name="update_already_in_progress">Обновление уже запущено</string>
     <string name="update_failed">Не удалось обновить приложение</string>
     <string name="title_activity_update">Обновления</string>
-    <string name="notification_sync_before_update">Вам необходимо выполнить синхронизацию до обновления</string>
 </resources>

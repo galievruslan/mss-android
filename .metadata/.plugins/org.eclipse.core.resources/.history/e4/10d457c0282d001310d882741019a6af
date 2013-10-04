@@ -173,5 +173,4 @@
     <string name="update_already_in_progress">Updates already runned</string>
     <string name="update_failed">Update failed</string>
     <string name="title_activity_update">Update</string>
-    <string name="notification_sync_before_update">You have to synchronize before update</string>
 </resources>

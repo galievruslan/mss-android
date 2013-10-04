@@ -190,16 +190,6 @@ public class RouteService {
 		return null;
 	}
 	
-	public boolean hasNotSynchronizedData(){
-		try {
-			return routeRepo.findNotSynchronized().iterator().hasNext();
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-		}
-		
-		return false;
-	}
-	
 	public void saveRoute(Route route) throws Throwable{
 		routeRepo.save(route);
 	}

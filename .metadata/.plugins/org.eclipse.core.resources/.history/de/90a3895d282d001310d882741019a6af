@@ -51,6 +51,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TimePicker;
 
 public class OrderEditActivity extends SherlockFragmentActivity implements OnTabChangeListener, OnOrderPickupItemSelectedListener, LoaderCallbacks<Order>{
+
 	private static final String TAG = OrderEditActivity.class.getSimpleName();
     
 	public static final String TAB_GENERAL = "General";

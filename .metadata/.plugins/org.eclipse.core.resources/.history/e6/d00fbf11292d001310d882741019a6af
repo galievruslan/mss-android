@@ -21,7 +21,7 @@
 	<string name="sync_route_templates">Синхронизация шаблонов маршрутов&#8230;</string>
 	<string name="sync_route_points_templates">Синхронизация шаблонов точек маршрутов&#8230;</string>
 	<string name="sync_preferences">Синхронизация настроек&#8230;</string>
-	<string name="sync_greetings">Приветствие!</string>
+	<string name="greetings">Приветствие!</string>
 	<string name="sync_routes">Синхронизация маршрутов&#8230;</string>
 	<string name="sync_orders">Синхронизация заказов&#8230;</string>
 	<string name="sync_manager_settings">Синхронизация настроек менеджера&#8230;</string>
