@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">mss</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_route">Маршруты</string>
+    <string name="menu_sync">Синхронизация</string>
+    <string name="title_activity_main">MSS</string>
+    <string name="title_activity_new_route_point">Новая точка</string>
+    <string name="title_activity_new_order">Новый заказ</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_route_point">Точка</string>
+    <string name="title_activity_order">Заказ</string>
+    <string name="title_activity_orders">Заказы</string>
+    <string name="title_activity_customers">Клиенты</string>
+    <string name="title_activity_categories">Категории</string>
+    <string name="title_activity_shipping_addresses">Точки</string>
+    <string name="menu_new_route_point">Новый</string>
+    <string name="title_activity_route_fragment">Маршрут</string>
+    <string name="title_activity_route_point_fragment">Точка</string>
+    <string name="menu_item_change_status">Смена статуса</string>
+    <string name="menu_item_add">Добавить</string>
+    <string name="menu_item_edit">Редактировать</string>
+    <string name="menu_item_delete">Удалить</string>
+    <string name="menu_item_order_list">Заказы</string>
+    <string name="menu_item_filter">Фильтр</string>
+    <string name="menu_item_save">Сохранить</string>
+    <string name="menu_item_clear_filter">Очистить фильтр</string>
+    <string name="menu_item_copy_route_from_template">Копировать из шаблона</string>
+    <string name="key_id">id</string>
+    <string name="title_activity_route_point">Точка</string>
+    <string name="title_activity_date_picker_fragment">Дата</string>
+    <string name="title_activity_abstract">AbstractActivity</string>
+    <string name="title_activity_orders">Заказы</string>
+    <string name="label_tab_general">Общее</string>
+    <string name="label_tab_details">Детали</string>
+    <string name="label_tab_notes">Заметки</string>
+    <string name="label_order_date">Дата заказа</string>
+    <string name="label_order_shipping_date">Дата отгрузки</string>
+    <string name="label_order_shipping_time">Время отгрузки</string>
+    <string name="label_order_customer">Клиент</string>
+    <string name="label_order_shipping_address">Адрес поставки</string>
+    <string name="label_order_price_list">Прайс лист</string>
+    <string name="label_order_warehouse">Склад</string>
+    <string name="label_order_notes">Заметки</string>
+    <string name="label_uom_base">Базовая</string>
+    <string name="label_uom_count_in_base">Количество в базовой</string>
+    <string name="label_orders">Заказы</string>
+    <string name="label_status">Статус</string>
+    <string name="label_count">Количество\u003A</string>
+    <string name="label_amount">Сумма\u003A</string>
+    <string name="label_in_order">В заказе</string>
+    <string name="label_categories">Категории</string>
+    <string name="title_activity_price_lists">Прайс листы</string>
+    <string name="title_activity_warehouses">Склады</string>
+    <string name="title_activity_time_picker_fragment">Время</string>
+    <string name="title_activity_order_pickup_items_fragment">Подбор товара</string>
+    <string name="title_activity_order_item_pickup">Подбор товара</string>
+    <string name="title_activity_product_uoms">Единицы измерения продукта</string>
+    <string name="title_activity_daily_orders">Заказы за день</string>
+    <string name="main_menu_routes">Маршруты</string>
+    <string name="main_menu_orders">Заказы</string>
+    <string name="main_menu_settings">Настройки</string>
+    <string name="main_menu_sync">Синхронизация</string>
+    <string name="main_menu_update">Обновления</string>
+    <string name="title_activity_authenticator">Аутентификация</string>
+    <string name="dialog_delete_confirmation_title">Подтверждение удаления</string>
+    <string name="dialog_delete_confirmation_message">Вы уверены, что хотите удалить?</string>
+    <string name="dialog_delete_confirmation_positive_button">Удалить</string>
+    <string name="dialog_delete_confirmation_negative_button">Отмена</string>
+    <string name="dialog_change_price_confirmation_title">Подтверждение смены прайс листа</string>
+    <string name="dialog_change_price_confirmation_message">Вы уверены, что хотите изменить прайс лист, выбранные товары будут удалены?</string>
+    <string name="dialog_change_price_confirmation_positive_button">Изменить</string>
+    <string name="dialog_change_price_confirmation_negative_button">Отмена</string>
+    <string name="title_search">Поиск</string>
+
+    <!-- Label for this package -->
+    <string name="label">MSS Синхронизатор</string>
+
+    <!-- Permission label -->
+    <string name="permlab_samplesyncadapterAuthPassword">access to passwords for Sample SyncAdapter accounts</string>
+    <!-- Permission description -->
+    <string name="permdesc_samplesyncadapterAuthPassword">Allows applications direct access to the passwords for the
+        Sample SyncAdapter account(s) you have configured.</string>
+
+    <!-- Permission label -->
+    <string name="permlab_samplesyncadapterAuth">view configured accounts</string>
+    <!-- Permission description -->
+    <string name="permdesc_samplesyncadapterAuth">Allows applications to see the usernames (email addresses) of
+        the Sample SyncAdapter account(s) you have configured.</string>
+    <string name="notification_login_error">Touch to sign into your Sample SyncAdapter account.</string>
+
+    <!-- Title string for Login activity -->
+    <string name="ui_activity_title">Вход</string>
+    <!-- Message shown in progress dialog while app connects to the server -->
+    <string name="ui_activity_authenticating">Аутентификация\u2026</string>
+
+    <!-- AuthenticatorActivity -->
+    <skip />
+
+    <string name="login_activity_server_label">Адрес сервера</string>
+    <!-- Label above username EditText -->
+    <string name="login_activity_username_label">Имя пользователя</string>
+    <!-- Label above password EditText -->
+    <string name="login_activity_password_label">Пароль</string>
+    <!-- Button to sign in after entering username and password -->
+    <string name="login_activity_ok_button">Войти</string>
+
+    <!-- Message shown in dialog if the username or password is invalid. -->
+    <string name="login_activity_loginfail_text_both">Не верные имя пользователя или пароль. Пожалуйста попробуйте снова.</string>
+    <!-- Message shown in dialog if the password is invalid -->
+    <string name="login_activity_loginfail_text_pwonly">Вы ввели неверный пароль или ваш аккаунт был изменён.
+        Пожалуйста введите Ваш пароль ещё раз.</string>
+    <!-- Message shown in dialog to prompt the user for their password -->
+    <string name="login_activity_loginfail_text_pwmissing">Введите пароль для данного аккаунта.</string>
+    <!--
+        Message shown if the provided account doesn't support the current
+        activity.
+    -->
+    <string name="login_activity_newaccount_text">Войти в Ваш MSS аккаунт.</string>
+
+    <!-- Button that takes the user to the "sign in" screen -->
+    <string name="sign_in_button_label">Войти</string>
+    <!-- Button for going to the previous screen or step -->
+    <string name="back_button_label">Назад</string>
+    <!-- Button to cancel the current operation -->
+    <string name="cancel_button_label">Отмена</string>
+    <string name="title_activity_statuses">Статусы</string>
+
+    <string name="expand_all_menu">Развернуть все</string>
+    <string name="expand_menu">Развернуть</string>
+    <string name="collapse_all_menu">Свернуть все</string>
+    <string name="select_all_menu">Выбрать все</string>
+    <string name="unselect_all_menu">Снять выбор</string>
+    <string name="title_activity_order_item_pickup_filter">Фильтр товаров</string>
+    <string name="description_in_order_filter">Отобразить только выбранные товары</string>
+	<string name="description_categories_filter">Выберите категории, для фильтрации списка товаров</string>
+	<string name="button_ok">OK</string>
+	<string name="label_shipping_at">Отгрузка\u003A </string>
+	<string name="label_to_the_amount_of">На сумму\u003A </string>
+	<string name="dialog_leave_changed_order_confirmation_title">Подтврждение выхода из заказа</string>
+    <string name="dialog_leave_changed_order_confirmation_message">Изменения в заказе не сохранены, Вы действительно хотите покинуть форму?</string>
+    <string name="dialog_leave_changed_order_confirmation_positive_button">Покинуть</string>
+    <string name="dialog_leave_changed_order_confirmationn_negative_button">Отмена</string>
+    <string name="collapse_all_condesed">Свернуть все</string>
+    <string name="expand_all_condensed">Развернуть все</string>
+    
+    <string name="update_connect">Соединение с сервером</string>
+    <string name="update_check_for_updates">Проверка наличия обновлений</string>
+    <string name="update_updates_available">Доступна новая версия</string>
+    <string name="update_nothing_to_update">У Вас установлена самая последняя версия приложения</string>
+    <string name="update_download">Загрузка обновлений</string>
+    <string name="update_install">Установка обновлений</string>
+    <string name="update_already_in_progress">Обновление уже запущено</string>
+    <string name="update_failed">Не удалось обновить приложение</string>
+</resources>

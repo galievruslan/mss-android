@@ -15,4 +15,5 @@
 	<string name="example_warehouse">Warehouse</string>
 	<string name="example_notes">Some notes</string>
 	<string name="example_unit_of_measure">box</string>
+	<string name="example_version">0.0.0</string>
 </resources>

@@ -65,8 +65,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * SyncAdapter implementation for syncing sample SyncAdapter contacts to the
- * platform ContactOperations provider.
+ * SyncAdapter implementation for data syncing.
  */
 public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = "SynchronizationAdapter";
@@ -87,7 +86,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority,
         ContentProviderClient provider, SyncResult syncResult) {
-        //String authtoken = null;
+        
     	Intent event = new Intent(SYNC_EVENT_KEY); 
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(mContext);
     	
@@ -120,7 +119,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
              int pageSize = sharedPreferences.getInt("buffer_size", 250);
              Boolean fullSync = extras.getBoolean("full_sync");
               
-             event.putExtra(MESSAGE_KEY, R.string.greetings);
+             event.putExtra(MESSAGE_KEY, R.string.sync_greetings);
              localBroadcastManager.sendBroadcast(event);
              PostGreetings(webServer);
              

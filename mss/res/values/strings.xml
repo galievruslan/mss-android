@@ -29,6 +29,7 @@
     <string name="menu_item_save">Save</string>
     <string name="menu_item_clear_filter">Clear filter</string>
     <string name="menu_item_copy_route_from_template">Copy From Template</string>
+    <string name="menu_cancel_update">Cancel update</string>
     <string name="key_id">id</string>
     <string name="title_activity_route_point">Route point</string>
     <string name="title_activity_date_picker_fragment">Date picker</string>
@@ -148,14 +149,7 @@
     <string name="collapse_all_menu">Collapse all</string>
     <string name="select_all_menu">Select all</string>
     <string name="unselect_all_menu">Unselect all</string>
-    <string name="title_activity_daily_orders">DailyOrdersActivity</string>
-    <string name="notify_check_if_updates_available">Check if updates available</string>
-    <string name="notify_updates_available">Updates available</string>
-    <string name="notify_lastests_version_is_installed">You have lastest varsion</string>
-    <string name="notify_download_updates">Download updates</string>
-    <string name="notify_install_updates">Install updates</string>
-    <string name="notify_update_in_progress">Updates already runned</string>
-    <string name="notify_update_failed">Update failed</string>
+    <string name="title_activity_daily_orders">DailyOrdersActivity</string>    
     <string name="title_activity_order_item_pickup_filter">Items filter</string>
     <string name="description_in_order_filter">Show only selected items</string>
 	<string name="description_categories_filter">Select categories, to filter item list</string>
@@ -168,4 +162,15 @@
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Cancel</string>
     <string name="collapse_all_condesed">Collapse all</string>
     <string name="expand_all_condensed">Expand all</string>
+    
+    <string name="action_update">Update</string>
+    <string name="update_connect">Connecting</string>
+    <string name="update_check_for_updates">Check for updates</string>
+    <string name="update_updates_available">Updates available</string>
+    <string name="update_nothing_to_update">You have lastest varsion</string>
+    <string name="update_download">Download updates</string>
+    <string name="update_install">Install updates</string>
+    <string name="update_already_in_progress">Updates already runned</string>
+    <string name="update_failed">Update failed</string>
+    <string name="title_activity_update">Update</string>
 </resources>

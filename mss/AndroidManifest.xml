@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mss.application"
     android:versionCode="1"
-    android:versionName="1.0.323" >
+    android:versionName="1.0.354" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -57,11 +57,9 @@
             android:authorities="com.mss.application.services"
             android:syncable="true" />
 
-        <service android:name="com.commonsware.cwac.updater.UpdateService" >
-        </service>
-
-        <receiver android:name="com.commonsware.cwac.updater.WakefulReceiver" >
-        </receiver>
+        <service 
+            android:name="com.mss.application.services.UpdateService" 
+            android:exported="false"/>
 
         <activity
             android:name="com.mss.application.MainActivity"
@@ -84,6 +82,10 @@
         <activity
             android:name="com.mss.application.SynchronizationActivity"
             android:label="@string/title_activity_sync" >
+        </activity>
+        <activity
+            android:name="com.mss.application.UpdateActivity"
+            android:label="@string/title_activity_update" >
         </activity>
         <activity
             android:name="com.mss.application.SettingsActivity"

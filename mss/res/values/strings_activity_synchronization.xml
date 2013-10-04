@@ -21,7 +21,7 @@
 	<string name="sync_route_templates">Route templates synchronizing&#8230;</string>
 	<string name="sync_route_points_templates">Route points templates\nsynchronizing&#8230;</string>
 	<string name="sync_preferences">Preferences synchronizing&#8230;</string>
-	<string name="greetings">Greetings!</string>
+	<string name="sync_greetings">Greetings!</string>
 	<string name="sync_routes">Routes synchronizing&#8230;</string>
 	<string name="sync_orders">Orders synchronizing&#8230;</string>
 	<string name="sync_manager_settings">Manager settings synchronizing&#8230;</string>

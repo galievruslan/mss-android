@@ -27,6 +27,7 @@
     <string name="menu_item_save">Сохранить</string>
     <string name="menu_item_clear_filter">Очистить фильтр</string>
     <string name="menu_item_copy_route_from_template">Копировать из шаблона</string>
+    <string name="menu_cancel_update">Отмена обновления</string>
     <string name="key_id">id</string>
     <string name="title_activity_route_point">Точка</string>
     <string name="title_activity_date_picker_fragment">Дата</string>
@@ -131,14 +132,7 @@
     <string name="expand_menu">Развернуть</string>
     <string name="collapse_all_menu">Свернуть все</string>
     <string name="select_all_menu">Выбрать все</string>
-    <string name="unselect_all_menu">Снять выбор</string>    
-    <string name="notify_check_if_updates_available">Проверка наличия обновлений</string>
-    <string name="notify_updates_available">Доступна новая версия</string>
-    <string name="notify_lastests_version_is_installed">У Вас установлена самая последняя версия приложения</string>
-    <string name="notify_download_updates">Получение обновлений</string>
-    <string name="notify_install_updates">Установка обновлений</string>
-    <string name="notify_update_in_progress">Обновление уже запущено</string>
-    <string name="notify_update_failed">Не удалось обновить приложение</string>
+    <string name="unselect_all_menu">Снять выбор</string>
     <string name="title_activity_order_item_pickup_filter">Фильтр товаров</string>
     <string name="description_in_order_filter">Отобразить только выбранные товары</string>
 	<string name="description_categories_filter">Выберите категории, для фильтрации списка товаров</string>
@@ -151,4 +145,15 @@
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Отмена</string>
     <string name="collapse_all_condesed">Свернуть все</string>
     <string name="expand_all_condensed">Развернуть все</string>
+    
+    <string name="action_update">Обновить</string>
+    <string name="update_connect">Соединение с сервером</string>
+    <string name="update_check_for_updates">Проверка наличия обновлений</string>
+    <string name="update_updates_available">Доступна новая версия</string>
+    <string name="update_nothing_to_update">У Вас установлена самая последняя версия приложения</string>
+    <string name="update_download">Загрузка обновлений</string>
+    <string name="update_install">Установка обновлений</string>
+    <string name="update_already_in_progress">Обновление уже запущено</string>
+    <string name="update_failed">Не удалось обновить приложение</string>
+    <string name="title_activity_update">Обновления</string>
 </resources>

@@ -23,8 +23,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
@@ -166,13 +164,7 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item)  {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			Intent upIntent = new Intent(this, MainActivity.class);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
-				TaskStackBuilder.create(this).addNextIntent(upIntent).startActivities();
-				finish();
-			} else {
-				NavUtils.navigateUpTo(this, upIntent);
-			}
+			finish();
 			return true;
 		case R.id.menu_item_cancel_sync:
 			ContentResolver.cancelSync(mAccount, DummyProvider.getAuthority());
