@@ -57,6 +57,7 @@ public class RouteService {
 		return null;		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Route getOnDate(Date date) {
 		try {
 			Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());
@@ -71,11 +72,13 @@ public class RouteService {
 		return null;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Route createRoute(Date date) {
 		Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());		
 		return new Route(dateOnly);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean isRouteTemplateOnDateExist(Date date) {
 		try {
 			int day = date.getDay();
@@ -115,6 +118,7 @@ public class RouteService {
 		return false;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Route copyRouteFromTemplate(Date date) {
 		try {
 			int day = date.getDay();

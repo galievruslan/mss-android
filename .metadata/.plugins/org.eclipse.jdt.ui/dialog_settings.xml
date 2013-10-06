@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="480,510" key="UserLibraryLoadSaveDialog.size"/>
-	<item value="C:\Projects\mss-android\libs\Gson" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="true" key="Comments"/>
+	<item value="false" key="InstanceOf"/>
 	<item value="500" key="CallHierarchyViewPart.ratio3"/>
 	<item value="500" key="CallHierarchyViewPart.ratio1"/>
-	<item value="3" key="CallHierarchyViewPart.orientation"/>
 	<item value="1" key="SearchScopeActionGroup.search_scope_type"/>
-	<item value="2" key="CallHierarchyViewPart.field_mode"/>
 	<item value="0" key="CallHierarchyViewPart.call_mode"/>
+	<item value="true" key="Replace"/>
+	<item value="C:\Projects\mss-android\libs\Gson" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="3" key="CallHierarchyViewPart.orientation"/>
+	<item value="2" key="CallHierarchyViewPart.field_mode"/>
+	<item value="true" key="Annotations"/>
+	<item value="true" key="Public"/>
+	<item value="true" key="Abstract"/>
 	<list key="SearchScopeActionGroup.working_set">
 	</list>
 	<section name="DialogBounds_OverrideMethodDialog">

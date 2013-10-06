@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mss.application"
     android:versionCode="1"
-    android:versionName="1.0.359" >
+    android:versionName="1.0.386" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -159,6 +159,10 @@
         <activity
             android:name="com.mss.application.OrderItemPickupFilterActivity"
             android:label="@string/title_activity_order_item_pickup_filter" >
+        </activity>
+        <activity
+            android:name="com.mss.application.CategoriesQuickFilterActivity"
+            android:label="@string/title_activity_categories_quick_filter" >
         </activity>
     </application>
 </manifest>

@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.annotation.SuppressLint;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
@@ -367,6 +368,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		}
     }
     
+    @SuppressLint("SimpleDateFormat")
     private List<NameValuePair> ToPostParams(Route route, RoutePoint points[]) {		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
@@ -408,7 +410,8 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		}
     }
     
-    private List<NameValuePair> ToPostParams(Order order, OrderItem items[]) {		
+    @SuppressLint("SimpleDateFormat")
+	private List<NameValuePair> ToPostParams(Order order, OrderItem items[]) {		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

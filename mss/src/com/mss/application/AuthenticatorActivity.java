@@ -214,7 +214,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     /**
      * Hides the progress UI for a lengthy operation.
      */
-    protected void hideProgress() {
+    @SuppressWarnings("deprecation")
+	protected void hideProgress() {
     	try {
     		dismissDialog(0);
     	} catch (Exception e) {
@@ -277,7 +278,8 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
     /**
      * Shows the progress UI for a lengthy operation.
      */
-    protected void showProgress() {
+    @SuppressWarnings("deprecation")
+	protected void showProgress() {
         showDialog(0);
     }
 }

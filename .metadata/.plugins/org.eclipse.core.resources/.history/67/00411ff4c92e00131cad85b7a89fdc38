@@ -1,0 +1,90 @@
+package pl.polidea.treeview;
+
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+
+public interface ITreeViewAdapter<T> extends ListAdapter {
+
+    public abstract Activity getActivity();
+
+    public abstract int getCount();
+
+    public abstract Object getItem(int position);
+
+    public abstract T getTreeId(int position);
+
+    public abstract TreeNodeInfo<T> getTreeNodeInfo(int position);
+
+    public abstract boolean hasStableIds();
+
+    public abstract int getItemViewType(int position);
+
+    public abstract int getViewTypeCount();
+
+    public abstract boolean isEmpty();
+
+    public abstract boolean areAllItemsEnabled();
+
+    public abstract View getView(int position, View convertView,
+            ViewGroup parent);
+
+    /**
+     * Called when new view is to be created.
+     * 
+     * @param treeNodeInfo
+     *            node info
+     * @return view that should be displayed as tree content
+     */
+    public abstract View getNewChildView(TreeNodeInfo<T> treeNodeInfo);
+
+    /**
+     * Called when new view is going to be reused. You should update the view
+     * and fill it in with the data required to display the new information. You
+     * can also create a new view, which will mean that the old view will not be
+     * reused.
+     * 
+     * @param view
+     *            view that should be updated with the new values
+     * @param treeNodeInfo
+     *            node info used to populate the view
+     * @return view to used as row indented content
+     */
+    public abstract View updateView(View view, TreeNodeInfo<T> treeNodeInfo);
+
+    /**
+     * Retrieves background drawable for the node.
+     * 
+     * @param treeNodeInfo
+     *            node info
+     * @return drawable returned as background for the whole row. Might be null,
+     *         then default background is used
+     */
+    public abstract Drawable getBackgroundDrawable(TreeNodeInfo<T> treeNodeInfo);
+
+    public abstract LinearLayout populateTreeItem(LinearLayout layout,
+            View childView, TreeNodeInfo<T> nodeInfo, boolean newChildView);
+
+    public abstract void setIndicatorGravity(int indicatorGravity);
+
+    public abstract void setCollapsedDrawable(Drawable collapsedDrawable);
+
+    public abstract void setExpandedDrawable(Drawable expandedDrawable);
+
+    public abstract void setIndentWidth(int indentWidth);
+
+    public abstract void setRowBackgroundDrawable(Drawable rowBackgroundDrawable);
+
+    public abstract void setIndicatorBackgroundDrawable(
+            Drawable indicatorBackgroundDrawable);
+
+    public abstract void setCollapsible(boolean collapsible);
+
+    public abstract void refresh();
+
+    public abstract void handleItemClick(View view, Object id);
+
+}

@@ -157,4 +157,6 @@
     <string name="update_failed">Не удалось обновить приложение</string>
     <string name="title_activity_update">Обновления</string>
     <string name="notification_sync_before_update">Вам необходимо выполнить синхронизацию до обновления</string>
+    <string name="menu_item_categories_quick_filter">Категория</string>
+    <string name="title_activity_categories_quick_filter">Быстрый фильтр по категориям</string>
 </resources>

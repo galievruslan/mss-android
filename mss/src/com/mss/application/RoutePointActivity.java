@@ -82,7 +82,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-			//getSupportActionBar().setDisplayShowTitleEnabled(false);
 		}
 	}
 	

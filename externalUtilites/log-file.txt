@@ -1985,3 +1985,148 @@
 299 2013-10-04 23:24:30,962 [1] [INFO ] - Current version is: 1.0.358
 299 2013-10-04 23:24:30,962 [1] [INFO ] - New version is: 1.0.359
 301 2013-10-04 23:24:30,964 [1] [INFO ] - Version incrementer finished
+291 2013-10-06 22:46:24,031 [1] [INFO ] - Version incrementer started
+310 2013-10-06 22:46:24,050 [1] [INFO ] - Update version in mss
+312 2013-10-06 22:46:24,052 [1] [INFO ] - Current version is: 1.0.359
+313 2013-10-06 22:46:24,053 [1] [INFO ] - New version is: 1.0.360
+314 2013-10-06 22:46:24,054 [1] [INFO ] - Version incrementer finished
+300 2013-10-06 23:11:12,852 [1] [INFO ] - Version incrementer started
+318 2013-10-06 23:11:12,870 [1] [INFO ] - Update version in mss
+320 2013-10-06 23:11:12,872 [1] [INFO ] - Current version is: 1.0.360
+320 2013-10-06 23:11:12,872 [1] [INFO ] - New version is: 1.0.361
+321 2013-10-06 23:11:12,873 [1] [INFO ] - Version incrementer finished
+337 2013-10-06 23:15:32,137 [1] [INFO ] - Version incrementer started
+354 2013-10-06 23:15:32,154 [1] [INFO ] - Update version in mss
+357 2013-10-06 23:15:32,157 [1] [INFO ] - Current version is: 1.0.361
+357 2013-10-06 23:15:32,157 [1] [INFO ] - New version is: 1.0.362
+358 2013-10-06 23:15:32,158 [1] [INFO ] - Version incrementer finished
+116 2013-10-06 23:17:08,131 [1] [INFO ] - Version incrementer started
+135 2013-10-06 23:17:08,150 [1] [INFO ] - Update version in mss
+137 2013-10-06 23:17:08,152 [1] [INFO ] - Current version is: 1.0.362
+137 2013-10-06 23:17:08,152 [1] [INFO ] - New version is: 1.0.363
+139 2013-10-06 23:17:08,154 [1] [INFO ] - Version incrementer finished
+306 2013-10-06 23:44:44,922 [1] [INFO ] - Version incrementer started
+327 2013-10-06 23:44:44,943 [1] [INFO ] - Update version in mss
+332 2013-10-06 23:44:44,948 [1] [INFO ] - Current version is: 1.0.363
+332 2013-10-06 23:44:44,948 [1] [INFO ] - New version is: 1.0.364
+334 2013-10-06 23:44:44,950 [1] [INFO ] - Version incrementer finished
+118 2013-10-06 23:44:51,135 [1] [INFO ] - Version incrementer started
+136 2013-10-06 23:44:51,153 [1] [INFO ] - Update version in tree-view-list-android-master
+139 2013-10-06 23:44:51,156 [1] [INFO ] - Current version is: 1.0.13
+139 2013-10-06 23:44:51,156 [1] [INFO ] - New version is: 1.0.14
+140 2013-10-06 23:44:51,157 [1] [INFO ] - Version incrementer finished
+124 2013-10-06 23:45:31,539 [1] [INFO ] - Version incrementer started
+145 2013-10-06 23:45:31,560 [1] [INFO ] - Update version in mss
+147 2013-10-06 23:45:31,562 [1] [INFO ] - Current version is: 1.0.364
+148 2013-10-06 23:45:31,563 [1] [INFO ] - New version is: 1.0.365
+149 2013-10-06 23:45:31,564 [1] [INFO ] - Version incrementer finished
+117 2013-10-06 23:45:38,034 [1] [INFO ] - Version incrementer started
+135 2013-10-06 23:45:38,052 [1] [INFO ] - Update version in tree-view-list-android-master
+137 2013-10-06 23:45:38,054 [1] [INFO ] - Current version is: 1.0.14
+138 2013-10-06 23:45:38,055 [1] [INFO ] - New version is: 1.0.15
+139 2013-10-06 23:45:38,056 [1] [INFO ] - Version incrementer finished
+320 2013-10-07 00:11:29,109 [1] [INFO ] - Version incrementer started
+337 2013-10-07 00:11:29,126 [1] [INFO ] - Update version in mss
+340 2013-10-07 00:11:29,129 [1] [INFO ] - Current version is: 1.0.365
+340 2013-10-07 00:11:29,129 [1] [INFO ] - New version is: 1.0.366
+341 2013-10-07 00:11:29,130 [1] [INFO ] - Version incrementer finished
+276 2013-10-07 00:13:06,078 [1] [INFO ] - Version incrementer started
+294 2013-10-07 00:13:06,096 [1] [INFO ] - Update version in mss
+297 2013-10-07 00:13:06,099 [1] [INFO ] - Current version is: 1.0.366
+297 2013-10-07 00:13:06,099 [1] [INFO ] - New version is: 1.0.367
+298 2013-10-07 00:13:06,100 [1] [INFO ] - Version incrementer finished
+339 2013-10-07 00:23:06,744 [1] [INFO ] - Version incrementer started
+356 2013-10-07 00:23:06,761 [1] [INFO ] - Update version in mss
+358 2013-10-07 00:23:06,763 [1] [INFO ] - Current version is: 1.0.367
+358 2013-10-07 00:23:06,763 [1] [INFO ] - New version is: 1.0.368
+360 2013-10-07 00:23:06,765 [1] [INFO ] - Version incrementer finished
+305 2013-10-07 00:26:20,445 [1] [INFO ] - Version incrementer started
+323 2013-10-07 00:26:20,463 [1] [INFO ] - Update version in mss
+325 2013-10-07 00:26:20,465 [1] [INFO ] - Current version is: 1.0.368
+325 2013-10-07 00:26:20,465 [1] [INFO ] - New version is: 1.0.369
+326 2013-10-07 00:26:20,466 [1] [INFO ] - Version incrementer finished
+303 2013-10-07 00:29:38,660 [1] [INFO ] - Version incrementer started
+321 2013-10-07 00:29:38,678 [1] [INFO ] - Update version in mss
+324 2013-10-07 00:29:38,681 [1] [INFO ] - Current version is: 1.0.369
+324 2013-10-07 00:29:38,681 [1] [INFO ] - New version is: 1.0.370
+325 2013-10-07 00:29:38,682 [1] [INFO ] - Version incrementer finished
+298 2013-10-07 00:32:37,820 [1] [INFO ] - Version incrementer started
+315 2013-10-07 00:32:37,837 [1] [INFO ] - Update version in mss
+317 2013-10-07 00:32:37,839 [1] [INFO ] - Current version is: 1.0.370
+318 2013-10-07 00:32:37,840 [1] [INFO ] - New version is: 1.0.371
+319 2013-10-07 00:32:37,841 [1] [INFO ] - Version incrementer finished
+117 2013-10-07 00:34:05,759 [1] [INFO ] - Version incrementer started
+135 2013-10-07 00:34:05,777 [1] [INFO ] - Update version in mss
+137 2013-10-07 00:34:05,779 [1] [INFO ] - Current version is: 1.0.371
+137 2013-10-07 00:34:05,779 [1] [INFO ] - New version is: 1.0.372
+138 2013-10-07 00:34:05,780 [1] [INFO ] - Version incrementer finished
+280 2013-10-07 00:41:41,794 [1] [INFO ] - Version incrementer started
+297 2013-10-07 00:41:41,811 [1] [INFO ] - Update version in mss
+300 2013-10-07 00:41:41,814 [1] [INFO ] - Current version is: 1.0.372
+300 2013-10-07 00:41:41,814 [1] [INFO ] - New version is: 1.0.373
+301 2013-10-07 00:41:41,815 [1] [INFO ] - Version incrementer finished
+291 2013-10-07 00:51:39,004 [1] [INFO ] - Version incrementer started
+308 2013-10-07 00:51:39,021 [1] [INFO ] - Update version in mss
+311 2013-10-07 00:51:39,024 [1] [INFO ] - Current version is: 1.0.373
+311 2013-10-07 00:51:39,024 [1] [INFO ] - New version is: 1.0.374
+313 2013-10-07 00:51:39,026 [1] [INFO ] - Version incrementer finished
+305 2013-10-07 00:55:36,161 [1] [INFO ] - Version incrementer started
+322 2013-10-07 00:55:36,178 [1] [INFO ] - Update version in mss
+325 2013-10-07 00:55:36,181 [1] [INFO ] - Current version is: 1.0.374
+325 2013-10-07 00:55:36,181 [1] [INFO ] - New version is: 1.0.375
+326 2013-10-07 00:55:36,182 [1] [INFO ] - Version incrementer finished
+114 2013-10-07 00:55:48,621 [1] [INFO ] - Version incrementer started
+133 2013-10-07 00:55:48,640 [1] [INFO ] - Update version in mss
+135 2013-10-07 00:55:48,642 [1] [INFO ] - Current version is: 1.0.375
+136 2013-10-07 00:55:48,643 [1] [INFO ] - New version is: 1.0.376
+137 2013-10-07 00:55:48,644 [1] [INFO ] - Version incrementer finished
+320 2013-10-07 00:59:48,108 [1] [INFO ] - Version incrementer started
+337 2013-10-07 00:59:48,125 [1] [INFO ] - Update version in mss
+340 2013-10-07 00:59:48,128 [1] [INFO ] - Current version is: 1.0.376
+340 2013-10-07 00:59:48,128 [1] [INFO ] - New version is: 1.0.377
+341 2013-10-07 00:59:48,129 [1] [INFO ] - Version incrementer finished
+304 2013-10-07 01:03:55,978 [1] [INFO ] - Version incrementer started
+321 2013-10-07 01:03:55,995 [1] [INFO ] - Update version in mss
+324 2013-10-07 01:03:55,998 [1] [INFO ] - Current version is: 1.0.377
+324 2013-10-07 01:03:55,998 [1] [INFO ] - New version is: 1.0.378
+325 2013-10-07 01:03:55,999 [1] [INFO ] - Version incrementer finished
+116 2013-10-07 01:05:32,213 [1] [INFO ] - Version incrementer started
+133 2013-10-07 01:05:32,230 [1] [INFO ] - Update version in mss
+136 2013-10-07 01:05:32,233 [1] [INFO ] - Current version is: 1.0.378
+136 2013-10-07 01:05:32,233 [1] [INFO ] - New version is: 1.0.379
+137 2013-10-07 01:05:32,234 [1] [INFO ] - Version incrementer finished
+289 2013-10-07 01:15:21,262 [1] [INFO ] - Version incrementer started
+307 2013-10-07 01:15:21,280 [1] [INFO ] - Update version in mss
+309 2013-10-07 01:15:21,282 [1] [INFO ] - Current version is: 1.0.379
+309 2013-10-07 01:15:21,282 [1] [INFO ] - New version is: 1.0.380
+310 2013-10-07 01:15:21,283 [1] [INFO ] - Version incrementer finished
+304 2013-10-07 01:19:36,867 [1] [INFO ] - Version incrementer started
+320 2013-10-07 01:19:36,883 [1] [INFO ] - Update version in mss
+323 2013-10-07 01:19:36,886 [1] [INFO ] - Current version is: 1.0.380
+323 2013-10-07 01:19:36,886 [1] [INFO ] - New version is: 1.0.381
+324 2013-10-07 01:19:36,887 [1] [INFO ] - Version incrementer finished
+302 2013-10-07 01:21:06,338 [1] [INFO ] - Version incrementer started
+321 2013-10-07 01:21:06,357 [1] [INFO ] - Update version in mss
+323 2013-10-07 01:21:06,359 [1] [INFO ] - Current version is: 1.0.381
+323 2013-10-07 01:21:06,359 [1] [INFO ] - New version is: 1.0.382
+324 2013-10-07 01:21:06,360 [1] [INFO ] - Version incrementer finished
+293 2013-10-07 01:43:45,784 [1] [INFO ] - Version incrementer started
+311 2013-10-07 01:43:45,802 [1] [INFO ] - Update version in mss
+314 2013-10-07 01:43:45,805 [1] [INFO ] - Current version is: 1.0.382
+314 2013-10-07 01:43:45,805 [1] [INFO ] - New version is: 1.0.383
+315 2013-10-07 01:43:45,806 [1] [INFO ] - Version incrementer finished
+281 2013-10-07 01:48:44,742 [1] [INFO ] - Version incrementer started
+299 2013-10-07 01:48:44,760 [1] [INFO ] - Update version in mss
+302 2013-10-07 01:48:44,763 [1] [INFO ] - Current version is: 1.0.383
+302 2013-10-07 01:48:44,763 [1] [INFO ] - New version is: 1.0.384
+303 2013-10-07 01:48:44,764 [1] [INFO ] - Version incrementer finished
+115 2013-10-07 01:50:08,914 [1] [INFO ] - Version incrementer started
+132 2013-10-07 01:50:08,931 [1] [INFO ] - Update version in mss
+135 2013-10-07 01:50:08,934 [1] [INFO ] - Current version is: 1.0.384
+135 2013-10-07 01:50:08,934 [1] [INFO ] - New version is: 1.0.385
+136 2013-10-07 01:50:08,935 [1] [INFO ] - Version incrementer finished
+116 2013-10-07 01:52:38,339 [1] [INFO ] - Version incrementer started
+134 2013-10-07 01:52:38,357 [1] [INFO ] - Update version in mss
+136 2013-10-07 01:52:38,359 [1] [INFO ] - Current version is: 1.0.385
+136 2013-10-07 01:52:38,359 [1] [INFO ] - New version is: 1.0.386
+137 2013-10-07 01:52:38,360 [1] [INFO ] - Version incrementer finished

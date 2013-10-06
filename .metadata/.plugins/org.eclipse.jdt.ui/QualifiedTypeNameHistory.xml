@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.zip.ZipEntry"/>
-<fullyQualifiedTypeName name="java.io.ByteArrayOutputStream"/>
-<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-<fullyQualifiedTypeName name="android.content.SharedPreferences"/>
-<fullyQualifiedTypeName name="com.commonsware.cwac.updater.DownloadStrategy"/>
-<fullyQualifiedTypeName name="android.os.AsyncTask"/>
-<fullyQualifiedTypeName name="com.mss.application.MainActivity.Update"/>
-<fullyQualifiedTypeName name="java.lang.Void"/>
-<fullyQualifiedTypeName name="com.commonsware.cwac.updater.UpdateService"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageInfo"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.WebRepository"/>
 <fullyQualifiedTypeName name="com.mss.application.MainActivity.UpdateTask"/>
@@ -18,7 +9,6 @@
 <fullyQualifiedTypeName name="com.mss.application.CategorySelectContext"/>
 <fullyQualifiedTypeName name="android.widget.EditText"/>
 <fullyQualifiedTypeName name="android.widget.CheckBox"/>
-<fullyQualifiedTypeName name="com.actionbarsherlock.app.SherlockFragmentActivity"/>
 <fullyQualifiedTypeName name="com.actionbarsherlock.view.Menu"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.Entity"/>
@@ -50,7 +40,6 @@
 <fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="java.lang.Throwable"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="com.mss.application.R.string"/>
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.WebServer"/>
 <fullyQualifiedTypeName name="com.mss.application.services.UpdateService.AvailableVersionInfo"/>
 <fullyQualifiedTypeName name="com.mss.application.services.UpdateService.VersionInfo"/>
@@ -60,4 +49,15 @@
 <fullyQualifiedTypeName name="android.app.IntentService"/>
 <fullyQualifiedTypeName name="com.mss.application.services.SystemService"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="com.mss.application.R.string"/>
+<fullyQualifiedTypeName name="com.actionbarsherlock.app.SherlockFragmentActivity"/>
+<fullyQualifiedTypeName name="com.mss.application.CategoriesQuickFilterActivity"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.mss.application.CategoriesQuickFilterAdapter"/>
+<fullyQualifiedTypeName name="android.widget.ListAdapter"/>
+<fullyQualifiedTypeName name="pl.polidea.treeview.ITreeViewAdapter"/>
+<fullyQualifiedTypeName name="pl.polidea.treeview.AbstractTreeViewQuickFilterAdapter"/>
+<fullyQualifiedTypeName name="pl.polidea.treeview.AbstractTreeViewAdapter"/>
+<fullyQualifiedTypeName name="android.view.ViewGroup"/>
+<fullyQualifiedTypeName name="com.mss.application.CategoriesQuickFilterAdapter.OnCategorySelectedListener"/>
 </qualifiedTypeNameHistroy>

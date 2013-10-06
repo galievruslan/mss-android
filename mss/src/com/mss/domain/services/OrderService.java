@@ -59,6 +59,7 @@ public class OrderService {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public Iterable<Order> findByOrderDate(Date date){		
 		try {
 			Date dateOnly = new Date(date.getYear(), date.getMonth(), date.getDate());

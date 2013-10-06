@@ -63,7 +63,8 @@ public class SynchronizationActivity extends SherlockFragmentActivity {
         mSyncStatusMessageTextView = (TextView)findViewById(R.id.sync_status_message);
         
         findViewById(R.id.sync_run_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+            @SuppressWarnings("deprecation")
+			public void onClick(View view) {
             	try {
             		AccountManager accountManager = AccountManager.get(getApplicationContext());
                     Account[] accounts = accountManager.getAccountsByType(Constants.ACCOUNT_TYPE);

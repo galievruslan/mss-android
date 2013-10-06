@@ -37,6 +37,7 @@ import com.mss.infrastructure.web.WebServer;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -172,7 +173,9 @@ public class UpdateService extends IntentService {
         return true;     	
     }
     
-    private void installUpdates(File apk){
+    @SuppressWarnings("deprecation")
+	@SuppressLint("InlinedApi")
+	private void installUpdates(File apk){
     	Intent i;
         
 		if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.ICE_CREAM_SANDWICH) {

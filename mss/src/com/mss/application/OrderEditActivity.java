@@ -73,6 +73,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	static final int PICK_PRODUCTS_REQUEST = 3;
 	static final int REQUEST_EDIT_ORDER_PICKUP_ITEM = 4;
 	static final int FILTER_REQUEST = 5;
+	static final int CATEGORIES_QUICK_FILTER_REQUEST = 6;
 
 	private Long mOrderId;
 	private Long mRoutePointId;
@@ -315,6 +316,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	    	if (resultCode == RESULT_OK) {	    		
 	    		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	    	}
+	    } else if (requestCode == CATEGORIES_QUICK_FILTER_REQUEST) {
+	    	if (resultCode == RESULT_OK) {	    		
+	    		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
+	    	}
 	    } else if (requestCode == PICK_WAREHOUSE_REQUEST) {
 	        // Make sure the request was successful
 	        if (resultCode == RESULT_OK) {
@@ -390,6 +395,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		case R.id.menu_item_filter: 
 			Intent filterActivity = new Intent(getApplicationContext(), OrderItemPickupFilterActivity.class);
 			startActivityForResult(filterActivity, FILTER_REQUEST);
+			return true;
+		case R.id.menu_item_categories_quick_filter: 
+			Intent categoriesQuickFilterActivity = new Intent(getApplicationContext(), CategoriesQuickFilterActivity.class);
+			startActivityForResult(categoriesQuickFilterActivity, CATEGORIES_QUICK_FILTER_REQUEST);
 			return true;
 		case R.id.menu_item_save:
 			if (mOrder != null)

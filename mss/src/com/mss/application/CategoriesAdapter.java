@@ -1,5 +1,6 @@
 package com.mss.application;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.domain.services.CategoryService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
@@ -43,12 +44,12 @@ public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
         }
     }
 
-    public CategoriesAdapter(final CategoriesActivity categoriesActivity,
+    public CategoriesAdapter(final SherlockFragmentActivity activity,
             final TreeStateManager<Long> treeStateManager,
             final int numberOfLevels) {
-        super(categoriesActivity, treeStateManager, numberOfLevels);
+        super(activity, treeStateManager, numberOfLevels);
         
-        mHelper = OpenHelperManager.getHelper(categoriesActivity, DatabaseHelper.class);
+        mHelper = OpenHelperManager.getHelper(activity, DatabaseHelper.class);
 		try {
 			mCategoryService = new CategoryService(mHelper);
 		} catch (Throwable e) {
@@ -57,7 +58,6 @@ public class CategoriesAdapter extends AbstractTreeViewAdapter<Long> {
     }
 
     private String getDescription(final long id) {
-        //final Integer[] hierarchy = getManager().getHierarchyDescription(id);
         return mCategoryService.getById(id).getName();
     }
 
