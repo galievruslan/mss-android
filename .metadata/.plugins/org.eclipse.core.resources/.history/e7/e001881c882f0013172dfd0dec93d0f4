@@ -440,7 +440,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 					}
 					
 					if (cancel) {
-						mTabHost.setCurrentTab(0); // Set General tab (e.g. errors possible only on this tab)
+						mTabHost.setCurrentTab(0); // Set General tab (errors possible only on this tab)
 				        focusView.requestFocus();
 				    } else {					
 				    	String note = mOrderNotes.getText().toString();

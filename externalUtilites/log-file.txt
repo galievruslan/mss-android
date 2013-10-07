@@ -2190,3 +2190,8 @@
 360 2013-10-07 23:27:55,845 [1] [INFO ] - Current version is: 1.0.397
 360 2013-10-07 23:27:55,845 [1] [INFO ] - New version is: 1.0.398
 362 2013-10-07 23:27:55,847 [1] [INFO ] - Version incrementer finished
+377 2013-10-07 23:44:58,776 [1] [INFO ] - Version incrementer started
+393 2013-10-07 23:44:58,792 [1] [INFO ] - Update version in mss
+396 2013-10-07 23:44:58,795 [1] [INFO ] - Current version is: 1.0.398
+396 2013-10-07 23:44:58,795 [1] [INFO ] - New version is: 1.0.399
+397 2013-10-07 23:44:58,796 [1] [INFO ] - Version incrementer finished

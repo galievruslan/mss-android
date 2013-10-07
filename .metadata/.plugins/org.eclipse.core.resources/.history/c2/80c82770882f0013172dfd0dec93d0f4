@@ -54,7 +54,6 @@
     <string name="label_amount">Amount\u003A</string>
     <string name="label_in_order">In order</string>
     <string name="label_categories">Categories</string>
-    <string name="label_current_version">Current version\u003A</string>
     <string name="title_activity_price_lists">Price lists</string>
     <string name="title_activity_warehouses">Warehouses</string>
     <string name="title_activity_time_picker_fragment">Time picker</string>
