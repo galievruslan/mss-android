@@ -175,5 +175,6 @@
     <string name="title_activity_update">Update</string>
     <string name="notification_sync_before_update">You have to synchronize before update</string>
     <string name="menu_item_categories_quick_filter">Category</string>
+    <string name="menu_item_categories_quick_filter_clear">Clear Category</string>
     <string name="title_activity_categories_quick_filter">Quick filter by categories</string>
 </resources>

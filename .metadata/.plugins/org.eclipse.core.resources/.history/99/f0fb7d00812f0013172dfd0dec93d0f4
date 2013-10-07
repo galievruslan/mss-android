@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/action_search"
+        android:title="@string/title_search"
+        android:icon="@drawable/ic_menu_search"
+        android:showAsAction="withText|always"
+        android:actionViewClass="com.actionbarsherlock.widget.SearchView"/>
+    
+    <item
+        android:id="@+id/menu_item_categories_quick_filter"
+        android:icon="@drawable/ic_action_categories_quick_filter_clear.png"
+        android:showAsAction="withText|always"
+        android:title="@string/menu_item_categories_quick_filter"/>
+        
+    <item
+        android:id="@+id/menu_item_filter"
+        android:icon="@drawable/ic_action_filter"
+        android:showAsAction="withText|always"
+        android:title="@string/menu_item_filter"/>
+    
+    <item
+        android:id="@+id/menu_item_save"
+        android:icon="@drawable/ic_action_save"
+        android:showAsAction="withText|always"
+        android:title="@string/menu_item_save"/>
+</menu>
