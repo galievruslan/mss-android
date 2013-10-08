@@ -13,4 +13,10 @@ public class Customer extends Dto {
 	public String getAddress(){
 		return address;
 	}
+	
+	private double debt;
+	
+	public double getDebt(){
+		return debt;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.util.Log;
 
+import com.mss.domain.models.Customer;
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
@@ -24,6 +25,7 @@ public class RoutePointService {
 	private OrmlitePreferencesRepository preferencesRepo;
 	private OrmliteStatusRepository statusRepo;
 	private OrmliteOrderRepository orderRepo;
+	private CustomerService customerService;
 		
 	public RoutePointService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
@@ -31,6 +33,7 @@ public class RoutePointService {
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);		
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
 		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
+		customerService = new CustomerService(this.databaseHelper);
 	}
 	
 	public RoutePoint getById(long id) {
@@ -80,7 +83,9 @@ public class RoutePointService {
 		
 			Preferences preferences = preferencesRepo.getById(Preferences.ID);
 			Status status = statusRepo.getById(preferences.getDefaultRoutePointStatusId());
-			RoutePoint routePoint = new RoutePoint(route, shippingAddress, status);
+			Customer customer = customerService.getByShippingAddress(shippingAddress);
+			
+			RoutePoint routePoint = new RoutePoint(route, customer, shippingAddress, status);
 			savePoint(routePoint);
 			return routePoint;
 			} catch (Throwable e) {

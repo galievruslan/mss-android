@@ -8,11 +8,11 @@ import com.mss.domain.models.Warehouse;
 
 public class OrmliteWarehouseRepository extends OrmliteGenericRepository<Warehouse> {
 
-	public OrmliteWarehouseRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteWarehouseRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getWarehouseDao());
 	}
 	
-	public Iterable<Warehouse> findDefault() throws Throwable {
+	public Iterable<Warehouse> findDefault() throws Exception {
 		
 		QueryBuilder<Warehouse, Integer> queryBuilder = dao.queryBuilder();
 		
@@ -20,7 +20,7 @@ public class OrmliteWarehouseRepository extends OrmliteGenericRepository<Warehou
 		return dao.query(queryBuilder.prepare());
 	}
 	
-	public Iterable<Warehouse> find(String searchCriteria) throws Throwable {
+	public Iterable<Warehouse> find(String searchCriteria) throws Exception {
 		ArrayList<Warehouse> filtredWarehouses = new ArrayList<Warehouse>();
 		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);
 		

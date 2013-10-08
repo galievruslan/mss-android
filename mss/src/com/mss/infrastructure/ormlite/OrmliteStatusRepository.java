@@ -7,11 +7,11 @@ import com.mss.domain.models.Status;
 
 public class OrmliteStatusRepository extends OrmliteGenericRepository<Status> {
 
-	public OrmliteStatusRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteStatusRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getStatusDao());
 	}
 	
-	public Iterable<Status> find(String searchCriteria) throws Throwable {
+	public Iterable<Status> find(String searchCriteria) throws Exception {
 		ArrayList<Status> filtredStatuses = new ArrayList<Status>();
 		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);
 		

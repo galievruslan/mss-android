@@ -1,5 +1,7 @@
 package com.mss.application;
 
+import java.text.NumberFormat;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -50,6 +52,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	private TextView mName;
 	private TextView mAddress;
 	private TextView mStatus;
+	private TextView mDebt;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
         mName = (TextView) findViewById(R.id.route_point_name_text_view);
         mAddress = (TextView) findViewById(R.id.route_point_address_text_view);
         mStatus = (TextView) findViewById(R.id.route_point_status_text_view);
+        mDebt = (TextView) findViewById(R.id.debt_text_view);
         
         mRoutePointId = getIntent().getLongExtra(getString(R.string.key_id), ROUTE_POINT_ID_NEW);
 		getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
@@ -241,6 +245,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			mName.setText(mRoutePoint.getShippingAddressName());
 			mAddress.setText(mRoutePoint.getShippingAddressValue());	
 			mStatus.setText(mRoutePoint.getStatusName());
+			
+			NumberFormat numberFormat = NumberFormat.getInstance();
+			numberFormat.setMaximumFractionDigits(2);
+			mDebt.setText(numberFormat.format(mRoutePoint.getDebt()));
 			
 			getRoutePointsOrdersFragment().refresh(mRoutePointId);
 		}

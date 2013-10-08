@@ -16,6 +16,7 @@ public class Constants {
 			public static final String TABLE_NAME = "customer";
 			public static final String NAME_FIELD = "name";
 			public static final String ADDRESS_FIELD = "address";
+			public static final String DEBT_FIELD = "debt";
 		}
 		
 		public static class ShippingAddress {
@@ -116,6 +117,7 @@ public class Constants {
 			public static final String STATUS_FIELD = "status_id";
 			public static final String STATUS_NAME_FIELD = "status_name";
 			public static final String SYNCHRONIZED_FIELD = "synchronized";
+			public static final String DEBT_FIELD = "debt";
 		}
 		
 		public static class RouteTemplate {

@@ -8,11 +8,11 @@ import com.mss.domain.models.ShippingAddress;
 
 public class OrmliteShippingAddressRepository extends OrmliteGenericRepository<ShippingAddress> {
 
-	public OrmliteShippingAddressRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteShippingAddressRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getShippingAddressDao());
 	}
 	
-	public Iterable<ShippingAddress> findByCustomerId(long id) throws Throwable {
+	public Iterable<ShippingAddress> findByCustomerId(long id) throws Exception {
 		
 		QueryBuilder<ShippingAddress, Integer> queryBuilder = dao.queryBuilder();		
 		queryBuilder.where().eq(com.mss.domain.models.Constants.Tables.ShippingAddress.CUSTOMER_FIELD ,id);
@@ -33,7 +33,7 @@ public class OrmliteShippingAddressRepository extends OrmliteGenericRepository<S
 		return filtredAdresses;
 	}
 	
-	public Iterable<ShippingAddress> find(String searchCriteria) throws Throwable {
+	public Iterable<ShippingAddress> find(String searchCriteria) throws Exception {
 		
 		ArrayList<ShippingAddress> filtredAdresses = new ArrayList<ShippingAddress>();
 		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);

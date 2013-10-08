@@ -8,7 +8,7 @@ import com.mss.domain.models.ProductUnitOfMeasure;
 public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericRepository<ProductUnitOfMeasure> {
 
 	private String rawQuery;
-	public OrmliteProductUnitOfMeasureRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteProductUnitOfMeasureRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getProductUnitOfMeasureDao());
 		
 		rawQuery = "select " + 
@@ -25,7 +25,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 	}
 	
 	@Override
-	public ProductUnitOfMeasure getById(long id) throws Throwable {
+	public ProductUnitOfMeasure getById(long id) throws Exception {
 		GenericRawResults<ProductUnitOfMeasure> rawResults =
 				dao.queryRaw(rawQuery + " where " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.Entity.ID_FIELD + " = " + Long.toString(id) ,
 				    new RawRowMapper<ProductUnitOfMeasure>() {
@@ -49,7 +49,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 	}
 
 	@Override
-	public Iterable<ProductUnitOfMeasure> find() throws Throwable {
+	public Iterable<ProductUnitOfMeasure> find() throws Exception {
 		GenericRawResults<ProductUnitOfMeasure> rawResults =
 				dao.queryRaw(rawQuery,
 				    new RawRowMapper<ProductUnitOfMeasure>() {
@@ -72,7 +72,7 @@ public class OrmliteProductUnitOfMeasureRepository extends OrmliteGenericReposit
 		return productUnitOfMeasureItems;
 	}
 	
-	public Iterable<ProductUnitOfMeasure> findByProductId(long productId) throws Throwable {
+	public Iterable<ProductUnitOfMeasure> findByProductId(long productId) throws Exception {
 		GenericRawResults<ProductUnitOfMeasure> rawResults =
 				dao.queryRaw(rawQuery + " where " + Constants.Tables.ProductUnitOfMeasure.TABLE_NAME + "." + Constants.Tables.ProductUnitOfMeasure.PRODUCT_FIELD + " = " + Long.toString(productId) ,
 				    new RawRowMapper<ProductUnitOfMeasure>() {

@@ -5,7 +5,7 @@ import com.mss.domain.models.RoutePointTemplate;
 
 public class OrmliteRoutePointTemplateRepository extends OrmliteGenericRepository<RoutePointTemplate> {
 
-	public OrmliteRoutePointTemplateRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteRoutePointTemplateRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getRoutePointTemplateDao());
 	}
 	

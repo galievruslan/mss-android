@@ -8,13 +8,14 @@ public class RoutePoint extends Entity {
 	
 	public RoutePoint() {}
 	
-	public RoutePoint(Route route, ShippingAddress shippingAddress, Status status) {
+	public RoutePoint(Route route, Customer customer, ShippingAddress shippingAddress, Status status) {
 		routeId = route.getId();
 		shippingAddressId = shippingAddress.getId();
 		shippingAddressName = shippingAddress.getName();
 		shippingAddressValue = shippingAddress.getAddress();
 		statusId = status.getId();
 		statusName = status.getName();
+		debt = customer.getDebt();
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePoint.ROUTE_FIELD)
@@ -80,5 +81,12 @@ public class RoutePoint extends Entity {
 	
 	public void setIsSynchronized(boolean isSynchronized){
 		this.isSynchronized = isSynchronized;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.RoutePoint.DEBT_FIELD)
+	private double debt;
+	
+	public double getDebt(){
+		return debt;
 	}
 }

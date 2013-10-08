@@ -1,5 +1,6 @@
 package com.mss.application.fragments;
 
+import java.text.NumberFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,10 +68,15 @@ public class CustomersFragment extends SherlockListFragment {
 	            View dialogView = inflater.inflate(R.layout.dialog_customer_info, null);
 	            TextView name = (TextView) dialogView.findViewById(R.id.name_text_view);
 	            TextView address = (TextView) dialogView.findViewById(R.id.address_text_view);
+	            TextView debt = (TextView) dialogView.findViewById(R.id.debt_text_view);
 	            
 	            Customer customer = (Customer) getListAdapter().getItem(position);
 	            name.setText(customer.getName());
 	            address.setText(customer.getAddress());
+	            
+	            NumberFormat numberFormat = NumberFormat.getInstance();
+				numberFormat.setMaximumFractionDigits(2);
+	            debt.setText(numberFormat.format(customer.getDebt()));
 
 	            // Inflate and set the layout for the dialog
 	            // Pass null as the parent view because its going in the dialog layout

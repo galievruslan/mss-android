@@ -50,6 +50,7 @@
     <string name="label_uom_count_in_base">Count in base</string>
     <string name="label_orders">Orders</string>
     <string name="label_status">Status</string>
+    <string name="label_debt">Debt</string>
     <string name="label_count">Count\u003A</string>
     <string name="label_amount">Amount\u003A</string>
     <string name="label_in_order">In order</string>

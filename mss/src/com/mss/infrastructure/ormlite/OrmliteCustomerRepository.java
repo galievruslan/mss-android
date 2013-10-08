@@ -7,11 +7,11 @@ import com.mss.domain.models.Customer;
 
 public class OrmliteCustomerRepository extends OrmliteGenericRepository<Customer> {
 
-	public OrmliteCustomerRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteCustomerRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getCustomerDao());
 	}
 	
-	public Iterable<Customer> find(String searchCriteria) throws Throwable {
+	public Iterable<Customer> find(String searchCriteria) throws Exception {
 		ArrayList<Customer> filtredCustomers = new ArrayList<Customer>();
 		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);
 		

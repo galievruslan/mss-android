@@ -7,11 +7,11 @@ import com.mss.domain.models.PriceList;
 
 public class OrmlitePriceListRepository extends OrmliteGenericRepository<PriceList> {
 
-	public OrmlitePriceListRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmlitePriceListRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getPriceListDao());
 	}	
 	
-	public Iterable<PriceList> find(String searchCriteria) throws Throwable {
+	public Iterable<PriceList> find(String searchCriteria) throws Exception {
 		ArrayList<PriceList> filtredPriceLists = new ArrayList<PriceList>();
 		Pattern pattern = Pattern.compile(Pattern.quote(searchCriteria), Pattern.CASE_INSENSITIVE);
 		

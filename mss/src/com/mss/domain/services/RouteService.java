@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import android.util.Log;
 
+import com.mss.domain.models.Customer;
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
@@ -35,6 +36,7 @@ public class RouteService {
 	private OrmliteShippingAddressRepository shippingAddressRepo;
 	private OrmliteStatusRepository statusRepo;
 	private OrmlitePreferencesRepository preferencesRepo;	
+	private CustomerService customerService;
 	
 	public RouteService(DatabaseHelper databaseHelper) throws Throwable{
 		this.databaseHelper = databaseHelper;
@@ -44,6 +46,7 @@ public class RouteService {
 		routePointTemplateRepo = new OrmliteRoutePointTemplateRepository(this.databaseHelper);
 		shippingAddressRepo = new OrmliteShippingAddressRepository(this.databaseHelper);
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
+		customerService = new CustomerService(this.databaseHelper);
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);		
 	}
 	
@@ -178,8 +181,9 @@ public class RouteService {
 			
 				if (!alreadyExist) {
 					ShippingAddress shippingAddress = shippingAddressRepo.getById(routePointTemplate.getShippingAddressId());
+					Customer customer = customerService.getByShippingAddress(shippingAddress);
 					if (shippingAddress != null) {
-						RoutePoint routePoint = new RoutePoint(route, shippingAddress, status);
+						RoutePoint routePoint = new RoutePoint(route, customer, shippingAddress, status);
 						routePointRepo.save(routePoint);
 					}
 				}

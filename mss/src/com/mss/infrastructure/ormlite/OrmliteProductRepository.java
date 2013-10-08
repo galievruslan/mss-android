@@ -4,7 +4,7 @@ import com.mss.domain.models.Product;
 
 public class OrmliteProductRepository extends OrmliteGenericRepository<Product> {
 
-	public OrmliteProductRepository(DatabaseHelper databaseHelper) throws Throwable{
+	public OrmliteProductRepository(DatabaseHelper databaseHelper) throws Exception{
 		super(databaseHelper.getProductDao());
 	}
 }

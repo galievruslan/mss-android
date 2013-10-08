@@ -48,6 +48,7 @@
     <string name="label_uom_count_in_base">Количество в базовой</string>
     <string name="label_orders">Заказы</string>
     <string name="label_status">Статус</string>
+    <string name="label_debt">Долг</string>
     <string name="label_count">Количество\u003A</string>
     <string name="label_amount">Сумма\u003A</string>
     <string name="label_in_order">В заказе</string>
