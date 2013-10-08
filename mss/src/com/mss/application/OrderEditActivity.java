@@ -262,11 +262,7 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		switch (mCurrentTab) {
 		case 1:
-			if (OrderEditContext.getSelectedCategories().size() > 0) {
-				getSupportMenuInflater().inflate(R.menu.menu_order_edit_filtred_details_tab, menu);
-			} else {
-				getSupportMenuInflater().inflate(R.menu.menu_order_edit_details_tab, menu);
-			}
+			getSupportMenuInflater().inflate(R.menu.menu_order_edit_details_tab, menu);
 			
 			SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 	        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() { 
@@ -318,12 +314,10 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 	        }
 	    } else if (requestCode == FILTER_REQUEST) {
 	    	if (resultCode == RESULT_OK) {
-	    		supportInvalidateOptionsMenu();
 	    		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	    	}
 	    } else if (requestCode == CATEGORIES_QUICK_FILTER_REQUEST) {	    	
-	    	if (resultCode == RESULT_OK) {	    		
-	    		supportInvalidateOptionsMenu();
+	    	if (resultCode == RESULT_OK) {	
 	    		getSupportLoaderManager().restartLoader(LOADER_ID_ORDER, null, this);
 	    	}
 	    } else if (requestCode == PICK_WAREHOUSE_REQUEST) {
@@ -405,11 +399,6 @@ public class OrderEditActivity extends SherlockFragmentActivity implements OnTab
 		case R.id.menu_item_categories_quick_filter: 
 			Intent categoriesQuickFilterActivity = new Intent(getApplicationContext(), CategoriesQuickFilterActivity.class);
 			startActivityForResult(categoriesQuickFilterActivity, CATEGORIES_QUICK_FILTER_REQUEST);
-			return true;
-		case R.id.menu_item_categories_quick_filter_clear:
-			OrderEditContext.getSelectedCategories().clear();			
-			getOrderPickupItemsFragment().refresh(mOrder.getPriceListId());
-			supportInvalidateOptionsMenu();
 			return true;
 		case R.id.menu_item_save:
 			if (mOrder != null)

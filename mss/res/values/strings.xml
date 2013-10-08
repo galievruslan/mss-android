@@ -179,4 +179,5 @@
     <string name="menu_item_categories_quick_filter">Category</string>
     <string name="menu_item_categories_quick_filter_clear">Clear Category</string>
     <string name="title_activity_categories_quick_filter">Quick filter by categories</string>
+    <string name="menu_item_select_all">Select all</string>
 </resources>

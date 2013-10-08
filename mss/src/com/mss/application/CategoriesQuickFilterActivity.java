@@ -124,6 +124,7 @@ public class CategoriesQuickFilterActivity extends SherlockFragmentActivity impl
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
+    	getSupportMenuInflater().inflate(R.menu.menu_categories_quick_filter, menu);
         return true;
     }
 
@@ -132,7 +133,14 @@ public class CategoriesQuickFilterActivity extends SherlockFragmentActivity impl
     	if (item.getItemId() == android.R.id.home) {
     		CategorySelectContext.Init();
     		finish();
-    	} 
+    	} else if (item.getItemId() == R.id.select_all_categories) {
+    		OrderEditContext.getSelectedCategories().clear();
+    		CategorySelectContext.Init();
+    		Intent intent=new Intent();
+    	    setResult(RESULT_OK, intent);
+    	    finish();
+    	}
+    	
         return true;
     }
 

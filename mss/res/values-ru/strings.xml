@@ -162,4 +162,5 @@
     <string name="menu_item_categories_quick_filter">Категория</string>
     <string name="menu_item_categories_quick_filter_clear">Очистить Категорию</string>
     <string name="title_activity_categories_quick_filter">Быстрый фильтр по категориям</string>
+    <string name="menu_item_select_all">Выбрать все</string>
 </resources>
