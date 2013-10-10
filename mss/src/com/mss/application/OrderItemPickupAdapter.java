@@ -3,8 +3,9 @@ package com.mss.application;
 import java.util.List;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.domain.models.OrderPickedUpItem;
 import com.mss.domain.models.OrderPickupItem;
-import com.mss.domain.services.OrderService;
+import com.mss.domain.services.PickupService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
@@ -23,19 +24,19 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 	private final LayoutInflater mLayoutInflater;
 	private List<OrderPickupItem> mOrderPickupItemList;
 	private final DatabaseHelper mHelper;
-	private final OrderService mOrderService;
+	private final PickupService mPickupService;
 	
-	public OrderItemPickupAdapter(Context ctx) throws Throwable {
+	public OrderItemPickupAdapter(Context ctx, long priceListId, long warehouseId) throws Throwable {
 		mContext = ctx;
 		mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
-		mOrderService = new OrderService(mHelper);
+		mPickupService = new PickupService(mHelper, priceListId, warehouseId);
 		notifyDataSetChanged();		
 	}
 	
 	public OrderPickupItem getItemById(long id) throws Throwable {
-		return mOrderService.getOrderPickupItemById(id);
+		return mPickupService.getOrderPickupItemById(id);
 	}
 
 	@Override
@@ -70,10 +71,12 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 
 			holder = new ViewHolder();
 			holder.mName = (TextView) v.findViewById(R.id.label_name);
-			holder.mPickedUpData = (TableRow)v.findViewById(R.id.tableRow2);
+			holder.mPickedUpData = (TableRow)v.findViewById(R.id.picked_up_data_table_row);
 			holder.mPrice = (TextView) v.findViewById(R.id.label_price);
 			holder.mCount = (TextView) v.findViewById(R.id.label_count);
 			holder.mUoM = (TextView) v.findViewById(R.id.label_uom);
+			holder.mWhseCount = (TextView) v.findViewById(R.id.label_count_on_whse);
+			holder.mWhseUoM = (TextView) v.findViewById(R.id.label_uom_on_whse);
 			
 
 			v.setTag(holder);
@@ -84,12 +87,22 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 		OrderPickupItem n = mOrderPickupItemList.get(position);
 
 		holder.mName.setText(n.getProductName());
-		holder.mPrice.setText(String.valueOf(n.getPrice()));		
+		holder.mPrice.setText(String.valueOf(n.getPrice()));
+		holder.mWhseCount.setText(String.valueOf(n.getRemainder()));
+		holder.mWhseUoM.setText(String.valueOf(n.getUoMName()));
 		if (OrderEditContext.getPickedUpItems().containsKey(n.getProductId())) {
-			holder.mCount.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getCount()));
-			holder.mUoM.setText(String.valueOf(OrderEditContext.getPickedUpItems().get(n.getProductId()).getUoMName()));
+			OrderPickedUpItem pickedUpItem = OrderEditContext.getPickedUpItems().get(n.getProductId());
+			
+			holder.mCount.setText(String.valueOf(pickedUpItem.getCount()));
+			holder.mUoM.setText(String.valueOf(pickedUpItem.getUoMName()));
 			holder.mPickedUpData.setVisibility(View.VISIBLE);
-			v.setBackgroundColor(Color.LTGRAY);
+			
+			if (n.getRemainder() * n.getCountInBase() >=
+				pickedUpItem.getCount() * pickedUpItem.getCountInBase()) {
+				v.setBackgroundColor(Color.argb(100, 169, 220, 165));
+			} else {
+				v.setBackgroundColor(Color.argb(100, 248, 137, 137));
+			}
 		} else {
 			holder.mPickedUpData.setVisibility(View.GONE);
 			v.setBackgroundColor(Color.TRANSPARENT);
@@ -115,6 +128,8 @@ public class OrderItemPickupAdapter extends BaseAdapter implements OnClickListen
 	private static class ViewHolder {
 		TextView mName;		
 		TextView mPrice;
+		TextView mWhseCount;
+		TextView mWhseUoM;
 		TableRow mPickedUpData;
 		TextView mCount;
 		TextView mUoM;

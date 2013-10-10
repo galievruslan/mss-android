@@ -5,7 +5,7 @@ import com.mss.utils.MathHelpers;
 
 public class OrderPickupItem implements IEntity {
 	
-	public OrderPickupItem(long id, long productId, String productName, double price, long productUomId, long uomId, String uomName, int countInBase) {
+	public OrderPickupItem(long id, long productId, String productName, double price, long productUomId, long uomId, String uomName, int countInBase, int remainder) {
 		this.id = id;
 		this.productId = productId;
 		this.productName = productName;
@@ -14,6 +14,7 @@ public class OrderPickupItem implements IEntity {
 		this.uomId = uomId;
 		this.uomName = uomName;
 		this.countInBase = countInBase;
+		this.remainder = remainder;
 	}
 	
 	private long id;
@@ -67,6 +68,12 @@ public class OrderPickupItem implements IEntity {
 	
 	public double getPrice(){
 		return MathHelpers.Round(price * countInBase, 2);
+	}
+	
+	private int remainder;
+	
+	public int getRemainder(){
+		return remainder;
 	}
 	
 	public void setProductUnitOfMeasure(ProductUnitOfMeasure productUnitOfMeasure){

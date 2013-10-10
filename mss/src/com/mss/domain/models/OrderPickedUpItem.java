@@ -10,7 +10,7 @@ public class OrderPickedUpItem implements IEntity {
 			double price, 
 			int count,
 			ProductUnitOfMeasure productUnitOfMeasure) {
-		this(id, name, price, count, 
+		this(id, name, price, count,
 				productUnitOfMeasure.getId(), 
 				productUnitOfMeasure.getUnitOfMeasureId(),
 				productUnitOfMeasure.getUnitOfMeasureName(),

@@ -19,6 +19,7 @@ public final class OrderEditContext {
 		selectedCategories = new HashSet<Long>();
 		
 		inOrderOnly = false;
+		inStockOnly = false;
 		modifyed = false;
 	}
 	
@@ -46,6 +47,16 @@ public final class OrderEditContext {
 	
 	public static void setInOrder(boolean showinOrderOnly) {
 		inOrderOnly = showinOrderOnly;
+	}
+	
+	private static boolean inStockOnly;
+	
+	public static boolean getInStock() {
+		return inStockOnly;
+	}
+	
+	public static void setInStock(boolean showinStockOnly) {
+		inStockOnly = showinStockOnly;
 	}
 	
 	private static boolean modifyed;

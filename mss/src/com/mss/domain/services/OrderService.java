@@ -8,18 +8,15 @@ import android.util.Log;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderItem;
 import com.mss.domain.models.OrderPickedUpItem;
-import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.Status;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteOrderItemRepository;
-import com.mss.infrastructure.ormlite.OrmliteOrderPickupItemRepository;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
-import com.mss.utils.IterableHelpers;
 import com.mss.utils.MathHelpers;
 
 public class OrderService {
@@ -28,7 +25,6 @@ public class OrderService {
 	private DatabaseHelper databaseHelper;
 	private OrmliteOrderRepository orderRepo;
 	private OrmliteOrderItemRepository orderItemRepo;
-	private OrmliteOrderPickupItemRepository orderPickUpItemRepo;
 	private OrmlitePreferencesRepository preferencesRepo;
 	private OrmliteStatusRepository statusRepo;
 	
@@ -36,7 +32,6 @@ public class OrderService {
 		this.databaseHelper = databaseHelper;
 		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
 		orderItemRepo = new OrmliteOrderItemRepository(this.databaseHelper);
-		orderPickUpItemRepo = new OrmliteOrderPickupItemRepository(this.databaseHelper);
 		preferencesRepo = new OrmlitePreferencesRepository(this.databaseHelper);
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);		
 	}
@@ -70,33 +65,6 @@ public class OrderService {
 		}
 	}
 	
-	public OrderPickupItem getOrderPickupItemById(long id) {
-		try {
-			return orderPickUpItemRepo.getById(id);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-			return null;
-		}
-	}
-	
-	public Iterable<OrderPickupItem> getOrderPickupItems(long priceListId, Iterable<Long> categoryFilter) {
-		try {
-			return orderPickUpItemRepo.findByPriceListId(priceListId, IterableHelpers.toArray(Long.class, categoryFilter));
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-			return new ArrayList<OrderPickupItem>();
-		}
-	}
-	
-	public Iterable<OrderPickupItem> getOrderPickupItems(long priceListId, Iterable<Long> categoryFilter, String searchCriteria) {
-		try {
-			return orderPickUpItemRepo.findByPriceListId(priceListId, IterableHelpers.toArray(Long.class, categoryFilter), searchCriteria);
-		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());
-			return new ArrayList<OrderPickupItem>();
-		}
-	}
-	
 	public Iterable<OrderPickedUpItem> getOrderPickedUpItems(long orderId) {
 		try {			
 			Iterable<OrderItem> orderItems = orderItemRepo.findByOrderId(orderId);
@@ -107,7 +75,7 @@ public class OrderService {
 								orderItem.getProductId(),
 								orderItem.getProductName(), 
 								orderItem.getPrice(),
-								orderItem.getCount(), 
+								orderItem.getCount(),
 								orderItem.getProductUnitOfMeasureId(),
 								orderItem.getUnitOfMeasureId(),
 								orderItem.getUnitOfMeasureName(),

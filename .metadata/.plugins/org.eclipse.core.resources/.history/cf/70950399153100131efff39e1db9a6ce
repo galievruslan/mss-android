@@ -1,0 +1,14 @@
+package com.mss.infrastructure.ormlite;
+
+import com.j256.ormlite.dao.GenericRawResults;
+import com.j256.ormlite.dao.RawRowMapper;
+import com.mss.domain.models.Constants;
+import com.mss.domain.models.ProductRemainder;
+import com.mss.domain.models.ProductUnitOfMeasure;
+
+public class OrmliteProductRemainderRepository extends OrmliteGenericRepository<ProductRemainder> {
+
+	public OrmliteProductRemainderRepository(DatabaseHelper databaseHelper) throws Exception{
+		super(databaseHelper.getProductRemainderDao());
+	}
+}

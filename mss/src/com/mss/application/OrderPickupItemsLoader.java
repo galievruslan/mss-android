@@ -6,7 +6,7 @@ import com.mss.utils.*;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.domain.models.OrderPickupItem;
-import com.mss.domain.services.OrderService;
+import com.mss.domain.services.PickupService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.content.Context;
@@ -14,20 +14,18 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.text.TextUtils;
 
 public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem>> {
-	private long priceListId;
 	private List<OrderPickupItem> mOrderPickupItemList;
 
 	private final DatabaseHelper mHelper;
-	private final OrderService mOrderService;
+	private final PickupService mPickupService;
 	private final String mSearchCriteria;
 
-	public OrderPickupItemsLoader(Context ctx, long priceListId, String searchCriteria) throws Throwable {
+	public OrderPickupItemsLoader(Context ctx, long priceListId, long warehouseId, String searchCriteria) throws Throwable {
 		super(ctx);
 		
-		this.priceListId = priceListId;
 		mSearchCriteria = searchCriteria;
 		mHelper = OpenHelperManager.getHelper(ctx, DatabaseHelper.class);
-		mOrderService = new OrderService(mHelper);
+		mPickupService = new PickupService(mHelper, priceListId, warehouseId);
 	}
 
 	/**
@@ -36,14 +34,25 @@ public class OrderPickupItemsLoader extends AsyncTaskLoader<List<OrderPickupItem
 	@Override
 	public List<OrderPickupItem> loadInBackground() {
 		if (TextUtils.isEmpty(mSearchCriteria))
-			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories()));
+			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mPickupService.getOrderPickupItems(OrderEditContext.getSelectedCategories()));
 		else 
-			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mOrderService.getOrderPickupItems(priceListId, OrderEditContext.getSelectedCategories(), mSearchCriteria));
+			mOrderPickupItemList = IterableHelpers.toList(OrderPickupItem.class, mPickupService.getOrderPickupItems(OrderEditContext.getSelectedCategories(), mSearchCriteria));
 		
 		if (OrderEditContext.getInOrder()) {			
 			List<OrderPickupItem> pickedUpItems = new ArrayList<OrderPickupItem>();
 			for (OrderPickupItem orderPickupItem : mOrderPickupItemList) {
 				if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
+					pickedUpItems.add(orderPickupItem);
+				}
+			}			
+			
+			mOrderPickupItemList = pickedUpItems;
+		}
+		
+		if (OrderEditContext.getInStock()) {			
+			List<OrderPickupItem> pickedUpItems = new ArrayList<OrderPickupItem>();
+			for (OrderPickupItem orderPickupItem : mOrderPickupItemList) {
+				if (orderPickupItem.getRemainder() > 0) {
 					pickedUpItems.add(orderPickupItem);
 				}
 			}			

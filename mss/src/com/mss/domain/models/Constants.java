@@ -103,6 +103,14 @@ public class Constants {
 			public static final String COUNT_IN_BASE_FIELD = "count_in_base";
 		}
 		
+		public static class ProductRemainder {
+			public static final String TABLE_NAME = "product_remainder";			
+			public static final String PRODUCT_FIELD = "product_id";
+			public static final String WAREHOUSE_FIELD = "warehouse_id";
+			public static final String UNIT_OF_MEASURE_FIELD = "unit_of_measure_id";
+			public static final String QUANTITY_FIELD = "quantity";
+		}
+		
 		public static class Route {
 			public static final String TABLE_NAME = "route";			
 			public static final String DATE_FIELD = "date";

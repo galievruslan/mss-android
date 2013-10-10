@@ -38,6 +38,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 	private static final int LOADER_ID_ORDER_PICKUP_ITEMS = 0;
 	
 	private long mPriceListId;
+	private long mWarehouseId;
 	private String mSearchCriteria;
 	
 	private final Set<OnOrderPickupItemSelectedListener> mOnOrderPickupItemSelectedListeners = 
@@ -61,7 +62,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		mAmountTextView = (TextView) v.findViewById(R.id.amount_text_view);		
 		
 		try {
-			mOrderPickupItemAdapter = new OrderItemPickupAdapter(v.getContext());			
+			mOrderPickupItemAdapter = new OrderItemPickupAdapter(v.getContext(), mPriceListId, mWarehouseId);			
 			setListAdapter(new OrderAdapter(v.getContext()));
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
@@ -88,11 +89,13 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 	            TextView price = (TextView) dialogView.findViewById(R.id.price_text_view);
 	            TextView count = (TextView) dialogView.findViewById(R.id.count_text_view);
 	            TextView amount = (TextView) dialogView.findViewById(R.id.amount_text_view);
+	            TextView remainder = (TextView) dialogView.findViewById(R.id.remainder_text_view);
 	            
 	            OrderPickupItem orderPickupItem = (OrderPickupItem) getListAdapter().getItem(position);
 	            description.setText(orderPickupItem.getProductName());
 	            uom.setText(orderPickupItem.getUoMName());
 	            price.setText(String.valueOf(orderPickupItem.getPrice()));
+	            remainder.setText(String.valueOf(orderPickupItem.getRemainder()));
 	            if (OrderEditContext.getPickedUpItems().containsKey(orderPickupItem.getProductId())) {
 	            	OrderPickedUpItem orderPickedUpItem = OrderEditContext.getPickedUpItems().get(orderPickupItem.getProductId());
 	            	count.setText(String.valueOf(orderPickedUpItem.getCount()));
@@ -164,8 +167,9 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		void onOrderPickupItemSelected(OrderPickupItem orderPickupItem, int position, long id);
 	}
 
-	public void refresh(long priceListId) {
+	public void refresh(long priceListId, long warehouseId) {
 		mPriceListId = priceListId;
+		mWarehouseId = warehouseId;
 		getLoaderManager().restartLoader(LOADER_ID_ORDER_PICKUP_ITEMS, null, this);
 	}
 	
@@ -174,7 +178,7 @@ public class OrderPickupItemsFragment extends SherlockListFragment implements Ca
 		switch (id) {
 		case LOADER_ID_ORDER_PICKUP_ITEMS:
 			try {
-				return new OrderPickupItemsLoader(getSherlockActivity(), mPriceListId, mSearchCriteria);
+				return new OrderPickupItemsLoader(getSherlockActivity(), mPriceListId, mWarehouseId, mSearchCriteria);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}

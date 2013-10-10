@@ -29,9 +29,11 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
     private CategoryService mCategoryService;
 	
 	private CheckBox mInOrder;
+	private CheckBox mInStock;
 	private EditText mCategories;
 	
 	private boolean mShowInOrderOnly = false;
+	private boolean mShowInStockOnly = false;
 	private long[] mCategoriesIds = new long[0];
 	
 	@Override
@@ -47,6 +49,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 		}
 		
 		mInOrder = (CheckBox)findViewById(R.id.in_order_filter_check_box);
+		mInStock = (CheckBox)findViewById(R.id.in_stock_filter_check_box);
 		mCategories = (EditText)findViewById(R.id.categories_filter_text_edit);
 		
 		Long[] categoriesIds = OrderEditContext.getSelectedCategories().toArray(new Long[0]);
@@ -56,6 +59,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 		}
 		
 		mShowInOrderOnly = OrderEditContext.getInOrder();
+		mShowInStockOnly = OrderEditContext.getInStock();
 		initActivityValues();
 		
 		mCategories.setOnClickListener(new TextView.OnClickListener() {
@@ -76,6 +80,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 		super.onSaveInstanceState(savedInstanceState);
 		
 		savedInstanceState.putBoolean("in_order", mShowInOrderOnly);
+		savedInstanceState.putBoolean("in_stock", mShowInStockOnly);
 		savedInstanceState.putLongArray("categories_ids", mCategoriesIds);
 	}
 
@@ -84,6 +89,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 
 		mShowInOrderOnly = savedInstanceState.getBoolean("in_order");
+		mShowInStockOnly = savedInstanceState.getBoolean("in_stock");
 		mCategoriesIds = savedInstanceState.getLongArray("categories_ids");
 		initActivityValues();
 	}
@@ -102,6 +108,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 			return true;
 		case R.id.menu_item_save:
 			OrderEditContext.setInOrder(mInOrder.isChecked());
+			OrderEditContext.setInStock(mInStock.isChecked());
 			Set<Long> categoriesIdsSet = new HashSet<Long>();
 			for (long categoryId : mCategoriesIds) {
 				if (!categoriesIdsSet.contains(categoryId)) {
@@ -130,6 +137,7 @@ public class OrderItemPickupFilterActivity extends SherlockFragmentActivity {
 	
 	private void initActivityValues(){
 		mInOrder.setChecked(mShowInOrderOnly);
+		mInStock.setChecked(mShowInStockOnly);
 		Category[] categories = IterableHelpers.toArray(Category.class, mCategoryService.getCategoriesByIds(mCategoriesIds));
 		String selectedCategories = "";
 		for (int i = 0; i < categories.length; i++) {

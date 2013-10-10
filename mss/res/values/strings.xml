@@ -50,7 +50,11 @@
     <string name="label_uom_count_in_base">Count in base</string>
     <string name="label_orders">Orders</string>
     <string name="label_status">Status</string>
+    <string name="label_open_bracket">(</string>
+    <string name="label_close_bracket">)</string>
+    <string name="label_status">Status</string>
     <string name="label_debt">Debt</string>
+    <string name="label_remainder">Remainder</string>
     <string name="label_count">Count\u003A</string>
     <string name="label_amount">Amount\u003A</string>
     <string name="label_in_order">In order</string>
@@ -163,8 +167,7 @@
     <string name="dialog_leave_changed_order_confirmation_positive_button">Leave</string>
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Cancel</string>
     <string name="collapse_all_condesed">Collapse all</string>
-    <string name="expand_all_condensed">Expand all</string>
-    
+    <string name="expand_all_condensed">Expand all</string>    
     <string name="action_update">Update</string>
     <string name="update_connect">Connecting</string>
     <string name="update_check_for_updates">Check for updates</string>
@@ -180,4 +183,6 @@
     <string name="menu_item_categories_quick_filter_clear">Clear Category</string>
     <string name="title_activity_categories_quick_filter">Quick filter by categories</string>
     <string name="menu_item_select_all">Select all</string>
+    <string name="description_in_stock_filter">Show only items in stock</string>
+    <string name="label_in_stock">In stock</string>    
 </resources>

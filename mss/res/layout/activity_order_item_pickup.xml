@@ -59,7 +59,7 @@
                     android:id="@+id/tableRow5"
                     android:layout_width="fill_parent"
         			android:layout_height="wrap_content"
-        			android:weightSum="3">
+        			android:weightSum="4">
         			
                     <TextView
                         android:id="@+id/textView3"
@@ -78,19 +78,28 @@
                         android:text="@string/label_count" />
 
                     <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/label_in_stock" />
+
+                    <TextView
                         android:id="@+id/textView8"
                         android:layout_width="0dip"
                         android:layout_weight="1"
             			android:layout_height="wrap_content"
             			android:gravity="center"
                         android:text="@string/label_amount" />
+
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/tableRow6"
                     android:layout_width="fill_parent"
         			android:layout_height="wrap_content"
-        			android:weightSum="3">
+        			android:weightSum="4">
 
                     <TextView
                         android:id="@+id/price_text_view"
@@ -107,6 +116,15 @@
                         android:layout_weight="1"
             			android:layout_height="wrap_content"
             			android:gravity="center"
+                        android:text="@string/example_count"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/remainder_text_view"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="@string/example_count"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 

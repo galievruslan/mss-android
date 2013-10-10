@@ -278,6 +278,19 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
             				return null;
             			}
             		});
+            
+            event.putExtra(MESSAGE_KEY, R.string.sync_remainders);
+            localBroadcastManager.sendBroadcast(event);
+            TransactionManager.callInTransaction(
+            		databaseHelper.getConnectionSource(),
+            		new Callable<Void>() {		
+            			public Void call()  throws Exception {            				
+            				Sync(new ProductRemainderWebRepository(webServer.getCurrentConnection()), 
+ 					new OrmliteProductRemainderRepository(databaseHelper), 
+ 					new ProductRemainderTranslator(), lastSyncDate, pageSize);
+            				return null;
+            			}
+            		});
  			
  			event.putExtra(MESSAGE_KEY, R.string.sync_route_templates);
             localBroadcastManager.sendBroadcast(event);

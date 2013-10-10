@@ -5,7 +5,9 @@ import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.R;
 import com.mss.domain.models.OrderPickedUpItem;
+import com.mss.domain.models.OrderPickupItem;
 import com.mss.domain.models.ProductUnitOfMeasure;
+import com.mss.domain.services.PickupService;
 import com.mss.domain.services.ProductService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
@@ -24,21 +26,27 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 	private static final String TAG = OrderItemPickupActivity.class.getSimpleName();
 	public static final String KEY_ID = "id";
 	public static final String KEY_ORDER_PICKUP_ITEM_ID = "order_pickup_item_id";
+	public static final String KEY_ORDER_PRICE_LIST_ID = "order_price_list_id";
+	public static final String KEY_ORDER_WAREHOUSE_ID = "order_warehouse_id";
 		
 	public static final int LOADER_ID_ORDER_PICKEDUP_ITEM = 0;
 	
 	static final int PICK_UNIT_OF_MEASURE_REQUEST = 1;
 
 	private long mOrderPickupItemId;
+	private long mOrderPriceListId;
+	private long mOrderWarehouseId;
 	
 	private OrderPickedUpItem mOrderPickedUpItem;
 	
 	private DatabaseHelper mHelper;
+	private PickupService mPickupService;
 	private ProductService mProductService;
 	
 	private TextView mDescription;
 	private TextView mPrice;
 	private TextView mCount;
+	private TextView mRemainder;
 	private TextView mAmount;
 	private EditText mUnitOfMeasure;
 	
@@ -60,9 +68,12 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		setContentView(R.layout.activity_order_item_pickup);
 
 		mOrderPickupItemId = getIntent().getLongExtra(KEY_ORDER_PICKUP_ITEM_ID, RoutePointActivity.ROUTE_POINT_ID_NEW);
+		mOrderPriceListId = getIntent().getLongExtra(KEY_ORDER_PRICE_LIST_ID, 0);
+		mOrderWarehouseId = getIntent().getLongExtra(KEY_ORDER_WAREHOUSE_ID, 0);
 		
 		mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
+			mPickupService = new PickupService(mHelper,mOrderPriceListId, mOrderWarehouseId);
 			mProductService = new ProductService(mHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
@@ -75,6 +86,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		mDescription = (TextView) findViewById(R.id.description_text_view);
 		mPrice = (TextView) findViewById(R.id.price_text_view);
 		mCount = (TextView) findViewById(R.id.count_text_view);
+		mRemainder = (TextView) findViewById(R.id.remainder_text_view);
 		mAmount = (TextView) findViewById(R.id.amount_text_view);
 		mUnitOfMeasure = (EditText) findViewById(R.id.uom_edit_text);
 		mUnitOfMeasure.setOnClickListener(new TextView.OnClickListener() {
@@ -245,7 +257,7 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 		case LOADER_ID_ORDER_PICKEDUP_ITEM:
 
 			try {
-				return new OrderPickedUpItemLoader(this, mOrderPickupItemId);
+				return new OrderPickedUpItemLoader(this, mOrderPickupItemId, mOrderPriceListId, mOrderWarehouseId);
 			} catch (Throwable e) {
 				Log.e(TAG, e.getMessage());
 			}
@@ -262,6 +274,8 @@ public class OrderItemPickupActivity extends SherlockFragmentActivity implements
 			mDescription.setText(mOrderPickedUpItem.getName());
 			mPrice.setText(String.valueOf(mOrderPickedUpItem.getPrice()));
 			mCount.setText(String.valueOf(mOrderPickedUpItem.getCount()));
+			OrderPickupItem orderPickupItem = mPickupService.getOrderPickupItemById(mOrderPickupItemId);
+			mRemainder.setText(String.valueOf(orderPickupItem.getRemainder()));
 			mAmount.setText(String.valueOf(mOrderPickedUpItem.getAmount()));
 			mUnitOfMeasure.setText(mOrderPickedUpItem.getUoMName());		
 		}			

@@ -8,11 +8,11 @@
         <TextView
             android:id="@+id/label_name"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-            android:text="@string/example_description"
-            android:minLines="2"
             android:maxLines="2"
+            android:minLines="2"
+            android:text="@string/example_description"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -28,13 +28,37 @@
                 android:layout_gravity="right"
                 android:maxLines="1"
                 android:text="@string/example_price"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:gravity="right">
+                android:layout_height="wrap_content"
+                android:gravity="right" >
+
+                <TextView
+                    android:id="@+id/label_count_on_whse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@string/example_count"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/label_uom_on_whse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:maxLines="1"
+                    android:text="@string/example_unit_of_measure"
+                    android:textSize="18sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/picked_up_data_table_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right" >
 
                 <TextView
                     android:id="@+id/label_count"
@@ -42,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:text="@string/example_count"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/label_uom"
@@ -51,7 +76,8 @@
                     android:layout_marginLeft="10dp"
                     android:maxLines="1"
                     android:text="@string/example_unit_of_measure"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </TableRow>
 

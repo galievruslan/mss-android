@@ -49,6 +49,7 @@
     <string name="label_orders">Заказы</string>
     <string name="label_status">Статус</string>
     <string name="label_debt">Долг</string>
+    <string name="label_remainder">Остаток</string>
     <string name="label_count">Количество\u003A</string>
     <string name="label_amount">Сумма\u003A</string>
     <string name="label_in_order">В заказе</string>
@@ -163,4 +164,6 @@
     <string name="menu_item_categories_quick_filter_clear">Очистить Категорию</string>
     <string name="title_activity_categories_quick_filter">Быстрый фильтр по категориям</string>
     <string name="menu_item_select_all">Выбрать все</string>
+    <string name="description_in_stock_filter">Отобразить только товары в наличии</string>
+    <string name="label_in_stock">В наличии</string>
 </resources>

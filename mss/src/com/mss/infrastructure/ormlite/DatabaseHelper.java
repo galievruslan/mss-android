@@ -31,8 +31,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, ShippingAddress.class);
 			TableUtils.createTable(connectionSource, UnitOfMeasure.class);
 			TableUtils.createTable(connectionSource, Status.class);
-			TableUtils.createTable(connectionSource, Warehouse.class);
+			TableUtils.createTable(connectionSource, Warehouse.class);			
 			TableUtils.createTable(connectionSource, Product.class);
+			TableUtils.createTable(connectionSource, ProductRemainder.class);
 			TableUtils.createTable(connectionSource, ProductUnitOfMeasure.class);
 			TableUtils.createTable(connectionSource, PriceList.class);
 			TableUtils.createTable(connectionSource, PriceListLine.class);
@@ -62,8 +63,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, ShippingAddress.class, true);
 			TableUtils.dropTable(connectionSource, UnitOfMeasure.class, true);
 			TableUtils.dropTable(connectionSource, Status.class, true);
-			TableUtils.dropTable(connectionSource, Warehouse.class, true);
+			TableUtils.dropTable(connectionSource, Warehouse.class, true);			
 			TableUtils.dropTable(connectionSource, Product.class, true);
+			TableUtils.dropTable(connectionSource, ProductRemainder.class, true);
 			TableUtils.dropTable(connectionSource, ProductUnitOfMeasure.class, true);
 			TableUtils.dropTable(connectionSource, PriceList.class, true);
 			TableUtils.dropTable(connectionSource, PriceListLine.class, true);
@@ -210,6 +212,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		return this.warehouseDao;
 	}
 	
+	private Dao<ProductRemainder, Integer> productRemainderDao = null;	
+	public Dao<ProductRemainder, Integer> getProductRemainderDao() throws SQLException, java.sql.SQLException {
+		if (this.productRemainderDao == null) {
+			this.productRemainderDao = getDao(ProductRemainder.class);
+		}
+		return this.productRemainderDao;
+	}
+	
 	private Dao<Preferences, Integer> preferencesDao = null;	
 	public Dao<Preferences, Integer> getPreferencesDao() throws SQLException, java.sql.SQLException {
 		if (this.preferencesDao == null) {
@@ -241,6 +251,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		this.shippingAddressDao = null;
 		this.statusDao = null;
 		this.warehouseDao = null;
+		this.productRemainderDao = null;
 		this.preferencesDao = null;
 	}
 	
@@ -251,8 +262,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.dropTable(connectionSource, ShippingAddress.class, true);
 		TableUtils.dropTable(connectionSource, UnitOfMeasure.class, true);
 		TableUtils.dropTable(connectionSource, Status.class, true);
-		TableUtils.dropTable(connectionSource, Warehouse.class, true);
+		TableUtils.dropTable(connectionSource, Warehouse.class, true);		
 		TableUtils.dropTable(connectionSource, Product.class, true);
+		TableUtils.dropTable(connectionSource, ProductRemainder.class, true);
 		TableUtils.dropTable(connectionSource, ProductUnitOfMeasure.class, true);
 		TableUtils.dropTable(connectionSource, PriceList.class, true);
 		TableUtils.dropTable(connectionSource, PriceListLine.class, true);
@@ -269,8 +281,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.createTable(connectionSource, ShippingAddress.class);
 		TableUtils.createTable(connectionSource, UnitOfMeasure.class);
 		TableUtils.createTable(connectionSource, Status.class);
-		TableUtils.createTable(connectionSource, Warehouse.class);
+		TableUtils.createTable(connectionSource, Warehouse.class);		
 		TableUtils.createTable(connectionSource, Product.class);
+		TableUtils.createTable(connectionSource, ProductRemainder.class);
 		TableUtils.createTable(connectionSource, ProductUnitOfMeasure.class);
 		TableUtils.createTable(connectionSource, PriceList.class);
 		TableUtils.createTable(connectionSource, PriceListLine.class);
