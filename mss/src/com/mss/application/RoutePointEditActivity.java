@@ -211,6 +211,7 @@ public class RoutePointEditActivity extends SherlockFragmentActivity implements 
 			    	if (mRoutePoint == null) {
 			    		mRoutePoint = mRoutePointService.cratePoint(mRouteDate, mShippingAddress);
 			    	} else {
+			    		mRoutePoint.setDebt(mCustomer.getDebt());
 			    		mRoutePoint.setShippingAddress(mShippingAddress);
 			    	}
 			       	mRoutePointService.savePoint(mRoutePoint);

@@ -15,9 +15,11 @@ import com.mss.domain.services.StatusService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;
@@ -31,13 +33,15 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	private static final String TAG = RoutePointActivity.class.getSimpleName();
 	
 	public static final String TAB_GENERAL = "General";
-    public static final String TAB_DETAILS = "Details";
+    public static final String TAB_ORDERS = "Orders";
+    public static final String TAB_PHOTOS = "Photos";
     private TabHost mTabHost;
     private int mCurrentTab;
     
     public static final int LOADER_ID_ROUTE_POINT = 0;    
 	public static final int REQUEST_SHOW_ROUTE_POINT = 0;
 	static final int PICK_STATUS_REQUEST = 1;
+	static final int TAKE_PHOTO_REQUEST = 2;
 	
 	public static final long ROUTE_POINT_ID_NEW = 0;
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
@@ -96,7 +100,11 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	private void setupTabs() {
         mTabHost.setup(); // you must call this before adding your tabs!
         mTabHost.addTab(newTab(TAB_GENERAL, R.string.label_tab_general, R.id.tab_general));
-        mTabHost.addTab(newTab(TAB_DETAILS, R.string.label_tab_details, R.id.tab_details));
+        mTabHost.addTab(newTab(TAB_ORDERS, R.string.label_tab_orders, R.id.tab_orders));
+        
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+        	mTabHost.addTab(newTab(TAB_PHOTOS, R.string.label_tab_photos, R.id.tab_photos));
+        }
     }
     
     private TabSpec newTab(String tag, int labelId, int tabContentId) {
@@ -112,20 +120,35 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
     public void onTabChanged(String tabId) {
         if (TAB_GENERAL.equals(tabId)) {
             mCurrentTab = 0;
+            supportInvalidateOptionsMenu();
             return;
         }
-        if (TAB_DETAILS.equals(tabId)) {
+        if (TAB_ORDERS.equals(tabId)) {
             mCurrentTab = 1;
+            supportInvalidateOptionsMenu();
+            return;
+        }
+        if (TAB_PHOTOS.equals(tabId)) {
+            mCurrentTab = 2;
+            supportInvalidateOptionsMenu();
             return;
         }
     }
     
     @Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-    	if (mRoutePointService.canBeEditedOrDeleted(mRoutePointId)) {
-    		getSupportMenuInflater().inflate(R.menu.menu_route_point_editable, menu);
-    	} else {
-    		getSupportMenuInflater().inflate(R.menu.menu_route_point, menu);
+    	switch (mCurrentTab) {
+			case 2: {
+				getSupportMenuInflater().inflate(R.menu.menu_route_point_photos, menu);
+				break;
+			} default: {
+    			if (mRoutePointService.canBeEditedOrDeleted(mRoutePointId)) {
+    			getSupportMenuInflater().inflate(R.menu.menu_route_point_editable, menu);
+    			} else {
+    				getSupportMenuInflater().inflate(R.menu.menu_route_point, menu);
+    			}
+    			break;
+    		}
     	}
 		return true;
 	}
@@ -218,6 +241,11 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 				startActivityForResult(intent, OrderEditActivity.REQUEST_ADD_ORDER);
 			}
 			return true;
+		case R.id.menu_item_take_photo: {
+				Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(takePictureIntent, TAKE_PHOTO_REQUEST);
+			}
+			return true;
 		default:
 			return false;
 		}
@@ -259,3 +287,4 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		mRoutePoint = null;	
 	}
 }
+

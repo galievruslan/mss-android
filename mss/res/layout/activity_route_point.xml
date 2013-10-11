@@ -36,8 +36,12 @@
                     layout="@layout/tab_route_point_general" />
 
                 <include
-                    android:id="@+id/tab_details"
+                    android:id="@+id/tab_orders"
                     layout="@layout/tab_route_point_orders" />
+                
+                <include
+                    android:id="@+id/tab_photos"
+                    layout="@layout/tab_route_point_photos" />
 
             </FrameLayout>
         </LinearLayout>

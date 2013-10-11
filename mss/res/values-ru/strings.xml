@@ -36,6 +36,8 @@
     <string name="label_tab_general">Общее</string>
     <string name="label_tab_details">Детали</string>
     <string name="label_tab_notes">Заметки</string>
+    <string name="label_tab_photos">Фотографии</string>
+    <string name="label_tab_orders">Заказы</string>
     <string name="label_order_date">Дата заказа</string>
     <string name="label_order_shipping_date">Дата отгрузки</string>
     <string name="label_order_shipping_time">Время отгрузки</string>
@@ -168,4 +170,5 @@
     <string name="label_in_stock">В наличии</string>
     <string name="label_stock">Наличие</string>
     <string name="label_selected_count">Кол-во</string>
+    <string name="menu_item_take_photo">Сделать снимок</string>
 </resources>

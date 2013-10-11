@@ -89,4 +89,8 @@ public class RoutePoint extends Entity {
 	public double getDebt(){
 		return debt;
 	}
+	
+	public void setDebt(double debt){
+		this.debt = debt;
+	}
 }
