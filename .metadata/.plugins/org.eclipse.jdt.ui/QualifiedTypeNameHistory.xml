@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteCategoryRepository"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
 <fullyQualifiedTypeName name="com.mss.domain.services.PickupService"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
+<fullyQualifiedTypeName name="android.content.pm.PackageManager"/>
+<fullyQualifiedTypeName name="android.provider.MediaStore"/>
 </qualifiedTypeNameHistroy>
