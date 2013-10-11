@@ -166,6 +166,4 @@
     <string name="menu_item_select_all">Выбрать все</string>
     <string name="description_in_stock_filter">Отобразить только товары в наличии</string>
     <string name="label_in_stock">В наличии</string>
-    <string name="label_stock">Наличие</string>
-    <string name="label_selected_count">Кол-во</string>
 </resources>

@@ -186,5 +186,4 @@
     <string name="description_in_stock_filter">Show only items in stock</string>
     <string name="label_in_stock">In stock</string>    
     <string name="label_stock">Stock</string>
-    <string name="label_selected_count">Count</string>
 </resources>

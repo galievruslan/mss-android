@@ -72,10 +72,10 @@
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="0dip"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/label_selected_count" />
+            			android:layout_height="wrap_content"
+            			android:gravity="center"
+                        android:text="@string/label_count" />
 
                     <TextView
                         android:id="@+id/TextView01"
@@ -104,22 +104,20 @@
                     <TextView
                         android:id="@+id/price_text_view"
                         android:layout_width="0dip"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
+            			android:layout_height="wrap_content"
+            			android:gravity="center"
                         android:text="@string/example_price"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="18sp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/count_text_view"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
+                       android:layout_width="0dip"
                         android:layout_weight="1"
-                        android:gravity="center"
+            			android:layout_height="wrap_content"
+            			android:gravity="center"
                         android:text="@string/example_count"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="18sp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/remainder_text_view"
@@ -128,19 +126,16 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/example_count"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="18sp" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/amount_text_view"
                         android:layout_width="0dip"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center"
+            			android:layout_height="wrap_content"
+            			android:gravity="center"
                         android:text="@string/example_amount"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="18sp" />
-
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                 </TableRow>
             </TableLayout>
 
