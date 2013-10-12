@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="android.widget.AdapterView.OnItemLongClickListener"/>
-<fullyQualifiedTypeName name="android.widget.AdapterView"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
 <fullyQualifiedTypeName name="android.content.DialogInterface"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.ShippingAddress"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.preference.Preference"/>
 <fullyQualifiedTypeName name="com.mss.utils.MathHelpers"/>
 <fullyQualifiedTypeName name="com.actionbarsherlock.app.SherlockActivity"/>
@@ -33,7 +27,6 @@
 <fullyQualifiedTypeName name="pl.polidea.treeview.ITreeViewAdapter"/>
 <fullyQualifiedTypeName name="pl.polidea.treeview.AbstractTreeViewQuickFilterAdapter"/>
 <fullyQualifiedTypeName name="pl.polidea.treeview.AbstractTreeViewAdapter"/>
-<fullyQualifiedTypeName name="android.view.ViewGroup"/>
 <fullyQualifiedTypeName name="com.mss.application.CategoriesQuickFilterAdapter.OnCategorySelectedListener"/>
 <fullyQualifiedTypeName name="com.mss.application.OrderEditContext"/>
 <fullyQualifiedTypeName name="android.widget.TabHost"/>
@@ -52,7 +45,6 @@
 <fullyQualifiedTypeName name="com.mss.infrastructure.web.dtos.ProductRemainder"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.ProductRemainder"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.ProductRemainder"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Warehouse"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.PriceList"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickedUpItem"/>
@@ -60,4 +52,12 @@
 <fullyQualifiedTypeName name="com.mss.domain.models.OrderPickupItem"/>
 <fullyQualifiedTypeName name="android.content.pm.PackageManager"/>
 <fullyQualifiedTypeName name="android.provider.MediaStore"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.RoutePointPhoto"/>
+<fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="android.widget.Gallery"/>
+<fullyQualifiedTypeName name="android.view.ViewGroup"/>
 </qualifiedTypeNameHistroy>

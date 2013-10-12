@@ -41,6 +41,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, RoutePointTemplate.class);
 			TableUtils.createTable(connectionSource, Route.class);
 			TableUtils.createTable(connectionSource, RoutePoint.class);
+			TableUtils.createTable(connectionSource, RoutePointPhoto.class);
 			TableUtils.createTable(connectionSource, Order.class);
 			TableUtils.createTable(connectionSource, OrderItem.class);
 			TableUtils.createTable(connectionSource, Preferences.class);
@@ -73,6 +74,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, RoutePointTemplate.class, true);
 			TableUtils.dropTable(connectionSource, Route.class, true);
 			TableUtils.dropTable(connectionSource, RoutePoint.class, true);
+			TableUtils.dropTable(connectionSource, RoutePointPhoto.class, true);
 			TableUtils.dropTable(connectionSource, Order.class, true);
 			TableUtils.dropTable(connectionSource, OrderItem.class, true);
 			TableUtils.dropTable(connectionSource, Preferences.class, true);
@@ -172,6 +174,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		return this.routePointDao;
 	}
 	
+	private Dao<RoutePointPhoto, Integer> routePointPhotoDao = null;	
+	public Dao<RoutePointPhoto, Integer> getRoutePointPhotoDao() throws SQLException, java.sql.SQLException {
+		if (this.routePointPhotoDao == null) {
+			this.routePointPhotoDao = getDao(RoutePointPhoto.class);
+		}
+		return this.routePointPhotoDao;
+	}
+	
 	private Dao<RouteTemplate, Integer> routeTemplateDao = null;	
 	public Dao<RouteTemplate, Integer> getRouteTemplateDao() throws SQLException, java.sql.SQLException {
 		if (this.routeTemplateDao == null) {
@@ -246,6 +256,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		this.productUnitOfMeasureDao = null;
 		this.routeDao = null;
 		this.routePointDao = null;
+		this.routePointDao = null;
 		this.routeTemplateDao = null;
 		this.routePointTemplateDao = null;
 		this.shippingAddressDao = null;
@@ -272,6 +283,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.dropTable(connectionSource, RoutePointTemplate.class, true);
 		TableUtils.dropTable(connectionSource, Route.class, true);
 		TableUtils.dropTable(connectionSource, RoutePoint.class, true);
+		TableUtils.dropTable(connectionSource, RoutePointPhoto.class, true);
 		TableUtils.dropTable(connectionSource, Order.class, true);
 		TableUtils.dropTable(connectionSource, OrderItem.class, true);
 		TableUtils.dropTable(connectionSource, Preferences.class, true);
@@ -291,6 +303,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		TableUtils.createTable(connectionSource, RoutePointTemplate.class);
 		TableUtils.createTable(connectionSource, Route.class);
 		TableUtils.createTable(connectionSource, RoutePoint.class);
+		TableUtils.createTable(connectionSource, RoutePointPhoto.class);
 		TableUtils.createTable(connectionSource, Order.class);
 		TableUtils.createTable(connectionSource, OrderItem.class);
 		TableUtils.createTable(connectionSource, Preferences.class);

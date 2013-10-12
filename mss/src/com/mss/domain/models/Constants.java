@@ -128,6 +128,14 @@ public class Constants {
 			public static final String DEBT_FIELD = "debt";
 		}
 		
+		public static class RoutePointPhoto {
+			public static final String TABLE_NAME = "route_point_photo";			
+			public static final String ROUTE_POINT_FIELD = "route_point_id";
+			public static final String PATH_FIELD = "path";
+			public static final String COMMENT_FIELD = "comment";
+			public static final String UID_FIELD = "uid";
+		}
+		
 		public static class RouteTemplate {
 			public static final String TABLE_NAME = "route_template";			
 			public static final String DAY_OF_WEEK_FIELD = "day_of_week";
