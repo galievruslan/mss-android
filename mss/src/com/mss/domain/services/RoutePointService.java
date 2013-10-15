@@ -9,11 +9,13 @@ import com.mss.domain.models.Customer;
 import com.mss.domain.models.Preferences;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.models.RoutePointPhoto;
 import com.mss.domain.models.ShippingAddress;
 import com.mss.domain.models.Status;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmliteOrderRepository;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
+import com.mss.infrastructure.ormlite.OrmliteRoutePointPhotoRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteStatusRepository;
 
@@ -25,6 +27,7 @@ public class RoutePointService {
 	private OrmlitePreferencesRepository preferencesRepo;
 	private OrmliteStatusRepository statusRepo;
 	private OrmliteOrderRepository orderRepo;
+	private OrmliteRoutePointPhotoRepository routePointPhotoRepo;
 	private CustomerService customerService;
 		
 	public RoutePointService(DatabaseHelper databaseHelper) throws Throwable{
@@ -34,6 +37,7 @@ public class RoutePointService {
 		statusRepo = new OrmliteStatusRepository(this.databaseHelper);
 		orderRepo = new OrmliteOrderRepository(this.databaseHelper);
 		customerService = new CustomerService(this.databaseHelper);
+		routePointPhotoRepo = new OrmliteRoutePointPhotoRepository(this.databaseHelper);
 	}
 	
 	public RoutePoint getById(long id) {
@@ -111,6 +115,15 @@ public class RoutePointService {
 	public void deletePoint(RoutePoint routePoint) {
 		try {
 			routePointRepo.delete(routePoint);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+	}
+	
+	public void addPhoto(RoutePoint routePoint, String file) {
+		try {
+			RoutePointPhoto routePointPhoto = new RoutePointPhoto(routePoint.getId(), file);
+			routePointPhotoRepo.save(routePointPhoto);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());			
 		}

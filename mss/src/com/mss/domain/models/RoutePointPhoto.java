@@ -10,8 +10,10 @@ public class RoutePointPhoto extends Entity {
 	
 	public RoutePointPhoto() {}
 	
-	public RoutePointPhoto(long id)  {
-		super(id);
+	public RoutePointPhoto(long routePointId, String path)  {
+		this.routePointId = routePointId;
+		this.path = path;
+		this.uid = UUID.randomUUID();
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.RoutePointPhoto.ROUTE_POINT_FIELD)
@@ -28,11 +30,15 @@ public class RoutePointPhoto extends Entity {
 		return path;
 	}
 	
-	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.RoutePointPhoto.COMMENT_FIELD)
+	@DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Constants.Tables.RoutePointPhoto.COMMENT_FIELD)
 	private String comment;
 	
 	public String getComment(){
 		return comment;
+	}
+	
+	public void setComment(String comment){
+		this.comment = comment;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.UUID, columnName = Constants.Tables.RoutePointPhoto.UID_FIELD)
