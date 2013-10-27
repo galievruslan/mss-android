@@ -1,5 +1,6 @@
 package com.mss.domain.services;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -120,13 +121,50 @@ public class RoutePointService {
 		}
 	}
 	
-	public void addPhoto(RoutePoint routePoint, String file) {
-		try {
-			RoutePointPhoto routePointPhoto = new RoutePointPhoto(routePoint.getId(), file);
+	public void addPhoto(RoutePoint routePoint, File file) {
+		try {			
+			RoutePointPhoto routePointPhoto = new RoutePointPhoto(routePoint.getId(), file.getAbsolutePath());
 			routePointPhotoRepo.save(routePointPhoto);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());			
 		}
+	}
+	
+	public void commentPhoto(RoutePointPhoto routePointPhoto, String comment) {
+		try {
+			routePointPhoto.setComment(comment);
+			routePointPhotoRepo.save(routePointPhoto);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+	}
+	
+	public void deletePhoto(RoutePointPhoto routePointPhoto) {
+		try {
+			routePointPhotoRepo.delete(routePointPhoto);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+	}
+	
+	public RoutePointPhoto getPhotoById(long id) {
+		try {
+			return routePointPhotoRepo.getById(id);
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return null;
+	}
+	
+	public Iterable<RoutePointPhoto> findPhotos(RoutePoint routePoint) {
+		try {
+			return routePointPhotoRepo.findByRoutePointId(routePoint.getId());
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());			
+		}
+		
+		return new ArrayList<RoutePointPhoto>(0);
 	}
 	
 	public boolean canBeEditedOrDeleted(long routePointId) {

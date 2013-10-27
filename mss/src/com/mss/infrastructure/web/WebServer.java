@@ -2,6 +2,7 @@ package com.mss.infrastructure.web;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +28,9 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -134,6 +138,45 @@ public class WebServer {
 		httpPost.setEntity(new UrlEncodedFormEntity(ParametersEscape(params), "UTF-8"));
 		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
 		httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
+		
+		HttpResponse response = Dispatch(httpPost);
+		String content = Parse(response);
+		String csrfToken = extractCsrfToken(content);
+		if (csrfToken != "") {
+			getCurrentConnection().setCsrf(csrfToken);
+			System.out.print("Get csrf token: " + csrfToken + '\n');
+		}
+		
+		return new PostResult(response.getStatusLine().getStatusCode(), content);
+	}
+	
+	
+	public PostResult post(String url, List<NameValuePair> params, List<NameValuePair> attachments) 
+			throws JSONException, Exception {
+		params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
+		
+		HttpPost httpPost = new HttpPost(address + url);
+		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
+		httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
+
+		MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+		multipartEntityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+		
+		List<NameValuePair> escapedParams = ParametersEscape(params);
+        for(int index=0; index < escapedParams.size(); index++) {
+        	multipartEntityBuilder.addTextBody(escapedParams.get(index).getName(), 
+        			escapedParams.get(index).getValue());
+        }
+                
+        for(int index=0; index < attachments.size(); index++) {
+        	File file = new File (attachments.get(index).getValue());
+        	multipartEntityBuilder.addBinaryBody(attachments.get(index).getName(), 
+        			file,
+        			ContentType.MULTIPART_FORM_DATA, 
+        			file.getName());
+        }
+
+		httpPost.setEntity(multipartEntityBuilder.build());
 		
 		HttpResponse response = Dispatch(httpPost);
 		String content = Parse(response);

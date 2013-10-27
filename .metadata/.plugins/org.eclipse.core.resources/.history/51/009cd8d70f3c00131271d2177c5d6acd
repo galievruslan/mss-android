@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.mss.application.Preview
+        android:id="@+id/preview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </com.mss.application.Preview>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:minHeight="54dip"
+        android:paddingLeft="2dip"
+        android:paddingRight="2dip"
+        android:paddingTop="4dip" >
+
+        <ImageView            
+            android:id="@+id/take_photo_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:contentDescription="@string/label_photo"
+            android:src="@drawable/ic_camera" />
+        
+        <ImageView            
+            android:id="@+id/switch_flash_button"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:contentDescription="@string/label_flash"
+            android:src="@drawable/ic_no_flash" />
+
+    </FrameLayout>
+    
+</RelativeLayout>

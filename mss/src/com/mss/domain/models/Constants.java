@@ -133,6 +133,7 @@ public class Constants {
 			public static final String ROUTE_POINT_FIELD = "route_point_id";
 			public static final String PATH_FIELD = "path";
 			public static final String COMMENT_FIELD = "comment";
+			public static final String SYNCHRONIZED_FIELD = "synchronized";
 			public static final String UID_FIELD = "uid";
 		}
 		

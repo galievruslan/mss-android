@@ -2,34 +2,28 @@ package com.mss.application;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.UUID;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.application.fragments.RoutePointPhotosFragment;
 import com.mss.application.fragments.RoutePointsOrdersFragment;
 import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
 import com.mss.domain.models.Order;
-import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.Status;
 import com.mss.domain.services.RoutePointService;
-import com.mss.domain.services.RouteService;
 import com.mss.domain.services.StatusService;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.util.Log;
@@ -62,10 +56,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	private DatabaseHelper mDatabaseHelper;
 	private RoutePointService mRoutePointService;
 	private StatusService mStatusService;
-	private RouteService mRouteService;
-	
-	private static File PhotoDirectory;
-	private static File PhotoFile;
 	
 	private TextView mName;
 	private TextView mAddress;
@@ -98,7 +88,6 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		try {
 			mRoutePointService = new RoutePointService(mDatabaseHelper);
 			mStatusService = new StatusService(mDatabaseHelper);
-			mRouteService = new RouteService(mDatabaseHelper);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -110,6 +99,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	
 	protected RoutePointsOrdersFragment getRoutePointsOrdersFragment() {
 		return (RoutePointsOrdersFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_order_list);
+	}
+	
+	protected RoutePointPhotosFragment getRoutePointPhotosFragment() {
+		return (RoutePointPhotosFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_photos);
 	}
 	
 	private void setupTabs() {
@@ -195,14 +188,15 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 				}
 				break;
 			case TAKE_PHOTO_REQUEST:
-				Uri u = data.getData();
-				new File(getRealPathFromURI(u)).delete();
-				
-				// make it available in the gallery
-			    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-			    Uri contentUri = Uri.fromFile(PhotoFile);
-			    mediaScanIntent.setData(contentUri);
-			    sendBroadcast(mediaScanIntent);
+				Bundle extras = data.getExtras(); 
+				String path = extras.getString(CameraActivity.IMAGE_PATH);
+
+		        File file = new File(path);
+				if (mRoutePoint == null) {
+					mRoutePoint = mRoutePointService.getById(mRoutePointId);
+				}
+		        
+		        mRoutePointService.addPhoto(mRoutePoint, file);
 				break;	
 			default:
 				break;
@@ -267,19 +261,8 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			}
 			return true;
 		case R.id.menu_item_take_photo: {
-				if (isThereAnAppToTakePictures()) {
-					createDirectoryForPictures();
-		        
-					Route route = mRouteService.getById(mRoutePoint.getRouteId());
-					java.text.DateFormat dateFormat = SimpleDateFormat.getDateInstance();
-					
-				    PhotoFile = new File(PhotoDirectory,  dateFormat.format(route.getDate()) + 
-				    		"_" + UUID.randomUUID() + ".jpeg");
-					
-					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(PhotoFile));
-				    startActivityForResult(intent, TAKE_PHOTO_REQUEST);
-				}
+				Intent intent = new Intent(this, CameraActivity.class);
+				startActivityForResult(intent, TAKE_PHOTO_REQUEST);
 			}
 			return true;
 		default:
@@ -315,6 +298,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 			mDebt.setText(numberFormat.format(mRoutePoint.getDebt()));
 			
 			getRoutePointsOrdersFragment().refresh(mRoutePointId);
+			getRoutePointPhotosFragment().refresh(mRoutePointId);
 		}
 	}
 
@@ -322,26 +306,13 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	public void onLoaderReset(Loader<RoutePoint> arg0) {
 		mRoutePoint = null;	
 	}
-	
-	private boolean isThereAnAppToTakePictures() {
-	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    List<ResolveInfo> availableActivities = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-	    return availableActivities != null && availableActivities.size() > 0;
-	}
-
-	private void createDirectoryForPictures() {
-	    PhotoDirectory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "mss");
-	    if (!PhotoDirectory.exists()) {
-	    	PhotoDirectory.mkdirs();
-	    }
-	}
-	
-	public String getRealPathFromURI(Uri contentUri) {
-		  String[] proj = { MediaStore.Images.Media.DATA };
-		  Cursor cursor = managedQuery(contentUri, proj, null, null, null);
-		  int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-		  cursor.moveToFirst();
-		  return cursor.getString(column_index);
-	}		  
+    
+    public static boolean isIntentAvailable(Context context, String action) {
+        final PackageManager packageManager = context.getPackageManager();
+        final Intent intent = new Intent(action);
+        List<ResolveInfo> list =
+                packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
+    }
 }
 

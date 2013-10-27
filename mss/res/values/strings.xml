@@ -126,7 +126,7 @@
     <string name="login_activity_loginfail_text_pwmissing">Type the password for this account.</string>
     <!--
         Message shown if the provided account doesn't support the current
-        activity.
+        activity.
     -->
     <string name="login_activity_newaccount_text">Sign in to your MSS account. </string>
 
@@ -157,19 +157,19 @@
     <string name="collapse_all_menu">Collapse all</string>
     <string name="select_all_menu">Select all</string>
     <string name="unselect_all_menu">Unselect all</string>
-    <string name="title_activity_daily_orders">DailyOrdersActivity</string>    
+    <string name="title_activity_daily_orders">DailyOrdersActivity</string>
     <string name="title_activity_order_item_pickup_filter">Items filter</string>
     <string name="description_in_order_filter">Show only selected items</string>
-	<string name="description_categories_filter">Select categories, to filter item list</string>
-	<string name="button_ok">OK</string>
-	<string name="label_shipping_at">Shipping at\u003A </string>
-	<string name="label_to_the_amount_of">To the amount of\u003A </string>
-	<string name="dialog_leave_changed_order_confirmation_title">Leave order confirmation</string>
+    <string name="description_categories_filter">Select categories, to filter item list</string>
+    <string name="button_ok">OK</string>
+    <string name="label_shipping_at">Shipping at\u003A </string>
+    <string name="label_to_the_amount_of">To the amount of\u003A </string>
+    <string name="dialog_leave_changed_order_confirmation_title">Leave order confirmation</string>
     <string name="dialog_leave_changed_order_confirmation_message">Order is changed, do you really want to leave order, all changes will be lost?</string>
     <string name="dialog_leave_changed_order_confirmation_positive_button">Leave</string>
     <string name="dialog_leave_changed_order_confirmationn_negative_button">Cancel</string>
     <string name="collapse_all_condesed">Collapse all</string>
-    <string name="expand_all_condensed">Expand all</string>    
+    <string name="expand_all_condensed">Expand all</string>
     <string name="action_update">Update</string>
     <string name="update_connect">Connecting</string>
     <string name="update_check_for_updates">Check for updates</string>
@@ -186,8 +186,14 @@
     <string name="title_activity_categories_quick_filter">Quick filter by categories</string>
     <string name="menu_item_select_all">Select all</string>
     <string name="description_in_stock_filter">Show only items in stock</string>
-    <string name="label_in_stock">In stock</string>    
+    <string name="label_in_stock">In stock</string>
     <string name="label_stock">Stock</string>
     <string name="label_selected_count">Count</string>
     <string name="menu_item_take_photo">Take photo</string>
+    <string name="title_activity_make_photo">Make photo</string>
+    <string name="label_make_photo">Make photo</string>
+    <string name="label_photo">Photo</string>
+    <string name="label_flash">Flash</string>
+    <string name="title_activity_route_point_photo">Route point\'s photo</string>
+
 </resources>

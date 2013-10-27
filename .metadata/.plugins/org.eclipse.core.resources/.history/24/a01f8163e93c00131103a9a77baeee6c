@@ -1,0 +1,309 @@
+package com.mss.application;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.UUID;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore.Images;
+import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+public class CameraActivity  extends Activity {
+	private static final String TAG = CameraActivity.class.getSimpleName();
+	
+	public static final String IMAGE_URI = "image_uri";
+	
+	private SurfaceView preview=null;
+	private SurfaceHolder previewHolder=null;
+	private Camera camera=null;
+	private boolean inPreview=false;
+	private boolean cameraConfigured=false;
+	  
+	private boolean mIsFlashOn = false;
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	    setContentView(R.layout.activity_camera);
+
+	    preview=(SurfaceView)findViewById(R.id.preview);
+	    previewHolder=preview.getHolder();
+	    previewHolder.addCallback(surfaceCallback);
+	    
+	    ImageView takePhoto = (ImageView)findViewById(R.id.take_photo_image_view);
+	    takePhoto.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				 if (inPreview) {
+					 camera.takePicture(null, null, photoCallback);
+				 	inPreview=false;
+				 }				
+			}
+		});
+	    
+	    ImageView flashSwitcher = (ImageView)findViewById(R.id.flash_switcher_image_view);
+	    if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+	    	flashSwitcher.setOnClickListener(new OnClickListener() {			
+	    		@Override
+	    		public void onClick(View v) {	    	
+	    			ImageView flashSwitcher = (ImageView)v;
+	    			
+	    			if (mIsFlashOn) {
+	    				mIsFlashOn = false;
+	    				flashSwitcher.setImageResource(R.drawable.ic_no_flash);
+	    			} else {
+	    				mIsFlashOn = true;
+	    				flashSwitcher.setImageResource(R.drawable.ic_flash);
+	    				
+	    				if (inPreview) {
+	    					camera.stopPreview();
+	    				}
+
+	    				camera.release();
+	    				camera=null;
+	    				inPreview=false;
+	    				
+	    				camera=Camera.open();
+	    				startPreview();
+	    			}
+	    		}
+			});
+	    } else {
+	    	flashSwitcher.setVisibility(View.GONE);
+	    }
+	    
+	    
+	    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+	    	previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);	    
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	    
+		if (camera == null) {
+			camera=Camera.open();
+		}
+
+		startPreview();
+	}
+
+	@Override
+	public void onPause() {
+		if (inPreview) {
+	    	camera.stopPreview();
+	    }
+
+	    camera.release();
+	    camera=null;
+	    inPreview=false;
+
+	    super.onPause();
+	}
+
+	private Camera.Size getBestPreviewSize(int width, int height,
+											Camera.Parameters parameters) {
+		Camera.Size result = null;
+
+	    for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+	    	if (size.width <= width && size.height <= height) {
+	    		if (result == null) {
+	    			result=size;
+	    		}
+	    		else {
+	    			int resultArea=result.width * result.height;
+	    			int newArea=size.width * size.height;
+
+	    			if (newArea > resultArea) {
+	    				result = size;
+	    			}
+	    		}
+	    	}
+	    }
+
+	    return(result);
+	}
+
+	private Camera.Size getPictureSize(Camera.Parameters parameters) {
+	    Camera.Size result = null;
+
+	    for (Camera.Size size : parameters.getSupportedPictureSizes()) {
+	    	if (result == null) {
+	    		result = size;
+	    	}
+	    	else {
+	    		int resultArea = result.width * result.height;
+	    		int newArea = size.width * size.height;
+
+	    		if (newArea > resultArea) {
+	    			result = size;
+	    		}
+	    	}
+	    }
+
+	    return(result);
+	}
+
+	private void initPreview(int width, int height) {
+	    if (camera != null && previewHolder.getSurface() != null) {
+	    	try {
+	    		camera.setPreviewDisplay(previewHolder);
+	    	}
+	    	catch (Throwable t) {
+	    		Log.e("PreviewDemo-surfaceCallback",
+	    				"Exception in setPreviewDisplay()", t);
+	    		Toast.makeText(CameraActivity.this, t.getMessage(),
+	    				Toast.LENGTH_LONG).show();
+	    	}
+
+	    	if (!cameraConfigured) {
+	    		Camera.Parameters parameters = camera.getParameters();
+	    		Camera.Size size = getBestPreviewSize(width, height, parameters);
+	    		Camera.Size pictureSize = getPictureSize(parameters);
+
+	    		if (size != null && pictureSize != null) {
+	    			if (mIsFlashOn)
+	    				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+	        	
+	    			parameters.setPreviewSize(size.width, size.height);
+	    			parameters.setPictureSize(pictureSize.width,
+	    					pictureSize.height);
+	    			parameters.setPictureFormat(ImageFormat.JPEG);
+	    			camera.setParameters(parameters);
+	    			cameraConfigured=true;
+	    		}
+	    	}
+	    }
+	}
+
+	private void startPreview() {
+	    if (cameraConfigured && camera != null) {
+	    	camera.startPreview();
+	    	inPreview=true;
+	    }
+	}
+
+	SurfaceHolder.Callback surfaceCallback=new SurfaceHolder.Callback() {
+	    public void surfaceCreated(SurfaceHolder holder) {
+	      // no-op -- wait until surfaceChanged()
+	    }
+
+	    public void surfaceChanged(SurfaceHolder holder, int format,
+	                               int width, int height) {
+	    	initPreview(width, height);
+	    	startPreview();
+	    }
+
+	    public void surfaceDestroyed(SurfaceHolder holder) {
+	    	// no-op
+	    }
+	};
+
+	Camera.PictureCallback photoCallback=new Camera.PictureCallback() {
+		public void onPictureTaken(byte[] data, Camera camera) {
+			try {
+				//Bitmap original = BitmapFactory.decodeByteArray(data, 0, data.length);				
+				//Matrix matrix = new Matrix();
+				
+				File storage = new File(Environment.getExternalStoragePublicDirectory(
+				        Environment.DIRECTORY_PICTURES), "mss");
+			
+				if (storage.exists()) {
+					storage.createNewFile();
+				}
+					
+				File photo=
+						new File(storage.getPath() + "/" + String.valueOf(UUID.randomUUID()) + ".jpeg");
+				
+				FileOutputStream out = new FileOutputStream(photo.getPath());
+				out.write(data);
+			    out.close();
+				//float rotation = rotationForImage(getApplicationContext(), uri);
+				//if (rotation != 0f) {
+				//     matrix.preRotate(rotation);
+				//}
+				
+				//Camera.Size size = camera.getParameters().getPictureSize();
+				//Bitmap.createBitmap(original, 0, 0, size.width, size.height, matrix, true);
+							    				
+				Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+			    mediaScanIntent.setData(Uri.fromFile(photo));
+			    sendBroadcast(mediaScanIntent);		
+			    
+			    camera.stopPreview();
+				camera.release();
+				camera = null;
+				
+				Intent intent=new Intent();
+			    intent.putExtra(IMAGE_URI, photo.getPath());
+			    setResult(RESULT_OK, intent);
+				finish();
+			}
+			catch (java.io.IOException e) {
+				Log.e(TAG, "Exception in photoCallback", e);
+			}
+		}
+	};
+	
+	public static Uri getImageUri(Context inContext, Bitmap inImage) throws IOException {
+		
+	    
+		return Uri.fromFile(photo);
+	}
+	
+	public static float rotationForImage(Context context, Uri uri) {
+        if (uri.getScheme().equals("content")) {
+        	String[] projection = { Images.ImageColumns.ORIENTATION };
+        	Cursor c = context.getContentResolver().query(
+                uri, projection, null, null, null);
+        	if (c.moveToFirst()) {
+        		return c.getInt(0);
+        	}
+        } else if (uri.getScheme().equals("file")) {
+        	try {
+        		ExifInterface exif = new ExifInterface(uri.getPath());
+        		int rotation = (int)exifOrientationToDegrees(
+        				exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+        						ExifInterface.ORIENTATION_NORMAL));
+        		return rotation;
+        	} catch (IOException e) {
+        		Log.e(TAG, "Error checking exif", e);
+        	}
+        }
+        
+        return 0f;
+    }
+
+    private static float exifOrientationToDegrees(int exifOrientation) {
+    	if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {
+    		return 90;
+    	} else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {
+    		return 180;
+    	} else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {
+    		return 270;
+    	}
+    	return 0;
+    }
+}

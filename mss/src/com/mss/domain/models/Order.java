@@ -163,7 +163,7 @@ public class Order extends Entity {
 		return isSynchronized;
 	}
 	
-	public void setIsSynchronized(boolean isSynchronized){
-		this.isSynchronized = isSynchronized;
+	public void setSynchronized(){
+		this.isSynchronized = true;
 	}
 }

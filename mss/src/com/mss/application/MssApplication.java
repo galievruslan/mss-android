@@ -1,0 +1,40 @@
+package com.mss.application;
+
+import java.io.File;
+
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import android.app.Application;
+import android.content.Context;
+import android.graphics.Bitmap.CompressFormat;
+
+public class MssApplication extends Application
+{
+	@Override
+	public void onCreate()
+	{
+		super.onCreate();
+		Context context = getApplicationContext();
+		File cacheDir = StorageUtils.getCacheDirectory(context);
+   
+		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
+		.memoryCacheExtraOptions(512, 512)
+		.threadPoolSize(5)
+		.threadPriority(Thread.MIN_PRIORITY + 2)
+		.memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024))
+		.discCache(new UnlimitedDiscCache(cacheDir))
+		.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
+		.discCacheFileCount(20)
+		.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+		.discCacheExtraOptions(512, 512, CompressFormat.JPEG, 75, null)
+		.build();
+		
+		ImageLoader.getInstance().init(imageLoaderConfiguration);
+	}
+}

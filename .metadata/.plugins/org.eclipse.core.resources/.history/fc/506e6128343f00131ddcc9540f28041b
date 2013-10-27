@@ -1,0 +1,4 @@
+package com.mss.infrastructure.web;
+
+public class FileNotExistException extends Exception {
+}

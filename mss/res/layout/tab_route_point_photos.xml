@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/route_point_fragment_tab_photos"
+    android:id="@+id/order_fragment_tab_photos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Gallery
-        android:id="@+id/gallery"
+    <fragment
+        android:id="@+id/fragment_photos"
+        android:name="com.mss.application.fragments.RoutePointPhotosFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_photos" />
 
 </LinearLayout>

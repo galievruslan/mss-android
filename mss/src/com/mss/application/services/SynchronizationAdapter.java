@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -43,6 +44,7 @@ import com.mss.domain.models.Order;
 import com.mss.domain.models.OrderItem;
 import com.mss.domain.models.Route;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.models.RoutePointPhoto;
 import com.mss.domain.models.Warehouse;
 import com.mss.infrastructure.data.IEntity;
 import com.mss.infrastructure.data.IRepository;
@@ -57,6 +59,8 @@ import com.mss.infrastructure.web.dtos.translators.*;
 import com.mss.infrastructure.web.repositories.*;
 import com.mss.utils.IterableHelpers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -138,11 +142,25 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
             		 new OrmliteOrderRepository(databaseHelper), 
             		 new OrmliteOrderItemRepository(databaseHelper));
              
+             event.putExtra(MESSAGE_KEY, R.string.sync_route_point_photos);
+             localBroadcastManager.sendBroadcast(event);
+             PostRoutePointPhotos(webServer, 
+            		 new OrmliteRouteRepository(databaseHelper), 
+            		 new OrmliteRoutePointRepository(databaseHelper), 
+            		 new OrmliteRoutePointPhotoRepository(databaseHelper));
+             
              if (fullSync) {
             	 event.putExtra(MESSAGE_KEY, R.string.sync_clear_storage);
                  localBroadcastManager.sendBroadcast(event);
             	 
+                 // clear database
                  databaseHelper.clear();
+                 
+                 // clear photos folder
+                 File photoStorage = new File(Environment.getExternalStoragePublicDirectory(
+ 				        Environment.DIRECTORY_PICTURES), "mss");
+                 DeleteRecursive(photoStorage);
+                 
                  lastSync = null;
  			}
  			
@@ -474,7 +492,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 			Matcher matcher = pattern.matcher(result.getContent());
 			if (matcher.find()) {
 				for (RoutePoint routePoint : points) {
-					routePoint.setIsSynchronized(true);
+					routePoint.setSynchronized();
 					routePointRepo.save(routePoint);
 				}
 			} else {
@@ -517,7 +535,7 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 			Pattern pattern = Pattern.compile("\"code\":100|\"code\":101");
 			Matcher matcher = pattern.matcher(result.getContent());
 			if (matcher.find()) {
-				order.setIsSynchronized(true);
+				order.setSynchronized();
 				orderRepo.save(order);
 			} else {
 				throw new Exception();
@@ -555,5 +573,60 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 				
 		return nameValuePairs;		
 	}
-}
+    
+    private void PostRoutePointPhotos(WebServer webServer,
+    		OrmliteRouteRepository routeRepo,
+			OrmliteRoutePointRepository routePointRepo,
+			OrmliteRoutePointPhotoRepository routePointPhotoRepository) throws Throwable{
+    	Iterable<RoutePointPhoto> routePointPhotos = 
+    			routePointPhotoRepository.findNotSynchronized();
+		for (RoutePointPhoto routePointPhoto : routePointPhotos) {	
+			try {
+				RoutePoint routePoint = routePointRepo.getById(routePointPhoto.getRoutePointId());
+				Route route = routeRepo.getById(routePoint.getRouteId());
+			
+				ArrayList<NameValuePair> attachments = new ArrayList<NameValuePair>();
+				attachments.add(new BasicNameValuePair("route_point_photo[photo]", routePointPhoto.getPath()));
+				PostResult result = 
+						webServer.post("/synchronization/route_point_photos.json", 
+							ToPostParams(route, routePoint, routePointPhoto), attachments);
+				result.getStatusCode();
+			
+				Pattern pattern = Pattern.compile("\"code\":100|\"code\":101");
+				Matcher matcher = pattern.matcher(result.getContent());
+				if (matcher.find()) {
+					routePointPhoto.setSynchronized();
+					routePointPhotoRepository.save(routePointPhoto);
+				} else {
+					throw new Exception();
+				}
+			} catch (FileNotFoundException exception) {
+				routePointPhoto.setSynchronized();
+				routePointPhotoRepository.save(routePointPhoto);
+			}			
+		}
+    }
+    
+    @SuppressLint("SimpleDateFormat")
+	private List<NameValuePair> ToPostParams(Route route, RoutePoint routePoint, RoutePointPhoto routePointPhoto) throws FileNotFoundException {		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+				
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		nameValuePairs.add(new BasicNameValuePair("date", dateFormat.format(route.getDate())));
+		nameValuePairs.add(new BasicNameValuePair("shipping_address_id", 
+				String.valueOf(routePoint.getShippingAddressId())));
+		nameValuePairs.add(new BasicNameValuePair("route_point_photo[guid]", String.valueOf(routePointPhoto.getUid())));
+		//nameValuePairs.add(new BasicNameValuePair("route_point_photo[photo]", base64Image));
+		nameValuePairs.add(new BasicNameValuePair("route_point_photo[comment]", routePointPhoto.getComment()));
+				
+		return nameValuePairs;		
+	}
+        
+    void DeleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                DeleteRecursive(child);
 
+        fileOrDirectory.delete();
+    }
+}

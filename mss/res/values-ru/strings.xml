@@ -171,4 +171,8 @@
     <string name="label_stock">Наличие</string>
     <string name="label_selected_count">Кол-во</string>
     <string name="menu_item_take_photo">Сделать снимок</string>
+    <string name="label_make_photo">Сделать снимок</string>
+    <string name="label_photo">Фотография</string>
+    <string name="label_flash">Вспышка</string>
+    <string name="title_activity_route_point_photo">Фотография точки</string>
 </resources>

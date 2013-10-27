@@ -13,6 +13,7 @@ public class RoutePointPhoto extends Entity {
 	public RoutePointPhoto(long routePointId, String path)  {
 		this.routePointId = routePointId;
 		this.path = path;
+		this.comment = "";
 		this.uid = UUID.randomUUID();
 	}
 	
@@ -46,5 +47,16 @@ public class RoutePointPhoto extends Entity {
 	
 	public UUID getUid(){
 		return uid;
+	}
+	
+	@DatabaseField(canBeNull = false, dataType = DataType.BOOLEAN, columnName = Constants.Tables.RoutePointPhoto.SYNCHRONIZED_FIELD)
+	private boolean isSynchronized;
+	
+	public boolean getIsSynchronized(){
+		return isSynchronized;
+	}
+	
+	public void setSynchronized(){
+		this.isSynchronized = true;
 	}
 }

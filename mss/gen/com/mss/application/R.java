@@ -767,10 +767,15 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f090005;
         public static final int abs__bright_foreground_holo_dark=0x7f090002;
         public static final int abs__bright_foreground_holo_light=0x7f090003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f090006;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f090007;
-        public static final int abs__primary_text_holo_dark=0x7f090008;
-        public static final int abs__primary_text_holo_light=0x7f090009;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f09000b;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f09000c;
+        public static final int abs__primary_text_holo_dark=0x7f09000d;
+        public static final int abs__primary_text_holo_light=0x7f09000e;
+        public static final int green=0x7f090009;
+        public static final int grey=0x7f090006;
+        public static final int red=0x7f090008;
+        public static final int transparent_white=0x7f09000a;
+        public static final int white=0x7f090007;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -878,6 +883,8 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f0a000f;
         public static final int activity_vertical_margin=0x7f0a0010;
+        public static final int thumbnail_height=0x7f0a0011;
+        public static final int thumbnail_width=0x7f0a0012;
     }
     public static final class drawable {
         public static final int abs__ab_bottom_solid_dark_holo=0x7f020000;
@@ -1012,22 +1019,25 @@ containing a value of this type.
         public static final int ic_action_take_photo=0x7f020081;
         public static final int ic_button_expand_selected=0x7f020082;
         public static final int ic_button_expand_unselected=0x7f020083;
-        public static final int ic_launcher=0x7f020084;
-        public static final int ic_menu_orders=0x7f020085;
-        public static final int ic_menu_route=0x7f020086;
-        public static final int ic_menu_search=0x7f020087;
-        public static final int ic_menu_settings=0x7f020088;
-        public static final int ic_menu_sync=0x7f020089;
-        public static final int ic_menu_update=0x7f02008a;
-        public static final int list_selector_background=0x7f02008b;
-        public static final int list_selector_background_disabled=0x7f02008c;
-        public static final int list_selector_background_focus=0x7f02008d;
-        public static final int list_selector_background_longpress=0x7f02008e;
-        public static final int list_selector_background_pressed=0x7f02008f;
-        public static final int list_selector_background_transition=0x7f020090;
+        public static final int ic_camera=0x7f020084;
+        public static final int ic_flash=0x7f020085;
+        public static final int ic_launcher=0x7f020086;
+        public static final int ic_menu_orders=0x7f020087;
+        public static final int ic_menu_route=0x7f020088;
+        public static final int ic_menu_search=0x7f020089;
+        public static final int ic_menu_settings=0x7f02008a;
+        public static final int ic_menu_sync=0x7f02008b;
+        public static final int ic_menu_update=0x7f02008c;
+        public static final int ic_no_flash=0x7f02008d;
+        public static final int list_selector_background=0x7f02008e;
+        public static final int list_selector_background_disabled=0x7f02008f;
+        public static final int list_selector_background_focus=0x7f020090;
+        public static final int list_selector_background_longpress=0x7f020091;
+        public static final int list_selector_background_pressed=0x7f020092;
+        public static final int list_selector_background_transition=0x7f020093;
     }
     public static final class id {
-        public static final int TextView01=0x7f05005b;
+        public static final int TextView01=0x7f050060;
         public static final int abs__action_bar=0x7f05002c;
         public static final int abs__action_bar_container=0x7f05002b;
         public static final int abs__action_bar_subtitle=0x7f05001d;
@@ -1067,196 +1077,205 @@ containing a value of this type.
         public static final int abs__textButton=0x7f05001f;
         public static final int abs__title=0x7f050027;
         public static final int abs__up=0x7f050017;
-        public static final int action_item_delete=0x7f0500d0;
-        public static final int action_search=0x7f0500db;
-        public static final int action_settings=0x7f0500d3;
-        public static final int address_text_view=0x7f05008e;
-        public static final int amount_text_view=0x7f050061;
+        public static final int action_item_delete=0x7f0500d9;
+        public static final int action_search=0x7f0500e4;
+        public static final int action_settings=0x7f0500dc;
+        public static final int address_text_view=0x7f050095;
+        public static final int amount_text_view=0x7f050066;
         public static final int bottom=0x7f050001;
-        public static final int button_delete=0x7f050070;
-        public static final int button_eight=0x7f05006c;
-        public static final int button_five=0x7f050068;
-        public static final int button_four=0x7f050067;
-        public static final int button_nill=0x7f05006f;
-        public static final int button_nine=0x7f05006d;
-        public static final int button_one=0x7f050063;
-        public static final int button_seven=0x7f05006b;
-        public static final int button_six=0x7f050069;
-        public static final int button_three=0x7f050065;
-        public static final int button_two=0x7f050064;
-        public static final int categories_filter_text_edit=0x7f050075;
+        public static final int button_delete=0x7f050075;
+        public static final int button_eight=0x7f050071;
+        public static final int button_five=0x7f05006d;
+        public static final int button_four=0x7f05006c;
+        public static final int button_nill=0x7f050074;
+        public static final int button_nine=0x7f050072;
+        public static final int button_one=0x7f050068;
+        public static final int button_seven=0x7f050070;
+        public static final int button_six=0x7f05006e;
+        public static final int button_three=0x7f05006a;
+        public static final int button_two=0x7f050069;
+        public static final int camera_preview=0x7f050053;
+        public static final int capture_button=0x7f050054;
+        public static final int categories_filter_text_edit=0x7f05007a;
         public static final int center=0x7f050008;
         public static final int center_horizontal=0x7f050006;
         public static final int center_vertical=0x7f050004;
-        public static final int clear_filter_menu_item=0x7f0500d6;
+        public static final int clear_filter_menu_item=0x7f0500df;
         public static final int clip_horizontal=0x7f05000b;
         public static final int clip_vertical=0x7f05000a;
-        public static final int collapse_all_menu_item=0x7f0500d5;
-        public static final int context_menu_select_all=0x7f0500d9;
-        public static final int context_menu_unselect_all=0x7f0500da;
-        public static final int count_text_view=0x7f05005f;
-        public static final int customer_edit_text=0x7f05007c;
-        public static final int date_edit_text=0x7f050095;
-        public static final int debt_text_view=0x7f05008f;
-        public static final int description_text_view=0x7f050056;
+        public static final int collapse_all_menu_item=0x7f0500de;
+        public static final int comment_text_edit=0x7f050084;
+        public static final int context_menu_select_all=0x7f0500e2;
+        public static final int context_menu_unselect_all=0x7f0500e3;
+        public static final int count_text_view=0x7f050064;
+        public static final int customer_edit_text=0x7f050081;
+        public static final int date_edit_text=0x7f05009c;
+        public static final int debt_text_view=0x7f050096;
+        public static final int description_text_view=0x7f05005b;
         public static final int disableHome=0x7f050015;
         public static final int edit_query=0x7f050032;
-        public static final int expand_all_menu_item=0x7f0500d4;
+        public static final int expand_all_menu_item=0x7f0500dd;
         public static final int fill=0x7f050009;
         public static final int fill_horizontal=0x7f050007;
         public static final int fill_vertical=0x7f050005;
-        public static final int fragment=0x7f050099;
-        public static final int fragment_category_list=0x7f050044;
-        public static final int fragment_customer_list=0x7f050046;
-        public static final int fragment_daily_orders=0x7f050047;
-        public static final int fragment_main_menu_list=0x7f05004f;
-        public static final int fragment_order=0x7f050098;
-        public static final int fragment_order_item_list=0x7f0500b0;
-        public static final int fragment_order_list=0x7f050076;
-        public static final int fragment_order_pickup_item_list=0x7f0500b1;
-        public static final int fragment_price_lists=0x7f050077;
-        public static final int fragment_route=0x7f050079;
-        public static final int fragment_route_point=0x7f05009b;
-        public static final int fragment_shipping_address_list=0x7f05007e;
-        public static final int fragment_statuses=0x7f05007f;
-        public static final int fragment_uom_list=0x7f050078;
-        public static final int fragment_warehouse_list=0x7f05008c;
-        public static final int full_synchronization_checkbox=0x7f050083;
-        public static final int gallery=0x7f0500cc;
+        public static final int flash_switcher_image_view=0x7f050045;
+        public static final int fragment=0x7f0500a0;
+        public static final int fragment_category_list=0x7f050047;
+        public static final int fragment_customer_list=0x7f050049;
+        public static final int fragment_daily_orders=0x7f05004a;
+        public static final int fragment_main_menu_list=0x7f050052;
+        public static final int fragment_order=0x7f05009f;
+        public static final int fragment_order_item_list=0x7f0500b9;
+        public static final int fragment_order_list=0x7f05007b;
+        public static final int fragment_order_pickup_item_list=0x7f0500ba;
+        public static final int fragment_photos=0x7f0500d5;
+        public static final int fragment_price_lists=0x7f05007c;
+        public static final int fragment_route=0x7f05007e;
+        public static final int fragment_route_point=0x7f0500a3;
+        public static final int fragment_shipping_address_list=0x7f050085;
+        public static final int fragment_statuses=0x7f050086;
+        public static final int fragment_uom_list=0x7f05007d;
+        public static final int fragment_warehouse_list=0x7f050093;
+        public static final int full_synchronization_checkbox=0x7f05008a;
         public static final int homeAsUp=0x7f050012;
-        public static final int imageView1=0x7f0500a5;
-        public static final int in_order_filter_check_box=0x7f050072;
-        public static final int in_stock_filter_check_box=0x7f050073;
-        public static final int label_address=0x7f0500a1;
-        public static final int label_amount=0x7f050097;
-        public static final int label_count=0x7f050096;
-        public static final int label_count_in_base=0x7f0500ad;
-        public static final int label_count_on_whse=0x7f0500a9;
-        public static final int label_is_base=0x7f0500ac;
-        public static final int label_name=0x7f0500a0;
-        public static final int label_order_customer=0x7f0500b9;
-        public static final int label_order_date=0x7f0500b3;
-        public static final int label_order_price_list=0x7f0500bd;
-        public static final int label_order_shipping_address=0x7f0500bb;
-        public static final int label_order_shipping_date=0x7f0500b5;
-        public static final int label_order_shipping_time=0x7f0500b7;
-        public static final int label_order_warehouse=0x7f0500bf;
-        public static final int label_price=0x7f0500a7;
-        public static final int label_shipping_address=0x7f0500a3;
-        public static final int label_shipping_date=0x7f0500a4;
-        public static final int label_shipping_name=0x7f0500a2;
-        public static final int label_status=0x7f0500ae;
-        public static final int label_uom=0x7f0500a8;
-        public static final int label_uom_on_whse=0x7f0500aa;
-        public static final int last_sync_label=0x7f050084;
-        public static final int last_sync_text_view=0x7f050085;
+        public static final int image=0x7f0500b4;
+        public static final int imageView1=0x7f0500ad;
+        public static final int in_order_filter_check_box=0x7f050077;
+        public static final int in_stock_filter_check_box=0x7f050078;
+        public static final int label_address=0x7f0500a9;
+        public static final int label_amount=0x7f05009e;
+        public static final int label_count=0x7f05009d;
+        public static final int label_count_in_base=0x7f0500b6;
+        public static final int label_count_on_whse=0x7f0500b1;
+        public static final int label_is_base=0x7f0500b5;
+        public static final int label_name=0x7f0500a8;
+        public static final int label_order_customer=0x7f0500c2;
+        public static final int label_order_date=0x7f0500bc;
+        public static final int label_order_price_list=0x7f0500c6;
+        public static final int label_order_shipping_address=0x7f0500c4;
+        public static final int label_order_shipping_date=0x7f0500be;
+        public static final int label_order_shipping_time=0x7f0500c0;
+        public static final int label_order_warehouse=0x7f0500c8;
+        public static final int label_price=0x7f0500af;
+        public static final int label_shipping_address=0x7f0500ab;
+        public static final int label_shipping_date=0x7f0500ac;
+        public static final int label_shipping_name=0x7f0500aa;
+        public static final int label_status=0x7f0500b7;
+        public static final int label_uom=0x7f0500b0;
+        public static final int label_uom_on_whse=0x7f0500b2;
+        public static final int last_sync_label=0x7f05008b;
+        public static final int last_sync_text_view=0x7f05008c;
         public static final int left=0x7f050002;
         public static final int listMode=0x7f05000e;
-        public static final int list_checkbox=0x7f05009f;
-        public static final int list_item_description=0x7f05009e;
-        public static final int login=0x7f05004c;
-        public static final int login_form=0x7f05004a;
-        public static final int login_status=0x7f050048;
-        public static final int login_status_message=0x7f050049;
-        public static final int mainTreeView=0x7f050045;
-        public static final int menu_cancel_sync=0x7f0500d1;
-        public static final int menu_item_add=0x7f0500dc;
-        public static final int menu_item_cancel_sync=0x7f0500e5;
-        public static final int menu_item_cancel_update=0x7f0500e6;
-        public static final int menu_item_categories_quick_filter=0x7f0500e0;
-        public static final int menu_item_change_status=0x7f0500e3;
-        public static final int menu_item_copy_from_template=0x7f0500e2;
-        public static final int menu_item_delete=0x7f0500de;
-        public static final int menu_item_edit=0x7f0500dd;
-        public static final int menu_item_filter=0x7f0500e1;
-        public static final int menu_item_save=0x7f0500df;
-        public static final int menu_item_take_photo=0x7f0500e4;
-        public static final int menu_settings=0x7f0500d2;
-        public static final int menu_text=0x7f0500a6;
+        public static final int list_checkbox=0x7f0500a7;
+        public static final int list_item_description=0x7f0500a6;
+        public static final int login=0x7f05004f;
+        public static final int login_form=0x7f05004d;
+        public static final int login_status=0x7f05004b;
+        public static final int login_status_message=0x7f05004c;
+        public static final int mainTreeView=0x7f050048;
+        public static final int menu_cancel_sync=0x7f0500da;
+        public static final int menu_item_add=0x7f0500e5;
+        public static final int menu_item_cancel_sync=0x7f0500ee;
+        public static final int menu_item_cancel_update=0x7f0500ef;
+        public static final int menu_item_categories_quick_filter=0x7f0500e9;
+        public static final int menu_item_change_status=0x7f0500ec;
+        public static final int menu_item_copy_from_template=0x7f0500eb;
+        public static final int menu_item_delete=0x7f0500e7;
+        public static final int menu_item_edit=0x7f0500e6;
+        public static final int menu_item_filter=0x7f0500ea;
+        public static final int menu_item_save=0x7f0500e8;
+        public static final int menu_item_take_photo=0x7f0500ed;
+        public static final int menu_settings=0x7f0500db;
+        public static final int menu_text=0x7f0500ae;
         public static final int message=0x7f05003e;
         public static final int message_bottom=0x7f050042;
-        public static final int name_text_view=0x7f05008d;
+        public static final int name_text_view=0x7f050094;
         public static final int normal=0x7f05000d;
         public static final int ok_button=0x7f050043;
-        public static final int order_customer_edit_text=0x7f0500ba;
-        public static final int order_customer_name_text_view=0x7f0500c5;
-        public static final int order_date_edit_text=0x7f0500b4;
-        public static final int order_date_text_view=0x7f0500c2;
-        public static final int order_fragment_tab_general=0x7f0500b2;
-        public static final int order_fragment_tab_notes=0x7f0500af;
-        public static final int order_notes_edit_text=0x7f0500c1;
-        public static final int order_notes_text_view=0x7f0500c9;
-        public static final int order_price_list_edit_text=0x7f0500be;
-        public static final int order_price_list_text_view=0x7f0500c7;
-        public static final int order_shipping_address_edit_text=0x7f0500bc;
-        public static final int order_shipping_address_text_view=0x7f0500c6;
-        public static final int order_shipping_date_edit_text=0x7f0500b6;
-        public static final int order_shipping_date_text_view=0x7f0500c3;
-        public static final int order_shipping_time_edit_text=0x7f0500b8;
-        public static final int order_shipping_time_text_view=0x7f0500c4;
-        public static final int order_warehouse_edit_text=0x7f0500c0;
-        public static final int order_warehouse_text_view=0x7f0500c8;
-        public static final int password=0x7f05004d;
+        public static final int order_customer_edit_text=0x7f0500c3;
+        public static final int order_customer_name_text_view=0x7f0500ce;
+        public static final int order_date_edit_text=0x7f0500bd;
+        public static final int order_date_text_view=0x7f0500cb;
+        public static final int order_fragment_tab_general=0x7f0500bb;
+        public static final int order_fragment_tab_notes=0x7f0500b8;
+        public static final int order_fragment_tab_photos=0x7f0500d4;
+        public static final int order_notes_edit_text=0x7f0500ca;
+        public static final int order_notes_text_view=0x7f0500d2;
+        public static final int order_price_list_edit_text=0x7f0500c7;
+        public static final int order_price_list_text_view=0x7f0500d0;
+        public static final int order_shipping_address_edit_text=0x7f0500c5;
+        public static final int order_shipping_address_text_view=0x7f0500cf;
+        public static final int order_shipping_date_edit_text=0x7f0500bf;
+        public static final int order_shipping_date_text_view=0x7f0500cc;
+        public static final int order_shipping_time_edit_text=0x7f0500c1;
+        public static final int order_shipping_time_text_view=0x7f0500cd;
+        public static final int order_warehouse_edit_text=0x7f0500c9;
+        public static final int order_warehouse_text_view=0x7f0500d1;
+        public static final int pager=0x7f0500a1;
+        public static final int password=0x7f050050;
         public static final int password_edit=0x7f050041;
-        public static final int picked_up_data_table_row=0x7f0500ab;
-        public static final int price_text_view=0x7f05005e;
-        public static final int remainder_text_view=0x7f050060;
+        public static final int photo_image_view=0x7f050083;
+        public static final int picked_up_data_table_row=0x7f0500b3;
+        public static final int preview=0x7f050044;
+        public static final int price_text_view=0x7f050063;
+        public static final int remainder_text_view=0x7f050065;
         public static final int right=0x7f050003;
-        public static final int route_date_edit_text=0x7f05009a;
-        public static final int route_point_address_text_view=0x7f05009d;
-        public static final int route_point_fragment_tab_photos=0x7f0500cb;
-        public static final int route_point_name_text_view=0x7f05009c;
-        public static final int route_point_status_text_view=0x7f0500ca;
-        public static final int save_menu_item=0x7f0500d7;
-        public static final int scrollView1=0x7f050054;
-        public static final int select_all_categories=0x7f0500d8;
-        public static final int server=0x7f05004b;
+        public static final int route_date_edit_text=0x7f0500a2;
+        public static final int route_point_address_text_view=0x7f0500a5;
+        public static final int route_point_name_text_view=0x7f0500a4;
+        public static final int route_point_status_text_view=0x7f0500d3;
+        public static final int save_menu_item=0x7f0500e0;
+        public static final int scrollView1=0x7f050059;
+        public static final int select_all_categories=0x7f0500e1;
+        public static final int server=0x7f05004e;
         public static final int server_edit=0x7f05003f;
-        public static final int shipping_address_edit_text=0x7f05007d;
+        public static final int shipping_address_edit_text=0x7f050082;
         public static final int showCustom=0x7f050014;
         public static final int showHome=0x7f050011;
         public static final int showTitle=0x7f050013;
-        public static final int sign_in_button=0x7f05004e;
-        public static final int space1=0x7f050053;
-        public static final int sync_form=0x7f050082;
-        public static final int sync_run_button=0x7f050086;
-        public static final int sync_status=0x7f050080;
-        public static final int sync_status_message=0x7f050081;
+        public static final int sign_in_button=0x7f050051;
+        public static final int space1=0x7f050058;
+        public static final int sync_form=0x7f050089;
+        public static final int sync_run_button=0x7f05008d;
+        public static final int sync_status=0x7f050087;
+        public static final int sync_status_message=0x7f050088;
         public static final int tabMode=0x7f05000f;
-        public static final int tab_details=0x7f050051;
-        public static final int tab_general=0x7f050050;
-        public static final int tab_notes=0x7f050052;
-        public static final int tab_orders=0x7f05007a;
-        public static final int tab_photos=0x7f05007b;
-        public static final int tableRow1=0x7f050062;
-        public static final int tableRow2=0x7f050066;
-        public static final int tableRow3=0x7f05006a;
-        public static final int tableRow4=0x7f05006e;
-        public static final int tableRow5=0x7f050058;
-        public static final int tableRow6=0x7f05005d;
-        public static final int tableRow7=0x7f050055;
-        public static final int textView1=0x7f050071;
-        public static final int textView2=0x7f050074;
-        public static final int textView3=0x7f050059;
-        public static final int textView4=0x7f050092;
-        public static final int textView5=0x7f050094;
-        public static final int textView6=0x7f05005a;
-        public static final int textView7=0x7f050090;
-        public static final int textView8=0x7f05005c;
-        public static final int textView9=0x7f050093;
+        public static final int tab_details=0x7f050056;
+        public static final int tab_general=0x7f050055;
+        public static final int tab_notes=0x7f050057;
+        public static final int tab_orders=0x7f05007f;
+        public static final int tab_photos=0x7f050080;
+        public static final int tableRow1=0x7f050067;
+        public static final int tableRow2=0x7f05006b;
+        public static final int tableRow3=0x7f05006f;
+        public static final int tableRow4=0x7f050073;
+        public static final int tableRow5=0x7f05005d;
+        public static final int tableRow6=0x7f050062;
+        public static final int tableRow7=0x7f05005a;
+        public static final int take_photo_image_view=0x7f050046;
+        public static final int textView1=0x7f050076;
+        public static final int textView2=0x7f050079;
+        public static final int textView3=0x7f05005e;
+        public static final int textView4=0x7f050099;
+        public static final int textView5=0x7f05009b;
+        public static final int textView6=0x7f05005f;
+        public static final int textView7=0x7f050097;
+        public static final int textView8=0x7f050061;
+        public static final int textView9=0x7f05009a;
         public static final int top=0x7f050000;
-        public static final int treeview_list_item_frame=0x7f0500cf;
-        public static final int treeview_list_item_image=0x7f0500ce;
-        public static final int treeview_list_item_image_layout=0x7f0500cd;
-        public static final int uom_edit_text=0x7f050057;
-        public static final int uom_text_view=0x7f050091;
-        public static final int update_form=0x7f050089;
-        public static final int update_run_button=0x7f05008b;
-        public static final int update_status=0x7f050087;
-        public static final int update_status_message=0x7f050088;
+        public static final int treeview_list_item_frame=0x7f0500d8;
+        public static final int treeview_list_item_image=0x7f0500d7;
+        public static final int treeview_list_item_image_layout=0x7f0500d6;
+        public static final int uom_edit_text=0x7f05005c;
+        public static final int uom_text_view=0x7f050098;
+        public static final int update_form=0x7f050090;
+        public static final int update_run_button=0x7f050092;
+        public static final int update_status=0x7f05008e;
+        public static final int update_status_message=0x7f05008f;
         public static final int useLogo=0x7f050010;
         public static final int username_edit=0x7f050040;
-        public static final int version_text_view=0x7f05008a;
+        public static final int version_text_view=0x7f050091;
         public static final int wrap_content=0x7f05000c;
     }
     public static final class integer {
@@ -1285,74 +1304,80 @@ containing a value of this type.
         public static final int abs__search_view=0x7f030013;
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_authenticator=0x7f030015;
-        public static final int activity_categories=0x7f030016;
-        public static final int activity_customers=0x7f030017;
-        public static final int activity_daily_orders=0x7f030018;
-        public static final int activity_login=0x7f030019;
-        public static final int activity_main=0x7f03001a;
-        public static final int activity_order=0x7f03001b;
-        public static final int activity_order_edit=0x7f03001c;
-        public static final int activity_order_item_pickup=0x7f03001d;
-        public static final int activity_order_item_pickup_filter=0x7f03001e;
-        public static final int activity_orders=0x7f03001f;
-        public static final int activity_price_lists=0x7f030020;
-        public static final int activity_product_uoms=0x7f030021;
-        public static final int activity_route=0x7f030022;
-        public static final int activity_route_point=0x7f030023;
-        public static final int activity_route_point_edit=0x7f030024;
-        public static final int activity_shipping_addresses=0x7f030025;
-        public static final int activity_statuses=0x7f030026;
-        public static final int activity_synchronization=0x7f030027;
-        public static final int activity_update=0x7f030028;
-        public static final int activity_warehouses=0x7f030029;
-        public static final int dialog_customer_info=0x7f03002a;
-        public static final int dialog_price_list_info=0x7f03002b;
-        public static final int dialog_product_info=0x7f03002c;
-        public static final int dialog_shipping_address_info=0x7f03002d;
-        public static final int dialog_warehouse_info=0x7f03002e;
-        public static final int fragment_customer_list=0x7f03002f;
-        public static final int fragment_daily_orders=0x7f030030;
-        public static final int fragment_date_picker=0x7f030031;
-        public static final int fragment_main_menu_list=0x7f030032;
-        public static final int fragment_order=0x7f030033;
-        public static final int fragment_order_item_list=0x7f030034;
-        public static final int fragment_order_list=0x7f030035;
-        public static final int fragment_order_pickup_item_list=0x7f030036;
-        public static final int fragment_price_lists=0x7f030037;
-        public static final int fragment_route=0x7f030038;
-        public static final int fragment_route_point=0x7f030039;
-        public static final int fragment_shipping_address_list=0x7f03003a;
-        public static final int fragment_statuses=0x7f03003b;
-        public static final int fragment_time_picker=0x7f03003c;
-        public static final int fragment_uom_list=0x7f03003d;
-        public static final int fragment_warehouse_list=0x7f03003e;
-        public static final int item_layout_category=0x7f03003f;
-        public static final int item_layout_category_quick_filter=0x7f030040;
-        public static final int item_layout_customer=0x7f030041;
-        public static final int item_layout_daily_order=0x7f030042;
-        public static final int item_layout_expandable_category=0x7f030043;
-        public static final int item_layout_main_menu=0x7f030044;
-        public static final int item_layout_order=0x7f030045;
-        public static final int item_layout_order_item=0x7f030046;
-        public static final int item_layout_order_pickup_item=0x7f030047;
-        public static final int item_layout_price_list=0x7f030048;
-        public static final int item_layout_product_unit_of_measure=0x7f030049;
-        public static final int item_layout_route_point=0x7f03004a;
-        public static final int item_layout_shipping_address=0x7f03004b;
-        public static final int item_layout_status=0x7f03004c;
-        public static final int item_layout_warehouse=0x7f03004d;
-        public static final int sherlock_spinner_dropdown_item=0x7f03004e;
-        public static final int sherlock_spinner_item=0x7f03004f;
-        public static final int tab_order_details=0x7f030050;
-        public static final int tab_order_edit_details=0x7f030051;
-        public static final int tab_order_edit_general=0x7f030052;
-        public static final int tab_order_edit_notes=0x7f030053;
-        public static final int tab_order_general=0x7f030054;
-        public static final int tab_order_notes=0x7f030055;
-        public static final int tab_route_point_general=0x7f030056;
-        public static final int tab_route_point_orders=0x7f030057;
-        public static final int tab_route_point_photos=0x7f030058;
-        public static final int tree_list_item_wrapper=0x7f030059;
+        public static final int activity_camera=0x7f030016;
+        public static final int activity_categories=0x7f030017;
+        public static final int activity_customers=0x7f030018;
+        public static final int activity_daily_orders=0x7f030019;
+        public static final int activity_login=0x7f03001a;
+        public static final int activity_main=0x7f03001b;
+        public static final int activity_make_photo=0x7f03001c;
+        public static final int activity_order=0x7f03001d;
+        public static final int activity_order_edit=0x7f03001e;
+        public static final int activity_order_item_pickup=0x7f03001f;
+        public static final int activity_order_item_pickup_filter=0x7f030020;
+        public static final int activity_orders=0x7f030021;
+        public static final int activity_price_lists=0x7f030022;
+        public static final int activity_product_uoms=0x7f030023;
+        public static final int activity_route=0x7f030024;
+        public static final int activity_route_point=0x7f030025;
+        public static final int activity_route_point_edit=0x7f030026;
+        public static final int activity_route_point_photo=0x7f030027;
+        public static final int activity_shipping_addresses=0x7f030028;
+        public static final int activity_statuses=0x7f030029;
+        public static final int activity_synchronization=0x7f03002a;
+        public static final int activity_update=0x7f03002b;
+        public static final int activity_warehouses=0x7f03002c;
+        public static final int dialog_customer_info=0x7f03002d;
+        public static final int dialog_price_list_info=0x7f03002e;
+        public static final int dialog_product_info=0x7f03002f;
+        public static final int dialog_shipping_address_info=0x7f030030;
+        public static final int dialog_warehouse_info=0x7f030031;
+        public static final int fragment_customer_list=0x7f030032;
+        public static final int fragment_daily_orders=0x7f030033;
+        public static final int fragment_date_picker=0x7f030034;
+        public static final int fragment_main_menu_list=0x7f030035;
+        public static final int fragment_order=0x7f030036;
+        public static final int fragment_order_item_list=0x7f030037;
+        public static final int fragment_order_list=0x7f030038;
+        public static final int fragment_order_pickup_item_list=0x7f030039;
+        public static final int fragment_photo=0x7f03003a;
+        public static final int fragment_photos=0x7f03003b;
+        public static final int fragment_price_lists=0x7f03003c;
+        public static final int fragment_route=0x7f03003d;
+        public static final int fragment_route_point=0x7f03003e;
+        public static final int fragment_shipping_address_list=0x7f03003f;
+        public static final int fragment_statuses=0x7f030040;
+        public static final int fragment_time_picker=0x7f030041;
+        public static final int fragment_uom_list=0x7f030042;
+        public static final int fragment_warehouse_list=0x7f030043;
+        public static final int item_layout_category=0x7f030044;
+        public static final int item_layout_category_quick_filter=0x7f030045;
+        public static final int item_layout_customer=0x7f030046;
+        public static final int item_layout_daily_order=0x7f030047;
+        public static final int item_layout_expandable_category=0x7f030048;
+        public static final int item_layout_main_menu=0x7f030049;
+        public static final int item_layout_order=0x7f03004a;
+        public static final int item_layout_order_item=0x7f03004b;
+        public static final int item_layout_order_pickup_item=0x7f03004c;
+        public static final int item_layout_photo=0x7f03004d;
+        public static final int item_layout_price_list=0x7f03004e;
+        public static final int item_layout_product_unit_of_measure=0x7f03004f;
+        public static final int item_layout_route_point=0x7f030050;
+        public static final int item_layout_shipping_address=0x7f030051;
+        public static final int item_layout_status=0x7f030052;
+        public static final int item_layout_warehouse=0x7f030053;
+        public static final int sherlock_spinner_dropdown_item=0x7f030054;
+        public static final int sherlock_spinner_item=0x7f030055;
+        public static final int tab_order_details=0x7f030056;
+        public static final int tab_order_edit_details=0x7f030057;
+        public static final int tab_order_edit_general=0x7f030058;
+        public static final int tab_order_edit_notes=0x7f030059;
+        public static final int tab_order_general=0x7f03005a;
+        public static final int tab_order_notes=0x7f03005b;
+        public static final int tab_route_point_general=0x7f03005c;
+        public static final int tab_route_point_orders=0x7f03005d;
+        public static final int tab_route_point_photos=0x7f03005e;
+        public static final int tree_list_item_wrapper=0x7f03005f;
     }
     public static final class menu {
         public static final int action_mode_list=0x7f0c0000;
@@ -1361,34 +1386,36 @@ containing a value of this type.
         public static final int authenticator=0x7f0c0003;
         public static final int daily_orders=0x7f0c0004;
         public static final int date_picker=0x7f0c0005;
-        public static final int menu_categories=0x7f0c0006;
-        public static final int menu_categories_quick_filter=0x7f0c0007;
-        public static final int menu_context_categories=0x7f0c0008;
-        public static final int menu_customers=0x7f0c0009;
-        public static final int menu_list=0x7f0c000a;
-        public static final int menu_order=0x7f0c000b;
-        public static final int menu_order_edit=0x7f0c000c;
-        public static final int menu_order_edit_details_tab=0x7f0c000d;
-        public static final int menu_order_item_pickup=0x7f0c000e;
-        public static final int menu_order_item_pickup_filter=0x7f0c000f;
-        public static final int menu_price_lists=0x7f0c0010;
-        public static final int menu_route=0x7f0c0011;
-        public static final int menu_route_point=0x7f0c0012;
-        public static final int menu_route_point_edit=0x7f0c0013;
-        public static final int menu_route_point_editable=0x7f0c0014;
-        public static final int menu_route_point_photos=0x7f0c0015;
-        public static final int menu_settings=0x7f0c0016;
-        public static final int menu_shipping_addresses=0x7f0c0017;
-        public static final int menu_statuses=0x7f0c0018;
-        public static final int menu_synchronization=0x7f0c0019;
-        public static final int menu_update=0x7f0c001a;
-        public static final int menu_warehouses=0x7f0c001b;
-        public static final int order=0x7f0c001c;
-        public static final int order_item_pickup=0x7f0c001d;
-        public static final int order_pickup_items=0x7f0c001e;
-        public static final int orders=0x7f0c001f;
-        public static final int product_uoms=0x7f0c0020;
-        public static final int time_picker=0x7f0c0021;
+        public static final int make_photo=0x7f0c0006;
+        public static final int menu_categories=0x7f0c0007;
+        public static final int menu_categories_quick_filter=0x7f0c0008;
+        public static final int menu_context_categories=0x7f0c0009;
+        public static final int menu_customers=0x7f0c000a;
+        public static final int menu_list=0x7f0c000b;
+        public static final int menu_order=0x7f0c000c;
+        public static final int menu_order_edit=0x7f0c000d;
+        public static final int menu_order_edit_details_tab=0x7f0c000e;
+        public static final int menu_order_item_pickup=0x7f0c000f;
+        public static final int menu_order_item_pickup_filter=0x7f0c0010;
+        public static final int menu_price_lists=0x7f0c0011;
+        public static final int menu_route=0x7f0c0012;
+        public static final int menu_route_point=0x7f0c0013;
+        public static final int menu_route_point_edit=0x7f0c0014;
+        public static final int menu_route_point_editable=0x7f0c0015;
+        public static final int menu_route_point_photos=0x7f0c0016;
+        public static final int menu_settings=0x7f0c0017;
+        public static final int menu_shipping_addresses=0x7f0c0018;
+        public static final int menu_statuses=0x7f0c0019;
+        public static final int menu_synchronization=0x7f0c001a;
+        public static final int menu_update=0x7f0c001b;
+        public static final int menu_warehouses=0x7f0c001c;
+        public static final int order=0x7f0c001d;
+        public static final int order_item_pickup=0x7f0c001e;
+        public static final int order_pickup_items=0x7f0c001f;
+        public static final int orders=0x7f0c0020;
+        public static final int product_uoms=0x7f0c0021;
+        public static final int route_point_photo=0x7f0c0022;
+        public static final int time_picker=0x7f0c0023;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1430,15 +1457,15 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f060008;
-        public static final int action_cancel=0x7f0600e3;
-        public static final int action_create=0x7f0600c0;
+        public static final int action_cancel=0x7f0600e8;
+        public static final int action_create=0x7f0600c5;
         public static final int action_settings=0x7f06002b;
-        public static final int action_sign_in_register=0x7f0600ba;
-        public static final int action_sign_in_short=0x7f0600bb;
+        public static final int action_sign_in_register=0x7f0600bf;
+        public static final int action_sign_in_short=0x7f0600c0;
         /**  Strings related to login 
  Strings related to login 
          */
-        public static final int action_synchronize=0x7f0600e2;
+        public static final int action_synchronize=0x7f0600e7;
         public static final int action_update=0x7f0600a3;
         public static final int alert_cant_change_point_status=0x7f06000f;
         public static final int alert_cant_edit_route_point=0x7f06000e;
@@ -1450,18 +1477,18 @@ containing a value of this type.
  Button for going to the previous screen or step 
          */
         public static final int back_button_label=0x7f060083;
-        public static final int button_delete=0x7f0600cf;
-        public static final int button_eight=0x7f0600cc;
-        public static final int button_five=0x7f0600c9;
-        public static final int button_four=0x7f0600c8;
-        public static final int button_nil=0x7f0600ce;
-        public static final int button_nine=0x7f0600cd;
+        public static final int button_delete=0x7f0600d4;
+        public static final int button_eight=0x7f0600d1;
+        public static final int button_five=0x7f0600ce;
+        public static final int button_four=0x7f0600cd;
+        public static final int button_nil=0x7f0600d3;
+        public static final int button_nine=0x7f0600d2;
         public static final int button_ok=0x7f06009c;
-        public static final int button_one=0x7f0600c5;
-        public static final int button_seven=0x7f0600cb;
-        public static final int button_six=0x7f0600ca;
-        public static final int button_three=0x7f0600c7;
-        public static final int button_two=0x7f0600c6;
+        public static final int button_one=0x7f0600ca;
+        public static final int button_seven=0x7f0600d0;
+        public static final int button_six=0x7f0600cf;
+        public static final int button_three=0x7f0600cc;
+        public static final int button_two=0x7f0600cb;
         /**  Button to cancel the current operation 
  Button to cancel the current operation 
          */
@@ -1473,11 +1500,11 @@ containing a value of this type.
         public static final int collapsible_condensed_enable=0x7f060094;
         public static final int collapsible_menu_disable=0x7f060091;
         public static final int collapsible_menu_enable=0x7f060093;
-        public static final int description_address=0x7f0600d6;
+        public static final int description_address=0x7f0600db;
         public static final int description_categories_filter=0x7f06009b;
         public static final int description_in_order_filter=0x7f06009a;
         public static final int description_in_stock_filter=0x7f0600b2;
-        public static final int description_name=0x7f0600d5;
+        public static final int description_name=0x7f0600da;
         public static final int dialog_change_price_confirmation_message=0x7f06006e;
         public static final int dialog_change_price_confirmation_negative_button=0x7f060070;
         public static final int dialog_change_price_confirmation_positive_button=0x7f06006f;
@@ -1490,12 +1517,12 @@ containing a value of this type.
         public static final int dialog_leave_changed_order_confirmation_positive_button=0x7f0600a1;
         public static final int dialog_leave_changed_order_confirmation_title=0x7f06009f;
         public static final int dialog_leave_changed_order_confirmationn_negative_button=0x7f0600a2;
-        public static final int error_field_required=0x7f060100;
-        public static final int error_incorrect_password=0x7f0600ff;
-        public static final int error_invalid_login=0x7f0600fd;
-        public static final int error_invalid_password=0x7f0600fe;
-        public static final int error_same_point_already_exist=0x7f060101;
-        public static final int error_shipping_date_must_be_greater_than_order_date=0x7f060102;
+        public static final int error_field_required=0x7f060106;
+        public static final int error_incorrect_password=0x7f060105;
+        public static final int error_invalid_login=0x7f060103;
+        public static final int error_invalid_password=0x7f060104;
+        public static final int error_same_point_already_exist=0x7f060107;
+        public static final int error_shipping_date_must_be_greater_than_order_date=0x7f060108;
         public static final int example_address=0x7f060018;
         public static final int example_amount=0x7f060016;
         public static final int example_count=0x7f060015;
@@ -1523,19 +1550,21 @@ containing a value of this type.
  Label for this package 
          */
         public static final int label=0x7f060072;
-        public static final int label_address=0x7f0600d4;
+        public static final int label_address=0x7f0600d9;
         public static final int label_amount=0x7f060059;
         public static final int label_categories=0x7f06005b;
         public static final int label_close_bracket=0x7f060055;
         public static final int label_count=0x7f060058;
         public static final int label_current_version=0x7f06005c;
         public static final int label_debt=0x7f060056;
-        public static final int label_description=0x7f0600c1;
-        public static final int label_full_synchronization=0x7f0600e4;
+        public static final int label_description=0x7f0600c6;
+        public static final int label_flash=0x7f0600ba;
+        public static final int label_full_synchronization=0x7f0600e9;
         public static final int label_in_order=0x7f06005a;
         public static final int label_in_stock=0x7f0600b3;
-        public static final int label_last_synchronization=0x7f0600e5;
-        public static final int label_name=0x7f0600d3;
+        public static final int label_last_synchronization=0x7f0600ea;
+        public static final int label_make_photo=0x7f0600b8;
+        public static final int label_name=0x7f0600d8;
         public static final int label_open_bracket=0x7f060054;
         public static final int label_order_customer=0x7f06004b;
         public static final int label_order_date=0x7f060048;
@@ -1546,7 +1575,8 @@ containing a value of this type.
         public static final int label_order_shipping_time=0x7f06004a;
         public static final int label_order_warehouse=0x7f06004e;
         public static final int label_orders=0x7f060052;
-        public static final int label_price=0x7f0600c2;
+        public static final int label_photo=0x7f0600b9;
+        public static final int label_price=0x7f0600c7;
         public static final int label_remainder=0x7f060057;
         public static final int label_selected_count=0x7f0600b5;
         public static final int label_shipping_at=0x7f06009d;
@@ -1558,11 +1588,11 @@ containing a value of this type.
         public static final int label_tab_orders=0x7f060047;
         public static final int label_tab_photos=0x7f060046;
         public static final int label_to_the_amount_of=0x7f06009e;
-        public static final int label_unit_of_measure=0x7f0600c3;
+        public static final int label_unit_of_measure=0x7f0600c8;
         public static final int label_uom_base=0x7f060050;
         public static final int label_uom_count_in_base=0x7f060051;
-        public static final int lable_route_date_default=0x7f0600d1;
-        public static final int last_synchronization=0x7f0600e6;
+        public static final int lable_route_date_default=0x7f0600d6;
+        public static final int last_synchronization=0x7f0600eb;
         /**  Message shown in dialog if the username or password is invalid. 
  Message shown in dialog if the username or password is invalid. 
          */
@@ -1578,10 +1608,6 @@ containing a value of this type.
         /** 
         Message shown if the provided account doesn't support the current
         activity.
-
-
-
-
     
 
         Message shown if the provided account doesn't support the current
@@ -1603,15 +1629,15 @@ containing a value of this type.
  Label above username EditText 
          */
         public static final int login_activity_username_label=0x7f06007b;
-        public static final int login_progress_signing_in=0x7f0600bd;
+        public static final int login_progress_signing_in=0x7f0600c2;
         public static final int main_menu_orders=0x7f060064;
         public static final int main_menu_routes=0x7f060063;
         public static final int main_menu_settings=0x7f060065;
         public static final int main_menu_sync=0x7f060066;
         public static final int main_menu_update=0x7f060067;
-        public static final int menu_cancel_sync=0x7f0600fc;
+        public static final int menu_cancel_sync=0x7f060102;
         public static final int menu_cancel_update=0x7f06003f;
-        public static final int menu_forgot_password=0x7f0600bc;
+        public static final int menu_forgot_password=0x7f0600c1;
         public static final int menu_item_add=0x7f060037;
         public static final int menu_item_categories_quick_filter=0x7f0600ae;
         public static final int menu_item_categories_quick_filter_clear=0x7f0600af;
@@ -1647,38 +1673,38 @@ containing a value of this type.
  Permission label 
          */
         public static final int permlab_samplesyncadapterAuthPassword=0x7f060073;
-        public static final int pref_default_buffer_size=0x7f0600e1;
-        public static final int pref_default_last_sync=0x7f0600df;
-        public static final int pref_default_server_address=0x7f0600dd;
+        public static final int pref_default_buffer_size=0x7f0600e6;
+        public static final int pref_default_last_sync=0x7f0600e4;
+        public static final int pref_default_server_address=0x7f0600e2;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_header_data_sync=0x7f0600db;
+        public static final int pref_header_data_sync=0x7f0600e0;
         /**  Strings related to Settings 
  Strings related to Settings 
  Example General settings 
          */
-        public static final int pref_header_general=0x7f0600d8;
-        public static final int pref_title_buffer_size=0x7f0600e0;
-        public static final int pref_title_last_sync=0x7f0600de;
+        public static final int pref_header_general=0x7f0600dd;
+        public static final int pref_title_buffer_size=0x7f0600e5;
+        public static final int pref_title_last_sync=0x7f0600e3;
         /**  Example settings for Data & Sync 
          */
-        public static final int pref_title_server_address=0x7f0600dc;
-        public static final int pref_title_version=0x7f0600d9;
-        public static final int pref_unknown_version=0x7f0600da;
+        public static final int pref_title_server_address=0x7f0600e1;
+        public static final int pref_title_version=0x7f0600de;
+        public static final int pref_unknown_version=0x7f0600df;
         public static final int profile_action=0x7f060085;
-        public static final int prompt_customer=0x7f0600be;
-        public static final int prompt_login=0x7f0600b8;
-        public static final int prompt_password=0x7f0600b9;
+        public static final int prompt_customer=0x7f0600c3;
+        public static final int prompt_login=0x7f0600bd;
+        public static final int prompt_password=0x7f0600be;
         /**  Strings related to route 
  Strings related to route 
          */
-        public static final int prompt_route_date=0x7f0600d0;
+        public static final int prompt_route_date=0x7f0600d5;
         /**  Strings related to login 
  Strings related to login 
          */
-        public static final int prompt_server=0x7f0600b7;
-        public static final int prompt_shipping_address=0x7f0600bf;
-        public static final int prompt_unit_of_measure=0x7f0600c4;
+        public static final int prompt_server=0x7f0600bc;
+        public static final int prompt_shipping_address=0x7f0600c4;
+        public static final int prompt_unit_of_measure=0x7f0600c9;
         public static final int select_all_menu=0x7f060096;
         /**  Button that takes the user to the "sign in" screen 
  Button that takes the user to the "sign in" screen 
@@ -1688,26 +1714,27 @@ containing a value of this type.
         public static final int simple_menu_name=0x7f060089;
         public static final int sub_title_activity_orders=0x7f060030;
         public static final int sub_title_activity_route_point=0x7f06002d;
-        public static final int sync_categories=0x7f0600ea;
-        public static final int sync_clear_storage=0x7f0600e8;
-        public static final int sync_customers=0x7f0600e9;
-        public static final int sync_greetings=0x7f0600f6;
-        public static final int sync_manager_settings=0x7f0600fa;
-        public static final int sync_orders=0x7f0600f8;
-        public static final int sync_preferences=0x7f0600f5;
-        public static final int sync_price_lists=0x7f0600eb;
-        public static final int sync_price_lists_lines=0x7f0600f0;
-        public static final int sync_products=0x7f0600ec;
-        public static final int sync_products_units_of_measures=0x7f0600ee;
-        public static final int sync_progress=0x7f0600e7;
-        public static final int sync_remainders=0x7f0600f9;
-        public static final int sync_route_points_templates=0x7f0600f4;
-        public static final int sync_route_templates=0x7f0600f3;
-        public static final int sync_routes=0x7f0600f7;
-        public static final int sync_shipping_addresses=0x7f0600ed;
-        public static final int sync_statuses=0x7f0600f1;
-        public static final int sync_units_of_measures=0x7f0600ef;
-        public static final int sync_warehouses=0x7f0600f2;
+        public static final int sync_categories=0x7f0600ef;
+        public static final int sync_clear_storage=0x7f0600ed;
+        public static final int sync_customers=0x7f0600ee;
+        public static final int sync_greetings=0x7f0600fb;
+        public static final int sync_manager_settings=0x7f060100;
+        public static final int sync_orders=0x7f0600fd;
+        public static final int sync_preferences=0x7f0600fa;
+        public static final int sync_price_lists=0x7f0600f0;
+        public static final int sync_price_lists_lines=0x7f0600f5;
+        public static final int sync_products=0x7f0600f1;
+        public static final int sync_products_units_of_measures=0x7f0600f3;
+        public static final int sync_progress=0x7f0600ec;
+        public static final int sync_remainders=0x7f0600ff;
+        public static final int sync_route_point_photos=0x7f0600fe;
+        public static final int sync_route_points_templates=0x7f0600f9;
+        public static final int sync_route_templates=0x7f0600f8;
+        public static final int sync_routes=0x7f0600fc;
+        public static final int sync_shipping_addresses=0x7f0600f2;
+        public static final int sync_statuses=0x7f0600f6;
+        public static final int sync_units_of_measures=0x7f0600f4;
+        public static final int sync_warehouses=0x7f0600f7;
         public static final int title_activity_abstract=0x7f060042;
         public static final int title_activity_authenticator=0x7f060068;
         public static final int title_activity_categories=0x7f060088;
@@ -1716,6 +1743,7 @@ containing a value of this type.
         public static final int title_activity_daily_orders=0x7f060098;
         public static final int title_activity_date_picker_fragment=0x7f060041;
         public static final int title_activity_main=0x7f060028;
+        public static final int title_activity_make_photo=0x7f0600b7;
         public static final int title_activity_new_order=0x7f06002a;
         public static final int title_activity_new_route_point=0x7f060029;
         public static final int title_activity_order=0x7f06002e;
@@ -1725,14 +1753,15 @@ containing a value of this type.
         public static final int title_activity_orders=0x7f06002f;
         public static final int title_activity_price_lists=0x7f06005d;
         public static final int title_activity_product_uoms=0x7f060062;
-        public static final int title_activity_route=0x7f0600d2;
+        public static final int title_activity_route=0x7f0600d7;
         public static final int title_activity_route_fragment=0x7f060034;
         public static final int title_activity_route_point=0x7f06002c;
         public static final int title_activity_route_point_fragment=0x7f060035;
-        public static final int title_activity_settings=0x7f0600d7;
+        public static final int title_activity_route_point_photo=0x7f0600bb;
+        public static final int title_activity_settings=0x7f0600dc;
         public static final int title_activity_shipping_addresses=0x7f060032;
         public static final int title_activity_statuses=0x7f060087;
-        public static final int title_activity_sync=0x7f0600fb;
+        public static final int title_activity_sync=0x7f060101;
         public static final int title_activity_time_picker_fragment=0x7f06005f;
         public static final int title_activity_update=0x7f0600ac;
         public static final int title_activity_warehouses=0x7f06005e;
@@ -1963,7 +1992,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:background
+          @attr name com.mss.application:background
         */
         public static final int SherlockActionBar_background = 2;
         /**
@@ -1977,7 +2006,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundSplit
+          @attr name com.mss.application:backgroundSplit
         */
         public static final int SherlockActionBar_backgroundSplit = 3;
         /**
@@ -1991,7 +2020,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundStacked
+          @attr name com.mss.application:backgroundStacked
         */
         public static final int SherlockActionBar_backgroundStacked = 12;
         /**
@@ -2003,7 +2032,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:customNavigationLayout
+          @attr name com.mss.application:customNavigationLayout
         */
         public static final int SherlockActionBar_customNavigationLayout = 13;
         /**
@@ -2026,7 +2055,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:displayOptions
+          @attr name com.mss.application:displayOptions
         */
         public static final int SherlockActionBar_displayOptions = 7;
         /**
@@ -2038,7 +2067,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:divider
+          @attr name com.mss.application:divider
         */
         public static final int SherlockActionBar_divider = 5;
         /**
@@ -2056,7 +2085,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:height
+          @attr name com.mss.application:height
         */
         public static final int SherlockActionBar_height = 4;
         /**
@@ -2068,7 +2097,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:homeLayout
+          @attr name com.mss.application:homeLayout
         */
         public static final int SherlockActionBar_homeLayout = 14;
         /**
@@ -2080,7 +2109,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:icon
+          @attr name com.mss.application:icon
         */
         public static final int SherlockActionBar_icon = 10;
         /**
@@ -2092,7 +2121,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:indeterminateProgressStyle
+          @attr name com.mss.application:indeterminateProgressStyle
         */
         public static final int SherlockActionBar_indeterminateProgressStyle = 16;
         /**
@@ -2111,7 +2140,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:itemPadding
+          @attr name com.mss.application:itemPadding
         */
         public static final int SherlockActionBar_itemPadding = 18;
         /**
@@ -2123,7 +2152,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:logo
+          @attr name com.mss.application:logo
         */
         public static final int SherlockActionBar_logo = 11;
         /**
@@ -2143,7 +2172,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:navigationMode
+          @attr name com.mss.application:navigationMode
         */
         public static final int SherlockActionBar_navigationMode = 6;
         /**
@@ -2161,7 +2190,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:progressBarPadding
+          @attr name com.mss.application:progressBarPadding
         */
         public static final int SherlockActionBar_progressBarPadding = 17;
         /**
@@ -2173,7 +2202,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:progressBarStyle
+          @attr name com.mss.application:progressBarStyle
         */
         public static final int SherlockActionBar_progressBarStyle = 15;
         /**
@@ -2189,7 +2218,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:subtitle
+          @attr name com.mss.application:subtitle
         */
         public static final int SherlockActionBar_subtitle = 9;
         /**
@@ -2201,7 +2230,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:subtitleTextStyle
+          @attr name com.mss.application:subtitleTextStyle
         */
         public static final int SherlockActionBar_subtitleTextStyle = 1;
         /**
@@ -2217,7 +2246,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:title
+          @attr name com.mss.application:title
         */
         public static final int SherlockActionBar_title = 8;
         /**
@@ -2229,7 +2258,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:titleTextStyle
+          @attr name com.mss.application:titleTextStyle
         */
         public static final int SherlockActionBar_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActionMenuItemView.
@@ -2238,7 +2267,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth com.mss.application:android_minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth android:minWidth}</code></td><td></td></tr>
            </table>
            @see #SherlockActionMenuItemView_android_minWidth
          */
@@ -2246,9 +2275,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x0101013f
         };
         /**
-          <p>This symbol is the offset where the {@link com.mss.application.R.attr#android_minWidth}
+          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
           attribute's value can be found in the {@link #SherlockActionMenuItemView} array.
-          @attr name android:android_minWidth
+          @attr name android:minWidth
         */
         public static final int SherlockActionMenuItemView_android_minWidth = 0;
         /** Attributes that can be used with a SherlockActionMode.
@@ -2284,7 +2313,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:background
+          @attr name com.mss.application:background
         */
         public static final int SherlockActionMode_background = 2;
         /**
@@ -2298,7 +2327,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundSplit
+          @attr name com.mss.application:backgroundSplit
         */
         public static final int SherlockActionMode_backgroundSplit = 3;
         /**
@@ -2316,7 +2345,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:height
+          @attr name com.mss.application:height
         */
         public static final int SherlockActionMode_height = 4;
         /**
@@ -2328,7 +2357,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:subtitleTextStyle
+          @attr name com.mss.application:subtitleTextStyle
         */
         public static final int SherlockActionMode_subtitleTextStyle = 1;
         /**
@@ -2340,7 +2369,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:titleTextStyle
+          @attr name com.mss.application:titleTextStyle
         */
         public static final int SherlockActionMode_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActivityChooserView.
@@ -2349,7 +2378,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActivityChooserView_android_background com.mss.application:android_background}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActivityChooserView_android_background android:background}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_expandActivityOverflowButtonDrawable com.mss.application:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_initialActivityCount com.mss.application:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
            </table>
@@ -2361,9 +2390,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x010100d4, 0x7f010066, 0x7f010067
         };
         /**
-          <p>This symbol is the offset where the {@link com.mss.application.R.attr#android_background}
+          <p>This symbol is the offset where the {@link android.R.attr#background}
           attribute's value can be found in the {@link #SherlockActivityChooserView} array.
-          @attr name android:android_background
+          @attr name android:background
         */
         public static final int SherlockActivityChooserView_android_background = 0;
         /**
@@ -2380,7 +2409,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:expandActivityOverflowButtonDrawable
+          @attr name com.mss.application:expandActivityOverflowButtonDrawable
         */
         public static final int SherlockActivityChooserView_expandActivityOverflowButtonDrawable = 2;
         /**
@@ -2396,7 +2425,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:initialActivityCount
+          @attr name com.mss.application:initialActivityCount
         */
         public static final int SherlockActivityChooserView_initialActivityCount = 1;
         /**  Base attributes that are available to all groups. 
@@ -2405,12 +2434,12 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior com.mss.application:android_checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_enabled com.mss.application:android_enabled}</code></td><td> Whether the items are enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_id com.mss.application:android_id}</code></td><td> The ID of the group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory com.mss.application:android_menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory com.mss.application:android_orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_visible com.mss.application:android_visible}</code></td><td> Whether the items are shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior android:checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_enabled android:enabled}</code></td><td> Whether the items are enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_id android:id}</code></td><td> The ID of the group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory android:menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_visible android:visible}</code></td><td> Whether the items are shown/visible.</td></tr>
            </table>
            @see #SherlockMenuGroup_android_checkableBehavior
            @see #SherlockMenuGroup_android_enabled
@@ -2427,24 +2456,27 @@ containing a value of this type.
           <p>
           @attr description
            Whether the items are capable of displaying a check mark. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_checkableBehavior}.
-          @attr name android:android_checkableBehavior
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checkableBehavior}.
+          @attr name android:checkableBehavior
         */
         public static final int SherlockMenuGroup_android_checkableBehavior = 5;
         /**
           <p>
           @attr description
            Whether the items are enabled. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_enabled}.
-          @attr name android:android_enabled
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#enabled}.
+          @attr name android:enabled
         */
         public static final int SherlockMenuGroup_android_enabled = 0;
         /**
           <p>
           @attr description
            The ID of the group. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_id}.
-          @attr name android:android_id
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#id}.
+          @attr name android:id
         */
         public static final int SherlockMenuGroup_android_id = 1;
         /**
@@ -2452,8 +2484,9 @@ containing a value of this type.
           @attr description
            The category applied to all items within this group.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_menuCategory}.
-          @attr name android:android_menuCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#menuCategory}.
+          @attr name android:menuCategory
         */
         public static final int SherlockMenuGroup_android_menuCategory = 3;
         /**
@@ -2461,16 +2494,18 @@ containing a value of this type.
           @attr description
            The order within the category applied to all items within this group.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_orderInCategory}.
-          @attr name android:android_orderInCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orderInCategory}.
+          @attr name android:orderInCategory
         */
         public static final int SherlockMenuGroup_android_orderInCategory = 4;
         /**
           <p>
           @attr description
            Whether the items are shown/visible. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_visible}.
-          @attr name android:android_visible
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#visible}.
+          @attr name android:visible
         */
         public static final int SherlockMenuGroup_android_visible = 2;
         /**  Base attributes that are available to all Item objects. 
@@ -2479,26 +2514,26 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout com.mss.application:android_actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass com.mss.application:android_actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
+           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout android:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass android:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass com.mss.application:android_actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
+           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass android:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
              action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut com.mss.application:android_alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checkable com.mss.application:android_checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checked com.mss.application:android_checked}</code></td><td> Whether the item is checked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_enabled com.mss.application:android_enabled}</code></td><td> Whether the item is enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_icon com.mss.application:android_icon}</code></td><td> The icon associated with this item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_id com.mss.application:android_id}</code></td><td> The ID of the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory com.mss.application:android_menuCategory}</code></td><td> The category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut com.mss.application:android_numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_onClick com.mss.application:android_onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
+           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checkable android:checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checked android:checked}</code></td><td> Whether the item is checked.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_enabled android:enabled}</code></td><td> Whether the item is enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_icon android:icon}</code></td><td> The icon associated with this item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_id android:id}</code></td><td> The ID of the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory android:menuCategory}</code></td><td> The category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut android:numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_onClick android:onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory com.mss.application:android_orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction com.mss.application:android_showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_title com.mss.application:android_title}</code></td><td> The title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed com.mss.application:android_titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_visible com.mss.application:android_visible}</code></td><td> Whether the item is shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction android:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_title android:title}</code></td><td> The title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed android:titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_visible android:visible}</code></td><td> Whether the item is shown/visible.</td></tr>
            </table>
            @see #SherlockMenuItem_android_actionLayout
            @see #SherlockMenuItem_android_actionProviderClass
@@ -2531,8 +2566,9 @@ containing a value of this type.
            An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_actionLayout}.
-          @attr name android:android_actionLayout
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionLayout}.
+          @attr name android:actionLayout
         */
         public static final int SherlockMenuItem_android_actionLayout = 14;
         /**
@@ -2542,8 +2578,9 @@ containing a value of this type.
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_actionProviderClass}.
-          @attr name android:android_actionProviderClass
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionProviderClass}.
+          @attr name android:actionProviderClass
         */
         public static final int SherlockMenuItem_android_actionProviderClass = 16;
         /**
@@ -2552,8 +2589,9 @@ containing a value of this type.
            The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_actionViewClass}.
-          @attr name android:android_actionViewClass
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionViewClass}.
+          @attr name android:actionViewClass
         */
         public static final int SherlockMenuItem_android_actionViewClass = 15;
         /**
@@ -2561,16 +2599,18 @@ containing a value of this type.
           @attr description
            The alphabetic shortcut key.  This is the shortcut when using a keyboard
              with alphabetic keys. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_alphabeticShortcut}.
-          @attr name android:android_alphabeticShortcut
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#alphabeticShortcut}.
+          @attr name android:alphabeticShortcut
         */
         public static final int SherlockMenuItem_android_alphabeticShortcut = 9;
         /**
           <p>
           @attr description
            Whether the item is capable of displaying a check mark. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_checkable}.
-          @attr name android:android_checkable
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checkable}.
+          @attr name android:checkable
         */
         public static final int SherlockMenuItem_android_checkable = 11;
         /**
@@ -2578,16 +2618,18 @@ containing a value of this type.
           @attr description
            Whether the item is checked.  Note that you must first have enabled checking with
              the checkable attribute or else the check mark will not appear. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_checked}.
-          @attr name android:android_checked
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checked}.
+          @attr name android:checked
         */
         public static final int SherlockMenuItem_android_checked = 3;
         /**
           <p>
           @attr description
            Whether the item is enabled. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_enabled}.
-          @attr name android:android_enabled
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#enabled}.
+          @attr name android:enabled
         */
         public static final int SherlockMenuItem_android_enabled = 1;
         /**
@@ -2595,16 +2637,18 @@ containing a value of this type.
           @attr description
            The icon associated with this item.  This icon will not always be shown, so
              the title should be sufficient in describing this item. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_icon}.
-          @attr name android:android_icon
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#icon}.
+          @attr name android:icon
         */
         public static final int SherlockMenuItem_android_icon = 0;
         /**
           <p>
           @attr description
            The ID of the item. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_id}.
-          @attr name android:android_id
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#id}.
+          @attr name android:id
         */
         public static final int SherlockMenuItem_android_id = 2;
         /**
@@ -2612,8 +2656,9 @@ containing a value of this type.
           @attr description
            The category applied to the item.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_menuCategory}.
-          @attr name android:android_menuCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#menuCategory}.
+          @attr name android:menuCategory
         */
         public static final int SherlockMenuItem_android_menuCategory = 5;
         /**
@@ -2621,8 +2666,9 @@ containing a value of this type.
           @attr description
            The numeric shortcut key.  This is the shortcut when using a numeric (e.g., 12-key)
              keyboard. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_numericShortcut}.
-          @attr name android:android_numericShortcut
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#numericShortcut}.
+          @attr name android:numericShortcut
         */
         public static final int SherlockMenuItem_android_numericShortcut = 10;
         /**
@@ -2630,8 +2676,9 @@ containing a value of this type.
           @attr description
            Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_onClick}.
-          @attr name android:android_onClick
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#onClick}.
+          @attr name android:onClick
         */
         public static final int SherlockMenuItem_android_onClick = 12;
         /**
@@ -2639,24 +2686,27 @@ containing a value of this type.
           @attr description
            The order within the category applied to the item.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_orderInCategory}.
-          @attr name android:android_orderInCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orderInCategory}.
+          @attr name android:orderInCategory
         */
         public static final int SherlockMenuItem_android_orderInCategory = 6;
         /**
           <p>
           @attr description
            How this item should display in the Action Bar, if present. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_showAsAction}.
-          @attr name android:android_showAsAction
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#showAsAction}.
+          @attr name android:showAsAction
         */
         public static final int SherlockMenuItem_android_showAsAction = 13;
         /**
           <p>
           @attr description
            The title associated with the item. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_title}.
-          @attr name android:android_title
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#title}.
+          @attr name android:title
         */
         public static final int SherlockMenuItem_android_title = 7;
         /**
@@ -2664,16 +2714,18 @@ containing a value of this type.
           @attr description
            The condensed title associated with the item.  This is used in situations where the
              normal title may be too long to be displayed. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_titleCondensed}.
-          @attr name android:android_titleCondensed
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#titleCondensed}.
+          @attr name android:titleCondensed
         */
         public static final int SherlockMenuItem_android_titleCondensed = 8;
         /**
           <p>
           @attr description
            Whether the item is shown/visible. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_visible}.
-          @attr name android:android_visible
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#visible}.
+          @attr name android:visible
         */
         public static final int SherlockMenuItem_android_visible = 4;
         /** Attributes that can be used with a SherlockMenuView.
@@ -2715,7 +2767,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:headerBackground
+          @attr name com.mss.application:headerBackground
         */
         public static final int SherlockMenuView_headerBackground = 3;
         /**
@@ -2727,7 +2779,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:horizontalDivider
+          @attr name com.mss.application:horizontalDivider
         */
         public static final int SherlockMenuView_horizontalDivider = 1;
         /**
@@ -2741,7 +2793,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:itemBackground
+          @attr name com.mss.application:itemBackground
         */
         public static final int SherlockMenuView_itemBackground = 4;
         /**
@@ -2757,7 +2809,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:itemIconDisabledAlpha
+          @attr name com.mss.application:itemIconDisabledAlpha
         */
         public static final int SherlockMenuView_itemIconDisabledAlpha = 6;
         /**
@@ -2769,7 +2821,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:itemTextAppearance
+          @attr name com.mss.application:itemTextAppearance
         */
         public static final int SherlockMenuView_itemTextAppearance = 0;
         /**
@@ -2785,7 +2837,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:preserveIconSpacing
+          @attr name com.mss.application:preserveIconSpacing
         */
         public static final int SherlockMenuView_preserveIconSpacing = 7;
         /**
@@ -2797,7 +2849,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:verticalDivider
+          @attr name com.mss.application:verticalDivider
         */
         public static final int SherlockMenuView_verticalDivider = 2;
         /**
@@ -2809,7 +2861,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:windowAnimationStyle
+          @attr name com.mss.application:windowAnimationStyle
         */
         public static final int SherlockMenuView_windowAnimationStyle = 5;
         /** Attributes that can be used with a SherlockSearchView.
@@ -2818,9 +2870,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_imeOptions com.mss.application:android_imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_inputType com.mss.application:android_inputType}</code></td><td> The input type to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_maxWidth com.mss.application:android_maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_imeOptions android:imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_inputType android:inputType}</code></td><td> The input type to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_maxWidth android:maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_iconifiedByDefault com.mss.application:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_queryHint com.mss.application:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
            </table>
@@ -2838,24 +2890,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>
           @attr description
            The IME options to set on the query text field. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_imeOptions}.
-          @attr name android:android_imeOptions
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#imeOptions}.
+          @attr name android:imeOptions
         */
         public static final int SherlockSearchView_android_imeOptions = 2;
         /**
           <p>
           @attr description
            The input type to set on the query text field. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_inputType}.
-          @attr name android:android_inputType
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#inputType}.
+          @attr name android:inputType
         */
         public static final int SherlockSearchView_android_inputType = 1;
         /**
           <p>
           @attr description
            An optional maximum width of the SearchView. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_maxWidth}.
-          @attr name android:android_maxWidth
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#maxWidth}.
+          @attr name android:maxWidth
         */
         public static final int SherlockSearchView_android_maxWidth = 0;
         /**
@@ -2872,7 +2927,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:iconifiedByDefault
+          @attr name com.mss.application:iconifiedByDefault
         */
         public static final int SherlockSearchView_iconifiedByDefault = 3;
         /**
@@ -2888,7 +2943,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:queryHint
+          @attr name com.mss.application:queryHint
         */
         public static final int SherlockSearchView_queryHint = 4;
         /** Attributes that can be used with a SherlockSpinner.
@@ -2897,17 +2952,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset com.mss.application:android_dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset android:dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector com.mss.application:android_dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset com.mss.application:android_dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector android:dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset android:dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth com.mss.application:android_dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_gravity com.mss.application:android_gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupBackground com.mss.application:android_popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView com.mss.application:android_popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth android:dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_gravity android:gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupBackground android:popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView android:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_prompt com.mss.application:android_prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_prompt android:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
            </table>
            @see #SherlockSpinner_android_dropDownHorizontalOffset
            @see #SherlockSpinner_android_dropDownSelector
@@ -2927,16 +2982,18 @@ containing a value of this type.
           @attr description
            Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_dropDownHorizontalOffset}.
-          @attr name android:android_dropDownHorizontalOffset
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownHorizontalOffset}.
+          @attr name android:dropDownHorizontalOffset
         */
         public static final int SherlockSpinner_android_dropDownHorizontalOffset = 5;
         /**
           <p>
           @attr description
            List selector to use for spinnerMode="dropdown" display. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_dropDownSelector}.
-          @attr name android:android_dropDownSelector
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownSelector}.
+          @attr name android:dropDownSelector
         */
         public static final int SherlockSpinner_android_dropDownSelector = 1;
         /**
@@ -2944,32 +3001,36 @@ containing a value of this type.
           @attr description
            Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_dropDownVerticalOffset}.
-          @attr name android:android_dropDownVerticalOffset
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownVerticalOffset}.
+          @attr name android:dropDownVerticalOffset
         */
         public static final int SherlockSpinner_android_dropDownVerticalOffset = 6;
         /**
           <p>
           @attr description
            Width of the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_dropDownWidth}.
-          @attr name android:android_dropDownWidth
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownWidth}.
+          @attr name android:dropDownWidth
         */
         public static final int SherlockSpinner_android_dropDownWidth = 4;
         /**
           <p>
           @attr description
            Gravity setting for positioning the currently selected item. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_gravity}.
-          @attr name android:android_gravity
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#gravity}.
+          @attr name android:gravity
         */
         public static final int SherlockSpinner_android_gravity = 0;
         /**
           <p>
           @attr description
            Background drawable to use for the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_popupBackground}.
-          @attr name android:android_popupBackground
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#popupBackground}.
+          @attr name android:popupBackground
         */
         public static final int SherlockSpinner_android_popupBackground = 2;
         /**
@@ -2979,15 +3040,16 @@ containing a value of this type.
              spinnerMode="dropdown". This layout must contain a TextView with the id
              @android:id/text1 to be populated with the prompt text. 
           <p>This is a private symbol.
-          @attr name android:android_popupPromptView
+          @attr name android:popupPromptView
         */
         public static final int SherlockSpinner_android_popupPromptView = 7;
         /**
           <p>
           @attr description
            The prompt to display when the spinner's dialog is shown. 
-          <p>This corresponds to the global attribute          resource symbol {@link com.mss.application.R.attr#android_prompt}.
-          @attr name android:android_prompt
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#prompt}.
+          @attr name android:prompt
         */
         public static final int SherlockSpinner_android_prompt = 3;
         /** Attributes that can be used with a SherlockTheme.
@@ -3164,7 +3226,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarDivider
+          @attr name com.mss.application:actionBarDivider
         */
         public static final int SherlockTheme_actionBarDivider = 8;
         /**
@@ -3176,7 +3238,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarItemBackground
+          @attr name com.mss.application:actionBarItemBackground
         */
         public static final int SherlockTheme_actionBarItemBackground = 9;
         /**
@@ -3203,7 +3265,7 @@ containing a value of this type.
 <tr><td><code>wrap_content</code></td><td>0</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:actionBarSize
+          @attr name com.mss.application:actionBarSize
         */
         public static final int SherlockTheme_actionBarSize = 7;
         /**
@@ -3218,7 +3280,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarSplitStyle
+          @attr name com.mss.application:actionBarSplitStyle
         */
         public static final int SherlockTheme_actionBarSplitStyle = 5;
         /**
@@ -3230,7 +3292,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarStyle
+          @attr name com.mss.application:actionBarStyle
         */
         public static final int SherlockTheme_actionBarStyle = 4;
         /**
@@ -3240,7 +3302,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionBarTabBarStyle
+          @attr name com.mss.application:actionBarTabBarStyle
         */
         public static final int SherlockTheme_actionBarTabBarStyle = 1;
         /**
@@ -3252,7 +3314,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarTabStyle
+          @attr name com.mss.application:actionBarTabStyle
         */
         public static final int SherlockTheme_actionBarTabStyle = 0;
         /**
@@ -3262,7 +3324,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionBarTabTextStyle
+          @attr name com.mss.application:actionBarTabTextStyle
         */
         public static final int SherlockTheme_actionBarTabTextStyle = 2;
         /**
@@ -3280,7 +3342,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarWidgetTheme
+          @attr name com.mss.application:actionBarWidgetTheme
         */
         public static final int SherlockTheme_actionBarWidgetTheme = 6;
         /**
@@ -3290,7 +3352,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionButtonStyle
+          @attr name com.mss.application:actionButtonStyle
         */
         public static final int SherlockTheme_actionButtonStyle = 52;
         /**
@@ -3300,7 +3362,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionDropDownStyle
+          @attr name com.mss.application:actionDropDownStyle
         */
         public static final int SherlockTheme_actionDropDownStyle = 51;
         /**
@@ -3313,7 +3375,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionMenuTextAppearance
+          @attr name com.mss.application:actionMenuTextAppearance
         */
         public static final int SherlockTheme_actionMenuTextAppearance = 10;
         /**
@@ -3327,7 +3389,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionMenuTextColor
+          @attr name com.mss.application:actionMenuTextColor
         */
         public static final int SherlockTheme_actionMenuTextColor = 11;
         /**
@@ -3339,7 +3401,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeBackground
+          @attr name com.mss.application:actionModeBackground
         */
         public static final int SherlockTheme_actionModeBackground = 14;
         /**
@@ -3349,7 +3411,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionModeCloseButtonStyle
+          @attr name com.mss.application:actionModeCloseButtonStyle
         */
         public static final int SherlockTheme_actionModeCloseButtonStyle = 13;
         /**
@@ -3361,7 +3423,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeCloseDrawable
+          @attr name com.mss.application:actionModeCloseDrawable
         */
         public static final int SherlockTheme_actionModeCloseDrawable = 16;
         /**
@@ -3373,7 +3435,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModePopupWindowStyle
+          @attr name com.mss.application:actionModePopupWindowStyle
         */
         public static final int SherlockTheme_actionModePopupWindowStyle = 18;
         /**
@@ -3385,7 +3447,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeShareDrawable
+          @attr name com.mss.application:actionModeShareDrawable
         */
         public static final int SherlockTheme_actionModeShareDrawable = 17;
         /**
@@ -3397,7 +3459,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeSplitBackground
+          @attr name com.mss.application:actionModeSplitBackground
         */
         public static final int SherlockTheme_actionModeSplitBackground = 15;
         /**
@@ -3407,7 +3469,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionModeStyle
+          @attr name com.mss.application:actionModeStyle
         */
         public static final int SherlockTheme_actionModeStyle = 12;
         /**
@@ -3417,7 +3479,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionOverflowButtonStyle
+          @attr name com.mss.application:actionOverflowButtonStyle
         */
         public static final int SherlockTheme_actionOverflowButtonStyle = 3;
         /**
@@ -3427,7 +3489,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionSpinnerItemStyle
+          @attr name com.mss.application:actionSpinnerItemStyle
         */
         public static final int SherlockTheme_actionSpinnerItemStyle = 57;
         /**
@@ -3439,7 +3501,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:activatedBackgroundIndicator
+          @attr name com.mss.application:activatedBackgroundIndicator
         */
         public static final int SherlockTheme_activatedBackgroundIndicator = 65;
         /**
@@ -3451,7 +3513,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:activityChooserViewStyle
+          @attr name com.mss.application:activityChooserViewStyle
         */
         public static final int SherlockTheme_activityChooserViewStyle = 64;
         /**
@@ -3463,7 +3525,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:buttonStyleSmall
+          @attr name com.mss.application:buttonStyleSmall
         */
         public static final int SherlockTheme_buttonStyleSmall = 19;
         /**
@@ -3475,7 +3537,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:dividerVertical
+          @attr name com.mss.application:dividerVertical
         */
         public static final int SherlockTheme_dividerVertical = 50;
         /**
@@ -3485,7 +3547,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:dropDownHintAppearance
+          @attr name com.mss.application:dropDownHintAppearance
         */
         public static final int SherlockTheme_dropDownHintAppearance = 66;
         /**
@@ -3495,7 +3557,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:dropDownListViewStyle
+          @attr name com.mss.application:dropDownListViewStyle
         */
         public static final int SherlockTheme_dropDownListViewStyle = 54;
         /**
@@ -3511,7 +3573,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:dropdownListPreferredItemHeight
+          @attr name com.mss.application:dropdownListPreferredItemHeight
         */
         public static final int SherlockTheme_dropdownListPreferredItemHeight = 56;
         /**
@@ -3521,7 +3583,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:homeAsUpIndicator
+          @attr name com.mss.application:homeAsUpIndicator
         */
         public static final int SherlockTheme_homeAsUpIndicator = 53;
         /**
@@ -3531,7 +3593,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:listPopupWindowStyle
+          @attr name com.mss.application:listPopupWindowStyle
         */
         public static final int SherlockTheme_listPopupWindowStyle = 63;
         /**
@@ -3549,7 +3611,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemHeightSmall
+          @attr name com.mss.application:listPreferredItemHeightSmall
         */
         public static final int SherlockTheme_listPreferredItemHeightSmall = 44;
         /**
@@ -3567,7 +3629,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemPaddingLeft
+          @attr name com.mss.application:listPreferredItemPaddingLeft
         */
         public static final int SherlockTheme_listPreferredItemPaddingLeft = 45;
         /**
@@ -3585,7 +3647,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemPaddingRight
+          @attr name com.mss.application:listPreferredItemPaddingRight
         */
         public static final int SherlockTheme_listPreferredItemPaddingRight = 46;
         /**
@@ -3595,7 +3657,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:popupMenuStyle
+          @attr name com.mss.application:popupMenuStyle
         */
         public static final int SherlockTheme_popupMenuStyle = 55;
         /**
@@ -3607,7 +3669,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchAutoCompleteTextView
+          @attr name com.mss.application:searchAutoCompleteTextView
         */
         public static final int SherlockTheme_searchAutoCompleteTextView = 30;
         /**
@@ -3619,7 +3681,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchDropdownBackground
+          @attr name com.mss.application:searchDropdownBackground
         */
         public static final int SherlockTheme_searchDropdownBackground = 31;
         /**
@@ -3637,7 +3699,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:searchResultListItemHeight
+          @attr name com.mss.application:searchResultListItemHeight
         */
         public static final int SherlockTheme_searchResultListItemHeight = 41;
         /**
@@ -3649,7 +3711,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewCloseIcon
+          @attr name com.mss.application:searchViewCloseIcon
         */
         public static final int SherlockTheme_searchViewCloseIcon = 32;
         /**
@@ -3661,7 +3723,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewEditQuery
+          @attr name com.mss.application:searchViewEditQuery
         */
         public static final int SherlockTheme_searchViewEditQuery = 36;
         /**
@@ -3673,7 +3735,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewEditQueryBackground
+          @attr name com.mss.application:searchViewEditQueryBackground
         */
         public static final int SherlockTheme_searchViewEditQueryBackground = 37;
         /**
@@ -3685,7 +3747,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewGoIcon
+          @attr name com.mss.application:searchViewGoIcon
         */
         public static final int SherlockTheme_searchViewGoIcon = 33;
         /**
@@ -3697,7 +3759,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewSearchIcon
+          @attr name com.mss.application:searchViewSearchIcon
         */
         public static final int SherlockTheme_searchViewSearchIcon = 34;
         /**
@@ -3709,7 +3771,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewTextField
+          @attr name com.mss.application:searchViewTextField
         */
         public static final int SherlockTheme_searchViewTextField = 38;
         /**
@@ -3721,7 +3783,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewTextFieldRight
+          @attr name com.mss.application:searchViewTextFieldRight
         */
         public static final int SherlockTheme_searchViewTextFieldRight = 39;
         /**
@@ -3733,7 +3795,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewVoiceIcon
+          @attr name com.mss.application:searchViewVoiceIcon
         */
         public static final int SherlockTheme_searchViewVoiceIcon = 35;
         /**
@@ -3745,7 +3807,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:selectableItemBackground
+          @attr name com.mss.application:selectableItemBackground
         */
         public static final int SherlockTheme_selectableItemBackground = 20;
         /**
@@ -3755,7 +3817,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:spinnerDropDownItemStyle
+          @attr name com.mss.application:spinnerDropDownItemStyle
         */
         public static final int SherlockTheme_spinnerDropDownItemStyle = 29;
         /**
@@ -3765,7 +3827,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:spinnerItemStyle
+          @attr name com.mss.application:spinnerItemStyle
         */
         public static final int SherlockTheme_spinnerItemStyle = 28;
         /**
@@ -3777,7 +3839,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceLargePopupMenu
+          @attr name com.mss.application:textAppearanceLargePopupMenu
         */
         public static final int SherlockTheme_textAppearanceLargePopupMenu = 22;
         /**
@@ -3789,7 +3851,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceListItemSmall
+          @attr name com.mss.application:textAppearanceListItemSmall
         */
         public static final int SherlockTheme_textAppearanceListItemSmall = 47;
         /**
@@ -3801,7 +3863,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSearchResultSubtitle
+          @attr name com.mss.application:textAppearanceSearchResultSubtitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultSubtitle = 43;
         /**
@@ -3813,7 +3875,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSearchResultTitle
+          @attr name com.mss.application:textAppearanceSearchResultTitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultTitle = 42;
         /**
@@ -3825,7 +3887,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSmall
+          @attr name com.mss.application:textAppearanceSmall
         */
         public static final int SherlockTheme_textAppearanceSmall = 24;
         /**
@@ -3837,7 +3899,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSmallPopupMenu
+          @attr name com.mss.application:textAppearanceSmallPopupMenu
         */
         public static final int SherlockTheme_textAppearanceSmallPopupMenu = 23;
         /**
@@ -3852,7 +3914,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimary
+          @attr name com.mss.application:textColorPrimary
         */
         public static final int SherlockTheme_textColorPrimary = 25;
         /**
@@ -3867,7 +3929,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimaryDisableOnly
+          @attr name com.mss.application:textColorPrimaryDisableOnly
         */
         public static final int SherlockTheme_textColorPrimaryDisableOnly = 26;
         /**
@@ -3882,7 +3944,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimaryInverse
+          @attr name com.mss.application:textColorPrimaryInverse
         */
         public static final int SherlockTheme_textColorPrimaryInverse = 27;
         /**
@@ -3896,7 +3958,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:textColorSearchUrl
+          @attr name com.mss.application:textColorSearchUrl
         */
         public static final int SherlockTheme_textColorSearchUrl = 40;
         /**
@@ -3910,7 +3972,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionBar
+          @attr name com.mss.application:windowActionBar
         */
         public static final int SherlockTheme_windowActionBar = 59;
         /**
@@ -3924,7 +3986,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionBarOverlay
+          @attr name com.mss.application:windowActionBarOverlay
         */
         public static final int SherlockTheme_windowActionBarOverlay = 60;
         /**
@@ -3938,7 +4000,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionModeOverlay
+          @attr name com.mss.application:windowActionModeOverlay
         */
         public static final int SherlockTheme_windowActionModeOverlay = 61;
         /**
@@ -3951,7 +4013,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:windowContentOverlay
+          @attr name com.mss.application:windowContentOverlay
         */
         public static final int SherlockTheme_windowContentOverlay = 21;
         /**
@@ -3967,7 +4029,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowMinWidthMajor
+          @attr name com.mss.application:windowMinWidthMajor
         */
         public static final int SherlockTheme_windowMinWidthMajor = 48;
         /**
@@ -3983,7 +4045,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowMinWidthMinor
+          @attr name com.mss.application:windowMinWidthMinor
         */
         public static final int SherlockTheme_windowMinWidthMinor = 49;
         /**
@@ -3997,7 +4059,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowNoTitle
+          @attr name com.mss.application:windowNoTitle
         */
         public static final int SherlockTheme_windowNoTitle = 58;
         /**
@@ -4011,7 +4073,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowSplitActionBar
+          @attr name com.mss.application:windowSplitActionBar
         */
         public static final int SherlockTheme_windowSplitActionBar = 62;
         /** Attributes that can be used with a SherlockView.
@@ -4020,7 +4082,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockView_android_focusable com.mss.application:android_focusable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockView_android_focusable android:focusable}</code></td><td></td></tr>
            </table>
            @see #SherlockView_android_focusable
          */
@@ -4028,9 +4090,9 @@ containing a value of this type.
             0x010100da
         };
         /**
-          <p>This symbol is the offset where the {@link com.mss.application.R.attr#android_focusable}
+          <p>This symbol is the offset where the {@link android.R.attr#focusable}
           attribute's value can be found in the {@link #SherlockView} array.
-          @attr name android:android_focusable
+          @attr name android:focusable
         */
         public static final int SherlockView_android_focusable = 0;
         /** Attributes that can be used with a TreeViewList.
@@ -4072,7 +4134,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:collapsible
+          @attr name com.mss.application:collapsible
         */
         public static final int TreeViewList_collapsible = 0;
         /**
@@ -4086,7 +4148,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:handle_trackball_press
+          @attr name com.mss.application:handle_trackball_press
         */
         public static final int TreeViewList_handle_trackball_press = 4;
         /**
@@ -4102,7 +4164,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:indent_width
+          @attr name com.mss.application:indent_width
         */
         public static final int TreeViewList_indent_width = 3;
         /**
@@ -4114,7 +4176,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name android:indicator_background
+          @attr name com.mss.application:indicator_background
         */
         public static final int TreeViewList_indicator_background = 6;
         /**
@@ -4145,7 +4207,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 				The clip will be based on the horizontal gravity: a left gravity will clip the right edge, a right gravity will clip the
 				left edge, and neither will clip both edges. </td></tr>
 </table>
-          @attr name android:indicator_gravity
+          @attr name com.mss.application:indicator_gravity
         */
         public static final int TreeViewList_indicator_gravity = 5;
         /**
@@ -4157,7 +4219,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name android:row_background
+          @attr name com.mss.application:row_background
         */
         public static final int TreeViewList_row_background = 7;
         /**
@@ -4169,7 +4231,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name android:src_collapsed
+          @attr name com.mss.application:src_collapsed
         */
         public static final int TreeViewList_src_collapsed = 2;
         /**
@@ -4181,7 +4243,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name android:src_expanded
+          @attr name com.mss.application:src_expanded
         */
         public static final int TreeViewList_src_expanded = 1;
     };

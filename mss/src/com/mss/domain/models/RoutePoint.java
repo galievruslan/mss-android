@@ -79,8 +79,8 @@ public class RoutePoint extends Entity {
 		return isSynchronized;
 	}
 	
-	public void setIsSynchronized(boolean isSynchronized){
-		this.isSynchronized = isSynchronized;
+	public void setSynchronized(){
+		this.isSynchronized = true;
 	}
 	
 	@DatabaseField(canBeNull = false, dataType = DataType.DOUBLE, columnName = Constants.Tables.RoutePoint.DEBT_FIELD)

@@ -24,6 +24,7 @@
 	<string name="sync_greetings">Greetings!</string>
 	<string name="sync_routes">Routes synchronizing&#8230;</string>
 	<string name="sync_orders">Orders synchronizing&#8230;</string>
+	<string name="sync_route_point_photos">Route point photos synchronizing&#8230;</string>
 	<string name="sync_remainders">Remainders synchronizing&#8230;</string>
 	<string name="sync_manager_settings">Manager settings synchronizing&#8230;</string>
 	<string name="title_activity_sync">Synchronization</string>
