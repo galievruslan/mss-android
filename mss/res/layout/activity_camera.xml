@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/label_photo"
-            android:rotation="90"
             android:src="@drawable/ic_camera" />
 
     </FrameLayout>

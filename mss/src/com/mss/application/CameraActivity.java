@@ -4,33 +4,55 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.domain.models.Preferences;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class CameraActivity  extends Activity {
 	private static final String TAG = CameraActivity.class.getSimpleName();
 	
+	private OrientationEventListener mOrientationEventListener;
+	private int mOrientation =  -1;
+	
+	private static final int ORIENTATION_PORTRAIT_NORMAL =  1;
+	private static final int ORIENTATION_PORTRAIT_INVERTED =  2;
+	private static final int ORIENTATION_LANDSCAPE_NORMAL =  3;
+	private static final int ORIENTATION_LANDSCAPE_INVERTED =  4;
+	
 	public static final String IMAGE_PATH = "image_path";
+	
+	private static int prefPhotoWidth = 0;
+	private static int prefPhotoHeight = 0;
 	
 	private SurfaceView preview=null;
 	private SurfaceHolder previewHolder=null;
@@ -38,6 +60,9 @@ public class CameraActivity  extends Activity {
 	private boolean inPreview=false;
 	private boolean cameraConfigured=false;
 	  
+	private ImageView mTakePhoto;
+	private ImageView mFlashSwitcher;
+	
 	private boolean mIsFlashOn = false;
 	
 	@SuppressWarnings("deprecation")
@@ -46,12 +71,22 @@ public class CameraActivity  extends Activity {
 		super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_camera);
 
+	    DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			OrmlitePreferencesRepository prefRepo = new OrmlitePreferencesRepository(mHelper);
+			Preferences preferences = prefRepo.getById(Preferences.ID);
+			prefPhotoWidth = preferences.getPhotoWidthResolution();
+			prefPhotoHeight = preferences.getPhotoHeightResolution();
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+	    
 	    preview=(SurfaceView)findViewById(R.id.preview);
 	    previewHolder=preview.getHolder();
 	    previewHolder.addCallback(surfaceCallback);
-	    
-	    ImageView takePhoto = (ImageView)findViewById(R.id.take_photo_image_view);
-	    takePhoto.setOnClickListener(new OnClickListener() {			
+	    	    
+	    mTakePhoto = (ImageView)findViewById(R.id.take_photo_image_view);
+	    mTakePhoto.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				 if (inPreview) {
@@ -61,9 +96,9 @@ public class CameraActivity  extends Activity {
 			}
 		});
 	    
-	    ImageView flashSwitcher = (ImageView)findViewById(R.id.flash_switcher_image_view);
+	    mFlashSwitcher = (ImageView)findViewById(R.id.flash_switcher_image_view);
 	    if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-	    	flashSwitcher.setOnClickListener(new OnClickListener() {			
+	    	mFlashSwitcher.setOnClickListener(new OnClickListener() {			
 	    		@Override
 	    		public void onClick(View v) {	    	
 	    			ImageView flashSwitcher = (ImageView)v;
@@ -89,7 +124,7 @@ public class CameraActivity  extends Activity {
 	    		}
 			});
 	    } else {
-	    	flashSwitcher.setVisibility(View.GONE);
+	    	mFlashSwitcher.setVisibility(View.GONE);
 	    }
 	    
 	    
@@ -101,6 +136,65 @@ public class CameraActivity  extends Activity {
 	public void onResume() {
 		super.onResume();
 	    
+		if (mOrientationEventListener == null) {            
+	        mOrientationEventListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
+
+	        	@Override
+	        	public void onOrientationChanged(int orientation) {
+
+	        	    // determine our orientation based on sensor response
+	        	    int lastOrientation = mOrientation;
+
+	        	    Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();                                        
+
+	        	    if (display.getRotation() == Surface.ROTATION_0) {   // landscape oriented devices
+	        	        if (orientation >= 315 || orientation < 45) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_NORMAL) {                         
+	        	                mOrientation = ORIENTATION_LANDSCAPE_NORMAL;
+	        	            }
+	        	        } else if (orientation < 315 && orientation >= 225) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_INVERTED) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_INVERTED;
+	        	            }                       
+	        	        } else if (orientation < 225 && orientation >= 135) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_INVERTED) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_INVERTED;
+	        	            }                       
+	        	        } else if (orientation <135 && orientation > 45) { 
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_NORMAL) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_NORMAL;
+	        	            }                       
+	        	        }                       
+	        	    } else {  // portrait oriented devices
+	        	        if (orientation >= 315 || orientation < 45) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_NORMAL) {                          
+	        	                mOrientation = ORIENTATION_PORTRAIT_NORMAL;
+	        	            }
+	        	        } else if (orientation < 315 && orientation >= 225) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_NORMAL) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_NORMAL;
+	        	            }                       
+	        	        } else if (orientation < 225 && orientation >= 135) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_INVERTED) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_INVERTED;
+	        	            }                       
+	        	        } else if (orientation <135 && orientation > 45) { 
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_INVERTED) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_INVERTED;
+	        	            }                       
+	        	        }
+	        	    }
+
+	        	    if (lastOrientation != mOrientation) {
+	        	        changeRotation(mOrientation, lastOrientation);
+	        	    }
+	        	}
+	        };
+	    }
+	    if (mOrientationEventListener.canDetectOrientation()) {
+	        mOrientationEventListener.enable();
+	    }
+		
 		if (camera == null) {
 			camera=Camera.open();
 		}
@@ -110,10 +204,11 @@ public class CameraActivity  extends Activity {
 
 	@Override
 	public void onPause() {
+		mOrientationEventListener.disable();
 		if (inPreview) {
 	    	camera.stopPreview();
 	    }
-
+		
 	    camera.release();
 	    camera=null;
 	    inPreview=false;
@@ -148,14 +243,17 @@ public class CameraActivity  extends Activity {
 	    Camera.Size result = null;
 
 	    for (Camera.Size size : parameters.getSupportedPictureSizes()) {
-	    	if (result == null) {
+	    	if (result == null) { 			
 	    		result = size;
 	    	}
 	    	else {
+	    		int prefArea = prefPhotoWidth * prefPhotoHeight;
 	    		int resultArea = result.width * result.height;
 	    		int newArea = size.width * size.height;
 
-	    		if (newArea > resultArea) {
+	    		if (newArea < resultArea && resultArea > prefArea) {
+	    			result = size;
+	    		} else if (newArea > resultArea && newArea <= prefArea) {
 	    			result = size;
 	    		}
 	    	}
@@ -223,22 +321,27 @@ public class CameraActivity  extends Activity {
 	Camera.PictureCallback photoCallback=new Camera.PictureCallback() {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			try {
-				int screenWidth = getResources().getDisplayMetrics().widthPixels;
-                int screenHeight = getResources().getDisplayMetrics().heightPixels;
                 Bitmap bm = BitmapFactory.decodeByteArray(data, 0, (data != null) ? data.length : 0);
-
-                Configuration configuration = getResources().getConfiguration(); 
-                if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    // Notice that width and height are reversed
-                    Bitmap scaled = Bitmap.createScaledBitmap(bm, screenHeight, screenWidth, true);
-                    int w = scaled.getWidth();
-                    int h = scaled.getHeight();
-                    // Setting post rotate to 90
-                    Matrix mtx = new Matrix();
-                    mtx.postRotate(90);
-                    // Rotating Bitmap
-                    bm = Bitmap.createBitmap(scaled, 0, 0, w, h, mtx, true);
-                }
+                              
+                Matrix mtx;                
+                switch (mOrientation) {
+                                
+                	case ORIENTATION_PORTRAIT_NORMAL:
+                        mtx = new Matrix();
+                        mtx.postRotate(90);
+                        bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), mtx, true);
+                		break;
+                	case ORIENTATION_PORTRAIT_INVERTED:
+                        mtx = new Matrix();
+                        mtx.postRotate(270);
+                        bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), mtx, true);
+                		break;
+                	case ORIENTATION_LANDSCAPE_INVERTED:
+                        mtx = new Matrix();
+                        mtx.postRotate(180);
+                        bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), mtx, true);
+                		break;
+				}
 				
 				File storage = new File(Environment.getExternalStoragePublicDirectory(
 				        Environment.DIRECTORY_PICTURES), "mss");
@@ -272,4 +375,40 @@ public class CameraActivity  extends Activity {
 			}
 		}
 	};
+	
+	private void changeRotation(int orientation, int lastOrientation) {
+		int flashDrawableResId = mIsFlashOn ? R.drawable.ic_no_flash : R.drawable.ic_flash;
+		
+	    switch (orientation) {
+	        case ORIENTATION_PORTRAIT_NORMAL:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 270));
+	            mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 270));
+	            Log.v("CameraActivity", "Orientation = 90");
+	            break;
+	        case ORIENTATION_LANDSCAPE_NORMAL:
+	        	mTakePhoto.setImageResource(R.drawable.ic_camera);
+	        	mFlashSwitcher.setImageResource(flashDrawableResId);
+	            Log.v("CameraActivity", "Orientation = 0");
+	            break;
+	        case ORIENTATION_PORTRAIT_INVERTED:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 90));
+	        	mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 90));
+	            Log.v("CameraActivity", "Orientation = 270");
+	            break;
+	        case ORIENTATION_LANDSCAPE_INVERTED:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 180));
+	        	mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 180));      
+	            Log.v("CameraActivity", "Orientation = 180");
+	            break;
+	    }
+	}
+	
+	private Drawable getRotatedImage(int drawableId, int degrees) {
+	    Bitmap original = BitmapFactory.decodeResource(getResources(), drawableId);
+	    Matrix matrix = new Matrix();
+	    matrix.postRotate(degrees);
+
+	    Bitmap rotated = Bitmap.createBitmap(original, 0, 0, original.getWidth(), original.getHeight(), matrix, true);
+	    return new BitmapDrawable(getResources(), rotated);
+	}
 }

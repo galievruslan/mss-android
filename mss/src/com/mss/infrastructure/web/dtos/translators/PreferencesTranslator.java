@@ -8,6 +8,9 @@ public class PreferencesTranslator extends Translator<com.mss.infrastructure.web
 		preferences.setDefaultRoutePointStatusId(dto.getDefaultRoutePointStatusId());
 		preferences.setDefaultRoutePointAttendedStatusId(dto.getDefaultRoutePointAttendedStatusId());
 		preferences.setDefaultPriceListId(dto.getDefaultPriceListId());
+		preferences.setPhotoWidthResolution(dto.getPhotoWidthResolution());
+		preferences.setPhotoHeightResolution(dto.getPhotoHeightResolution());
+		preferences.setMessagePoolFrequency(dto.getMessagePoolFrequency());
 		return preferences;
 	}
 }

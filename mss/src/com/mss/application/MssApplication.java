@@ -22,7 +22,7 @@ public class MssApplication extends Application
 		super.onCreate();
 		Context context = getApplicationContext();
 		File cacheDir = StorageUtils.getCacheDirectory(context);
-   
+		
 		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
 		.memoryCacheExtraOptions(512, 512)
 		.threadPoolSize(5)

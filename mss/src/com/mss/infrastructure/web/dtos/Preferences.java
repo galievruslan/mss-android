@@ -24,4 +24,22 @@ public class Preferences extends Dto {
     public long getDefaultPriceListId() {
     	return defaultPriceListId;
     }
+    
+    @SerializedName("photo_width_res")
+    private int photoWidthResolution;
+    public int getPhotoWidthResolution() {
+    	return photoWidthResolution;
+    }
+    
+    @SerializedName("photo_height_res")
+    private int photoHeightResolution;
+    public int getPhotoHeightResolution() {
+    	return photoHeightResolution;
+    }
+    
+    @SerializedName("message_pull_frequency")
+    private int messagePoolFrequency;
+    public int getMessagePoolFrequency() {
+    	return messagePoolFrequency;
+    }
 }

@@ -152,7 +152,10 @@ public class Constants {
 			public static final String TABLE_NAME = "preferences";
 			public static final String DEFAULT_STATUS_FIELD = "default_status_id";
 			public static final String DEFAULT_ATTENDED_STATUS_FIELD = "default_attended_status_id";
-			public static final String DEFAULT_PRICE_LIST = "default_price_list_id";
+			public static final String DEFAULT_PRICE_LIST_FIELD = "default_price_list_id";
+			public static final String PHOTO_WIDTH_RESOLUTION_FIELD = "photo_width_resolution";
+			public static final String PHOTO_HEIGHT_RESOLUTION_FIELD = "photo_height_resolution";
+			public static final String MESSAGE_POOL_FREQUENCY_FIELD = "message_pool_frequency";
 		}
 	}
 }

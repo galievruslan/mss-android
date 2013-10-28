@@ -33,7 +33,7 @@ public class Preferences extends Entity {
     	defaultRoutePointAttendedStatusId = value;
     }
     
-    @DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Preferences.DEFAULT_PRICE_LIST)
+    @DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Constants.Tables.Preferences.DEFAULT_PRICE_LIST_FIELD)
     private long defaultPriceListId;
     
     public long getDefaultPriceListId() {
@@ -42,5 +42,38 @@ public class Preferences extends Entity {
     
     public void setDefaultPriceListId(long value) {
     	defaultPriceListId = value;
+    }
+    
+    @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.Preferences.PHOTO_WIDTH_RESOLUTION_FIELD)
+    private int photoWidthResolution;
+    
+    public int getPhotoWidthResolution() {
+    	return photoWidthResolution;
+    }
+    
+    public void setPhotoWidthResolution(int value) {
+    	photoWidthResolution = value;
+    }
+    
+    @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.Preferences.PHOTO_HEIGHT_RESOLUTION_FIELD)
+    private int photoHeightResolution;
+    
+    public int getPhotoHeightResolution() {
+    	return photoHeightResolution;
+    }
+    
+    public void setPhotoHeightResolution(int value) {
+    	photoHeightResolution = value;
+    }
+    
+    @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Constants.Tables.Preferences.MESSAGE_POOL_FREQUENCY_FIELD)
+    private int messagePoolFrequency;
+    
+    public int getMessagePoolFrequency() {
+    	return messagePoolFrequency;
+    }
+    
+    public void setMessagePoolFrequency(int value) {
+    	messagePoolFrequency = value;
     }
 }
