@@ -48,13 +48,17 @@ public class RoutePointPhotoActivity extends SherlockActivity {
 		mComment = (EditText)findViewById(R.id.comment_text_edit);        
         
 		mRouePointPhoto = mRoutePointService.getPhotoById(getIntent().getLongExtra(PHOTO_ID, 0));
+		if (!mRoutePointService.canCommentOrDeletePhoto(mRouePointPhoto.getId())) {
+			mComment.setFocusable(false);
+			mComment.setFocusableInTouchMode(false);
+		}
 		
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
-		.resetViewBeforeLoading(true)
-	  	.cacheInMemory(true)
-	  	.imageScaleType(ImageScaleType.EXACTLY)
-	  	.build();
+			.resetViewBeforeLoading(true)
+			.cacheInMemory(true)
+			.imageScaleType(ImageScaleType.EXACTLY)
+			.build();
     
 		imageLoader.displayImage("file://" + mRouePointPhoto.getPath(), mImage, options);
 		mComment.setText(mRouePointPhoto.getComment());		
@@ -65,8 +69,9 @@ public class RoutePointPhotoActivity extends SherlockActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.route_point_photo, menu);
+		if (mRoutePointService.canCommentOrDeletePhoto(mRouePointPhoto.getId())) {
+			getSupportMenuInflater().inflate(R.menu.route_point_photo, menu);
+		}
 		return true;
 	}
 

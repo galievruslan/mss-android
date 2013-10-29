@@ -124,10 +124,31 @@ public class RoutePointService {
 	public void addPhoto(RoutePoint routePoint, File file) {
 		try {			
 			RoutePointPhoto routePointPhoto = new RoutePointPhoto(routePoint.getId(), file.getAbsolutePath());
+			Preferences preferences = preferencesRepo.getById(Preferences.ID);
+			if (routePoint.getStatusId() == preferences.getDefaultRoutePointStatusId()) {
+				Status defaultAttendedStatus = statusRepo.getById(preferences.getDefaultRoutePointAttendedStatusId());
+				changePointStatus(routePoint, defaultAttendedStatus);
+			}
+			
 			routePointPhotoRepo.save(routePointPhoto);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());			
 		}
+	}
+	
+	public boolean canCommentOrDeletePhoto(long routePointPhotoId) {
+		boolean can = false;
+		
+		try {
+			RoutePointPhoto routePointPhoto = routePointPhotoRepo.getById(routePointPhotoId);
+			if (routePointPhoto != null) {
+				can = !routePointPhoto.getIsSynchronized();		
+			}
+		}catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+		
+		return can;
 	}
 	
 	public void commentPhoto(RoutePointPhoto routePointPhoto, String comment) {
@@ -135,7 +156,7 @@ public class RoutePointService {
 			routePointPhoto.setComment(comment);
 			routePointPhotoRepo.save(routePointPhoto);
 		} catch (Throwable e) {
-			Log.e(TAG, e.getMessage());			
+			Log.e(TAG, e.getMessage());
 		}
 	}
 	
@@ -169,7 +190,8 @@ public class RoutePointService {
 	
 	public boolean canBeEditedOrDeleted(long routePointId) {
 		try {
-			return !orderRepo.existForRoutePointId(routePointId);
+			return !orderRepo.existForRoutePointId(routePointId) &&
+					!routePointPhotoRepo.existForRoutePointId(routePointId);
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

@@ -616,7 +616,6 @@ public class SynchronizationAdapter extends AbstractThreadedSyncAdapter {
 		nameValuePairs.add(new BasicNameValuePair("shipping_address_id", 
 				String.valueOf(routePoint.getShippingAddressId())));
 		nameValuePairs.add(new BasicNameValuePair("route_point_photo[guid]", String.valueOf(routePointPhoto.getUid())));
-		//nameValuePairs.add(new BasicNameValuePair("route_point_photo[photo]", base64Image));
 		nameValuePairs.add(new BasicNameValuePair("route_point_photo[comment]", routePointPhoto.getComment()));
 				
 		return nameValuePairs;		

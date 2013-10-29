@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,9 +136,9 @@ public class WebServer {
 		params.add(new BasicNameValuePair("authenticity_token", getCurrentConnection().getCsrf()));
 		
 		HttpPost httpPost = new HttpPost(address + url);
-		httpPost.setEntity(new UrlEncodedFormEntity(ParametersEscape(params), "UTF-8"));
 		httpPost.addHeader("User-Agent", "MSS.Android mobile client");
 		httpPost.addHeader("X-CSRF-Token", getCurrentConnection().getCsrf());
+		httpPost.setEntity(new UrlEncodedFormEntity(ParametersEscape(params), "UTF-8"));		
 		
 		HttpResponse response = Dispatch(httpPost);
 		String content = Parse(response);
@@ -176,6 +177,7 @@ public class WebServer {
         			file.getName());
         }
 
+        multipartEntityBuilder.setCharset(Charset.defaultCharset());
 		httpPost.setEntity(multipartEntityBuilder.build());
 		
 		HttpResponse response = Dispatch(httpPost);

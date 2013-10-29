@@ -24,4 +24,13 @@ public class OrmliteRoutePointPhotoRepository extends OrmliteGenericRepository<R
 			.eq(com.mss.domain.models.Constants.Tables.RoutePointPhoto.SYNCHRONIZED_FIELD , false);
 		return dao.query(queryBuilder.prepare());
 	}
+	
+	public boolean existForRoutePointId(long id) throws Throwable {
+		
+		QueryBuilder<RoutePointPhoto, Integer> queryBuilder = dao.queryBuilder();
+		
+		return queryBuilder
+			.where().eq(com.mss.domain.models.Constants.Tables.RoutePointPhoto.ROUTE_POINT_FIELD , id)
+			.countOf() > 0;
+	}
 }

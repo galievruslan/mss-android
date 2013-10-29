@@ -18,6 +18,7 @@ import com.mss.domain.models.Week;
 import com.mss.domain.models.Week.Days;
 import com.mss.infrastructure.ormlite.DatabaseHelper;
 import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
+import com.mss.infrastructure.ormlite.OrmliteRoutePointPhotoRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointRepository;
 import com.mss.infrastructure.ormlite.OrmliteRoutePointTemplateRepository;
 import com.mss.infrastructure.ormlite.OrmliteRouteRepository;
@@ -31,6 +32,7 @@ public class RouteService {
 	private DatabaseHelper databaseHelper;
 	private OrmliteRouteRepository routeRepo;
 	private OrmliteRoutePointRepository routePointRepo;
+	private OrmliteRoutePointPhotoRepository routePointPhotoRepo;
 	private OrmliteRouteTemplateRepository routeTemplateRepo;
 	private OrmliteRoutePointTemplateRepository routePointTemplateRepo;
 	private OrmliteShippingAddressRepository shippingAddressRepo;
@@ -42,6 +44,7 @@ public class RouteService {
 		this.databaseHelper = databaseHelper;
 		routeRepo = new OrmliteRouteRepository(this.databaseHelper);
 		routePointRepo = new OrmliteRoutePointRepository(this.databaseHelper);
+		routePointPhotoRepo = new OrmliteRoutePointPhotoRepository(this.databaseHelper);
 		routeTemplateRepo = new OrmliteRouteTemplateRepository(this.databaseHelper);
 		routePointTemplateRepo = new OrmliteRoutePointTemplateRepository(this.databaseHelper);
 		shippingAddressRepo = new OrmliteShippingAddressRepository(this.databaseHelper);
@@ -200,7 +203,10 @@ public class RouteService {
 	
 	public boolean hasNotSynchronizedData(){
 		try {
-			return routeRepo.findNotSynchronized().iterator().hasNext();
+			boolean hasRoutePointsToSync = routeRepo.findNotSynchronized().iterator().hasNext();
+			boolean hasRoutePointPhotosToSync = routePointPhotoRepo.findNotSynchronized().iterator().hasNext();
+			
+			return hasRoutePointsToSync || hasRoutePointPhotosToSync;
 		} catch (Throwable e) {
 			Log.e(TAG, e.getMessage());
 		}

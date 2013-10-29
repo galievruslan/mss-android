@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.content.Intent"/>
-<fullyQualifiedTypeName name="android.media.ExifInterface"/>
-<fullyQualifiedTypeName name="android.provider.MediaStore.Images"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
 <fullyQualifiedTypeName name="com.mss.application.CameraActivity"/>
 <fullyQualifiedTypeName name="android.graphics.BitmapFactory.Options"/>
 <fullyQualifiedTypeName name="android.net.Uri"/>
 <fullyQualifiedTypeName name="android.content.pm.ActivityInfo"/>
 <fullyQualifiedTypeName name="android.hardware.Camera.CameraInfo"/>
-<fullyQualifiedTypeName name="com.mss.domain.models.RoutePointPhoto"/>
 <fullyQualifiedTypeName name="com.mss.domain.models.Route"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.apache.http.NameValuePair"/>
@@ -31,9 +26,7 @@
 <fullyQualifiedTypeName name="org.apache.http.entity.mime.MultipartEntityBuilder"/>
 <fullyQualifiedTypeName name="org.apache.http.entity.mime.HttpMultipartMode"/>
 <fullyQualifiedTypeName name="org.apache.http.entity.mime.content.FileBody"/>
-<fullyQualifiedTypeName name="org.apache.http.entity.ContentType"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
-<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
 <fullyQualifiedTypeName name="android.graphics.Matrix"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap.CompressFormat"/>
 <fullyQualifiedTypeName name="android.content.res.Configuration"/>
@@ -60,4 +53,11 @@
 <fullyQualifiedTypeName name="com.mss.domain.models.Preferences"/>
 <fullyQualifiedTypeName name="android.hardware.Camera"/>
 <fullyQualifiedTypeName name="android.hardware.Camera.Size"/>
+<fullyQualifiedTypeName name="com.mss.infrastructure.ormlite.OrmliteRoutePointPhotoRepository"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.Constants.Tables.RoutePointPhoto"/>
+<fullyQualifiedTypeName name="com.mss.domain.models.RoutePointPhoto"/>
+<fullyQualifiedTypeName name="java.lang.Throwable"/>
+<fullyQualifiedTypeName name="org.apache.http.entity.ContentType"/>
+<fullyQualifiedTypeName name="java.nio.charset.Charset"/>
+<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
 </qualifiedTypeNameHistroy>

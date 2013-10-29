@@ -3,6 +3,7 @@ package com.mss.application.fragments;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.R;
+import com.mss.application.RoutePointPhotoActivity;
 import com.mss.application.RoutePointPhotoAdapter;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.RoutePointPhoto;
