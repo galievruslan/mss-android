@@ -116,10 +116,10 @@ public class CameraActivity  extends Activity {
 	    			}
 
 	    			camera.release();
-	    			camera=null;
+	    			camera = null;
 	    			inPreview=false;
-	    				
-	    			camera=Camera.open();
+	    			
+	    			camera = Camera.open();
 	    			startPreview();
 	    		}
 			});
@@ -240,24 +240,30 @@ public class CameraActivity  extends Activity {
 
 	private Camera.Size getPictureSize(Camera.Parameters parameters) {
 	    Camera.Size result = null;
-
+	    Log.i(TAG, "Prefered size: " + prefPhotoWidth + "x" + prefPhotoHeight);
+	    
 	    for (Camera.Size size : parameters.getSupportedPictureSizes()) {
+	    	Log.i(TAG, "Test size: " + size.width + "x" + size.height);
 	    	if (result == null) { 			
 	    		result = size;
+	    		Log.i(TAG, "Temporary selected size: " + size.width + "x" + size.height);
 	    	}
 	    	else {
 	    		int prefArea = prefPhotoWidth * prefPhotoHeight;
 	    		int resultArea = result.width * result.height;
 	    		int newArea = size.width * size.height;
-
+	    		
 	    		if (newArea < resultArea && resultArea > prefArea) {
 	    			result = size;
+	    			Log.i(TAG, "Temporary selected size: " + size.width + "x" + size.height);
 	    		} else if (newArea > resultArea && newArea <= prefArea) {
 	    			result = size;
+	    			Log.i(TAG, "Temporary selected size: " + size.width + "x" + size.height);
 	    		}
 	    	}
 	    }
 
+	    Log.i(TAG, "Selected size: " + result.width + "x" + result.height);
 	    return(result);
 	}
 
@@ -279,8 +285,11 @@ public class CameraActivity  extends Activity {
 	    		Camera.Size pictureSize = getPictureSize(parameters);
 
 	    		if (size != null && pictureSize != null) {
-	    			if (mIsFlashOn)
+	    			if (mIsFlashOn) {
 	    				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+	    			} else {
+	    				parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
+	    			}
 	        	
 	    			parameters.setPreviewSize(size.width, size.height);
 	    			parameters.setPictureSize(pictureSize.width,
@@ -316,7 +325,7 @@ public class CameraActivity  extends Activity {
 		public void onPictureTaken(byte[] data, Camera camera) {
 			try {
                 Bitmap bm = BitmapFactory.decodeByteArray(data, 0, (data != null) ? data.length : 0);
-                
+                                
                 int orientation = 0;
                 switch (mOrientation) {                
             		case ORIENTATION_PORTRAIT_NORMAL:
@@ -340,14 +349,15 @@ public class CameraActivity  extends Activity {
 				        Environment.DIRECTORY_PICTURES), "mss");
 			
 				if (!storage.exists()) {
-					storage.mkdir();
+					storage.mkdirs();
 				}
 					
 				File photo = new File(storage.getPath() + "/" + String.valueOf(UUID.randomUUID()) + ".jpeg");
 					
 				FileOutputStream out = new FileOutputStream(photo.getPath());
-				bm.compress(CompressFormat.JPEG, 100, out);
+				bm.compress(CompressFormat.JPEG, 80, out);
 			    out.close();
+			    bm.recycle();
 							    				
 				Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
 			    mediaScanIntent.setData(Uri.fromFile(photo));

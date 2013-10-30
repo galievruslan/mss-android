@@ -1,0 +1,406 @@
+package com.mss.application;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.UUID;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.mss.domain.models.Preferences;
+import com.mss.infrastructure.ormlite.DatabaseHelper;
+import com.mss.infrastructure.ormlite.OrmlitePreferencesRepository;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Matrix;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
+import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
+import android.view.Display;
+import android.view.OrientationEventListener;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+public class CameraActivity  extends Activity {
+	private static final String TAG = CameraActivity.class.getSimpleName();
+	
+	private OrientationEventListener mOrientationEventListener;
+	private int mOrientation =  -1;
+	
+	private static final int ORIENTATION_PORTRAIT_NORMAL =  1;
+	private static final int ORIENTATION_PORTRAIT_INVERTED =  2;
+	private static final int ORIENTATION_LANDSCAPE_NORMAL =  3;
+	private static final int ORIENTATION_LANDSCAPE_INVERTED =  4;
+	
+	public static final String IMAGE_PATH = "image_path";
+	
+	private static int prefPhotoWidth = 0;
+	private static int prefPhotoHeight = 0;
+	
+	private SurfaceView preview=null;
+	private SurfaceHolder previewHolder=null;
+	private Camera camera=null;
+	private boolean inPreview=false;
+	private boolean cameraConfigured=false;
+	  
+	private ImageView mTakePhoto;
+	private ImageView mFlashSwitcher;
+	
+	private boolean mIsFlashOn = false;
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+	    setContentView(R.layout.activity_camera);
+
+	    DatabaseHelper mHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
+		try {
+			OrmlitePreferencesRepository prefRepo = new OrmlitePreferencesRepository(mHelper);
+			Preferences preferences = prefRepo.getById(Preferences.ID);
+			prefPhotoWidth = preferences.getPhotoWidthResolution();
+			prefPhotoHeight = preferences.getPhotoHeightResolution();
+		} catch (Throwable e) {
+			Log.e(TAG, e.getMessage());
+		}
+	    
+	    preview=(SurfaceView)findViewById(R.id.preview);
+	    previewHolder=preview.getHolder();
+	    previewHolder.addCallback(surfaceCallback);
+	    	    
+	    mTakePhoto = (ImageView)findViewById(R.id.take_photo_image_view);
+	    mTakePhoto.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				 if (inPreview) {
+					 camera.takePicture(null, null, photoCallback);
+				 	inPreview=false;
+				 }				
+			}
+		});
+	    
+	    mFlashSwitcher = (ImageView)findViewById(R.id.flash_switcher_image_view);
+	    if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+	    	mFlashSwitcher.setOnClickListener(new OnClickListener() {			
+	    		@Override
+	    		public void onClick(View v) {	    	
+	    			ImageView flashSwitcher = (ImageView)v;
+	    			
+	    			if (mIsFlashOn) {
+	    				mIsFlashOn = false;
+	    				flashSwitcher.setImageResource(R.drawable.ic_no_flash);
+	    			} else {
+	    				mIsFlashOn = true;
+	    				flashSwitcher.setImageResource(R.drawable.ic_flash);
+	    			}
+	    			
+	    			if (inPreview) {
+	    				camera.stopPreview();
+	    			}
+
+	    			camera.release();
+	    			camera=null;
+	    			inPreview=false;
+	    				
+	    			camera=Camera.open();
+	    			startPreview();
+	    		}
+			});
+	    } else {
+	    	mFlashSwitcher.setVisibility(View.GONE);
+	    }	    
+	    
+	    if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB)
+	    	previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);	    
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	    
+		if (mOrientationEventListener == null) {            
+	        mOrientationEventListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
+
+	        	@Override
+	        	public void onOrientationChanged(int orientation) {
+
+	        	    // determine our orientation based on sensor response
+	        	    int lastOrientation = mOrientation;
+
+	        	    Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay();                                        
+
+	        	    if (display.getRotation() == Surface.ROTATION_0) {   // landscape oriented devices
+	        	        if (orientation >= 315 || orientation < 45) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_NORMAL) {                         
+	        	                mOrientation = ORIENTATION_LANDSCAPE_NORMAL;
+	        	            }
+	        	        } else if (orientation < 315 && orientation >= 225) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_INVERTED) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_INVERTED;
+	        	            }                       
+	        	        } else if (orientation < 225 && orientation >= 135) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_INVERTED) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_INVERTED;
+	        	            }                       
+	        	        } else if (orientation <135 && orientation > 45) { 
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_NORMAL) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_NORMAL;
+	        	            }                       
+	        	        }                       
+	        	    } else {  // portrait oriented devices
+	        	        if (orientation >= 315 || orientation < 45) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_NORMAL) {                          
+	        	                mOrientation = ORIENTATION_PORTRAIT_NORMAL;
+	        	            }
+	        	        } else if (orientation < 315 && orientation >= 225) {
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_NORMAL) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_NORMAL;
+	        	            }                       
+	        	        } else if (orientation < 225 && orientation >= 135) {
+	        	            if (mOrientation != ORIENTATION_PORTRAIT_INVERTED) {
+	        	                mOrientation = ORIENTATION_PORTRAIT_INVERTED;
+	        	            }                       
+	        	        } else if (orientation <135 && orientation > 45) { 
+	        	            if (mOrientation != ORIENTATION_LANDSCAPE_INVERTED) {
+	        	                mOrientation = ORIENTATION_LANDSCAPE_INVERTED;
+	        	            }                       
+	        	        }
+	        	    }
+
+	        	    if (lastOrientation != mOrientation) {
+	        	        changeRotation(mOrientation, lastOrientation);
+	        	    }
+	        	}
+	        };
+	    }
+	    if (mOrientationEventListener.canDetectOrientation()) {
+	        mOrientationEventListener.enable();
+	    }
+		
+		if (camera == null) {
+			camera=Camera.open();
+		}
+
+		startPreview();
+	}
+
+	@Override
+	public void onPause() {
+		mOrientationEventListener.disable();
+		if (inPreview) {
+	    	camera.stopPreview();
+	    }
+		
+	    camera.release();
+	    camera=null;
+	    inPreview=false;
+
+	    super.onPause();
+	}
+
+	private Camera.Size getBestPreviewSize(int width, int height,
+											Camera.Parameters parameters) {
+		Camera.Size result = null;
+
+	    for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+	    	if (size.width <= width && size.height <= height) {
+	    		if (result == null) {
+	    			result=size;
+	    		}
+	    		else {
+	    			int resultArea=result.width * result.height;
+	    			int newArea=size.width * size.height;
+
+	    			if (newArea > resultArea) {
+	    				result = size;
+	    			}
+	    		}
+	    	}
+	    }
+
+	    return(result);
+	}
+
+	private Camera.Size getPictureSize(Camera.Parameters parameters) {
+	    Camera.Size result = null;
+
+	    for (Camera.Size size : parameters.getSupportedPictureSizes()) {
+	    	if (result == null) { 			
+	    		result = size;
+	    	}
+	    	else {
+	    		int prefArea = prefPhotoWidth * prefPhotoHeight;
+	    		int resultArea = result.width * result.height;
+	    		int newArea = size.width * size.height;
+
+	    		if (newArea < resultArea && resultArea > prefArea) {
+	    			result = size;
+	    		} else if (newArea > resultArea && newArea <= prefArea) {
+	    			result = size;
+	    		}
+	    	}
+	    }
+
+	    return(result);
+	}
+
+	private void initPreview(int width, int height) {
+	    if (camera != null && previewHolder.getSurface() != null) {
+	    	try {
+	    		camera.setPreviewDisplay(previewHolder);
+	    	}
+	    	catch (Throwable t) {
+	    		Log.e("PreviewDemo-surfaceCallback",
+	    				"Exception in setPreviewDisplay()", t);
+	    		Toast.makeText(CameraActivity.this, t.getMessage(),
+	    				Toast.LENGTH_LONG).show();
+	    	}
+
+	    	if (!cameraConfigured) {
+	    		Camera.Parameters parameters = camera.getParameters();
+	    		Camera.Size size = getBestPreviewSize(width, height, parameters);
+	    		Camera.Size pictureSize = getPictureSize(parameters);
+
+	    		if (size != null && pictureSize != null) {
+	    			if (mIsFlashOn)
+	    				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+	        	
+	    			parameters.setPreviewSize(size.width, size.height);
+	    			parameters.setPictureSize(pictureSize.width,
+	    					pictureSize.height);
+	    			parameters.setPictureFormat(ImageFormat.JPEG);
+	    			camera.setParameters(parameters);
+	    			cameraConfigured=true;
+	    		}
+	    	}
+	    }
+	}
+
+	private void startPreview() {
+	    if (cameraConfigured && camera != null) {
+	    	camera.startPreview();
+	    	inPreview=true;
+	    }
+	}
+
+	SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
+	    public void surfaceCreated(SurfaceHolder holder) {}
+
+	    public void surfaceChanged(SurfaceHolder holder, int format,
+	                               int width, int height) {
+	    	initPreview(width, height);
+	    	startPreview();
+	    }
+
+	    public void surfaceDestroyed(SurfaceHolder holder) {}
+	};
+
+	Camera.PictureCallback photoCallback=new Camera.PictureCallback() {
+		public void onPictureTaken(byte[] data, Camera camera) {
+			try {
+                Bitmap bm = BitmapFactory.decodeByteArray(data, 0, (data != null) ? data.length : 0);
+                
+                int orientation = 0;
+                switch (mOrientation) {                
+            		case ORIENTATION_PORTRAIT_NORMAL:
+            			orientation = 90;
+            			break;
+            		case ORIENTATION_PORTRAIT_INVERTED:
+            			orientation = 270;
+            			break;
+            		case ORIENTATION_LANDSCAPE_INVERTED:
+                    	orientation = 180;
+                    	break;
+                }
+                
+                if (orientation > 0) {
+                	Matrix mtx = new Matrix();
+                	mtx.postRotate(orientation);
+                    bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), mtx, true);
+                }
+				
+				File storage = new File(Environment.getExternalStoragePublicDirectory(
+				        Environment.DIRECTORY_PICTURES), "mss");
+			
+				if (!storage.exists()) {
+					storage.mkdir();
+				}
+					
+				File photo = new File(storage.getPath() + "/" + String.valueOf(UUID.randomUUID()) + ".jpeg");
+					
+				FileOutputStream out = new FileOutputStream(photo.getPath());
+				bm.compress(CompressFormat.JPEG, 100, out);
+			    out.close();
+							    				
+				Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+			    mediaScanIntent.setData(Uri.fromFile(photo));
+			    sendBroadcast(mediaScanIntent);		
+			    
+			    camera.stopPreview();
+				camera.release();
+				camera = null;
+				
+				Intent intent=new Intent();
+			    intent.putExtra(IMAGE_PATH, photo.getPath());
+			    setResult(RESULT_OK, intent);
+				finish();
+			}
+			catch (java.io.IOException e) {
+				Log.e(TAG, "Exception in photoCallback", e);
+			}
+		}
+	};
+	
+	private void changeRotation(int orientation, int lastOrientation) {
+		int flashDrawableResId = mIsFlashOn ? R.drawable.ic_no_flash : R.drawable.ic_flash;
+		
+	    switch (orientation) {
+	        case ORIENTATION_PORTRAIT_NORMAL:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 270));
+	            mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 270));
+	            Log.v("CameraActivity", "Orientation = 90");
+	            break;
+	        case ORIENTATION_LANDSCAPE_NORMAL:
+	        	mTakePhoto.setImageResource(R.drawable.ic_camera);
+	        	mFlashSwitcher.setImageResource(flashDrawableResId);
+	            Log.v("CameraActivity", "Orientation = 0");
+	            break;
+	        case ORIENTATION_PORTRAIT_INVERTED:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 90));
+	        	mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 90));
+	            Log.v("CameraActivity", "Orientation = 270");
+	            break;
+	        case ORIENTATION_LANDSCAPE_INVERTED:
+	        	mTakePhoto.setImageDrawable(getRotatedImage(R.drawable.ic_camera, 180));
+	        	mFlashSwitcher.setImageDrawable(getRotatedImage(flashDrawableResId, 180));      
+	            Log.v("CameraActivity", "Orientation = 180");
+	            break;
+	    }
+	}
+	
+	private Drawable getRotatedImage(int drawableId, int degrees) {
+	    Bitmap original = BitmapFactory.decodeResource(getResources(), drawableId);
+	    Matrix matrix = new Matrix();
+	    matrix.postRotate(degrees);
+
+	    Bitmap rotated = Bitmap.createBitmap(original, 0, 0, original.getWidth(), original.getHeight(), matrix, true);
+	    return new BitmapDrawable(getResources(), rotated);
+	}
+}

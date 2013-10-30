@@ -23,6 +23,8 @@
             android:id="@+id/update_status_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif-light"
             android:text="@string/sync_progress"
