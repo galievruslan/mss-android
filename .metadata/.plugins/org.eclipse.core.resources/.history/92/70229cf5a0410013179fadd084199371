@@ -168,8 +168,7 @@ public class WebServer {
 		List<NameValuePair> escapedParams = ParametersEscape(params);
         for(int index=0; index < escapedParams.size(); index++) {
         	multipartEntityBuilder.addPart(escapedParams.get(index).getName(),
-        			new StringBody( escapedParams.get(index).getValue(), "text/plain", Charset.forName( "UTF-8" )));
-       	}
+        			new StringBody( escapedParams.get(index).getValue(), "text/plain", Charset.forName( "UTF-8" )));        }
                 
         for(int index=0; index < attachments.size(); index++) {
         	File file = new File (attachments.get(index).getValue());

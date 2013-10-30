@@ -32,7 +32,6 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -167,9 +166,9 @@ public class WebServer {
 		
 		List<NameValuePair> escapedParams = ParametersEscape(params);
         for(int index=0; index < escapedParams.size(); index++) {
-        	multipartEntityBuilder.addPart(escapedParams.get(index).getName(),
-        			new StringBody( escapedParams.get(index).getValue(), "text/plain", Charset.forName( "UTF-8" )));
-       	}
+        	multipartEntityBuilder.addTextBody(escapedParams.get(index).getName(), 
+        			escapedParams.get(index).getValue(), ContentType.APPLICATION_FORM_URLENCODED);
+        }
                 
         for(int index=0; index < attachments.size(); index++) {
         	File file = new File (attachments.get(index).getValue());
