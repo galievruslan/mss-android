@@ -2,12 +2,10 @@ package com.mss.application.fragments;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.mss.application.R;
-import com.mss.application.RoutePointPhotoActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +27,10 @@ public class RoutePointPhotoFragment extends SherlockFragment {
 		return(frag);
 	}
 
+	public long getRoutePointPhotoId() {
+		return getArguments().getLong(KEY_ID);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 	                         ViewGroup container,
@@ -37,16 +39,6 @@ public class RoutePointPhotoFragment extends SherlockFragment {
 		ImageLoader imageLoader = ImageLoader.getInstance();
 		
 		final String uri = "file://" + getArguments().getString(KEY_URI);
-		final Long id = getArguments().getLong(KEY_ID);
-		
-		result.setOnClickListener(new View.OnClickListener() {			
-			@Override
-			public void onClick(View view) {
-				Intent routePointPhotoActivity = new Intent(getActivity(), RoutePointPhotoActivity.class);
-				routePointPhotoActivity.putExtra(RoutePointPhotoActivity.PHOTO_ID, id);
-				startActivity(routePointPhotoActivity);
-			}
-		});
 		  
 		ImageView imageView = (ImageView) result.findViewById(R.id.image);
 		DisplayImageOptions options = new DisplayImageOptions.Builder()

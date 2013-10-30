@@ -8,10 +8,12 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.mss.application.fragments.RoutePointPhotosFragment;
+import com.mss.application.fragments.RoutePointPhotosFragment.OnRoutePointPhotoSelectedListener;
 import com.mss.application.fragments.RoutePointsOrdersFragment;
 import com.mss.application.fragments.RoutePointsOrdersFragment.OnOrderSelectedListener;
 import com.mss.domain.models.Order;
 import com.mss.domain.models.RoutePoint;
+import com.mss.domain.models.RoutePointPhoto;
 import com.mss.domain.models.Status;
 import com.mss.domain.services.RoutePointService;
 import com.mss.domain.services.StatusService;
@@ -32,7 +34,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-public class RoutePointActivity extends SherlockFragmentActivity implements OnTabChangeListener, OnOrderSelectedListener, LoaderCallbacks<RoutePoint> {
+public class RoutePointActivity extends SherlockFragmentActivity implements OnTabChangeListener, OnOrderSelectedListener, LoaderCallbacks<RoutePoint>, OnRoutePointPhotoSelectedListener {
 
 	private static final String TAG = RoutePointActivity.class.getSimpleName();
 	
@@ -46,6 +48,7 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 	public static final int REQUEST_SHOW_ROUTE_POINT = 0;
 	static final int PICK_STATUS_REQUEST = 1;
 	static final int TAKE_PHOTO_REQUEST = 2;
+	static final int REQUEST_EDIT_ROUTE_POINT_PHOTO = 3;
 	
 	public static final long ROUTE_POINT_ID_NEW = 0;
 	public static final String EXTRA_ROUTE_POINT_ID = "route_point_id";
@@ -81,8 +84,10 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
         mRoutePointId = getIntent().getLongExtra(getString(R.string.key_id), ROUTE_POINT_ID_NEW);
 		getSupportLoaderManager().initLoader(LOADER_ID_ROUTE_POINT, null, this);
         
-		RoutePointsOrdersFragment fragment = getRoutePointsOrdersFragment();		
-		fragment.addOnOrderSelectedListener(this);
+		RoutePointsOrdersFragment routePointsOrdersFragment = getRoutePointsOrdersFragment();		
+		routePointsOrdersFragment.addOnOrderSelectedListener(this);
+		RoutePointPhotosFragment routePointPhotosFragment = getRoutePointPhotosFragment();
+		routePointPhotosFragment.addOnRoutePointPhotoSelectedListener(this);
 		
 		mDatabaseHelper = OpenHelperManager.getHelper(this, DatabaseHelper.class);
 		try {
@@ -198,6 +203,9 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
 		        
 		        mRoutePointService.addPhoto(mRoutePoint, file);
 				break;	
+			case REQUEST_EDIT_ROUTE_POINT_PHOTO:
+				getRoutePointPhotosFragment().refresh(mRoutePointId);
+				break;
 			default:
 				break;
 			}
@@ -314,5 +322,13 @@ public class RoutePointActivity extends SherlockFragmentActivity implements OnTa
                 packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
+
+	@Override
+	public void onRoutePointPhotoSelected(RoutePointPhoto routePointPhoto,
+			int position, long id) {
+		Intent routePointPhotoActivity = new Intent(this, RoutePointPhotoActivity.class);
+		routePointPhotoActivity.putExtra(RoutePointPhotoActivity.PHOTO_ID, id);
+		startActivityForResult(routePointPhotoActivity, REQUEST_EDIT_ROUTE_POINT_PHOTO);		
+	}
 }
 

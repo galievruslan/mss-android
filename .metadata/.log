@@ -5609,3 +5609,18 @@ Binding(CTRL+SHIFT+\,
 
 !ENTRY org.eclipse.ui 2 2 2013-10-30 00:16:29.792
 !MESSAGE Invalid property category path: ValidationPropertiesPage (bundle: org.eclipse.wst.xml.ui, propertyPage: org.eclipse.wst.xml.ui.propertyPage.project.validation)
+!SESSION 2013-10-30 22:20:08.529 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.6.0_38
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=ru_RU
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-30 22:20:53.141
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-30 22:20:53.171
+!MESSAGE fileChanged: failed to find manifest package for project mss
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-10-30 22:20:53.173
+!MESSAGE fileChanged: failed to find manifest package for project mss

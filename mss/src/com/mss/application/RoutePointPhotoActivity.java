@@ -22,7 +22,7 @@ import android.widget.ImageView;
 public class RoutePointPhotoActivity extends SherlockActivity {
 	private static final String TAG = RoutePointPhotoActivity.class.getSimpleName();
 	
-	public static final String PHOTO_ID = "photo_id";
+	public static final String PHOTO_ID = "photo_id";	
 	
 	private DatabaseHelper mDatabaseHelper;
 	private RoutePointService mRoutePointService;

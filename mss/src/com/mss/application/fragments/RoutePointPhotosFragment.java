@@ -3,12 +3,14 @@ package com.mss.application.fragments;
 import java.util.HashSet;
 import java.util.Set;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -17,7 +19,6 @@ import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.mss.application.R;
-import com.mss.application.RoutePointPhotoActivity;
 import com.mss.application.RoutePointPhotoAdapter;
 import com.mss.domain.models.RoutePoint;
 import com.mss.domain.models.RoutePointPhoto;
@@ -52,6 +53,15 @@ public class RoutePointPhotosFragment extends SherlockFragment implements Callba
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_photos, container, false);
 		mPager = (ViewPager)v.findViewById(R.id.pager);
+		
+		final GestureDetector tapGestureDetector = new GestureDetector(getActivity(), new TapGestureListener());
+		mPager.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				tapGestureDetector.onTouchEvent(event);
+		            return false;
+			}
+		});
 		
 		mDatabaseHelper = new DatabaseHelper(v.getContext());
 		try {
@@ -125,5 +135,26 @@ public class RoutePointPhotosFragment extends SherlockFragment implements Callba
 	public void onDestroyActionMode(ActionMode mode) {
 		mode = null;
 		
+	}
+	
+	class TapGestureListener extends GestureDetector.SimpleOnGestureListener{				
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			int position = mPager.getCurrentItem();
+			
+			setLastClickedPosition(position);
+			
+			long routePointPhotoId = ((RoutePointPhotoFragment)mRoutePointPhotoAdapter.getItem(position)).getRoutePointPhotoId();
+			RoutePointPhoto routePointPhoto = mRoutePointService.getPhotoById(routePointPhotoId);
+			for (OnRoutePointPhotoSelectedListener listener : mOnRoutePointPhotoSelectedListeners) {
+				listener.onRoutePointPhotoSelected(routePointPhoto, position, routePointPhotoId);
+			}
+			
+			return false;
+		}  
+	}
+	
+	private void setLastClickedPosition(int position) {
+		mLastPosition = position;
 	}
 }
